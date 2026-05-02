@@ -54,7 +54,7 @@ export { Table } from './components/ui/data/Table';
 // Overlays
 export { Dialog } from './components/ui/overlays/Dialog';
 export { Popover } from './components/ui/overlays/Popover';
-export { Toast } from './components/ui/overlays/Toast';
+export { ToastProvider, useToast } from './components/ui/overlays/Toast';
 export { Tooltip } from './components/ui/overlays/Tooltip';
 
 // Typography
@@ -80,9 +80,9 @@ export { ChatProvider, useChatContext } from './components/ui/chatbox/ChatContex
 
 // Effects / Backgrounds
 export { CursorGlow } from './components/effects/CursorGlow';
-export { EmbersBGE } from './components/effects/EmbersBGE';
+export { default as EmbersBGE } from './components/effects/EmbersBGE';
 export { ImBgAurora } from './components/effects/ImBgAurora';
-export { LightTheme } from './components/effects/LightTheme';
-export { NetBGE } from './components/effects/NetBGE';
-export { SwarmsBGE } from './components/effects/SwarmsBGE';
-export { WaveformBackground } from './components/effects/WaveformBackground';
+export { default as LightTheme } from './components/effects/LightTheme';
+export { default as NetBGE } from './components/effects/NetBGE';
+export { default as SwarmsBGE } from './components/effects/SwarmsBGE';
+export { default as WaveformBackground } from './components/effects/WaveformBackground';

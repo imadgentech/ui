@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import styles from '@/app/agents/page.module.css' // We might need to handle this CSS dependency, but for now assuming it fits or we inline
 
 export default function SwarmsBGE() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
