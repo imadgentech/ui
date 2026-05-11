@@ -8,6 +8,8 @@ export interface ErrorTextProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Error message content
      */
@@ -17,9 +19,9 @@ export interface ErrorTextProps {
 /**
  * ErrorText component for validation feedback.
  */
-export function ErrorText({ className, children }: ErrorTextProps) {
+export function ErrorText({ className, style, children }: ErrorTextProps) {
     return (
-        <p className={cn(styles.errorText, className)} role="alert">
+        <p className={cn(styles.errorText, className)} style={style} role="alert">
             {children}
         </p>
     );

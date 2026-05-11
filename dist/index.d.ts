@@ -128,6 +128,7 @@ interface ErrorTextProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Error message content
      */
@@ -136,7 +137,7 @@ interface ErrorTextProps {
 /**
  * ErrorText component for validation feedback.
  */
-declare function ErrorText({ className, children }: ErrorTextProps): React__default.JSX.Element;
+declare function ErrorText({ className, style, children }: ErrorTextProps): React__default.JSX.Element;
 
 interface FormField$1 {
     /**
@@ -596,6 +597,7 @@ interface FlexProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Children content
      */
@@ -604,7 +606,7 @@ interface FlexProps {
 /**
  * Flex component for flexible layouts.
  */
-declare function Flex({ direction, wrap, align, justify, gap, as: Component, fullWidth, className, children, }: FlexProps): React__default.JSX.Element;
+declare function Flex({ direction, wrap, align, justify, gap, as: Component, fullWidth, className, style, children, }: FlexProps): React__default.JSX.Element;
 
 type ResponsiveValue$1<T> = T | {
     base?: T;
@@ -751,6 +753,7 @@ interface StackProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -766,7 +769,7 @@ interface StackProps {
  *   <Text>Item 2</Text>
  * </Stack>
  */
-declare function Stack({ gap, align, as: Component, className, children, }: StackProps): React__default.JSX.Element;
+declare function Stack({ gap, align, as: Component, className, style, children, }: StackProps): React__default.JSX.Element;
 
 interface SurfaceProps extends React__default.HTMLAttributes<HTMLElement> {
     /**
@@ -1315,6 +1318,7 @@ interface HeadingProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -1329,7 +1333,7 @@ interface HeadingProps {
  * <Heading as="h2" size="xl">Section Title</Heading>
  * <Heading as="h3" align="center">Centered Title</Heading>
  */
-declare function Heading({ as: Component, size, weight, align, className, children, }: HeadingProps): React__default.JSX.Element;
+declare function Heading({ as: Component, size, weight, align, className, style, children, }: HeadingProps): React__default.JSX.Element;
 
 interface KbdProps {
     /**
@@ -1419,6 +1423,7 @@ interface TextProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -1431,7 +1436,7 @@ interface TextProps {
  * <Text size="lg" tone="brand">This is brand text</Text>
  * <Text as="span" size="sm" tone="muted">Small muted text</Text>
  */
-declare function Text({ as: Component, size, tone, weight, align, className, children, }: TextProps): React__default.JSX.Element;
+declare function Text({ as: Component, size, tone, weight, align, className, style, children, }: TextProps): React__default.JSX.Element;
 
 interface CTAProps {
     /**

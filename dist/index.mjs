@@ -1,3 +1,4 @@
+"use client";
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
@@ -150,8 +151,8 @@ import React4 from "react";
 var ErrorText_default = {};
 
 // src/components/ui/forms/ErrorText.tsx
-function ErrorText({ className, children }) {
-  return /* @__PURE__ */ React4.createElement("p", { className: cn(ErrorText_default.errorText, className), role: "alert" }, children);
+function ErrorText({ className, style, children }) {
+  return /* @__PURE__ */ React4.createElement("p", { className: cn(ErrorText_default.errorText, className), style, role: "alert" }, children);
 }
 
 // src/components/ui/forms/Form.tsx
@@ -278,12 +279,14 @@ function Stack({
   align = "stretch",
   as: Component = "div",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ React7.createElement(
     Component,
     {
-      className: cn(Stack_default.stack, Stack_default[`gap-${gap}`], Stack_default[`align-${align}`], className)
+      className: cn(Stack_default.stack, Stack_default[`gap-${gap}`], Stack_default[`align-${align}`], className),
+      style
     },
     children
   );
@@ -721,6 +724,7 @@ function Flex({
   as: Component = "div",
   fullWidth = false,
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ React20.createElement(
@@ -735,7 +739,8 @@ function Flex({
         Flex_default[`gap-${gap}`],
         fullWidth && Flex_default.fullWidth,
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -1218,6 +1223,7 @@ function Heading({
   weight,
   align = "left",
   className,
+  style,
   children
 }) {
   const defaultSizes = {
@@ -1238,7 +1244,8 @@ function Heading({
         Heading_default[`align-${align}`],
         weight && Heading_default[`weight-${weight}`],
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -1258,6 +1265,7 @@ function Text({
   weight = "normal",
   align,
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ React36.createElement(
@@ -1270,7 +1278,8 @@ function Text({
         Text_default[`weight-${weight}`],
         align && Text_default[`align-${align}`],
         className
-      )
+      ),
+      style
     },
     children
   );

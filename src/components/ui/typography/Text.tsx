@@ -37,6 +37,8 @@ export interface TextProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -45,7 +47,7 @@ export interface TextProps {
 
 /**
  * Text component for body text and inline text elements.
- * 
+ *
  * @example
  * <Text size="lg" tone="brand">This is brand text</Text>
  * <Text as="span" size="sm" tone="muted">Small muted text</Text>
@@ -57,6 +59,7 @@ export function Text({
     weight = 'normal',
     align,
     className,
+    style,
     children,
 }: TextProps) {
     return (
@@ -69,6 +72,7 @@ export function Text({
                 align && styles[`align-${align}`],
                 className
             )}
+            style={style}
         >
             {children}
         </Component>

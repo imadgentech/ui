@@ -26,6 +26,8 @@ export interface StackProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -35,7 +37,7 @@ export interface StackProps {
 /**
  * Stack component for vertical layouts with gap-based spacing.
  * Uses CSS flexbox gap property - no wrapper elements per child.
- * 
+ *
  * @example
  * <Stack gap="24">
  *   <Text>Item 1</Text>
@@ -47,11 +49,13 @@ export function Stack({
     align = 'stretch',
     as: Component = 'div',
     className,
+    style,
     children,
 }: StackProps) {
     return (
         <Component
             className={cn(styles.stack, styles[`gap-${gap}`], styles[`align-${align}`], className)}
+            style={style}
         >
             {children}
         </Component>

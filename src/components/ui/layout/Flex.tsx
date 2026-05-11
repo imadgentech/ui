@@ -50,6 +50,8 @@ export interface FlexProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Children content
      */
@@ -68,6 +70,7 @@ export function Flex({
     as: Component = 'div',
     fullWidth = false,
     className,
+    style,
     children,
 }: FlexProps) {
     return (
@@ -82,6 +85,7 @@ export function Flex({
                 fullWidth && styles.fullWidth,
                 className
             )}
+            style={style}
         >
             {children}
         </Component>

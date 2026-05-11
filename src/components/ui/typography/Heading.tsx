@@ -32,6 +32,8 @@ export interface HeadingProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -41,7 +43,7 @@ export interface HeadingProps {
 /**
  * Heading component for headings h1-h6 with configurable visual size.
  * Maintains semantic HTML hierarchy while allowing visual flexibility.
- * 
+ *
  * @example
  * <Heading as="h1" size="display">Hero Heading</Heading>
  * <Heading as="h2" size="xl">Section Title</Heading>
@@ -53,6 +55,7 @@ export function Heading({
     weight,
     align = 'left',
     className,
+    style,
     children,
 }: HeadingProps) {
     // Default size based on heading level if not specified
@@ -76,6 +79,7 @@ export function Heading({
                 weight && styles[`weight-${weight}`],
                 className
             )}
+            style={style}
         >
             {children}
         </Component>
