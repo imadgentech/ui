@@ -14,16 +14,23 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./tokens.css": "./src/tokens/tokens.css",
-    "./dist/index.css": "./dist/index.css"
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.js"
+    },
+    "./dist/index.css": "./dist/index.css",
+    "./tokens.css": "./src/tokens/tokens.css"
   },
   "files": [
     "dist",
     "src/tokens/tokens.css"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts --out-dir dist",
-    "type-check": "tsc --noEmit"
+    "build": "tsup",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "peerDependencies": {
     "@ai-sdk/react": ">=3",
@@ -43,11 +50,20 @@
   },
   "devDependencies": {
     "@ai-sdk/react": "^3.0.176",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.3.4",
     "ai": "^6.0.174",
+    "jsdom": "^26.1.0",
+    "next": "^15.3.2",
+    "next-themes": "^0.4.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tsup": "^8.5.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.0"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

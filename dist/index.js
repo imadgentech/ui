@@ -145,7 +145,7 @@ function Providers({ children }) {
 // src/components/ui/forms/Button.tsx
 var import_react = __toESM(require("react"));
 
-// src/components/ui/forms/Button.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Button.module.css
 var Button_default = {};
 
 // src/components/ui/forms/Button.tsx
@@ -205,7 +205,7 @@ Button.displayName = "Button";
 var import_react2 = __toESM(require("react"));
 var CheckboxPrimitive = __toESM(require("@radix-ui/react-checkbox"));
 
-// src/components/ui/forms/Checkbox.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Checkbox.module.css
 var Checkbox_default = {};
 
 // src/components/ui/forms/Checkbox.tsx
@@ -247,7 +247,7 @@ function Checkbox({
 // src/components/ui/forms/ErrorText.tsx
 var import_react3 = __toESM(require("react"));
 
-// src/components/ui/forms/ErrorText.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\ErrorText.module.css
 var ErrorText_default = {};
 
 // src/components/ui/forms/ErrorText.tsx
@@ -258,13 +258,13 @@ function ErrorText({ className, style, children }) {
 // src/components/ui/forms/Form.tsx
 var import_react8 = __toESM(require("react"));
 
-// src/components/ui/forms/Form.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Form.module.css
 var Form_default = {};
 
 // src/components/ui/forms/Input.tsx
 var import_react4 = __toESM(require("react"));
 
-// src/components/ui/forms/Input.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Input.module.css
 var Input_default = {};
 
 // src/components/ui/forms/Input.tsx
@@ -329,7 +329,7 @@ Input.displayName = "Input";
 // src/components/ui/forms/Textarea.tsx
 var import_react5 = __toESM(require("react"));
 
-// src/components/ui/forms/Textarea.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Textarea.module.css
 var Textarea_default = {};
 
 // src/components/ui/forms/Textarea.tsx
@@ -370,7 +370,7 @@ Textarea.displayName = "Textarea";
 // src/components/ui/layout/Stack.tsx
 var import_react6 = __toESM(require("react"));
 
-// src/components/ui/layout/Stack.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Stack.module.css
 var Stack_default = {};
 
 // src/components/ui/layout/Stack.tsx
@@ -395,7 +395,7 @@ function Stack({
 // src/components/ui/layout/Grid.tsx
 var import_react7 = __toESM(require("react"));
 
-// src/components/ui/layout/Grid.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Grid.module.css
 var Grid_default = {};
 
 // src/components/ui/layout/Grid.tsx
@@ -506,7 +506,7 @@ var import_react11 = __toESM(require("react"));
 // src/components/ui/forms/Label.tsx
 var import_react9 = __toESM(require("react"));
 
-// src/components/ui/forms/Label.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Label.module.css
 var Label_default = {};
 
 // src/components/ui/forms/Label.tsx
@@ -518,7 +518,7 @@ function Label(_a) {
 // src/components/ui/forms/HelperText.tsx
 var import_react10 = __toESM(require("react"));
 
-// src/components/ui/forms/HelperText.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\HelperText.module.css
 var HelperText_default = {};
 
 // src/components/ui/forms/HelperText.tsx
@@ -526,7 +526,7 @@ function HelperText({ className, children }) {
   return /* @__PURE__ */ import_react10.default.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
 }
 
-// src/components/ui/forms/FormField.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\FormField.module.css
 var FormField_default = {};
 
 // src/components/ui/forms/FormField.tsx
@@ -545,7 +545,7 @@ function FormField({
 // src/components/ui/forms/IconButton.tsx
 var import_react12 = __toESM(require("react"));
 
-// src/components/ui/forms/IconButton.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\IconButton.module.css
 var IconButton_default = {};
 
 // src/components/ui/forms/IconButton.tsx
@@ -596,7 +596,7 @@ IconButton.displayName = "IconButton";
 var import_react13 = __toESM(require("react"));
 var RadioGroupPrimitive = __toESM(require("@radix-ui/react-radio-group"));
 
-// src/components/ui/forms/RadioGroup.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\RadioGroup.module.css
 var RadioGroup_default = {};
 
 // src/components/ui/forms/RadioGroup.tsx
@@ -639,7 +639,7 @@ function RadioGroup({
 // src/components/ui/forms/Select.tsx
 var import_react14 = __toESM(require("react"));
 
-// src/components/ui/forms/Select.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Select.module.css
 var Select_default = {};
 
 // src/components/ui/forms/Select.tsx
@@ -682,7 +682,7 @@ Select.displayName = "Select";
 var import_react15 = __toESM(require("react"));
 var SwitchPrimitive = __toESM(require("@radix-ui/react-switch"));
 
-// src/components/ui/forms/Switch.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Switch.module.css
 var Switch_default = {};
 
 // src/components/ui/forms/Switch.tsx
@@ -713,7 +713,7 @@ function Switch({
 // src/components/ui/layout/AspectRatio.tsx
 var import_react16 = __toESM(require("react"));
 
-// src/components/ui/layout/AspectRatio.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\AspectRatio.module.css
 var AspectRatio_default = {};
 
 // src/components/ui/layout/AspectRatio.tsx
@@ -735,7 +735,7 @@ function AspectRatio({
 // src/components/ui/layout/Cluster.tsx
 var import_react17 = __toESM(require("react"));
 
-// src/components/ui/layout/Cluster.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Cluster.module.css
 var Cluster_default = {};
 
 // src/components/ui/layout/Cluster.tsx
@@ -765,7 +765,7 @@ function Cluster({
 // src/components/ui/layout/Container.tsx
 var import_react18 = __toESM(require("react"));
 
-// src/components/ui/layout/Container.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Container.module.css
 var Container_default = {};
 
 // src/components/ui/layout/Container.tsx
@@ -777,7 +777,7 @@ function Container({
   return /* @__PURE__ */ import_react18.default.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className) }, children);
 }
 
-// src/components/ui/layout/Divider.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Divider.module.css
 var Divider_default = {};
 
 // src/components/ui/layout/Divider.tsx
@@ -811,7 +811,7 @@ var Divider = ({
 // src/components/ui/layout/Flex.tsx
 var import_react19 = __toESM(require("react"));
 
-// src/components/ui/layout/Flex.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Flex.module.css
 var Flex_default = {};
 
 // src/components/ui/layout/Flex.tsx
@@ -881,7 +881,7 @@ function GridItem({
 // src/components/ui/layout/Section.tsx
 var import_react21 = __toESM(require("react"));
 
-// src/components/ui/layout/Section.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Section.module.css
 var Section_default = {};
 
 // src/components/ui/layout/Section.tsx
@@ -909,7 +909,7 @@ function Section(_a) {
 // src/components/ui/layout/Spacer.tsx
 var import_react22 = __toESM(require("react"));
 
-// src/components/ui/layout/Spacer.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Spacer.module.css
 var Spacer_default = {};
 
 // src/components/ui/layout/Spacer.tsx
@@ -935,7 +935,7 @@ function Spacer({
 // src/components/ui/layout/Surface.tsx
 var import_react23 = __toESM(require("react"));
 
-// src/components/ui/layout/Surface.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Surface.module.css
 var Surface_default = {};
 
 // src/components/ui/layout/Surface.tsx
@@ -974,7 +974,7 @@ function Surface(_a) {
 var import_react24 = __toESM(require("react"));
 var import_link = __toESM(require("next/link"));
 
-// src/components/ui/navigation/Breadcrumbs.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Breadcrumbs.module.css
 var Breadcrumbs_default = {};
 
 // src/components/ui/navigation/Breadcrumbs.tsx
@@ -993,7 +993,7 @@ function Breadcrumbs({
 var import_react25 = __toESM(require("react"));
 var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
 
-// src/components/ui/navigation/MobileMenu.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenu.module.css
 var MobileMenu_default = {};
 
 // src/components/ui/navigation/MobileMenu.tsx
@@ -1028,7 +1028,7 @@ var import_react26 = __toESM(require("react"));
 var import_link2 = __toESM(require("next/link"));
 var import_navigation = require("next/navigation");
 
-// src/components/ui/navigation/NavLink.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\NavLink.module.css
 var NavLink_default = {};
 
 // src/components/ui/navigation/NavLink.tsx
@@ -1061,7 +1061,7 @@ function NavLink(_a) {
   );
 }
 
-// src/components/ui/navigation/MobileMenuContent.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenuContent.module.css
 var MobileMenuContent_default = {};
 
 // src/components/ui/navigation/MobileMenuContent.tsx
@@ -1086,7 +1086,7 @@ function MobileMenuContent({ links, actions }) {
 // src/components/ui/navigation/Navbar.tsx
 var import_react28 = __toESM(require("react"));
 
-// src/components/ui/navigation/Navbar.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Navbar.module.css
 var Navbar_default = {};
 
 // src/components/ui/navigation/Navbar.tsx
@@ -1117,7 +1117,7 @@ function Navbar({
 // src/components/ui/navigation/Pagination.tsx
 var import_react29 = __toESM(require("react"));
 
-// src/components/ui/navigation/Pagination.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Pagination.module.css
 var Pagination_default = {};
 
 // src/components/ui/navigation/Pagination.tsx
@@ -1165,7 +1165,7 @@ function Pagination({
 var import_react30 = __toESM(require("react"));
 var TabsPrimitive = __toESM(require("@radix-ui/react-tabs"));
 
-// src/components/ui/navigation/Tabs.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Tabs.module.css
 var Tabs_default = {};
 
 // src/components/ui/navigation/Tabs.tsx
@@ -1209,7 +1209,7 @@ function Tabs({
 var import_react31 = __toESM(require("react"));
 var AccordionPrimitive = __toESM(require("@radix-ui/react-accordion"));
 
-// src/components/ui/data/Accordion.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Accordion.module.css
 var Accordion_default = {};
 
 // src/components/ui/data/Accordion.tsx
@@ -1257,7 +1257,7 @@ function Accordion({
 // src/components/ui/data/Avatar.tsx
 var import_react32 = __toESM(require("react"));
 
-// src/components/ui/data/Avatar.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Avatar.module.css
 var Avatar_default = {};
 
 // src/components/ui/data/Avatar.tsx
@@ -1295,7 +1295,7 @@ function Avatar({
 // src/components/ui/data/Badge.tsx
 var import_react33 = __toESM(require("react"));
 
-// src/components/ui/data/Badge.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Badge.module.css
 var Badge_default = {};
 
 // src/components/ui/data/Badge.tsx
@@ -1313,7 +1313,7 @@ var import_react36 = __toESM(require("react"));
 // src/components/ui/typography/Heading.tsx
 var import_react34 = __toESM(require("react"));
 
-// src/components/ui/typography/Heading.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\typography\Heading.module.css
 var Heading_default = {};
 
 // src/components/ui/typography/Heading.tsx
@@ -1354,7 +1354,7 @@ function Heading({
 // src/components/ui/typography/Text.tsx
 var import_react35 = __toESM(require("react"));
 
-// src/components/ui/typography/Text.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\typography\Text.module.css
 var Text_default = {};
 
 // src/components/ui/typography/Text.tsx
@@ -1385,7 +1385,7 @@ function Text({
   );
 }
 
-// src/components/ui/data/EmptyState.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\EmptyState.module.css
 var EmptyState_default = {};
 
 // src/components/ui/data/EmptyState.tsx
@@ -1402,7 +1402,7 @@ function EmptyState({
 // src/components/ui/data/Skeleton.tsx
 var import_react37 = __toESM(require("react"));
 
-// src/components/ui/data/Skeleton.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Skeleton.module.css
 var Skeleton_default = {};
 
 // src/components/ui/data/Skeleton.tsx
@@ -1433,7 +1433,7 @@ function Skeleton({
 // src/components/ui/data/StatCard.tsx
 var import_react38 = __toESM(require("react"));
 
-// src/components/ui/data/StatCard.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\StatCard.module.css
 var StatCard_default = {};
 
 // src/components/ui/data/StatCard.tsx
@@ -1459,7 +1459,7 @@ function StatCard({
 // src/components/ui/data/Table.tsx
 var import_react39 = __toESM(require("react"));
 
-// src/components/ui/data/Table.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Table.module.css
 var Table_default = {};
 
 // src/components/ui/data/Table.tsx
@@ -1476,7 +1476,7 @@ function Table({
 var import_react40 = __toESM(require("react"));
 var DialogPrimitive3 = __toESM(require("@radix-ui/react-dialog"));
 
-// src/components/ui/overlays/Dialog.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Dialog.module.css
 var Dialog_default = {};
 
 // src/components/ui/overlays/Dialog.tsx
@@ -1495,7 +1495,7 @@ function Dialog({
 var import_react41 = __toESM(require("react"));
 var PopoverPrimitive = __toESM(require("@radix-ui/react-popover"));
 
-// src/components/ui/overlays/Popover.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Popover.module.css
 var Popover_default = {};
 
 // src/components/ui/overlays/Popover.tsx
@@ -1520,7 +1520,7 @@ function Popover({
 // src/components/ui/overlays/Toast.tsx
 var import_react42 = __toESM(require("react"));
 
-// src/components/ui/overlays/Toast.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Toast.module.css
 var Toast_default = {};
 
 // src/components/ui/overlays/Toast.tsx
@@ -1555,7 +1555,7 @@ function ToastProvider({ children }) {
 var import_react43 = __toESM(require("react"));
 var TooltipPrimitive = __toESM(require("@radix-ui/react-tooltip"));
 
-// src/components/ui/overlays/Tooltip.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Tooltip.module.css
 var Tooltip_default = {};
 
 // src/components/ui/overlays/Tooltip.tsx
@@ -1580,7 +1580,7 @@ function Tooltip({
 // src/components/ui/typography/Code.tsx
 var import_react44 = __toESM(require("react"));
 
-// src/components/ui/typography/Code.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\typography\Code.module.css
 var Code_default = {};
 
 // src/components/ui/typography/Code.tsx
@@ -1598,7 +1598,7 @@ function Code({
 // src/components/ui/typography/Kbd.tsx
 var import_react45 = __toESM(require("react"));
 
-// src/components/ui/typography/Kbd.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\typography\Kbd.module.css
 var Kbd_default = {};
 
 // src/components/ui/typography/Kbd.tsx
@@ -1610,7 +1610,7 @@ function Kbd({ className, children }) {
 var import_react46 = __toESM(require("react"));
 var import_link3 = __toESM(require("next/link"));
 
-// src/components/ui/typography/Link.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\typography\Link.module.css
 var Link_default = {};
 
 // src/components/ui/typography/Link.tsx
@@ -1647,7 +1647,7 @@ function Link({
 // src/components/ui/marketing/CTA.tsx
 var import_react47 = __toESM(require("react"));
 
-// src/components/ui/marketing/CTA.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\CTA.module.css
 var CTA_default = {};
 
 // src/components/ui/marketing/CTA.tsx
@@ -1681,7 +1681,7 @@ function CTA({
 // src/components/ui/marketing/FeatureGrid.tsx
 var import_react48 = __toESM(require("react"));
 
-// src/components/ui/marketing/FeatureGrid.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\FeatureGrid.module.css
 var FeatureGrid_default = {};
 
 // src/components/ui/marketing/FeatureGrid.tsx
@@ -1702,7 +1702,7 @@ function FeatureGrid({
 // src/components/ui/marketing/Footer.tsx
 var import_react49 = __toESM(require("react"));
 
-// src/components/ui/marketing/Footer.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\Footer.module.css
 var Footer_default = {};
 
 // src/components/ui/marketing/Footer.tsx
@@ -1730,7 +1730,7 @@ function Footer({
 // src/components/ui/marketing/Hero.tsx
 var import_react50 = __toESM(require("react"));
 
-// src/components/ui/marketing/Hero.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\Hero.module.css
 var Hero_default = {};
 
 // src/components/ui/marketing/Hero.tsx
@@ -1760,7 +1760,7 @@ function Hero({
 var import_react51 = __toESM(require("react"));
 var import_image = __toESM(require("next/image"));
 
-// src/components/ui/marketing/LogoCloud.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\LogoCloud.module.css
 var LogoCloud_default = {};
 
 // src/components/ui/marketing/LogoCloud.tsx
@@ -1781,7 +1781,7 @@ function LogoCloud({ title, logos }) {
 // src/components/ui/marketing/PricingCard.tsx
 var import_react52 = __toESM(require("react"));
 
-// src/components/ui/marketing/PricingCard.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\PricingCard.module.css
 var PricingCard_default = {};
 
 // src/components/ui/marketing/PricingCard.tsx
@@ -1823,7 +1823,7 @@ function PricingCard({
 // src/components/ui/marketing/Testimonial.tsx
 var import_react53 = __toESM(require("react"));
 
-// src/components/ui/marketing/Testimonial.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\Testimonial.module.css
 var Testimonial_default = {};
 
 // src/components/ui/marketing/Testimonial.tsx
@@ -1833,7 +1833,7 @@ function Testimonial({
   role,
   avatarSrc
 }) {
-  return /* @__PURE__ */ import_react53.default.createElement(Surface, { padding: "lg", elevation: "sm", className: Testimonial_default.card }, /* @__PURE__ */ import_react53.default.createElement(Stack, { gap: "24" }, /* @__PURE__ */ import_react53.default.createElement(Text, { size: "lg", className: Testimonial_default.quote }, "\u201C", quote, "\u201D"), /* @__PURE__ */ import_react53.default.createElement("div", { className: Testimonial_default.footer }, /* @__PURE__ */ import_react53.default.createElement(
+  return /* @__PURE__ */ import_react53.default.createElement(Surface, { padding: "lg", elevation: "sm", className: Testimonial_default.card }, /* @__PURE__ */ import_react53.default.createElement(Stack, { gap: "24" }, /* @__PURE__ */ import_react53.default.createElement(Text, { size: "lg", className: Testimonial_default.quote }, '"', quote, '"'), /* @__PURE__ */ import_react53.default.createElement("div", { className: Testimonial_default.footer }, /* @__PURE__ */ import_react53.default.createElement(
     Avatar,
     {
       src: avatarSrc,
@@ -1847,7 +1847,7 @@ function Testimonial({
 var import_react54 = __toESM(require("react"));
 var import_image2 = __toESM(require("next/image"));
 
-// src/components/ui/marketing/ThemeImage.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\ThemeImage.module.css
 var ThemeImage_default = {};
 
 // src/components/ui/marketing/ThemeImage.tsx
@@ -1981,7 +1981,7 @@ function useChatContext() {
   return context;
 }
 
-// src/components/ui/chatbox/ChatPage.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\chatbox\ChatPage.module.css
 var ChatPage_default = {};
 
 // src/components/ui/chatbox/ChatPage.tsx
@@ -1992,7 +1992,9 @@ function ChatPage({
   onClose,
   isFullPage,
   variant = "full",
-  placeholder = "Ask anything..."
+  placeholder = "Ask anything...",
+  onSessionCreate,
+  onSaveConversation
 }) {
   const [sessionId] = (0, import_react57.useState)(() => crypto.randomUUID());
   const [error, setError] = (0, import_react57.useState)(null);
@@ -2003,13 +2005,11 @@ function ChatPage({
     messages,
     input,
     handleInputChange,
-    append,
     handleSubmit: submitContext,
     status,
     isLoading: isChatLoading,
     setMessages,
     setIsChatActive,
-    setInput,
     isDisabled,
     reportFailure,
     resetChat
@@ -2028,62 +2028,28 @@ function ChatPage({
     }
   }, [messages, isStreaming]);
   (0, import_react57.useEffect)(() => {
-    const createSession = async () => {
-      if (hasCreatedSession.current) return;
-      hasCreatedSession.current = true;
-      try {
-        const res = await fetch("/api/create-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId,
-            metadata: { started_at: (/* @__PURE__ */ new Date()).toISOString() }
-          })
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          console.error("[ChatPage] Session creation failed:", data);
-          setError(`Session creation failed: ${data.message || data.error || res.statusText}`);
-          reportFailure();
-        }
-      } catch (err) {
-        console.error("[ChatPage] Session creation error:", err);
-        setError(`Connection error: ${err.message || "Failed to reach server"}`);
-        reportFailure();
-      }
-    };
-    createSession();
-  }, [sessionId]);
+    if (!onSessionCreate || hasCreatedSession.current) return;
+    hasCreatedSession.current = true;
+    onSessionCreate(sessionId, { started_at: (/* @__PURE__ */ new Date()).toISOString() }).catch((err) => {
+      console.error("[ChatPage] Session creation error:", err);
+      setError(`Session creation failed: ${err.message || "Unknown error"}`);
+      reportFailure();
+    });
+  }, [sessionId, onSessionCreate]);
+  const buildConversationPayload = () => ({
+    session_id: sessionId,
+    messages: messages.map((msg) => ({
+      role: msg.role === "assistant" ? "assistant" : "user",
+      content: getMessageContent(msg),
+      timestamp: msg.timestamp || (/* @__PURE__ */ new Date()).toISOString()
+    }))
+  });
   const saveConversation = async () => {
-    if (messages.length === 0) return;
+    if (messages.length === 0 || !onSaveConversation) return;
     setIsSaving(true);
     setError(null);
     try {
-      const conversationData = {
-        session_id: sessionId,
-        messages: messages.map((msg) => ({
-          role: msg.role === "assistant" ? "assistant" : "user",
-          content: getMessageContent(msg),
-          timestamp: msg.timestamp || (/* @__PURE__ */ new Date()).toISOString()
-        }))
-      };
-      console.log(`[ChatPage] Saving conversation to API...`, {
-        sessionId,
-        messageCount: messages.length
-      });
-      const response = await fetch("/api/save-conversation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(conversationData)
-      });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.details || errorData.error || `HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      console.log("[ChatPage] Save successful:", result);
+      await onSaveConversation(buildConversationPayload());
     } catch (err) {
       console.error("[ChatPage] Failed to save conversation:", err);
       setError(`Failed to save: ${err.message || "Unknown error"}`);
@@ -2091,26 +2057,6 @@ function ChatPage({
       setIsSaving(false);
     }
   };
-  (0, import_react57.useEffect)(() => {
-    const handleBeforeUnload = () => {
-      if (messages.length > 0 && typeof navigator !== "undefined" && navigator.sendBeacon) {
-        const conversationData = {
-          session_id: sessionId,
-          messages: messages.map((msg) => ({
-            role: msg.role,
-            content: getMessageContent(msg),
-            timestamp: msg.timestamp || (/* @__PURE__ */ new Date()).toISOString()
-          }))
-        };
-        navigator.sendBeacon(
-          "/api/save-conversation",
-          JSON.stringify(conversationData)
-        );
-      }
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [messages, sessionId]);
   const handleEndChat = async () => {
     await saveConversation();
     setMessages([]);
@@ -2163,7 +2109,7 @@ function ChatPage({
       },
       /* @__PURE__ */ import_react57.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ import_react57.default.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ import_react57.default.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
     )))),
-    isDisabled && /* @__PURE__ */ import_react57.default.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.12)", borderBottom: "1px solid rgba(239, 68, 68, 0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" } }, /* @__PURE__ */ import_react57.default.createElement(Text, { size: "sm", tone: "danger" }, "Chat unavailable \xE2\u20AC\u201D service failed to connect. Please try again later."), /* @__PURE__ */ import_react57.default.createElement(
+    isDisabled && /* @__PURE__ */ import_react57.default.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.12)", borderBottom: "1px solid rgba(239, 68, 68, 0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" } }, /* @__PURE__ */ import_react57.default.createElement(Text, { size: "sm", tone: "danger" }, "Chat unavailable - service failed to connect. Please try again later."), /* @__PURE__ */ import_react57.default.createElement(
       "button",
       {
         onClick: resetChat,
@@ -2551,7 +2497,7 @@ function SwarmsBGE() {
 // src/components/effects/WaveformBackground.tsx
 var import_react63 = __toESM(require("react"));
 
-// src/components/effects/WaveformBackground.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\effects\WaveformBackground.module.css
 var WaveformBackground_default = {};
 
 // src/components/effects/WaveformBackground.tsx

@@ -9,16 +9,19 @@ import { Stack } from '../layout/Stack';
 import { Flex } from '../layout/Flex';
 import { Text } from '../typography/Text';
 import { IconButton } from '../forms/IconButton';
-import { Input } from '../forms/Input';
 import styles from './ChatPage.module.css';
 
-// Local Message interface for internal UI logic if needed, 
-// though we primarily use UIMessage from the SDK now.
 export interface Message extends UIMessage {
   timestamp?: string;
 }
 
-interface ChatPageProps {
+export interface ConversationMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;
+}
+
+export interface ChatPageProps {
   initialMessages?: Message[];
   className?: string;
   onSendMessage?: (content: string) => void;
@@ -26,12 +29,22 @@ interface ChatPageProps {
   isFullPage?: boolean;
   variant?: 'full' | 'compact' | 'minimal';
   placeholder?: string;
+  /**
+   * Called once on mount with the generated session ID.
+   * Use this to persist the session in your backend.
+   * If omitted, no session is created.
+   */
+  onSessionCreate?: (sessionId: string, metadata: { started_at: string }) => Promise<void>;
+  /**
+   * Called when the user ends the chat session.
+   * Use this to persist the conversation in your backend.
+   * If omitted, messages are not saved.
+   * Note: for beforeunload persistence, add your own window event listener
+   * using navigator.sendBeacon with your own endpoint.
+   */
+  onSaveConversation?: (data: { session_id: string; messages: ConversationMessage[] }) => Promise<void>;
 }
 
-/**
- * ChatPage component with Vercel AI SDK v6 and Supabase integration.
- * Supports multiple variants for embedding across the application.
- */
 export function ChatPage({
   initialMessages,
   className,
@@ -40,6 +53,8 @@ export function ChatPage({
   isFullPage,
   variant = 'full',
   placeholder = "Ask anything...",
+  onSessionCreate,
+  onSaveConversation,
 }: ChatPageProps) {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [error, setError] = useState<string | null>(null);
@@ -52,13 +67,11 @@ export function ChatPage({
     messages,
     input,
     handleInputChange,
-    append,
     handleSubmit: submitContext,
     status,
     isLoading: isChatLoading,
     setMessages,
     setIsChatActive,
-    setInput,
     isDisabled,
     reportFailure,
     resetChat,
@@ -86,76 +99,35 @@ export function ChatPage({
     }
   }, [messages, isStreaming]);
 
-  // Create session in database on mount
+  // Notify the consumer about the new session on mount
   useEffect(() => {
-    const createSession = async () => {
-      if (hasCreatedSession.current) return;
-      hasCreatedSession.current = true;
+    if (!onSessionCreate || hasCreatedSession.current) return;
+    hasCreatedSession.current = true;
 
-      try {
-        const res = await fetch('/api/create-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            session_id: sessionId,
-            metadata: { started_at: new Date().toISOString() },
-          }),
-        });
+    onSessionCreate(sessionId, { started_at: new Date().toISOString() }).catch((err: any) => {
+      console.error('[ChatPage] Session creation error:', err);
+      setError(`Session creation failed: ${err.message || 'Unknown error'}`);
+      reportFailure();
+    });
+  }, [sessionId, onSessionCreate]);
 
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          console.error('[ChatPage] Session creation failed:', data);
-          setError(`Session creation failed: ${data.message || data.error || res.statusText}`);
-          reportFailure();
-        }
-      } catch (err: any) {
-        console.error('[ChatPage] Session creation error:', err);
-        setError(`Connection error: ${err.message || 'Failed to reach server'}`);
-        reportFailure();
-      }
-    };
+  const buildConversationPayload = () => ({
+    session_id: sessionId,
+    messages: messages.map((msg) => ({
+      role: (msg.role === 'assistant' ? 'assistant' : 'user') as 'user' | 'assistant',
+      content: getMessageContent(msg),
+      timestamp: (msg as any).timestamp || new Date().toISOString(),
+    })),
+  });
 
-    createSession();
-  }, [sessionId]);
-
-  // Save conversation to our API endpoint
   const saveConversation = async () => {
-    if (messages.length === 0) return;
+    if (messages.length === 0 || !onSaveConversation) return;
 
     setIsSaving(true);
     setError(null);
 
     try {
-      const conversationData = {
-        session_id: sessionId,
-        messages: messages.map((msg) => ({
-          role: msg.role === 'assistant' ? 'assistant' : 'user',
-          content: getMessageContent(msg),
-          timestamp: (msg as any).timestamp || new Date().toISOString(),
-        })),
-      };
-
-      console.log(`[ChatPage] Saving conversation to API...`, {
-        sessionId,
-        messageCount: messages.length
-      });
-
-      const response = await fetch('/api/save-conversation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(conversationData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.details || errorData.error || `HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      console.log('[ChatPage] Save successful:', result);
-
+      await onSaveConversation(buildConversationPayload());
     } catch (err: any) {
       console.error('[ChatPage] Failed to save conversation:', err);
       setError(`Failed to save: ${err.message || 'Unknown error'}`);
@@ -164,29 +136,6 @@ export function ChatPage({
     }
   };
 
-  // Auto-save on beforeunload using sendBeacon for reliability
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (messages.length > 0 && typeof navigator !== 'undefined' && navigator.sendBeacon) {
-        const conversationData = {
-          session_id: sessionId,
-          messages: messages.map((msg) => ({
-            role: msg.role,
-            content: getMessageContent(msg),
-            timestamp: (msg as any).timestamp || new Date().toISOString(),
-          })),
-        };
-        // Use sendBeacon for reliable data transmission on page unload
-        navigator.sendBeacon(
-          '/api/save-conversation',
-          JSON.stringify(conversationData)
-        );
-      }
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, [messages, sessionId]);
 
   const handleEndChat = async () => {
     await saveConversation();
@@ -268,7 +217,7 @@ export function ChatPage({
       {/* Service unavailable banner */}
       {isDisabled && (
         <div style={{ padding: '12px 16px', backgroundColor: 'rgba(239, 68, 68, 0.12)', borderBottom: '1px solid rgba(239, 68, 68, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-          <Text size="sm" tone="danger">Chat unavailable â€” service failed to connect. Please try again later.</Text>
+          <Text size="sm" tone="danger">Chat unavailable - service failed to connect. Please try again later.</Text>
           <button
             onClick={resetChat}
             style={{ flexShrink: 0, fontSize: '12px', padding: '4px 10px', borderRadius: '6px', border: '1px solid rgba(239, 68, 68, 0.4)', background: 'transparent', color: 'inherit', cursor: 'pointer' }}

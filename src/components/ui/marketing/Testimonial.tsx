@@ -40,7 +40,7 @@ export function Testimonial({
         <Surface padding="lg" elevation="sm" className={styles.card}>
             <Stack gap="24">
                 <Text size="lg" className={styles.quote}>
-                    “{quote}”
+                    "{quote}"
                 </Text>
                 <div className={styles.footer}>
                     <Avatar

@@ -1,40 +1,35 @@
 "use client";
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
-
-// src/lib/cn.ts
-function cn(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import {
+  AspectRatio,
+  Avatar,
+  Badge,
+  CTA,
+  Cluster,
+  Code,
+  Container,
+  Divider,
+  FeatureGrid,
+  Flex,
+  Footer,
+  Grid,
+  GridItem,
+  Heading,
+  Hero,
+  Kbd,
+  Link,
+  LogoCloud,
+  PricingCard,
+  Section,
+  Spacer,
+  Stack,
+  Surface,
+  Testimonial,
+  Text,
+  ThemeImage,
+  __objRest,
+  __spreadValues,
+  cn
+} from "./chunk-E4WD4LMV.mjs";
 
 // src/components/ui/Providers.tsx
 import { ThemeProvider } from "next-themes";
@@ -45,7 +40,7 @@ function Providers({ children }) {
 // src/components/ui/forms/Button.tsx
 import React2 from "react";
 
-// src/components/ui/forms/Button.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Button.module.css
 var Button_default = {};
 
 // src/components/ui/forms/Button.tsx
@@ -105,7 +100,7 @@ Button.displayName = "Button";
 import React3 from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 
-// src/components/ui/forms/Checkbox.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Checkbox.module.css
 var Checkbox_default = {};
 
 // src/components/ui/forms/Checkbox.tsx
@@ -147,7 +142,7 @@ function Checkbox({
 // src/components/ui/forms/ErrorText.tsx
 import React4 from "react";
 
-// src/components/ui/forms/ErrorText.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\ErrorText.module.css
 var ErrorText_default = {};
 
 // src/components/ui/forms/ErrorText.tsx
@@ -156,15 +151,15 @@ function ErrorText({ className, style, children }) {
 }
 
 // src/components/ui/forms/Form.tsx
-import React9 from "react";
+import React7 from "react";
 
-// src/components/ui/forms/Form.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Form.module.css
 var Form_default = {};
 
 // src/components/ui/forms/Input.tsx
 import React5 from "react";
 
-// src/components/ui/forms/Input.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Input.module.css
 var Input_default = {};
 
 // src/components/ui/forms/Input.tsx
@@ -229,7 +224,7 @@ Input.displayName = "Input";
 // src/components/ui/forms/Textarea.tsx
 import React6 from "react";
 
-// src/components/ui/forms/Textarea.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Textarea.module.css
 var Textarea_default = {};
 
 // src/components/ui/forms/Textarea.tsx
@@ -267,82 +262,8 @@ var Textarea = React6.forwardRef(
 );
 Textarea.displayName = "Textarea";
 
-// src/components/ui/layout/Stack.tsx
-import React7 from "react";
-
-// src/components/ui/layout/Stack.module.css
-var Stack_default = {};
-
-// src/components/ui/layout/Stack.tsx
-function Stack({
-  gap = "16",
-  align = "stretch",
-  as: Component = "div",
-  className,
-  style,
-  children
-}) {
-  return /* @__PURE__ */ React7.createElement(
-    Component,
-    {
-      className: cn(Stack_default.stack, Stack_default[`gap-${gap}`], Stack_default[`align-${align}`], className),
-      style
-    },
-    children
-  );
-}
-
-// src/components/ui/layout/Grid.tsx
-import React8 from "react";
-
-// src/components/ui/layout/Grid.module.css
-var Grid_default = {};
-
-// src/components/ui/layout/Grid.tsx
-function getResponsiveClasses(value, prefix, styles) {
-  if (!value) return "";
-  if (typeof value === "object") {
-    const classes = [];
-    if (value.base) classes.push(styles[`${prefix}-${value.base}`]);
-    if (value.sm) classes.push(styles[`${prefix}-sm-${value.sm}`]);
-    if (value.md) classes.push(styles[`${prefix}-md-${value.md}`]);
-    if (value.lg) classes.push(styles[`${prefix}-lg-${value.lg}`]);
-    return classes.filter(Boolean).join(" ");
-  }
-  return styles[`${prefix}-${value}`] || "";
-}
-function Grid(_a) {
-  var _b = _a, {
-    columns = 12,
-    gap = "16",
-    align,
-    className,
-    children
-  } = _b, props = __objRest(_b, [
-    "columns",
-    "gap",
-    "align",
-    "className",
-    "children"
-  ]);
-  const columnClasses = getResponsiveClasses(columns, "columns", Grid_default);
-  return /* @__PURE__ */ React8.createElement(
-    "div",
-    __spreadProps(__spreadValues({}, props), {
-      className: cn(
-        Grid_default.grid,
-        columnClasses,
-        Grid_default[`gap-${gap}`],
-        align && Grid_default[`align-${align}`],
-        className
-      )
-    }),
-    children
-  );
-}
-
 // src/components/ui/forms/Form.tsx
-var Form = React9.forwardRef(
+var Form = React7.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       fields,
@@ -369,14 +290,14 @@ var Form = React9.forwardRef(
     };
     const textareaFields = fields.filter((f) => f.type === "textarea");
     const inputFields = fields.filter((f) => f.type !== "textarea");
-    return /* @__PURE__ */ React9.createElement(
+    return /* @__PURE__ */ React7.createElement(
       "form",
       __spreadValues({
         ref,
         className: cn(Form_default.form, className),
         onSubmit: handleSubmit
       }, props),
-      /* @__PURE__ */ React9.createElement(Stack, { gap: "24" }, textareaFields.map((field) => /* @__PURE__ */ React9.createElement(
+      /* @__PURE__ */ React7.createElement(Stack, { gap: "24" }, textareaFields.map((field) => /* @__PURE__ */ React7.createElement(
         Textarea,
         {
           key: field.name,
@@ -385,7 +306,7 @@ var Form = React9.forwardRef(
           required: field.required,
           rows: field.rows || 4
         }
-      )), inputFields.length > 0 && /* @__PURE__ */ React9.createElement(Grid, { columns: { base: 1, md: inputFields.length }, gap: "16" }, inputFields.map((field) => /* @__PURE__ */ React9.createElement(
+      )), inputFields.length > 0 && /* @__PURE__ */ React7.createElement(Grid, { columns: { base: 1, md: inputFields.length }, gap: "16" }, inputFields.map((field) => /* @__PURE__ */ React7.createElement(
         Input,
         {
           key: field.name,
@@ -394,39 +315,39 @@ var Form = React9.forwardRef(
           placeholder: field.placeholder,
           required: field.required
         }
-      ))), children, showSubmit && /* @__PURE__ */ React9.createElement("div", { className: Form_default.actions }, /* @__PURE__ */ React9.createElement(Button, { variant: submitVariant, type: "submit" }, submitLabel)))
+      ))), children, showSubmit && /* @__PURE__ */ React7.createElement("div", { className: Form_default.actions }, /* @__PURE__ */ React7.createElement(Button, { variant: submitVariant, type: "submit" }, submitLabel)))
     );
   }
 );
 Form.displayName = "Form";
 
 // src/components/ui/forms/FormField.tsx
-import React12 from "react";
-
-// src/components/ui/forms/Label.tsx
 import React10 from "react";
 
-// src/components/ui/forms/Label.module.css
+// src/components/ui/forms/Label.tsx
+import React8 from "react";
+
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Label.module.css
 var Label_default = {};
 
 // src/components/ui/forms/Label.tsx
 function Label(_a) {
   var _b = _a, { required, className, children } = _b, props = __objRest(_b, ["required", "className", "children"]);
-  return /* @__PURE__ */ React10.createElement("label", __spreadValues({ className: cn(Label_default.label, className) }, props), children, required && /* @__PURE__ */ React10.createElement("span", { className: Label_default.required, title: "Required" }, "*"));
+  return /* @__PURE__ */ React8.createElement("label", __spreadValues({ className: cn(Label_default.label, className) }, props), children, required && /* @__PURE__ */ React8.createElement("span", { className: Label_default.required, title: "Required" }, "*"));
 }
 
 // src/components/ui/forms/HelperText.tsx
-import React11 from "react";
+import React9 from "react";
 
-// src/components/ui/forms/HelperText.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\HelperText.module.css
 var HelperText_default = {};
 
 // src/components/ui/forms/HelperText.tsx
 function HelperText({ className, children }) {
-  return /* @__PURE__ */ React11.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
+  return /* @__PURE__ */ React9.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
 }
 
-// src/components/ui/forms/FormField.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\FormField.module.css
 var FormField_default = {};
 
 // src/components/ui/forms/FormField.tsx
@@ -439,17 +360,17 @@ function FormField({
   className,
   children
 }) {
-  return /* @__PURE__ */ React12.createElement("div", { className: cn(FormField_default.formField, className) }, label && /* @__PURE__ */ React12.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ React12.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ React12.createElement(HelperText, null, hint) : null);
+  return /* @__PURE__ */ React10.createElement("div", { className: cn(FormField_default.formField, className) }, label && /* @__PURE__ */ React10.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ React10.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ React10.createElement(HelperText, null, hint) : null);
 }
 
 // src/components/ui/forms/IconButton.tsx
-import React13 from "react";
+import React11 from "react";
 
-// src/components/ui/forms/IconButton.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\IconButton.module.css
 var IconButton_default = {};
 
 // src/components/ui/forms/IconButton.tsx
-var IconButton = React13.forwardRef(
+var IconButton = React11.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       variant = "primary",
@@ -470,7 +391,7 @@ var IconButton = React13.forwardRef(
       "disabled",
       "children"
     ]);
-    return /* @__PURE__ */ React13.createElement(
+    return /* @__PURE__ */ React11.createElement(
       "button",
       __spreadValues({
         ref,
@@ -486,17 +407,17 @@ var IconButton = React13.forwardRef(
         "aria-label": ariaLabel,
         disabled: disabled || loading
       }, props),
-      loading ? /* @__PURE__ */ React13.createElement("span", { className: IconButton_default.spinner }) : children
+      loading ? /* @__PURE__ */ React11.createElement("span", { className: IconButton_default.spinner }) : children
     );
   }
 );
 IconButton.displayName = "IconButton";
 
 // src/components/ui/forms/RadioGroup.tsx
-import React14 from "react";
+import React12 from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
-// src/components/ui/forms/RadioGroup.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\RadioGroup.module.css
 var RadioGroup_default = {};
 
 // src/components/ui/forms/RadioGroup.tsx
@@ -508,7 +429,7 @@ function RadioGroup({
   orientation = "vertical",
   className
 }) {
-  return /* @__PURE__ */ React14.createElement(
+  return /* @__PURE__ */ React12.createElement(
     RadioGroupPrimitive.Root,
     {
       className: cn(RadioGroup_default.root, RadioGroup_default[orientation], className),
@@ -516,7 +437,7 @@ function RadioGroup({
       defaultValue,
       onValueChange
     },
-    items.map((item) => /* @__PURE__ */ React14.createElement("div", { key: item.value, className: RadioGroup_default.itemWrapper }, /* @__PURE__ */ React14.createElement(
+    items.map((item) => /* @__PURE__ */ React12.createElement("div", { key: item.value, className: RadioGroup_default.itemWrapper }, /* @__PURE__ */ React12.createElement(
       RadioGroupPrimitive.Item,
       {
         id: item.id,
@@ -524,8 +445,8 @@ function RadioGroup({
         disabled: item.disabled,
         className: RadioGroup_default.item
       },
-      /* @__PURE__ */ React14.createElement(RadioGroupPrimitive.Indicator, { className: RadioGroup_default.indicator })
-    ), /* @__PURE__ */ React14.createElement(
+      /* @__PURE__ */ React12.createElement(RadioGroupPrimitive.Indicator, { className: RadioGroup_default.indicator })
+    ), /* @__PURE__ */ React12.createElement(
       "label",
       {
         htmlFor: item.id,
@@ -537,13 +458,13 @@ function RadioGroup({
 }
 
 // src/components/ui/forms/Select.tsx
-import React15 from "react";
+import React13 from "react";
 
-// src/components/ui/forms/Select.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Select.module.css
 var Select_default = {};
 
 // src/components/ui/forms/Select.tsx
-var Select = React15.forwardRef(
+var Select = React13.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       selectSize = "md",
@@ -560,7 +481,7 @@ var Select = React15.forwardRef(
       "disabled",
       "children"
     ]);
-    return /* @__PURE__ */ React15.createElement("div", { className: cn(Select_default.wrapper, Select_default[`size-${selectSize}`]) }, /* @__PURE__ */ React15.createElement(
+    return /* @__PURE__ */ React13.createElement("div", { className: cn(Select_default.wrapper, Select_default[`size-${selectSize}`]) }, /* @__PURE__ */ React13.createElement(
       "select",
       __spreadValues({
         ref,
@@ -572,17 +493,17 @@ var Select = React15.forwardRef(
         ),
         disabled
       }, props),
-      options ? options.map((opt) => /* @__PURE__ */ React15.createElement("option", { key: opt.value, value: opt.value }, opt.label)) : children
-    ), /* @__PURE__ */ React15.createElement("span", { className: Select_default.icon, "aria-hidden": "true" }, "\xE2\u2013\xBC"));
+      options ? options.map((opt) => /* @__PURE__ */ React13.createElement("option", { key: opt.value, value: opt.value }, opt.label)) : children
+    ), /* @__PURE__ */ React13.createElement("span", { className: Select_default.icon, "aria-hidden": "true" }, "\xE2\u2013\xBC"));
   }
 );
 Select.displayName = "Select";
 
 // src/components/ui/forms/Switch.tsx
-import React16 from "react";
+import React14 from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 
-// src/components/ui/forms/Switch.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Switch.module.css
 var Switch_default = {};
 
 // src/components/ui/forms/Switch.tsx
@@ -595,7 +516,7 @@ function Switch({
   className,
   disabled
 }) {
-  return /* @__PURE__ */ React16.createElement(
+  return /* @__PURE__ */ React14.createElement(
     SwitchPrimitive.Root,
     {
       id,
@@ -606,275 +527,15 @@ function Switch({
       disabled,
       "aria-label": ariaLabel
     },
-    /* @__PURE__ */ React16.createElement(SwitchPrimitive.Thumb, { className: Switch_default.thumb })
-  );
-}
-
-// src/components/ui/layout/AspectRatio.tsx
-import React17 from "react";
-
-// src/components/ui/layout/AspectRatio.module.css
-var AspectRatio_default = {};
-
-// src/components/ui/layout/AspectRatio.tsx
-function AspectRatio({
-  ratio = "1/1",
-  className,
-  children
-}) {
-  return /* @__PURE__ */ React17.createElement(
-    "div",
-    {
-      className: cn(AspectRatio_default.aspectRatio, className),
-      style: { aspectRatio: ratio }
-    },
-    children
-  );
-}
-
-// src/components/ui/layout/Cluster.tsx
-import React18 from "react";
-
-// src/components/ui/layout/Cluster.module.css
-var Cluster_default = {};
-
-// src/components/ui/layout/Cluster.tsx
-function Cluster({
-  gap = "8",
-  justify = "start",
-  align = "center",
-  as: Component = "div",
-  className,
-  children
-}) {
-  return /* @__PURE__ */ React18.createElement(
-    Component,
-    {
-      className: cn(
-        Cluster_default.cluster,
-        Cluster_default[`gap-${gap}`],
-        Cluster_default[`justify-${justify}`],
-        Cluster_default[`align-${align}`],
-        className
-      )
-    },
-    children
-  );
-}
-
-// src/components/ui/layout/Container.tsx
-import React19 from "react";
-
-// src/components/ui/layout/Container.module.css
-var Container_default = {};
-
-// src/components/ui/layout/Container.tsx
-function Container({
-  maxWidth = "layout",
-  className,
-  children
-}) {
-  return /* @__PURE__ */ React19.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className) }, children);
-}
-
-// src/components/ui/layout/Divider.module.css
-var Divider_default = {};
-
-// src/components/ui/layout/Divider.tsx
-var Divider = ({
-  orientation = "horizontal",
-  scale = 1,
-  className = "",
-  style = {},
-  opacity = 0.2,
-  color = "currentColor",
-  length = "100%"
-}) => {
-  const isHorizontal = orientation === "horizontal";
-  const dividerStyle = __spreadProps(__spreadValues({}, style), {
-    color,
-    opacity,
-    [isHorizontal ? "width" : "height"]: length,
-    "--divider-scale": `${scale}`
-  });
-  return /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      className: `${Divider_default.divider} ${Divider_default[orientation]} ${className}`,
-      style: dividerStyle,
-      role: "separator",
-      "aria-orientation": orientation
-    }
-  );
-};
-
-// src/components/ui/layout/Flex.tsx
-import React20 from "react";
-
-// src/components/ui/layout/Flex.module.css
-var Flex_default = {};
-
-// src/components/ui/layout/Flex.tsx
-function Flex({
-  direction = "row",
-  wrap = "nowrap",
-  align = "stretch",
-  justify = "start",
-  gap = "0",
-  as: Component = "div",
-  fullWidth = false,
-  className,
-  style,
-  children
-}) {
-  return /* @__PURE__ */ React20.createElement(
-    Component,
-    {
-      className: cn(
-        Flex_default.flex,
-        Flex_default[`direction-${direction}`],
-        Flex_default[`wrap-${wrap}`],
-        Flex_default[`align-${align}`],
-        Flex_default[`justify-${justify}`],
-        Flex_default[`gap-${gap}`],
-        fullWidth && Flex_default.fullWidth,
-        className
-      ),
-      style
-    },
-    children
-  );
-}
-
-// src/components/ui/layout/GridItem.tsx
-import React21 from "react";
-function getResponsiveClasses2(value, prefix) {
-  if (!value) return "";
-  if (typeof value === "object") {
-    const classes = [];
-    if (value.base) classes.push(`${prefix}-${value.base}`);
-    if (value.md) classes.push(`${prefix}-md-${value.md}`);
-    if (value.lg) classes.push(`${prefix}-lg-${value.lg}`);
-    return classes.join(" ");
-  }
-  return `${prefix}-${value}`;
-}
-function GridItem({
-  span,
-  start,
-  className,
-  children
-}) {
-  return /* @__PURE__ */ React21.createElement(
-    "div",
-    {
-      className: cn(
-        getResponsiveClasses2(span, "span"),
-        getResponsiveClasses2(start, "start"),
-        className
-      )
-    },
-    children
-  );
-}
-
-// src/components/ui/layout/Section.tsx
-import React22 from "react";
-
-// src/components/ui/layout/Section.module.css
-var Section_default = {};
-
-// src/components/ui/layout/Section.tsx
-function Section(_a) {
-  var _b = _a, {
-    size = "md",
-    as: Component = "section",
-    className,
-    children
-  } = _b, props = __objRest(_b, [
-    "size",
-    "as",
-    "className",
-    "children"
-  ]);
-  return /* @__PURE__ */ React22.createElement(
-    Component,
-    __spreadProps(__spreadValues({}, props), {
-      className: cn(Section_default.section, Section_default[`size-${size}`], className)
-    }),
-    children
-  );
-}
-
-// src/components/ui/layout/Spacer.tsx
-import React23 from "react";
-
-// src/components/ui/layout/Spacer.module.css
-var Spacer_default = {};
-
-// src/components/ui/layout/Spacer.tsx
-function Spacer({
-  axis = "vertical",
-  size = "16",
-  className
-}) {
-  return /* @__PURE__ */ React23.createElement(
-    "div",
-    {
-      className: cn(
-        Spacer_default.spacer,
-        Spacer_default[`axis-${axis}`],
-        Spacer_default[`size-${size}`],
-        className
-      ),
-      "aria-hidden": "true"
-    }
-  );
-}
-
-// src/components/ui/layout/Surface.tsx
-import React24 from "react";
-
-// src/components/ui/layout/Surface.module.css
-var Surface_default = {};
-
-// src/components/ui/layout/Surface.tsx
-function Surface(_a) {
-  var _b = _a, {
-    padding = "md",
-    elevation = "sm",
-    radius = "md",
-    as: Component = "div",
-    className,
-    children
-  } = _b, props = __objRest(_b, [
-    "padding",
-    "elevation",
-    "radius",
-    "as",
-    "className",
-    "children"
-  ]);
-  return /* @__PURE__ */ React24.createElement(
-    Component,
-    __spreadProps(__spreadValues({}, props), {
-      className: cn(
-        Surface_default.surface,
-        Surface_default[`padding-${padding}`],
-        Surface_default[`elevation-${elevation}`],
-        Surface_default[`radius-${radius}`],
-        className
-      )
-    }),
-    children
+    /* @__PURE__ */ React14.createElement(SwitchPrimitive.Thumb, { className: Switch_default.thumb })
   );
 }
 
 // src/components/ui/navigation/Breadcrumbs.tsx
-import React25 from "react";
+import React15 from "react";
 import NextLink from "next/link";
 
-// src/components/ui/navigation/Breadcrumbs.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Breadcrumbs.module.css
 var Breadcrumbs_default = {};
 
 // src/components/ui/navigation/Breadcrumbs.tsx
@@ -883,17 +544,17 @@ function Breadcrumbs({
   className,
   separator = "/"
 }) {
-  return /* @__PURE__ */ React25.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), "aria-label": "Breadcrumb" }, /* @__PURE__ */ React25.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
+  return /* @__PURE__ */ React15.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), "aria-label": "Breadcrumb" }, /* @__PURE__ */ React15.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
     const isLast = index === items.length - 1;
-    return /* @__PURE__ */ React25.createElement("li", { key: item.label, className: Breadcrumbs_default.item }, !isLast && item.href ? /* @__PURE__ */ React25.createElement(NextLink, { href: item.href, className: Breadcrumbs_default.link }, item.label) : /* @__PURE__ */ React25.createElement("span", { className: Breadcrumbs_default.current, "aria-current": "page" }, item.label), !isLast && /* @__PURE__ */ React25.createElement("span", { className: Breadcrumbs_default.separator, "aria-hidden": "true" }, separator));
+    return /* @__PURE__ */ React15.createElement("li", { key: item.label, className: Breadcrumbs_default.item }, !isLast && item.href ? /* @__PURE__ */ React15.createElement(NextLink, { href: item.href, className: Breadcrumbs_default.link }, item.label) : /* @__PURE__ */ React15.createElement("span", { className: Breadcrumbs_default.current, "aria-current": "page" }, item.label), !isLast && /* @__PURE__ */ React15.createElement("span", { className: Breadcrumbs_default.separator, "aria-hidden": "true" }, separator));
   })));
 }
 
 // src/components/ui/navigation/MobileMenu.tsx
-import React26 from "react";
+import React16 from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
-// src/components/ui/navigation/MobileMenu.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenu.module.css
 var MobileMenu_default = {};
 
 // src/components/ui/navigation/MobileMenu.tsx
@@ -902,7 +563,7 @@ function MobileMenu({
   children,
   title = ""
 }) {
-  return /* @__PURE__ */ React26.createElement(DialogPrimitive.Root, null, /* @__PURE__ */ React26.createElement(DialogPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React26.createElement(DialogPrimitive.Portal, null, /* @__PURE__ */ React26.createElement(DialogPrimitive.Overlay, { className: MobileMenu_default.overlay }), /* @__PURE__ */ React26.createElement(DialogPrimitive.Content, { className: MobileMenu_default.content }, /* @__PURE__ */ React26.createElement(DialogPrimitive.Title, { className: MobileMenu_default.srOnly }, title || "Navigation Menu"), /* @__PURE__ */ React26.createElement(DialogPrimitive.Description, { className: MobileMenu_default.srOnly }, "Mobile navigation menu"), /* @__PURE__ */ React26.createElement("div", { className: MobileMenu_default.header }, /* @__PURE__ */ React26.createElement(DialogPrimitive.Close, { className: MobileMenu_default.close, "aria-label": "Close" }, /* @__PURE__ */ React26.createElement(
+  return /* @__PURE__ */ React16.createElement(DialogPrimitive.Root, null, /* @__PURE__ */ React16.createElement(DialogPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React16.createElement(DialogPrimitive.Portal, null, /* @__PURE__ */ React16.createElement(DialogPrimitive.Overlay, { className: MobileMenu_default.overlay }), /* @__PURE__ */ React16.createElement(DialogPrimitive.Content, { className: MobileMenu_default.content }, /* @__PURE__ */ React16.createElement(DialogPrimitive.Title, { className: MobileMenu_default.srOnly }, title || "Navigation Menu"), /* @__PURE__ */ React16.createElement(DialogPrimitive.Description, { className: MobileMenu_default.srOnly }, "Mobile navigation menu"), /* @__PURE__ */ React16.createElement("div", { className: MobileMenu_default.header }, /* @__PURE__ */ React16.createElement(DialogPrimitive.Close, { className: MobileMenu_default.close, "aria-label": "Close" }, /* @__PURE__ */ React16.createElement(
     "svg",
     {
       width: "32",
@@ -914,21 +575,21 @@ function MobileMenu({
       strokeLinecap: "round",
       strokeLinejoin: "round"
     },
-    /* @__PURE__ */ React26.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }),
-    /* @__PURE__ */ React26.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" })
-  ))), /* @__PURE__ */ React26.createElement("div", { className: MobileMenu_default.body }, children))));
+    /* @__PURE__ */ React16.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }),
+    /* @__PURE__ */ React16.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" })
+  ))), /* @__PURE__ */ React16.createElement("div", { className: MobileMenu_default.body }, children))));
 }
 
 // src/components/ui/navigation/MobileMenuContent.tsx
-import React28 from "react";
+import React18 from "react";
 import * as DialogPrimitive2 from "@radix-ui/react-dialog";
 
 // src/components/ui/navigation/NavLink.tsx
-import React27 from "react";
+import React17 from "react";
 import NextLink2 from "next/link";
 import { usePathname } from "next/navigation";
 
-// src/components/ui/navigation/NavLink.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\NavLink.module.css
 var NavLink_default = {};
 
 // src/components/ui/navigation/NavLink.tsx
@@ -946,7 +607,7 @@ function NavLink(_a) {
   ]);
   const pathname = usePathname();
   const isActive = isActiveProp !== void 0 ? isActiveProp : pathname === href || typeof href === "string" && href !== "/" && (pathname == null ? void 0 : pathname.startsWith(href));
-  return /* @__PURE__ */ React27.createElement(
+  return /* @__PURE__ */ React17.createElement(
     NextLink2,
     __spreadValues({
       href,
@@ -961,32 +622,32 @@ function NavLink(_a) {
   );
 }
 
-// src/components/ui/navigation/MobileMenuContent.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenuContent.module.css
 var MobileMenuContent_default = {};
 
 // src/components/ui/navigation/MobileMenuContent.tsx
 function MobileMenuContent({ links, actions }) {
-  return /* @__PURE__ */ React28.createElement("div", { className: MobileMenuContent_default.content }, /* @__PURE__ */ React28.createElement("div", { className: MobileMenuContent_default.logoArea }, /* @__PURE__ */ React28.createElement("img", { className: "logo-dark", src: "/media/logo/imadgen-logo-dark.png", alt: "IMADGEN" }), /* @__PURE__ */ React28.createElement("img", { className: "logo-light", src: "/media/logo/imadgen-logo-light.png", alt: "IMADGEN" }), /* @__PURE__ */ React28.createElement("span", null, "IMADGEN")), /* @__PURE__ */ React28.createElement("nav", { className: MobileMenuContent_default.linksStack }, /* @__PURE__ */ React28.createElement(DialogPrimitive2.Close, { asChild: true }, /* @__PURE__ */ React28.createElement(
+  return /* @__PURE__ */ React18.createElement("div", { className: MobileMenuContent_default.content }, /* @__PURE__ */ React18.createElement("div", { className: MobileMenuContent_default.logoArea }, /* @__PURE__ */ React18.createElement("img", { className: "logo-dark", src: "/media/logo/imadgen-logo-dark.png", alt: "IMADGEN" }), /* @__PURE__ */ React18.createElement("img", { className: "logo-light", src: "/media/logo/imadgen-logo-light.png", alt: "IMADGEN" }), /* @__PURE__ */ React18.createElement("span", null, "IMADGEN")), /* @__PURE__ */ React18.createElement("nav", { className: MobileMenuContent_default.linksStack }, /* @__PURE__ */ React18.createElement(DialogPrimitive2.Close, { asChild: true }, /* @__PURE__ */ React18.createElement(
     NavLink,
     {
       href: "/",
       className: MobileMenuContent_default.navLink
     },
     "Home"
-  )), links.map((link) => /* @__PURE__ */ React28.createElement(DialogPrimitive2.Close, { key: link.href, asChild: true }, /* @__PURE__ */ React28.createElement(
+  )), links.map((link) => /* @__PURE__ */ React18.createElement(DialogPrimitive2.Close, { key: link.href, asChild: true }, /* @__PURE__ */ React18.createElement(
     NavLink,
     {
       href: link.href,
       className: MobileMenuContent_default.navLink
     },
     link.label
-  )))), actions && /* @__PURE__ */ React28.createElement("div", { className: MobileMenuContent_default.actions }, actions));
+  )))), actions && /* @__PURE__ */ React18.createElement("div", { className: MobileMenuContent_default.actions }, actions));
 }
 
 // src/components/ui/navigation/Navbar.tsx
-import React29 from "react";
+import React19 from "react";
 
-// src/components/ui/navigation/Navbar.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Navbar.module.css
 var Navbar_default = {};
 
 // src/components/ui/navigation/Navbar.tsx
@@ -997,27 +658,27 @@ function Navbar({
   className,
   sticky = true
 }) {
-  return /* @__PURE__ */ React29.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className) }, /* @__PURE__ */ React29.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ React29.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ React29.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ React29.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ React29.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ React29.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ React29.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ React29.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ React29.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ React29.createElement(
+  return /* @__PURE__ */ React19.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className) }, /* @__PURE__ */ React19.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ React19.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ React19.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ React19.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ React19.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ React19.createElement(
     MobileMenu,
     {
-      trigger: /* @__PURE__ */ React29.createElement(
+      trigger: /* @__PURE__ */ React19.createElement(
         IconButton,
         {
           variant: "ghost",
           "aria-label": "Toggle menu",
           className: Navbar_default.burger
         },
-        /* @__PURE__ */ React29.createElement("svg", { width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" }, /* @__PURE__ */ React29.createElement("rect", { y: "4", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React29.createElement("rect", { y: "11", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React29.createElement("rect", { y: "18", width: "24", height: "2", rx: "1", fill: "currentColor" }))
+        /* @__PURE__ */ React19.createElement("svg", { width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" }, /* @__PURE__ */ React19.createElement("rect", { y: "4", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React19.createElement("rect", { y: "11", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React19.createElement("rect", { y: "18", width: "24", height: "2", rx: "1", fill: "currentColor" }))
       )
     },
-    /* @__PURE__ */ React29.createElement(MobileMenuContent, { links, actions })
+    /* @__PURE__ */ React19.createElement(MobileMenuContent, { links, actions })
   ))))));
 }
 
 // src/components/ui/navigation/Pagination.tsx
-import React30 from "react";
+import React20 from "react";
 
-// src/components/ui/navigation/Pagination.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Pagination.module.css
 var Pagination_default = {};
 
 // src/components/ui/navigation/Pagination.tsx
@@ -1029,13 +690,13 @@ function Pagination({
 }) {
   const canGoPrev = currentPage > 1;
   const canGoNext = currentPage < totalPages;
-  return /* @__PURE__ */ React30.createElement(
+  return /* @__PURE__ */ React20.createElement(
     "nav",
     {
       className: cn(Pagination_default.pagination, className),
       "aria-label": "Pagination"
     },
-    /* @__PURE__ */ React30.createElement(
+    /* @__PURE__ */ React20.createElement(
       Button,
       {
         variant: "secondary",
@@ -1046,8 +707,8 @@ function Pagination({
       },
       "Previous"
     ),
-    /* @__PURE__ */ React30.createElement("div", { className: Pagination_default.info }, "Page ", /* @__PURE__ */ React30.createElement("span", { className: Pagination_default.current }, currentPage), " of ", totalPages),
-    /* @__PURE__ */ React30.createElement(
+    /* @__PURE__ */ React20.createElement("div", { className: Pagination_default.info }, "Page ", /* @__PURE__ */ React20.createElement("span", { className: Pagination_default.current }, currentPage), " of ", totalPages),
+    /* @__PURE__ */ React20.createElement(
       Button,
       {
         variant: "secondary",
@@ -1062,10 +723,10 @@ function Pagination({
 }
 
 // src/components/ui/navigation/Tabs.tsx
-import React31 from "react";
+import React21 from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
-// src/components/ui/navigation/Tabs.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Tabs.module.css
 var Tabs_default = {};
 
 // src/components/ui/navigation/Tabs.tsx
@@ -1076,7 +737,7 @@ function Tabs({
   items,
   className
 }) {
-  return /* @__PURE__ */ React31.createElement(
+  return /* @__PURE__ */ React21.createElement(
     TabsPrimitive.Root,
     {
       defaultValue,
@@ -1084,7 +745,7 @@ function Tabs({
       onValueChange,
       className: cn(className)
     },
-    /* @__PURE__ */ React31.createElement(TabsPrimitive.List, { className: Tabs_default.list }, items.map((item) => /* @__PURE__ */ React31.createElement(
+    /* @__PURE__ */ React21.createElement(TabsPrimitive.List, { className: Tabs_default.list }, items.map((item) => /* @__PURE__ */ React21.createElement(
       TabsPrimitive.Trigger,
       {
         key: item.value,
@@ -1093,7 +754,7 @@ function Tabs({
       },
       item.label
     ))),
-    items.map((item) => item.content && /* @__PURE__ */ React31.createElement(
+    items.map((item) => item.content && /* @__PURE__ */ React21.createElement(
       TabsPrimitive.Content,
       {
         key: item.value,
@@ -1106,10 +767,10 @@ function Tabs({
 }
 
 // src/components/ui/data/Accordion.tsx
-import React32 from "react";
+import React22 from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 
-// src/components/ui/data/Accordion.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Accordion.module.css
 var Accordion_default = {};
 
 // src/components/ui/data/Accordion.tsx
@@ -1119,14 +780,14 @@ function Accordion({
   collapsible = true,
   className
 }) {
-  return /* @__PURE__ */ React32.createElement(
+  return /* @__PURE__ */ React22.createElement(
     AccordionPrimitive.Root,
     {
       type,
       collapsible,
       className: cn(Accordion_default.root, className)
     },
-    items.map((item) => /* @__PURE__ */ React32.createElement(
+    items.map((item) => /* @__PURE__ */ React22.createElement(
       AccordionPrimitive.Item,
       {
         key: item.value,
@@ -1134,7 +795,7 @@ function Accordion({
         disabled: item.disabled,
         className: Accordion_default.item
       },
-      /* @__PURE__ */ React32.createElement(AccordionPrimitive.Header, { className: Accordion_default.header }, /* @__PURE__ */ React32.createElement(AccordionPrimitive.Trigger, { className: Accordion_default.trigger }, item.title, /* @__PURE__ */ React32.createElement(
+      /* @__PURE__ */ React22.createElement(AccordionPrimitive.Header, { className: Accordion_default.header }, /* @__PURE__ */ React22.createElement(AccordionPrimitive.Trigger, { className: Accordion_default.trigger }, item.title, /* @__PURE__ */ React22.createElement(
         "svg",
         {
           width: "16",
@@ -1147,145 +808,17 @@ function Accordion({
           strokeLinejoin: "round",
           className: Accordion_default.chevron
         },
-        /* @__PURE__ */ React32.createElement("polyline", { points: "6 9 12 15 18 9" })
+        /* @__PURE__ */ React22.createElement("polyline", { points: "6 9 12 15 18 9" })
       ))),
-      /* @__PURE__ */ React32.createElement(AccordionPrimitive.Content, { className: Accordion_default.content }, /* @__PURE__ */ React32.createElement("div", { className: Accordion_default.contentInner }, item.content))
+      /* @__PURE__ */ React22.createElement(AccordionPrimitive.Content, { className: Accordion_default.content }, /* @__PURE__ */ React22.createElement("div", { className: Accordion_default.contentInner }, item.content))
     ))
   );
 }
 
-// src/components/ui/data/Avatar.tsx
-import React33 from "react";
-
-// src/components/ui/data/Avatar.module.css
-var Avatar_default = {};
-
-// src/components/ui/data/Avatar.tsx
-function Avatar({
-  src,
-  alt,
-  fallback,
-  size = "md",
-  shape = "circle",
-  className
-}) {
-  const [error, setError] = React33.useState(false);
-  return /* @__PURE__ */ React33.createElement(
-    "div",
-    {
-      className: cn(
-        Avatar_default.avatar,
-        Avatar_default[`size-${size}`],
-        Avatar_default[`shape-${shape}`],
-        className
-      )
-    },
-    src && !error ? /* @__PURE__ */ React33.createElement(
-      "img",
-      {
-        src,
-        alt,
-        className: Avatar_default.image,
-        onError: () => setError(true)
-      }
-    ) : /* @__PURE__ */ React33.createElement("span", { className: Avatar_default.fallback }, fallback)
-  );
-}
-
-// src/components/ui/data/Badge.tsx
-import React34 from "react";
-
-// src/components/ui/data/Badge.module.css
-var Badge_default = {};
-
-// src/components/ui/data/Badge.tsx
-function Badge({
-  variant = "neutral",
-  className,
-  children
-}) {
-  return /* @__PURE__ */ React34.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className) }, children);
-}
-
 // src/components/ui/data/EmptyState.tsx
-import React37 from "react";
+import React23 from "react";
 
-// src/components/ui/typography/Heading.tsx
-import React35 from "react";
-
-// src/components/ui/typography/Heading.module.css
-var Heading_default = {};
-
-// src/components/ui/typography/Heading.tsx
-function Heading({
-  as: Component = "h2",
-  size,
-  weight,
-  align = "left",
-  className,
-  style,
-  children
-}) {
-  const defaultSizes = {
-    h1: "xxl",
-    h2: "xl",
-    h3: "lg",
-    h4: "md",
-    h5: "sm",
-    h6: "sm"
-  };
-  const appliedSize = size || defaultSizes[Component];
-  return /* @__PURE__ */ React35.createElement(
-    Component,
-    {
-      className: cn(
-        Heading_default.heading,
-        Heading_default[`size-${appliedSize}`],
-        Heading_default[`align-${align}`],
-        weight && Heading_default[`weight-${weight}`],
-        className
-      ),
-      style
-    },
-    children
-  );
-}
-
-// src/components/ui/typography/Text.tsx
-import React36 from "react";
-
-// src/components/ui/typography/Text.module.css
-var Text_default = {};
-
-// src/components/ui/typography/Text.tsx
-function Text({
-  as: Component = "p",
-  size = "md",
-  tone = "default",
-  weight = "normal",
-  align,
-  className,
-  style,
-  children
-}) {
-  return /* @__PURE__ */ React36.createElement(
-    Component,
-    {
-      className: cn(
-        Text_default.text,
-        Text_default[`size-${size}`],
-        Text_default[`tone-${tone}`],
-        Text_default[`weight-${weight}`],
-        align && Text_default[`align-${align}`],
-        className
-      ),
-      style
-    },
-    children
-  );
-}
-
-// src/components/ui/data/EmptyState.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\EmptyState.module.css
 var EmptyState_default = {};
 
 // src/components/ui/data/EmptyState.tsx
@@ -1296,13 +829,13 @@ function EmptyState({
   action,
   className
 }) {
-  return /* @__PURE__ */ React37.createElement("div", { className: cn(EmptyState_default.emptyState, className) }, /* @__PURE__ */ React37.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ React37.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ React37.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React37.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ React37.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ React37.createElement("div", { className: EmptyState_default.action }, action)));
+  return /* @__PURE__ */ React23.createElement("div", { className: cn(EmptyState_default.emptyState, className) }, /* @__PURE__ */ React23.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ React23.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ React23.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React23.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ React23.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ React23.createElement("div", { className: EmptyState_default.action }, action)));
 }
 
 // src/components/ui/data/Skeleton.tsx
-import React38 from "react";
+import React24 from "react";
 
-// src/components/ui/data/Skeleton.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Skeleton.module.css
 var Skeleton_default = {};
 
 // src/components/ui/data/Skeleton.tsx
@@ -1313,7 +846,7 @@ function Skeleton({
   shimmer = true,
   className
 }) {
-  return /* @__PURE__ */ React38.createElement(
+  return /* @__PURE__ */ React24.createElement(
     "div",
     {
       className: cn(
@@ -1331,9 +864,9 @@ function Skeleton({
 }
 
 // src/components/ui/data/StatCard.tsx
-import React39 from "react";
+import React25 from "react";
 
-// src/components/ui/data/StatCard.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\StatCard.module.css
 var StatCard_default = {};
 
 // src/components/ui/data/StatCard.tsx
@@ -1344,7 +877,7 @@ function StatCard({
   variant = "neutral",
   className
 }) {
-  return /* @__PURE__ */ React39.createElement(
+  return /* @__PURE__ */ React25.createElement(
     Surface,
     {
       padding: "lg",
@@ -1352,14 +885,14 @@ function StatCard({
       radius: "lg",
       className: cn(StatCard_default.statCard, StatCard_default[`variant-${variant}`], className)
     },
-    /* @__PURE__ */ React39.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React39.createElement(Text, { size: "sm", tone: "muted", className: StatCard_default.label }, label), /* @__PURE__ */ React39.createElement(Heading, { as: "h3", size: "xl", className: StatCard_default.value }, value), note && /* @__PURE__ */ React39.createElement(Text, { size: "xs", tone: "muted", className: StatCard_default.note }, note))
+    /* @__PURE__ */ React25.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React25.createElement(Text, { size: "sm", tone: "muted", className: StatCard_default.label }, label), /* @__PURE__ */ React25.createElement(Heading, { as: "h3", size: "xl", className: StatCard_default.value }, value), note && /* @__PURE__ */ React25.createElement(Text, { size: "xs", tone: "muted", className: StatCard_default.note }, note))
   );
 }
 
 // src/components/ui/data/Table.tsx
-import React40 from "react";
+import React26 from "react";
 
-// src/components/ui/data/Table.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Table.module.css
 var Table_default = {};
 
 // src/components/ui/data/Table.tsx
@@ -1369,14 +902,14 @@ function Table({
   className,
   striped = false
 }) {
-  return /* @__PURE__ */ React40.createElement("div", { className: cn(Table_default.wrapper, className) }, /* @__PURE__ */ React40.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ React40.createElement("thead", null, /* @__PURE__ */ React40.createElement("tr", null, headers.map((header) => /* @__PURE__ */ React40.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ React40.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ React40.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ React40.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
+  return /* @__PURE__ */ React26.createElement("div", { className: cn(Table_default.wrapper, className) }, /* @__PURE__ */ React26.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ React26.createElement("thead", null, /* @__PURE__ */ React26.createElement("tr", null, headers.map((header) => /* @__PURE__ */ React26.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ React26.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ React26.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ React26.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
 }
 
 // src/components/ui/overlays/Dialog.tsx
-import React41 from "react";
+import React27 from "react";
 import * as DialogPrimitive3 from "@radix-ui/react-dialog";
 
-// src/components/ui/overlays/Dialog.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Dialog.module.css
 var Dialog_default = {};
 
 // src/components/ui/overlays/Dialog.tsx
@@ -1388,14 +921,14 @@ function Dialog({
   description,
   children
 }) {
-  return /* @__PURE__ */ React41.createElement(DialogPrimitive3.Root, { open, onOpenChange }, trigger && /* @__PURE__ */ React41.createElement(DialogPrimitive3.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React41.createElement(DialogPrimitive3.Portal, null, /* @__PURE__ */ React41.createElement(DialogPrimitive3.Overlay, { className: Dialog_default.overlay }), /* @__PURE__ */ React41.createElement(DialogPrimitive3.Content, { className: Dialog_default.content }, /* @__PURE__ */ React41.createElement("div", { className: Dialog_default.header }, title && /* @__PURE__ */ React41.createElement(DialogPrimitive3.Title, { className: Dialog_default.title }, title), description && /* @__PURE__ */ React41.createElement(DialogPrimitive3.Description, { className: Dialog_default.description }, description), /* @__PURE__ */ React41.createElement(DialogPrimitive3.Close, { className: Dialog_default.close, "aria-label": "Close" }, "\xC3\u2014")), /* @__PURE__ */ React41.createElement("div", { className: Dialog_default.body }, children))));
+  return /* @__PURE__ */ React27.createElement(DialogPrimitive3.Root, { open, onOpenChange }, trigger && /* @__PURE__ */ React27.createElement(DialogPrimitive3.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React27.createElement(DialogPrimitive3.Portal, null, /* @__PURE__ */ React27.createElement(DialogPrimitive3.Overlay, { className: Dialog_default.overlay }), /* @__PURE__ */ React27.createElement(DialogPrimitive3.Content, { className: Dialog_default.content }, /* @__PURE__ */ React27.createElement("div", { className: Dialog_default.header }, title && /* @__PURE__ */ React27.createElement(DialogPrimitive3.Title, { className: Dialog_default.title }, title), description && /* @__PURE__ */ React27.createElement(DialogPrimitive3.Description, { className: Dialog_default.description }, description), /* @__PURE__ */ React27.createElement(DialogPrimitive3.Close, { className: Dialog_default.close, "aria-label": "Close" }, "\xC3\u2014")), /* @__PURE__ */ React27.createElement("div", { className: Dialog_default.body }, children))));
 }
 
 // src/components/ui/overlays/Popover.tsx
-import React42 from "react";
+import React28 from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
-// src/components/ui/overlays/Popover.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Popover.module.css
 var Popover_default = {};
 
 // src/components/ui/overlays/Popover.tsx
@@ -1406,21 +939,21 @@ function Popover({
   onOpenChange,
   className
 }) {
-  return /* @__PURE__ */ React42.createElement(PopoverPrimitive.Root, { open, onOpenChange }, /* @__PURE__ */ React42.createElement(PopoverPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React42.createElement(PopoverPrimitive.Portal, null, /* @__PURE__ */ React42.createElement(
+  return /* @__PURE__ */ React28.createElement(PopoverPrimitive.Root, { open, onOpenChange }, /* @__PURE__ */ React28.createElement(PopoverPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React28.createElement(PopoverPrimitive.Portal, null, /* @__PURE__ */ React28.createElement(
     PopoverPrimitive.Content,
     {
       className: cn(Popover_default.content, className),
       sideOffset: 8
     },
     children,
-    /* @__PURE__ */ React42.createElement(PopoverPrimitive.Arrow, { className: Popover_default.arrow })
+    /* @__PURE__ */ React28.createElement(PopoverPrimitive.Arrow, { className: Popover_default.arrow })
   )));
 }
 
 // src/components/ui/overlays/Toast.tsx
-import React43, { createContext, useContext, useState, useCallback } from "react";
+import React29, { createContext, useContext, useState, useCallback } from "react";
 
-// src/components/ui/overlays/Toast.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Toast.module.css
 var Toast_default = {};
 
 // src/components/ui/overlays/Toast.tsx
@@ -1440,7 +973,7 @@ function ToastProvider({ children }) {
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => removeToast(id), 5e3);
   }, [removeToast]);
-  return /* @__PURE__ */ React43.createElement(ToastContext.Provider, { value: { addToast, removeToast } }, children, /* @__PURE__ */ React43.createElement("div", { className: Toast_default.container }, toasts.map((toast) => /* @__PURE__ */ React43.createElement(
+  return /* @__PURE__ */ React29.createElement(ToastContext.Provider, { value: { addToast, removeToast } }, children, /* @__PURE__ */ React29.createElement("div", { className: Toast_default.container }, toasts.map((toast) => /* @__PURE__ */ React29.createElement(
     "div",
     {
       key: toast.id,
@@ -1452,10 +985,10 @@ function ToastProvider({ children }) {
 }
 
 // src/components/ui/overlays/Tooltip.tsx
-import React44 from "react";
+import React30 from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
-// src/components/ui/overlays/Tooltip.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Tooltip.module.css
 var Tooltip_default = {};
 
 // src/components/ui/overlays/Tooltip.tsx
@@ -1465,7 +998,7 @@ function Tooltip({
   side = "top",
   className
 }) {
-  return /* @__PURE__ */ React44.createElement(TooltipPrimitive.Provider, { delayDuration: 300 }, /* @__PURE__ */ React44.createElement(TooltipPrimitive.Root, null, /* @__PURE__ */ React44.createElement(TooltipPrimitive.Trigger, { asChild: true }, children), /* @__PURE__ */ React44.createElement(TooltipPrimitive.Portal, null, /* @__PURE__ */ React44.createElement(
+  return /* @__PURE__ */ React30.createElement(TooltipPrimitive.Provider, { delayDuration: 300 }, /* @__PURE__ */ React30.createElement(TooltipPrimitive.Root, null, /* @__PURE__ */ React30.createElement(TooltipPrimitive.Trigger, { asChild: true }, children), /* @__PURE__ */ React30.createElement(TooltipPrimitive.Portal, null, /* @__PURE__ */ React30.createElement(
     TooltipPrimitive.Content,
     {
       className: cn(Tooltip_default.content, className),
@@ -1473,318 +1006,15 @@ function Tooltip({
       sideOffset: 4
     },
     content,
-    /* @__PURE__ */ React44.createElement(TooltipPrimitive.Arrow, { className: Tooltip_default.arrow })
+    /* @__PURE__ */ React30.createElement(TooltipPrimitive.Arrow, { className: Tooltip_default.arrow })
   ))));
 }
 
-// src/components/ui/typography/Code.tsx
-import React45 from "react";
-
-// src/components/ui/typography/Code.module.css
-var Code_default = {};
-
-// src/components/ui/typography/Code.tsx
-function Code({
-  variant = "inline",
-  className,
-  children
-}) {
-  if (variant === "block") {
-    return /* @__PURE__ */ React45.createElement("pre", { className: cn(Code_default.block, className) }, /* @__PURE__ */ React45.createElement("code", null, children));
-  }
-  return /* @__PURE__ */ React45.createElement("code", { className: cn(Code_default.inline, className) }, children);
-}
-
-// src/components/ui/typography/Kbd.tsx
-import React46 from "react";
-
-// src/components/ui/typography/Kbd.module.css
-var Kbd_default = {};
-
-// src/components/ui/typography/Kbd.tsx
-function Kbd({ className, children }) {
-  return /* @__PURE__ */ React46.createElement("kbd", { className: cn(Kbd_default.kbd, className) }, children);
-}
-
-// src/components/ui/typography/Link.tsx
-import React47 from "react";
-import NextLink3 from "next/link";
-
-// src/components/ui/typography/Link.module.css
-var Link_default = {};
-
-// src/components/ui/typography/Link.tsx
-function Link({
-  href,
-  underline = "hover",
-  tone = "default",
-  external: externalProp,
-  className,
-  children
-}) {
-  const isExternal = externalProp != null ? externalProp : href.startsWith("http://") || href.startsWith("https://");
-  const linkClasses = cn(
-    Link_default.link,
-    Link_default[`underline-${underline}`],
-    Link_default[`tone-${tone}`],
-    className
-  );
-  if (isExternal) {
-    return /* @__PURE__ */ React47.createElement(
-      "a",
-      {
-        href,
-        className: linkClasses,
-        target: "_blank",
-        rel: "noopener noreferrer"
-      },
-      children
-    );
-  }
-  return /* @__PURE__ */ React47.createElement(NextLink3, { href, className: linkClasses }, children);
-}
-
-// src/components/ui/marketing/CTA.tsx
-import React48 from "react";
-
-// src/components/ui/marketing/CTA.module.css
-var CTA_default = {};
-
-// src/components/ui/marketing/CTA.tsx
-function CTA({
-  title,
-  description,
-  actions,
-  variant = "brand",
-  className
-}) {
-  return /* @__PURE__ */ React48.createElement(
-    Surface,
-    {
-      padding: "lg",
-      className: cn(CTA_default.cta, CTA_default[variant], className),
-      elevation: "lg",
-      radius: "lg"
-    },
-    /* @__PURE__ */ React48.createElement(Stack, { gap: "32", align: "center" }, /* @__PURE__ */ React48.createElement(Stack, { gap: "16", align: "center" }, /* @__PURE__ */ React48.createElement(Heading, { as: "h2", size: "xl", align: "center" }, title), description && /* @__PURE__ */ React48.createElement(
-      Text,
-      {
-        size: "lg",
-        align: "center",
-        className: CTA_default.description
-      },
-      description
-    )), /* @__PURE__ */ React48.createElement("div", { className: CTA_default.actions }, actions))
-  );
-}
-
-// src/components/ui/marketing/FeatureGrid.tsx
-import React49 from "react";
-
-// src/components/ui/marketing/FeatureGrid.module.css
-var FeatureGrid_default = {};
-
-// src/components/ui/marketing/FeatureGrid.tsx
-function FeatureGrid({
-  features,
-  columns = 3
-}) {
-  return /* @__PURE__ */ React49.createElement(
-    Grid,
-    {
-      columns: { base: 1, md: 2, lg: columns },
-      gap: "24"
-    },
-    features.map((feature, index) => /* @__PURE__ */ React49.createElement(GridItem, { key: index }, /* @__PURE__ */ React49.createElement(Surface, { padding: "lg", elevation: "sm", className: FeatureGrid_default.card }, /* @__PURE__ */ React49.createElement(Stack, { gap: "16" }, feature.icon && /* @__PURE__ */ React49.createElement("div", { className: FeatureGrid_default.icon }, feature.icon), /* @__PURE__ */ React49.createElement(Stack, { gap: "8" }, /* @__PURE__ */ React49.createElement(Heading, { as: "h3", size: "md" }, feature.title), /* @__PURE__ */ React49.createElement(Text, { tone: "muted", size: "sm" }, feature.description))))))
-  );
-}
-
-// src/components/ui/marketing/Footer.tsx
-import React50 from "react";
-
-// src/components/ui/marketing/Footer.module.css
-var Footer_default = {};
-
-// src/components/ui/marketing/Footer.tsx
-function Footer({
-  brand,
-  brandName,
-  copyright,
-  message,
-  socials
-}) {
-  return /* @__PURE__ */ React50.createElement("footer", { className: Footer_default.footer }, /* @__PURE__ */ React50.createElement("div", { className: "wrap" }, /* @__PURE__ */ React50.createElement("div", { className: Footer_default.finebar }, /* @__PURE__ */ React50.createElement("div", { className: Footer_default.fineLeft }, /* @__PURE__ */ React50.createElement("div", null, copyright), message && /* @__PURE__ */ React50.createElement("div", null, message)), /* @__PURE__ */ React50.createElement("div", { className: Footer_default.fineRight }, socials && /* @__PURE__ */ React50.createElement("div", { className: Footer_default.socials }, socials.map((social) => /* @__PURE__ */ React50.createElement(
-    "a",
-    {
-      key: social.label,
-      href: social.href,
-      className: Footer_default.iconBtn,
-      target: "_blank",
-      rel: "noreferrer",
-      "aria-label": social.label
-    },
-    social.icon
-  ))), /* @__PURE__ */ React50.createElement("div", { className: Footer_default.footmark }, /* @__PURE__ */ React50.createElement("div", { className: Footer_default.logo }, brand), brandName && /* @__PURE__ */ React50.createElement("span", { className: Footer_default.brandName }, brandName))))));
-}
-
-// src/components/ui/marketing/Hero.tsx
-import React51 from "react";
-
-// src/components/ui/marketing/Hero.module.css
-var Hero_default = {};
-
-// src/components/ui/marketing/Hero.tsx
-function Hero({
-  badge,
-  title,
-  titleWeight,
-  description,
-  actions,
-  visual,
-  align = "center",
-  className
-}) {
-  return /* @__PURE__ */ React51.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className) }, /* @__PURE__ */ React51.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ React51.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ React51.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ React51.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ React51.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ React51.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ React51.createElement(
-    Text,
-    {
-      size: "lg",
-      tone: "muted",
-      align,
-      className: Hero_default.description
-    },
-    description
-  ), actions && /* @__PURE__ */ React51.createElement("div", { className: Hero_default.actions }, actions))), visual && /* @__PURE__ */ React51.createElement("div", { className: Hero_default.visual }, visual))));
-}
-
-// src/components/ui/marketing/LogoCloud.tsx
-import React52 from "react";
-import Image from "next/image";
-
-// src/components/ui/marketing/LogoCloud.module.css
-var LogoCloud_default = {};
-
-// src/components/ui/marketing/LogoCloud.tsx
-function LogoCloud({ title, logos }) {
-  return /* @__PURE__ */ React52.createElement("div", { className: LogoCloud_default.logoCloud }, title && /* @__PURE__ */ React52.createElement("p", { className: LogoCloud_default.title }, title), /* @__PURE__ */ React52.createElement(Flex, { wrap: "wrap", gap: "32", justify: "center", align: "center" }, logos.map((logo, index) => /* @__PURE__ */ React52.createElement("div", { key: index, className: LogoCloud_default.logoWrapper }, /* @__PURE__ */ React52.createElement(
-    Image,
-    {
-      src: logo.src,
-      alt: logo.alt,
-      width: 120,
-      height: 40,
-      className: LogoCloud_default.logo,
-      style: { objectFit: "contain" }
-    }
-  )))));
-}
-
-// src/components/ui/marketing/PricingCard.tsx
-import React53 from "react";
-
-// src/components/ui/marketing/PricingCard.module.css
-var PricingCard_default = {};
-
-// src/components/ui/marketing/PricingCard.tsx
-function PricingCard({
-  name,
-  price,
-  frequency = "/mo",
-  description,
-  features,
-  action,
-  featured = false
-}) {
-  return /* @__PURE__ */ React53.createElement(
-    Surface,
-    {
-      padding: "lg",
-      elevation: featured ? "lg" : "sm",
-      className: cn(PricingCard_default.card, featured && PricingCard_default.featured),
-      radius: "lg"
-    },
-    /* @__PURE__ */ React53.createElement(Stack, { gap: "32" }, /* @__PURE__ */ React53.createElement(Stack, { gap: "16" }, /* @__PURE__ */ React53.createElement("div", { className: PricingCard_default.header }, /* @__PURE__ */ React53.createElement(Heading, { as: "h3", size: "lg" }, name), featured && /* @__PURE__ */ React53.createElement(Badge, { variant: "brand" }, "Recommended")), /* @__PURE__ */ React53.createElement("div", { className: PricingCard_default.priceContainer }, /* @__PURE__ */ React53.createElement("span", { className: PricingCard_default.price }, price), /* @__PURE__ */ React53.createElement("span", { className: PricingCard_default.frequency }, frequency)), description && /* @__PURE__ */ React53.createElement(Text, { size: "sm", tone: "muted" }, description)), /* @__PURE__ */ React53.createElement(Divider, null), /* @__PURE__ */ React53.createElement(Stack, { gap: "12" }, features.map((feature, index) => /* @__PURE__ */ React53.createElement("div", { key: index, className: PricingCard_default.feature }, /* @__PURE__ */ React53.createElement(
-      "svg",
-      {
-        width: "16",
-        height: "16",
-        viewBox: "0 0 24 24",
-        fill: "none",
-        stroke: "currentColor",
-        strokeWidth: "3",
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
-        className: PricingCard_default.check
-      },
-      /* @__PURE__ */ React53.createElement("polyline", { points: "20 6 9 17 4 12" })
-    ), /* @__PURE__ */ React53.createElement(Text, { size: "sm" }, feature)))), /* @__PURE__ */ React53.createElement("div", { className: PricingCard_default.action }, action))
-  );
-}
-
-// src/components/ui/marketing/Testimonial.tsx
-import React54 from "react";
-
-// src/components/ui/marketing/Testimonial.module.css
-var Testimonial_default = {};
-
-// src/components/ui/marketing/Testimonial.tsx
-function Testimonial({
-  quote,
-  author,
-  role,
-  avatarSrc
-}) {
-  return /* @__PURE__ */ React54.createElement(Surface, { padding: "lg", elevation: "sm", className: Testimonial_default.card }, /* @__PURE__ */ React54.createElement(Stack, { gap: "24" }, /* @__PURE__ */ React54.createElement(Text, { size: "lg", className: Testimonial_default.quote }, "\u201C", quote, "\u201D"), /* @__PURE__ */ React54.createElement("div", { className: Testimonial_default.footer }, /* @__PURE__ */ React54.createElement(
-    Avatar,
-    {
-      src: avatarSrc,
-      fallback: author.charAt(0),
-      size: "md"
-    }
-  ), /* @__PURE__ */ React54.createElement(Stack, { gap: "0" }, /* @__PURE__ */ React54.createElement(Text, { weight: "semibold", size: "sm" }, author), role && /* @__PURE__ */ React54.createElement(Text, { size: "xs", tone: "muted" }, role)))));
-}
-
-// src/components/ui/marketing/ThemeImage.tsx
-import React55 from "react";
-import Image2 from "next/image";
-
-// src/components/ui/marketing/ThemeImage.module.css
-var ThemeImage_default = {};
-
-// src/components/ui/marketing/ThemeImage.tsx
-function ThemeImage(_a) {
-  var _b = _a, {
-    lightSrc,
-    darkSrc,
-    alt,
-    className
-  } = _b, props = __objRest(_b, [
-    "lightSrc",
-    "darkSrc",
-    "alt",
-    "className"
-  ]);
-  return /* @__PURE__ */ React55.createElement(React55.Fragment, null, /* @__PURE__ */ React55.createElement(
-    Image2,
-    __spreadProps(__spreadValues({}, props), {
-      src: darkSrc,
-      alt,
-      className: cn(ThemeImage_default.darkOnly, className)
-    })
-  ), /* @__PURE__ */ React55.createElement(
-    Image2,
-    __spreadProps(__spreadValues({}, props), {
-      src: lightSrc,
-      alt,
-      className: cn(ThemeImage_default.lightOnly, className)
-    })
-  ));
-}
-
 // src/components/ui/chatbox/ChatPage.tsx
-import React57, { useState as useState3, useRef as useRef2, useEffect } from "react";
+import React32, { useState as useState3, useRef as useRef2, useEffect } from "react";
 
 // src/components/ui/chatbox/ChatContext.tsx
-import React56, { createContext as createContext2, useContext as useContext2, useState as useState2, useRef, useCallback as useCallback2, useMemo } from "react";
+import React31, { createContext as createContext2, useContext as useContext2, useState as useState2, useRef, useCallback as useCallback2, useMemo } from "react";
 import { useChat } from "@ai-sdk/react";
 var MAX_FAILURES = 3;
 var ChatContext = createContext2(void 0);
@@ -1871,7 +1101,7 @@ function ChatProvider({ children }) {
     reportFailure,
     resetChat
   ]);
-  return /* @__PURE__ */ React56.createElement(ChatContext.Provider, { value }, children);
+  return /* @__PURE__ */ React31.createElement(ChatContext.Provider, { value }, children);
 }
 function useChatContext() {
   const context = useContext2(ChatContext);
@@ -1881,7 +1111,7 @@ function useChatContext() {
   return context;
 }
 
-// src/components/ui/chatbox/ChatPage.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\chatbox\ChatPage.module.css
 var ChatPage_default = {};
 
 // src/components/ui/chatbox/ChatPage.tsx
@@ -1892,7 +1122,9 @@ function ChatPage({
   onClose,
   isFullPage,
   variant = "full",
-  placeholder = "Ask anything..."
+  placeholder = "Ask anything...",
+  onSessionCreate,
+  onSaveConversation
 }) {
   const [sessionId] = useState3(() => crypto.randomUUID());
   const [error, setError] = useState3(null);
@@ -1903,13 +1135,11 @@ function ChatPage({
     messages,
     input,
     handleInputChange,
-    append,
     handleSubmit: submitContext,
     status,
     isLoading: isChatLoading,
     setMessages,
     setIsChatActive,
-    setInput,
     isDisabled,
     reportFailure,
     resetChat
@@ -1928,62 +1158,28 @@ function ChatPage({
     }
   }, [messages, isStreaming]);
   useEffect(() => {
-    const createSession = async () => {
-      if (hasCreatedSession.current) return;
-      hasCreatedSession.current = true;
-      try {
-        const res = await fetch("/api/create-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId,
-            metadata: { started_at: (/* @__PURE__ */ new Date()).toISOString() }
-          })
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          console.error("[ChatPage] Session creation failed:", data);
-          setError(`Session creation failed: ${data.message || data.error || res.statusText}`);
-          reportFailure();
-        }
-      } catch (err) {
-        console.error("[ChatPage] Session creation error:", err);
-        setError(`Connection error: ${err.message || "Failed to reach server"}`);
-        reportFailure();
-      }
-    };
-    createSession();
-  }, [sessionId]);
+    if (!onSessionCreate || hasCreatedSession.current) return;
+    hasCreatedSession.current = true;
+    onSessionCreate(sessionId, { started_at: (/* @__PURE__ */ new Date()).toISOString() }).catch((err) => {
+      console.error("[ChatPage] Session creation error:", err);
+      setError(`Session creation failed: ${err.message || "Unknown error"}`);
+      reportFailure();
+    });
+  }, [sessionId, onSessionCreate]);
+  const buildConversationPayload = () => ({
+    session_id: sessionId,
+    messages: messages.map((msg) => ({
+      role: msg.role === "assistant" ? "assistant" : "user",
+      content: getMessageContent(msg),
+      timestamp: msg.timestamp || (/* @__PURE__ */ new Date()).toISOString()
+    }))
+  });
   const saveConversation = async () => {
-    if (messages.length === 0) return;
+    if (messages.length === 0 || !onSaveConversation) return;
     setIsSaving(true);
     setError(null);
     try {
-      const conversationData = {
-        session_id: sessionId,
-        messages: messages.map((msg) => ({
-          role: msg.role === "assistant" ? "assistant" : "user",
-          content: getMessageContent(msg),
-          timestamp: msg.timestamp || (/* @__PURE__ */ new Date()).toISOString()
-        }))
-      };
-      console.log(`[ChatPage] Saving conversation to API...`, {
-        sessionId,
-        messageCount: messages.length
-      });
-      const response = await fetch("/api/save-conversation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(conversationData)
-      });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.details || errorData.error || `HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      console.log("[ChatPage] Save successful:", result);
+      await onSaveConversation(buildConversationPayload());
     } catch (err) {
       console.error("[ChatPage] Failed to save conversation:", err);
       setError(`Failed to save: ${err.message || "Unknown error"}`);
@@ -1991,26 +1187,6 @@ function ChatPage({
       setIsSaving(false);
     }
   };
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (messages.length > 0 && typeof navigator !== "undefined" && navigator.sendBeacon) {
-        const conversationData = {
-          session_id: sessionId,
-          messages: messages.map((msg) => ({
-            role: msg.role,
-            content: getMessageContent(msg),
-            timestamp: msg.timestamp || (/* @__PURE__ */ new Date()).toISOString()
-          }))
-        };
-        navigator.sendBeacon(
-          "/api/save-conversation",
-          JSON.stringify(conversationData)
-        );
-      }
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [messages, sessionId]);
   const handleEndChat = async () => {
     await saveConversation();
     setMessages([]);
@@ -2037,7 +1213,7 @@ function ChatPage({
       handleChatSubmit();
     }
   };
-  return /* @__PURE__ */ React57.createElement(
+  return /* @__PURE__ */ React32.createElement(
     Surface,
     {
       elevation: variant === "minimal" ? "none" : "md",
@@ -2051,7 +1227,7 @@ function ChatPage({
       ),
       padding: "none"
     },
-    /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.header }, /* @__PURE__ */ React57.createElement(Flex, { align: "center", justify: "between", gap: "12" }, /* @__PURE__ */ React57.createElement(Flex, { align: "center", gap: "12" }, /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.statusDot }), /* @__PURE__ */ React57.createElement(Stack, { gap: "0" }, /* @__PURE__ */ React57.createElement(Text, { weight: "semibold", size: "sm" }, "Imadgen AI"), /* @__PURE__ */ React57.createElement(Text, { size: "xs", tone: "muted" }, "Quantum-V2 Core"))), /* @__PURE__ */ React57.createElement(Flex, { align: "center", gap: "8" }, onClose && /* @__PURE__ */ React57.createElement(
+    /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.header }, /* @__PURE__ */ React32.createElement(Flex, { align: "center", justify: "between", gap: "12" }, /* @__PURE__ */ React32.createElement(Flex, { align: "center", gap: "12" }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.statusDot }), /* @__PURE__ */ React32.createElement(Stack, { gap: "0" }, /* @__PURE__ */ React32.createElement(Text, { weight: "semibold", size: "sm" }, "Imadgen AI"), /* @__PURE__ */ React32.createElement(Text, { size: "xs", tone: "muted" }, "Quantum-V2 Core"))), /* @__PURE__ */ React32.createElement(Flex, { align: "center", gap: "8" }, onClose && /* @__PURE__ */ React32.createElement(
       IconButton,
       {
         variant: "ghost",
@@ -2061,9 +1237,9 @@ function ChatPage({
         className: ChatPage_default.closeButton,
         disabled: isSaving
       },
-      /* @__PURE__ */ React57.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React57.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React57.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
+      /* @__PURE__ */ React32.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React32.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React32.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
     )))),
-    isDisabled && /* @__PURE__ */ React57.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.12)", borderBottom: "1px solid rgba(239, 68, 68, 0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" } }, /* @__PURE__ */ React57.createElement(Text, { size: "sm", tone: "danger" }, "Chat unavailable \xE2\u20AC\u201D service failed to connect. Please try again later."), /* @__PURE__ */ React57.createElement(
+    isDisabled && /* @__PURE__ */ React32.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.12)", borderBottom: "1px solid rgba(239, 68, 68, 0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" } }, /* @__PURE__ */ React32.createElement(Text, { size: "sm", tone: "danger" }, "Chat unavailable - service failed to connect. Please try again later."), /* @__PURE__ */ React32.createElement(
       "button",
       {
         onClick: resetChat,
@@ -2071,8 +1247,8 @@ function ChatPage({
       },
       "Retry"
     )),
-    error && !isDisabled && /* @__PURE__ */ React57.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.1)" } }, /* @__PURE__ */ React57.createElement(Text, { size: "sm", tone: "danger" }, error)),
-    /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.messagesArea, ref: scrollRef }, /* @__PURE__ */ React57.createElement(Stack, { gap: "16" }, messages.map((message) => /* @__PURE__ */ React57.createElement(
+    error && !isDisabled && /* @__PURE__ */ React32.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.1)" } }, /* @__PURE__ */ React32.createElement(Text, { size: "sm", tone: "danger" }, error)),
+    /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.messagesArea, ref: scrollRef }, /* @__PURE__ */ React32.createElement(Stack, { gap: "16" }, messages.map((message) => /* @__PURE__ */ React32.createElement(
       "div",
       {
         key: message.id,
@@ -2081,13 +1257,13 @@ function ChatPage({
           message.role === "user" ? ChatPage_default.userWrapper : ChatPage_default.assistantWrapper
         )
       },
-      /* @__PURE__ */ React57.createElement("div", { className: cn(
+      /* @__PURE__ */ React32.createElement("div", { className: cn(
         ChatPage_default.bubble,
         message.role === "user" ? ChatPage_default.userBubble : ChatPage_default.assistantBubble
-      ) }, /* @__PURE__ */ React57.createElement(Text, { size: "sm" }, getMessageContent(message))),
-      /* @__PURE__ */ React57.createElement(Text, { size: "xs", tone: "muted", className: ChatPage_default.timestamp }, message.timestamp ? new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : (/* @__PURE__ */ new Date()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))
-    )), isStreaming && /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.assistantWrapper }, /* @__PURE__ */ React57.createElement("div", { className: cn(ChatPage_default.bubble, ChatPage_default.assistantBubble, ChatPage_default.typing) }, /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.dot }))))),
-    /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.inputArea }, /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.premiumWrapper }, /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.premiumGlow }), /* @__PURE__ */ React57.createElement("div", { className: ChatPage_default.premiumContainer }, /* @__PURE__ */ React57.createElement(
+      ) }, /* @__PURE__ */ React32.createElement(Text, { size: "sm" }, getMessageContent(message))),
+      /* @__PURE__ */ React32.createElement(Text, { size: "xs", tone: "muted", className: ChatPage_default.timestamp }, message.timestamp ? new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : (/* @__PURE__ */ new Date()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))
+    )), isStreaming && /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.assistantWrapper }, /* @__PURE__ */ React32.createElement("div", { className: cn(ChatPage_default.bubble, ChatPage_default.assistantBubble, ChatPage_default.typing) }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.dot }))))),
+    /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.inputArea }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.premiumWrapper }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.premiumGlow }), /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.premiumContainer }, /* @__PURE__ */ React32.createElement(
       "input",
       {
         type: "text",
@@ -2098,7 +1274,7 @@ function ChatPage({
         onKeyDown: handleKeyDown,
         disabled: isDisabled || !canSend && variant !== "minimal"
       }
-    ), /* @__PURE__ */ React57.createElement(
+    ), /* @__PURE__ */ React32.createElement(
       "button",
       {
         className: ChatPage_default.premiumSendButton,
@@ -2106,7 +1282,7 @@ function ChatPage({
         disabled: isDisabled || (!input.trim() || !canSend) && variant !== "minimal",
         "aria-label": "Send message"
       },
-      /* @__PURE__ */ React57.createElement(
+      /* @__PURE__ */ React32.createElement(
         "svg",
         {
           className: ChatPage_default.premiumIcon,
@@ -2116,8 +1292,8 @@ function ChatPage({
           strokeLinecap: "round",
           strokeLinejoin: "round"
         },
-        /* @__PURE__ */ React57.createElement("path", { d: "M22 2L11 13" }),
-        /* @__PURE__ */ React57.createElement("path", { d: "M22 2L15 22L11 13L2 9L22 2Z" })
+        /* @__PURE__ */ React32.createElement("path", { d: "M22 2L11 13" }),
+        /* @__PURE__ */ React32.createElement("path", { d: "M22 2L15 22L11 13L2 9L22 2Z" })
       )
     ))))
   );
@@ -2449,9 +1625,9 @@ function SwarmsBGE() {
 }
 
 // src/components/effects/WaveformBackground.tsx
-import React58, { useEffect as useEffect7, useRef as useRef6 } from "react";
+import React33, { useEffect as useEffect7, useRef as useRef6 } from "react";
 
-// src/components/effects/WaveformBackground.module.css
+// css-module-local:D:\Yushrut\PROJECTS\ui\src\components\effects\WaveformBackground.module.css
 var WaveformBackground_default = {};
 
 // src/components/effects/WaveformBackground.tsx
@@ -2497,7 +1673,7 @@ function WaveformBackground() {
       window.removeEventListener("resize", resize);
     };
   }, []);
-  return /* @__PURE__ */ React58.createElement("canvas", { ref: canvasRef, className: WaveformBackground_default.waveformCanvas });
+  return /* @__PURE__ */ React33.createElement("canvas", { ref: canvasRef, className: WaveformBackground_default.waveformCanvas });
 }
 export {
   Accordion,

@@ -1,0 +1,55 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    name: Bump version, build & publish to GitHub Packages
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # needed to push the version-bump commit + tag
+      packages: write   # needed to publish to GitHub Packages
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Use a PAT or the default token with write access so the push succeeds
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@imadgentech'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Smoke tests
+        run: npm test
+
+      - name: Configure git for version bump commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump patch version
+        run: npm version patch -m "chore: release v%s [skip ci]"
+
+      - name: Push version bump commit and tag
+        run: git push --follow-tags
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
