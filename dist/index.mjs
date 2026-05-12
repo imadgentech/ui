@@ -29,7 +29,7 @@ import {
   __objRest,
   __spreadValues,
   cn
-} from "./chunk-Y7FCEYZU.mjs";
+} from "./chunk-WHEOF3YO.mjs";
 
 // src/components/ui/Providers.tsx
 import React2 from "react";
@@ -42,7 +42,7 @@ function Providers({ children }) {
 import React3 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Button.module-css
-var Button_default = { "button": "button", "loading": "loading", "fullWidth": "fullWidth", "rounded": "rounded", "size-sm": "size-sm", "size-md": "size-md", "size-lg": "size-lg", "variant-primary": "variant-primary", "variant-secondary": "variant-secondary", "variant-ghost": "variant-ghost", "variant-danger": "variant-danger", "variant-brand": "variant-brand", "variant-subtle": "variant-subtle", "content": "content", "spinner": "spinner" };
+var Button_default = { "button": "imui_Button_button___-kjOB", "loading": "imui_Button_loading__7xz92R", "fullWidth": "imui_Button_fullWidth__jjd5Tm", "rounded": "imui_Button_rounded__uqWKgL", "size-sm": "imui_Button_size-sm__Lw6G7_", "size-md": "imui_Button_size-md__DaN-nk", "size-lg": "imui_Button_size-lg__1hQsJp", "variant-primary": "imui_Button_variant-primary__13Wa33", "variant-secondary": "imui_Button_variant-secondary__LS1rBb", "variant-ghost": "imui_Button_variant-ghost__2uIfBu", "variant-danger": "imui_Button_variant-danger__kjtZ8I", "variant-brand": "imui_Button_variant-brand__4_6wiK", "variant-subtle": "imui_Button_variant-subtle__2UCKNK", "content": "imui_Button_content__lLqfXZ", "spinner": "imui_Button_spinner__f97alF" };
 
 // src/components/ui/forms/Button.tsx
 var Button = React3.forwardRef(
@@ -102,7 +102,7 @@ import React4 from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Checkbox.module-css
-var Checkbox_default = { "wrapper": "wrapper", "disabled": "disabled", "checkbox": "checkbox", "indicator": "indicator", "icon": "icon", "label": "label" };
+var Checkbox_default = { "wrapper": "imui_Checkbox_wrapper__v8ntw7", "disabled": "imui_Checkbox_disabled__QMCvV8", "checkbox": "imui_Checkbox_checkbox__YeeA69", "indicator": "imui_Checkbox_indicator__dWgSVu", "icon": "imui_Checkbox_icon__OhWjoR", "label": "imui_Checkbox_label__KuG5Au" };
 
 // src/components/ui/forms/Checkbox.tsx
 function Checkbox({
@@ -144,7 +144,7 @@ function Checkbox({
 import React5 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\ErrorText.module-css
-var ErrorText_default = { "errorText": "errorText" };
+var ErrorText_default = { "errorText": "imui_ErrorText_errorText__oYYcEO" };
 
 // src/components/ui/forms/ErrorText.tsx
 function ErrorText({ className, style, children }) {
@@ -155,13 +155,13 @@ function ErrorText({ className, style, children }) {
 import React8 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Form.module-css
-var Form_default = { "form": "form", "actions": "actions" };
+var Form_default = { "form": "imui_Form_form__mJrUiF", "actions": "imui_Form_actions__O4M2sf" };
 
 // src/components/ui/forms/Input.tsx
 import React6 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Input.module-css
-var Input_default = { "inputStandalone": "inputStandalone", "input": "input", "wrapper": "wrapper", "disabled": "disabled", "invalid": "invalid", "size-sm": "size-sm", "size-md": "size-md", "size-lg": "size-lg", "startAdornment": "startAdornment", "endAdornment": "endAdornment" };
+var Input_default = { "inputStandalone": "imui_Input_inputStandalone__QRi6ho", "input": "imui_Input_input__dOga5-", "wrapper": "imui_Input_wrapper__Fyilr3", "disabled": "imui_Input_disabled__hL03GG", "invalid": "imui_Input_invalid__fK4sZu", "size-sm": "imui_Input_size-sm__-Tyy7w", "size-md": "imui_Input_size-md__x1y0jz", "size-lg": "imui_Input_size-lg__iGDqM3", "startAdornment": "imui_Input_startAdornment__9aH_vx", "endAdornment": "imui_Input_endAdornment__JULmLU" };
 
 // src/components/ui/forms/Input.tsx
 var Input = React6.forwardRef(
@@ -226,7 +226,7 @@ Input.displayName = "Input";
 import React7 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Textarea.module-css
-var Textarea_default = { "textarea": "textarea", "invalid": "invalid", "resize-none": "resize-none", "resize-vertical": "resize-vertical", "resize-both": "resize-both", "size-sm": "size-sm", "size-md": "size-md", "size-lg": "size-lg" };
+var Textarea_default = { "textarea": "imui_Textarea_textarea__iMPpJB", "invalid": "imui_Textarea_invalid__vXxdVm", "resize-none": "imui_Textarea_resize-none__eAISnC", "resize-vertical": "imui_Textarea_resize-vertical__XXfDT1", "resize-both": "imui_Textarea_resize-both__8FCT0s", "size-sm": "imui_Textarea_size-sm__zld2RH", "size-md": "imui_Textarea_size-md__tymxqZ", "size-lg": "imui_Textarea_size-lg__pNzdfx" };
 
 // src/components/ui/forms/Textarea.tsx
 var Textarea = React7.forwardRef(
@@ -329,7 +329,7 @@ import React11 from "react";
 import React9 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Label.module-css
-var Label_default = { "label": "label", "required": "required" };
+var Label_default = { "label": "imui_Label_label__hhiW5s", "required": "imui_Label_required__tv1FBc" };
 
 // src/components/ui/forms/Label.tsx
 function Label(_a) {
@@ -341,7 +341,7 @@ function Label(_a) {
 import React10 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\HelperText.module-css
-var HelperText_default = { "helperText": "helperText" };
+var HelperText_default = { "helperText": "imui_HelperText_helperText__YWUutB" };
 
 // src/components/ui/forms/HelperText.tsx
 function HelperText({ className, children }) {
@@ -349,7 +349,7 @@ function HelperText({ className, children }) {
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\FormField.module-css
-var FormField_default = { "formField": "formField" };
+var FormField_default = { "formField": "imui_FormField_formField__392q6r" };
 
 // src/components/ui/forms/FormField.tsx
 function FormField({
@@ -368,7 +368,7 @@ function FormField({
 import React12 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\IconButton.module-css
-var IconButton_default = { "iconButton": "iconButton", "shape-square": "shape-square", "shape-circle": "shape-circle", "size-sm": "size-sm", "size-md": "size-md", "size-lg": "size-lg", "variant-primary": "variant-primary", "variant-secondary": "variant-secondary", "variant-ghost": "variant-ghost", "spinner": "spinner" };
+var IconButton_default = { "iconButton": "imui_IconButton_iconButton__8UtYfC", "shape-square": "imui_IconButton_shape-square__iy2cre", "shape-circle": "imui_IconButton_shape-circle__CMR5xL", "size-sm": "imui_IconButton_size-sm__-yiU65", "size-md": "imui_IconButton_size-md__yqTP4X", "size-lg": "imui_IconButton_size-lg__TKvhsb", "variant-primary": "imui_IconButton_variant-primary__UNvwaB", "variant-secondary": "imui_IconButton_variant-secondary__2VFLfl", "variant-ghost": "imui_IconButton_variant-ghost__HjP4p7", "spinner": "imui_IconButton_spinner__zNO-rw" };
 
 // src/components/ui/forms/IconButton.tsx
 var IconButton = React12.forwardRef(
@@ -419,7 +419,7 @@ import React13 from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\RadioGroup.module-css
-var RadioGroup_default = { "root": "root", "vertical": "vertical", "horizontal": "horizontal", "itemWrapper": "itemWrapper", "item": "item", "indicator": "indicator", "label": "label", "disabledLabel": "disabledLabel" };
+var RadioGroup_default = { "root": "imui_RadioGroup_root__cHEzro", "vertical": "imui_RadioGroup_vertical__0Fhqun", "horizontal": "imui_RadioGroup_horizontal__hbgR3x", "itemWrapper": "imui_RadioGroup_itemWrapper__hiSRWK", "item": "imui_RadioGroup_item__UXxb54", "indicator": "imui_RadioGroup_indicator__SoWvz5", "label": "imui_RadioGroup_label__R76qS1", "disabledLabel": "imui_RadioGroup_disabledLabel__Caqbr5" };
 
 // src/components/ui/forms/RadioGroup.tsx
 function RadioGroup({
@@ -462,7 +462,7 @@ function RadioGroup({
 import React14 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Select.module-css
-var Select_default = { "wrapper": "wrapper", "select": "select", "invalid": "invalid", "icon": "icon", "size-sm": "size-sm", "size-md": "size-md", "size-lg": "size-lg" };
+var Select_default = { "wrapper": "imui_Select_wrapper__0FnNw7", "select": "imui_Select_select__Ol77vz", "invalid": "imui_Select_invalid__7A3dCZ", "icon": "imui_Select_icon__vCxe39", "size-sm": "imui_Select_size-sm__x9SMpO", "size-md": "imui_Select_size-md__iOzRIk", "size-lg": "imui_Select_size-lg__bpj_mk" };
 
 // src/components/ui/forms/Select.tsx
 var Select = React14.forwardRef(
@@ -505,7 +505,7 @@ import React15 from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Switch.module-css
-var Switch_default = { "switch": "switch", "thumb": "thumb" };
+var Switch_default = { "switch": "imui_Switch_switch__pLm0kK", "thumb": "imui_Switch_thumb__eOQps7" };
 
 // src/components/ui/forms/Switch.tsx
 function Switch({
@@ -537,7 +537,7 @@ import React16 from "react";
 import NextLink from "next/link";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Breadcrumbs.module-css
-var Breadcrumbs_default = { "breadcrumbs": "breadcrumbs", "list": "list", "item": "item", "link": "link", "current": "current", "separator": "separator" };
+var Breadcrumbs_default = { "breadcrumbs": "imui_Breadcrumbs_breadcrumbs__PI05oR", "list": "imui_Breadcrumbs_list__mv4Y-D", "item": "imui_Breadcrumbs_item__Nt2r02", "link": "imui_Breadcrumbs_link__o17aKE", "current": "imui_Breadcrumbs_current__dG1P-O", "separator": "imui_Breadcrumbs_separator__Oq_oXf" };
 
 // src/components/ui/navigation/Breadcrumbs.tsx
 function Breadcrumbs({
@@ -556,7 +556,7 @@ import React17 from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenu.module-css
-var MobileMenu_default = { "overlay": "overlay", "content": "content", "header": "header", "srOnly": "srOnly", "close": "close", "body": "body" };
+var MobileMenu_default = { "overlay": "imui_MobileMenu_overlay__yxCReI", "content": "imui_MobileMenu_content__Vr-h8v", "header": "imui_MobileMenu_header__yIzJkH", "srOnly": "imui_MobileMenu_srOnly__KBy8iJ", "close": "imui_MobileMenu_close___-K7ba", "body": "imui_MobileMenu_body__EhfmBF" };
 
 // src/components/ui/navigation/MobileMenu.tsx
 function MobileMenu({
@@ -591,7 +591,7 @@ import NextLink2 from "next/link";
 import { usePathname } from "next/navigation";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\NavLink.module-css
-var NavLink_default = { "navLink": "navLink", "active": "active" };
+var NavLink_default = { "navLink": "imui_NavLink_navLink__Fr2dWi", "active": "imui_NavLink_active__RaQs0L" };
 
 // src/components/ui/navigation/NavLink.tsx
 function NavLink(_a) {
@@ -624,7 +624,7 @@ function NavLink(_a) {
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenuContent.module-css
-var MobileMenuContent_default = { "content": "content", "logoArea": "logoArea", "logo-dark": "logo-dark", "logo-light": "logo-light", "linksStack": "linksStack", "navLink": "navLink", "active": "active", "actions": "actions", "btn": "btn", "toggle": "toggle" };
+var MobileMenuContent_default = { "content": "imui_MobileMenuContent_content__lygFFX", "logoArea": "imui_MobileMenuContent_logoArea__CdBKRB", "linksStack": "imui_MobileMenuContent_linksStack__uQolix", "navLink": "imui_MobileMenuContent_navLink__Y2lF4F", "navLink__IMUI_GLOBAL_7__": "imui_MobileMenuContent_navLink__IMUI_GLOBAL_7____sIezqc", "navLink__IMUI_GLOBAL_8__": "imui_MobileMenuContent_navLink__IMUI_GLOBAL_8____nyYVwN", "actions": "imui_MobileMenuContent_actions__AjqBzi" };
 
 // src/components/ui/navigation/MobileMenuContent.tsx
 function MobileMenuContent({ links, actions }) {
@@ -649,7 +649,7 @@ function MobileMenuContent({ links, actions }) {
 import React20 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Navbar.module-css
-var Navbar_default = { "navbar": "navbar", "sticky": "sticky", "container": "container", "flex": "flex", "brand": "brand", "logo-light": "logo-light", "logo-dark": "logo-dark", "desktopNav": "desktopNav", "rightSection": "rightSection", "actions": "actions", "mobileNav": "mobileNav", "burger": "burger" };
+var Navbar_default = { "navbar": "imui_Navbar_navbar__FsFYSn", "sticky": "imui_Navbar_sticky__5eHQI5", "container": "imui_Navbar_container__Ytp59N", "flex": "imui_Navbar_flex__DoMTUn", "brand": "imui_Navbar_brand__Tlwqy8", "desktopNav": "imui_Navbar_desktopNav__U8aE24", "rightSection": "imui_Navbar_rightSection__zkgOeZ", "actions": "imui_Navbar_actions__YCakXP", "mobileNav": "imui_Navbar_mobileNav__NQywwb", "burger": "imui_Navbar_burger__7rNcW3" };
 
 // src/components/ui/navigation/Navbar.tsx
 function Navbar({
@@ -680,7 +680,7 @@ function Navbar({
 import React21 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Pagination.module-css
-var Pagination_default = { "pagination": "pagination", "info": "info", "current": "current" };
+var Pagination_default = { "pagination": "imui_Pagination_pagination__OL9Wwh", "info": "imui_Pagination_info__PxCfDw", "current": "imui_Pagination_current__pfjClf" };
 
 // src/components/ui/navigation/Pagination.tsx
 function Pagination({
@@ -728,7 +728,7 @@ import React22 from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Tabs.module-css
-var Tabs_default = { "list": "list", "trigger": "trigger", "content": "content" };
+var Tabs_default = { "list": "imui_Tabs_list__Pwg23Y", "trigger": "imui_Tabs_trigger__zGXFOF", "content": "imui_Tabs_content__PACoql" };
 
 // src/components/ui/navigation/Tabs.tsx
 function Tabs({
@@ -772,7 +772,7 @@ import React23 from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Accordion.module-css
-var Accordion_default = { "root": "root", "item": "item", "header": "header", "trigger": "trigger", "chevron": "chevron", "content": "content", "contentInner": "contentInner" };
+var Accordion_default = { "root": "imui_Accordion_root__ZKpusI", "item": "imui_Accordion_item__ZMopXX", "header": "imui_Accordion_header__LwUjAO", "trigger": "imui_Accordion_trigger__lkDEdm", "chevron": "imui_Accordion_chevron__-Q2lFD", "content": "imui_Accordion_content__dLof7Y", "contentInner": "imui_Accordion_contentInner__PCuZXG" };
 
 // src/components/ui/data/Accordion.tsx
 function Accordion({
@@ -820,7 +820,7 @@ function Accordion({
 import React24 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\EmptyState.module-css
-var EmptyState_default = { "emptyState": "emptyState", "icon": "icon", "description": "description", "action": "action" };
+var EmptyState_default = { "emptyState": "imui_EmptyState_emptyState__pH1V-s", "icon": "imui_EmptyState_icon__H97DWb", "description": "imui_EmptyState_description__sLLkRw", "action": "imui_EmptyState_action__eGrEBQ" };
 
 // src/components/ui/data/EmptyState.tsx
 function EmptyState({
@@ -837,7 +837,7 @@ function EmptyState({
 import React25 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Skeleton.module-css
-var Skeleton_default = { "skeleton": "skeleton", "radius-none": "radius-none", "radius-sm": "radius-sm", "radius-md": "radius-md", "radius-lg": "radius-lg", "radius-full": "radius-full", "shimmer": "shimmer" };
+var Skeleton_default = { "skeleton": "imui_Skeleton_skeleton__ezvGAs", "radius-none": "imui_Skeleton_radius-none__pjztqu", "radius-sm": "imui_Skeleton_radius-sm__ZFF9Q2", "radius-md": "imui_Skeleton_radius-md__IxA6qu", "radius-lg": "imui_Skeleton_radius-lg__ZX-r3F", "radius-full": "imui_Skeleton_radius-full__Kn68rj", "shimmer": "imui_Skeleton_shimmer__kOGC6n" };
 
 // src/components/ui/data/Skeleton.tsx
 function Skeleton({
@@ -868,7 +868,7 @@ function Skeleton({
 import React26 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\StatCard.module-css
-var StatCard_default = { "statCard": "statCard", "label": "label", "value": "value", "note": "note", "variant-success": "variant-success", "variant-warning": "variant-warning", "variant-danger": "variant-danger", "variant-neutral": "variant-neutral" };
+var StatCard_default = { "statCard": "imui_StatCard_statCard__0jf-ze", "label": "imui_StatCard_label__AlrJaZ", "value": "imui_StatCard_value__QzigP9", "note": "imui_StatCard_note__sVGzBV", "variant-success": "imui_StatCard_variant-success__4ry95g", "variant-warning": "imui_StatCard_variant-warning__LPTiJh", "variant-danger": "imui_StatCard_variant-danger__UxuIEJ", "variant-neutral": "imui_StatCard_variant-neutral__fbcU8J" };
 
 // src/components/ui/data/StatCard.tsx
 function StatCard({
@@ -894,7 +894,7 @@ function StatCard({
 import React27 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Table.module-css
-var Table_default = { "wrapper": "wrapper", "table": "table", "th": "th", "td": "td", "tr": "tr", "striped": "striped" };
+var Table_default = { "wrapper": "imui_Table_wrapper__yoafOH", "table": "imui_Table_table__KkhnVp", "th": "imui_Table_th__Y_gDFh", "td": "imui_Table_td__aJ3WqB", "tr": "imui_Table_tr__HzlvpQ", "striped": "imui_Table_striped__HSwSiD" };
 
 // src/components/ui/data/Table.tsx
 function Table({
@@ -911,7 +911,7 @@ import React28 from "react";
 import * as DialogPrimitive3 from "@radix-ui/react-dialog";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Dialog.module-css
-var Dialog_default = { "overlay": "overlay", "content": "content", "header": "header", "title": "title", "description": "description", "close": "close", "body": "body" };
+var Dialog_default = { "overlay": "imui_Dialog_overlay__QIshGt", "content": "imui_Dialog_content__9ciCTy", "header": "imui_Dialog_header__NU5YXf", "title": "imui_Dialog_title__40HiBz", "description": "imui_Dialog_description__FrSdwD", "close": "imui_Dialog_close__PI4lIf", "body": "imui_Dialog_body__qg5Xdj" };
 
 // src/components/ui/overlays/Dialog.tsx
 function Dialog({
@@ -930,7 +930,7 @@ import React29 from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Popover.module-css
-var Popover_default = { "content": "content", "arrow": "arrow" };
+var Popover_default = { "content": "imui_Popover_content__ReVU_F", "arrow": "imui_Popover_arrow__rzANkF" };
 
 // src/components/ui/overlays/Popover.tsx
 function Popover({
@@ -955,7 +955,7 @@ function Popover({
 import React30, { createContext, useContext, useState, useCallback } from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Toast.module-css
-var Toast_default = { "container": "container", "toast": "toast", "success": "success", "error": "error", "warning": "warning", "info": "info" };
+var Toast_default = { "container": "imui_Toast_container__k1fRm9", "toast": "imui_Toast_toast__0lZV_Z", "success": "imui_Toast_success__tKUAoG", "error": "imui_Toast_error__qb1-5O", "warning": "imui_Toast_warning__dJgZW8", "info": "imui_Toast_info__nKkKij" };
 
 // src/components/ui/overlays/Toast.tsx
 var ToastContext = createContext(void 0);
@@ -990,7 +990,7 @@ import React31 from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Tooltip.module-css
-var Tooltip_default = { "content": "content", "arrow": "arrow" };
+var Tooltip_default = { "content": "imui_Tooltip_content__KbQaB-", "arrow": "imui_Tooltip_arrow__lHEdqb" };
 
 // src/components/ui/overlays/Tooltip.tsx
 function Tooltip({
@@ -1113,7 +1113,7 @@ function useChatContext() {
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\chatbox\ChatPage.module-css
-var ChatPage_default = { "container": "container", "compact": "compact", "minimal": "minimal", "header": "header", "messagesArea": "messagesArea", "inputArea": "inputArea", "fullPage": "fullPage", "statusDot": "statusDot", "messageWrapper": "messageWrapper", "userWrapper": "userWrapper", "assistantWrapper": "assistantWrapper", "bubble": "bubble", "userBubble": "userBubble", "assistantBubble": "assistantBubble", "timestamp": "timestamp", "tsx": "tsx", "premiumWrapper": "premiumWrapper", "premiumContainer": "premiumContainer", "premiumInput": "premiumInput", "premiumSendButton": "premiumSendButton", "premiumIcon": "premiumIcon", "premiumGlow": "premiumGlow", "typing": "typing", "dot": "dot", "closeButton": "closeButton" };
+var ChatPage_default = { "container": "imui_ChatPage_container__f-OEzM", "compact": "imui_ChatPage_compact__0KStXp", "minimal": "imui_ChatPage_minimal__9eY1AP", "header": "imui_ChatPage_header__SOMH7M", "messagesArea": "imui_ChatPage_messagesArea__sV5s5h", "inputArea": "imui_ChatPage_inputArea__qm83xL", "fullPage": "imui_ChatPage_fullPage__M6R8jD", "statusDot": "imui_ChatPage_statusDot__sqEK7x", "messageWrapper": "imui_ChatPage_messageWrapper__76myhb", "userWrapper": "imui_ChatPage_userWrapper__USa8Sa", "assistantWrapper": "imui_ChatPage_assistantWrapper__0k5G0Q", "bubble": "imui_ChatPage_bubble__DnhTHp", "userBubble": "imui_ChatPage_userBubble__9r3GP9", "assistantBubble": "imui_ChatPage_assistantBubble__DU0NcB", "timestamp": "imui_ChatPage_timestamp__euuSzn", "tsx": "imui_ChatPage_tsx__3XljiS", "premiumWrapper": "imui_ChatPage_premiumWrapper__Y8BgzN", "premiumContainer": "imui_ChatPage_premiumContainer__blQVYb", "premiumInput": "imui_ChatPage_premiumInput__030Iaz", "premiumSendButton": "imui_ChatPage_premiumSendButton__pciu1c", "premiumIcon": "imui_ChatPage_premiumIcon__y81srG", "premiumGlow": "imui_ChatPage_premiumGlow__vwFeZT", "typing": "imui_ChatPage_typing__ZzKxZp", "dot": "imui_ChatPage_dot__oTqVwu", "closeButton": "imui_ChatPage_closeButton__lC1okr" };
 
 // src/components/ui/chatbox/ChatPage.tsx
 function ChatPage({
@@ -1629,7 +1629,7 @@ function SwarmsBGE() {
 import React34, { useEffect as useEffect7, useRef as useRef6 } from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\effects\WaveformBackground.module-css
-var WaveformBackground_default = { "waveformCanvas": "waveformCanvas" };
+var WaveformBackground_default = { "waveformCanvas": "imui_WaveformBackground_waveformCanvas__fBQL63" };
 
 // src/components/effects/WaveformBackground.tsx
 function WaveformBackground() {
