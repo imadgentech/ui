@@ -1,5 +1,5 @@
 export { AspectRatio, CTA, Cluster, Code, Container, Divider, FeatureGrid, Flex, Footer, Grid, GridItem, Heading, Hero, Kbd, Link, LogoCloud, PricingCard, Section, Spacer, Stack, Surface, Testimonial, Text, ThemeImage, cn } from './server.mjs';
-import * as React$1 from 'react';
+import * as React from 'react';
 import React__default, { FormEvent } from 'react';
 import { LinkProps } from 'next/link';
 import { UIMessage } from 'ai';
@@ -7,8 +7,8 @@ import { UIMessage as UIMessage$1 } from '@ai-sdk/react';
 import 'next/image';
 
 declare function Providers({ children }: {
-    children: React.ReactNode;
-}): React$1.JSX.Element;
+    children: React__default.ReactNode;
+}): React__default.JSX.Element;
 
 interface ButtonProps extends React__default.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
@@ -962,15 +962,15 @@ declare function useChatContext(): ChatContextType;
  */
 declare function CursorGlow(): null;
 
-declare function EmbersBGE(): React$1.JSX.Element;
+declare function EmbersBGE(): React.JSX.Element;
 
-declare function ImBgAurora(): React$1.JSX.Element;
+declare function ImBgAurora(): React.JSX.Element;
 
-declare function LightTheme(): React$1.JSX.Element;
+declare function LightTheme(): React.JSX.Element;
 
-declare function NetBGE(): React$1.JSX.Element;
+declare function NetBGE(): React.JSX.Element;
 
-declare function SwarmsBGE(): React$1.JSX.Element;
+declare function SwarmsBGE(): React.JSX.Element;
 
 /**
  * Animated waveform background effect for hero sections.

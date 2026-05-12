@@ -32,19 +32,20 @@ import {
 } from "./chunk-E4WD4LMV.mjs";
 
 // src/components/ui/Providers.tsx
+import React2 from "react";
 import { ThemeProvider } from "next-themes";
 function Providers({ children }) {
-  return /* @__PURE__ */ React.createElement(ThemeProvider, { attribute: "data-theme", defaultTheme: "dark", enableSystem: true }, children);
+  return /* @__PURE__ */ React2.createElement(ThemeProvider, { attribute: "data-theme", defaultTheme: "dark", enableSystem: true }, children);
 }
 
 // src/components/ui/forms/Button.tsx
-import React2 from "react";
+import React3 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Button.module.css
 var Button_default = {};
 
 // src/components/ui/forms/Button.tsx
-var Button = React2.forwardRef(
+var Button = React3.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       variant = "primary",
@@ -71,7 +72,7 @@ var Button = React2.forwardRef(
       "children",
       "as"
     ]);
-    return /* @__PURE__ */ React2.createElement(
+    return /* @__PURE__ */ React3.createElement(
       Component,
       __spreadValues({
         ref,
@@ -87,17 +88,17 @@ var Button = React2.forwardRef(
         type: Component === "button" ? props.type || "button" : void 0,
         disabled: disabled || loading
       }, props),
-      loading && /* @__PURE__ */ React2.createElement("span", { className: Button_default.spinner }),
-      !loading && leftIcon && /* @__PURE__ */ React2.createElement("span", { className: Button_default.leftIcon }, leftIcon),
-      /* @__PURE__ */ React2.createElement("span", { className: Button_default.content }, children),
-      !loading && rightIcon && /* @__PURE__ */ React2.createElement("span", { className: Button_default.rightIcon }, rightIcon)
+      loading && /* @__PURE__ */ React3.createElement("span", { className: Button_default.spinner }),
+      !loading && leftIcon && /* @__PURE__ */ React3.createElement("span", { className: Button_default.leftIcon }, leftIcon),
+      /* @__PURE__ */ React3.createElement("span", { className: Button_default.content }, children),
+      !loading && rightIcon && /* @__PURE__ */ React3.createElement("span", { className: Button_default.rightIcon }, rightIcon)
     );
   }
 );
 Button.displayName = "Button";
 
 // src/components/ui/forms/Checkbox.tsx
-import React3 from "react";
+import React4 from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Checkbox.module.css
@@ -113,7 +114,7 @@ function Checkbox({
   className,
   disabled
 }) {
-  return /* @__PURE__ */ React3.createElement("div", { className: cn(Checkbox_default.wrapper, disabled && Checkbox_default.disabled, className) }, /* @__PURE__ */ React3.createElement(
+  return /* @__PURE__ */ React4.createElement("div", { className: cn(Checkbox_default.wrapper, disabled && Checkbox_default.disabled, className) }, /* @__PURE__ */ React4.createElement(
     CheckboxPrimitive.Root,
     {
       id,
@@ -123,7 +124,7 @@ function Checkbox({
       onCheckedChange,
       disabled
     },
-    /* @__PURE__ */ React3.createElement(CheckboxPrimitive.Indicator, { className: Checkbox_default.indicator }, /* @__PURE__ */ React3.createElement(
+    /* @__PURE__ */ React4.createElement(CheckboxPrimitive.Indicator, { className: Checkbox_default.indicator }, /* @__PURE__ */ React4.createElement(
       "svg",
       {
         viewBox: "0 0 24 24",
@@ -134,36 +135,36 @@ function Checkbox({
         strokeLinejoin: "round",
         className: Checkbox_default.icon
       },
-      /* @__PURE__ */ React3.createElement("polyline", { points: "20 6 9 17 4 12" })
+      /* @__PURE__ */ React4.createElement("polyline", { points: "20 6 9 17 4 12" })
     ))
-  ), label && /* @__PURE__ */ React3.createElement("label", { htmlFor: id, className: Checkbox_default.label }, label));
+  ), label && /* @__PURE__ */ React4.createElement("label", { htmlFor: id, className: Checkbox_default.label }, label));
 }
 
 // src/components/ui/forms/ErrorText.tsx
-import React4 from "react";
+import React5 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\ErrorText.module.css
 var ErrorText_default = {};
 
 // src/components/ui/forms/ErrorText.tsx
 function ErrorText({ className, style, children }) {
-  return /* @__PURE__ */ React4.createElement("p", { className: cn(ErrorText_default.errorText, className), style, role: "alert" }, children);
+  return /* @__PURE__ */ React5.createElement("p", { className: cn(ErrorText_default.errorText, className), style, role: "alert" }, children);
 }
 
 // src/components/ui/forms/Form.tsx
-import React7 from "react";
+import React8 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Form.module.css
 var Form_default = {};
 
 // src/components/ui/forms/Input.tsx
-import React5 from "react";
+import React6 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Input.module.css
 var Input_default = {};
 
 // src/components/ui/forms/Input.tsx
-var Input = React5.forwardRef(
+var Input = React6.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       inputSize = "md",
@@ -181,7 +182,7 @@ var Input = React5.forwardRef(
       "disabled"
     ]);
     if (startAdornment || endAdornment) {
-      return /* @__PURE__ */ React5.createElement(
+      return /* @__PURE__ */ React6.createElement(
         "div",
         {
           className: cn(
@@ -191,8 +192,8 @@ var Input = React5.forwardRef(
             disabled && Input_default.disabled
           )
         },
-        startAdornment && /* @__PURE__ */ React5.createElement("span", { className: Input_default.startAdornment }, startAdornment),
-        /* @__PURE__ */ React5.createElement(
+        startAdornment && /* @__PURE__ */ React6.createElement("span", { className: Input_default.startAdornment }, startAdornment),
+        /* @__PURE__ */ React6.createElement(
           "input",
           __spreadValues({
             ref,
@@ -200,10 +201,10 @@ var Input = React5.forwardRef(
             disabled
           }, props)
         ),
-        endAdornment && /* @__PURE__ */ React5.createElement("span", { className: Input_default.endAdornment }, endAdornment)
+        endAdornment && /* @__PURE__ */ React6.createElement("span", { className: Input_default.endAdornment }, endAdornment)
       );
     }
-    return /* @__PURE__ */ React5.createElement(
+    return /* @__PURE__ */ React6.createElement(
       "input",
       __spreadValues({
         ref,
@@ -222,13 +223,13 @@ var Input = React5.forwardRef(
 Input.displayName = "Input";
 
 // src/components/ui/forms/Textarea.tsx
-import React6 from "react";
+import React7 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Textarea.module.css
 var Textarea_default = {};
 
 // src/components/ui/forms/Textarea.tsx
-var Textarea = React6.forwardRef(
+var Textarea = React7.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       textareaSize = "md",
@@ -243,7 +244,7 @@ var Textarea = React6.forwardRef(
       "className",
       "disabled"
     ]);
-    return /* @__PURE__ */ React6.createElement(
+    return /* @__PURE__ */ React7.createElement(
       "textarea",
       __spreadValues({
         ref,
@@ -263,7 +264,7 @@ var Textarea = React6.forwardRef(
 Textarea.displayName = "Textarea";
 
 // src/components/ui/forms/Form.tsx
-var Form = React7.forwardRef(
+var Form = React8.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       fields,
@@ -290,14 +291,14 @@ var Form = React7.forwardRef(
     };
     const textareaFields = fields.filter((f) => f.type === "textarea");
     const inputFields = fields.filter((f) => f.type !== "textarea");
-    return /* @__PURE__ */ React7.createElement(
+    return /* @__PURE__ */ React8.createElement(
       "form",
       __spreadValues({
         ref,
         className: cn(Form_default.form, className),
         onSubmit: handleSubmit
       }, props),
-      /* @__PURE__ */ React7.createElement(Stack, { gap: "24" }, textareaFields.map((field) => /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(Stack, { gap: "24" }, textareaFields.map((field) => /* @__PURE__ */ React8.createElement(
         Textarea,
         {
           key: field.name,
@@ -306,7 +307,7 @@ var Form = React7.forwardRef(
           required: field.required,
           rows: field.rows || 4
         }
-      )), inputFields.length > 0 && /* @__PURE__ */ React7.createElement(Grid, { columns: { base: 1, md: inputFields.length }, gap: "16" }, inputFields.map((field) => /* @__PURE__ */ React7.createElement(
+      )), inputFields.length > 0 && /* @__PURE__ */ React8.createElement(Grid, { columns: { base: 1, md: inputFields.length }, gap: "16" }, inputFields.map((field) => /* @__PURE__ */ React8.createElement(
         Input,
         {
           key: field.name,
@@ -315,17 +316,17 @@ var Form = React7.forwardRef(
           placeholder: field.placeholder,
           required: field.required
         }
-      ))), children, showSubmit && /* @__PURE__ */ React7.createElement("div", { className: Form_default.actions }, /* @__PURE__ */ React7.createElement(Button, { variant: submitVariant, type: "submit" }, submitLabel)))
+      ))), children, showSubmit && /* @__PURE__ */ React8.createElement("div", { className: Form_default.actions }, /* @__PURE__ */ React8.createElement(Button, { variant: submitVariant, type: "submit" }, submitLabel)))
     );
   }
 );
 Form.displayName = "Form";
 
 // src/components/ui/forms/FormField.tsx
-import React10 from "react";
+import React11 from "react";
 
 // src/components/ui/forms/Label.tsx
-import React8 from "react";
+import React9 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Label.module.css
 var Label_default = {};
@@ -333,18 +334,18 @@ var Label_default = {};
 // src/components/ui/forms/Label.tsx
 function Label(_a) {
   var _b = _a, { required, className, children } = _b, props = __objRest(_b, ["required", "className", "children"]);
-  return /* @__PURE__ */ React8.createElement("label", __spreadValues({ className: cn(Label_default.label, className) }, props), children, required && /* @__PURE__ */ React8.createElement("span", { className: Label_default.required, title: "Required" }, "*"));
+  return /* @__PURE__ */ React9.createElement("label", __spreadValues({ className: cn(Label_default.label, className) }, props), children, required && /* @__PURE__ */ React9.createElement("span", { className: Label_default.required, title: "Required" }, "*"));
 }
 
 // src/components/ui/forms/HelperText.tsx
-import React9 from "react";
+import React10 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\HelperText.module.css
 var HelperText_default = {};
 
 // src/components/ui/forms/HelperText.tsx
 function HelperText({ className, children }) {
-  return /* @__PURE__ */ React9.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
+  return /* @__PURE__ */ React10.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\FormField.module.css
@@ -360,17 +361,17 @@ function FormField({
   className,
   children
 }) {
-  return /* @__PURE__ */ React10.createElement("div", { className: cn(FormField_default.formField, className) }, label && /* @__PURE__ */ React10.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ React10.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ React10.createElement(HelperText, null, hint) : null);
+  return /* @__PURE__ */ React11.createElement("div", { className: cn(FormField_default.formField, className) }, label && /* @__PURE__ */ React11.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ React11.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ React11.createElement(HelperText, null, hint) : null);
 }
 
 // src/components/ui/forms/IconButton.tsx
-import React11 from "react";
+import React12 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\IconButton.module.css
 var IconButton_default = {};
 
 // src/components/ui/forms/IconButton.tsx
-var IconButton = React11.forwardRef(
+var IconButton = React12.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       variant = "primary",
@@ -391,7 +392,7 @@ var IconButton = React11.forwardRef(
       "disabled",
       "children"
     ]);
-    return /* @__PURE__ */ React11.createElement(
+    return /* @__PURE__ */ React12.createElement(
       "button",
       __spreadValues({
         ref,
@@ -407,14 +408,14 @@ var IconButton = React11.forwardRef(
         "aria-label": ariaLabel,
         disabled: disabled || loading
       }, props),
-      loading ? /* @__PURE__ */ React11.createElement("span", { className: IconButton_default.spinner }) : children
+      loading ? /* @__PURE__ */ React12.createElement("span", { className: IconButton_default.spinner }) : children
     );
   }
 );
 IconButton.displayName = "IconButton";
 
 // src/components/ui/forms/RadioGroup.tsx
-import React12 from "react";
+import React13 from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\RadioGroup.module.css
@@ -429,7 +430,7 @@ function RadioGroup({
   orientation = "vertical",
   className
 }) {
-  return /* @__PURE__ */ React12.createElement(
+  return /* @__PURE__ */ React13.createElement(
     RadioGroupPrimitive.Root,
     {
       className: cn(RadioGroup_default.root, RadioGroup_default[orientation], className),
@@ -437,7 +438,7 @@ function RadioGroup({
       defaultValue,
       onValueChange
     },
-    items.map((item) => /* @__PURE__ */ React12.createElement("div", { key: item.value, className: RadioGroup_default.itemWrapper }, /* @__PURE__ */ React12.createElement(
+    items.map((item) => /* @__PURE__ */ React13.createElement("div", { key: item.value, className: RadioGroup_default.itemWrapper }, /* @__PURE__ */ React13.createElement(
       RadioGroupPrimitive.Item,
       {
         id: item.id,
@@ -445,8 +446,8 @@ function RadioGroup({
         disabled: item.disabled,
         className: RadioGroup_default.item
       },
-      /* @__PURE__ */ React12.createElement(RadioGroupPrimitive.Indicator, { className: RadioGroup_default.indicator })
-    ), /* @__PURE__ */ React12.createElement(
+      /* @__PURE__ */ React13.createElement(RadioGroupPrimitive.Indicator, { className: RadioGroup_default.indicator })
+    ), /* @__PURE__ */ React13.createElement(
       "label",
       {
         htmlFor: item.id,
@@ -458,13 +459,13 @@ function RadioGroup({
 }
 
 // src/components/ui/forms/Select.tsx
-import React13 from "react";
+import React14 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Select.module.css
 var Select_default = {};
 
 // src/components/ui/forms/Select.tsx
-var Select = React13.forwardRef(
+var Select = React14.forwardRef(
   (_a, ref) => {
     var _b = _a, {
       selectSize = "md",
@@ -481,7 +482,7 @@ var Select = React13.forwardRef(
       "disabled",
       "children"
     ]);
-    return /* @__PURE__ */ React13.createElement("div", { className: cn(Select_default.wrapper, Select_default[`size-${selectSize}`]) }, /* @__PURE__ */ React13.createElement(
+    return /* @__PURE__ */ React14.createElement("div", { className: cn(Select_default.wrapper, Select_default[`size-${selectSize}`]) }, /* @__PURE__ */ React14.createElement(
       "select",
       __spreadValues({
         ref,
@@ -493,14 +494,14 @@ var Select = React13.forwardRef(
         ),
         disabled
       }, props),
-      options ? options.map((opt) => /* @__PURE__ */ React13.createElement("option", { key: opt.value, value: opt.value }, opt.label)) : children
-    ), /* @__PURE__ */ React13.createElement("span", { className: Select_default.icon, "aria-hidden": "true" }, "\xE2\u2013\xBC"));
+      options ? options.map((opt) => /* @__PURE__ */ React14.createElement("option", { key: opt.value, value: opt.value }, opt.label)) : children
+    ), /* @__PURE__ */ React14.createElement("span", { className: Select_default.icon, "aria-hidden": "true" }, "\xE2\u2013\xBC"));
   }
 );
 Select.displayName = "Select";
 
 // src/components/ui/forms/Switch.tsx
-import React14 from "react";
+import React15 from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\Switch.module.css
@@ -516,7 +517,7 @@ function Switch({
   className,
   disabled
 }) {
-  return /* @__PURE__ */ React14.createElement(
+  return /* @__PURE__ */ React15.createElement(
     SwitchPrimitive.Root,
     {
       id,
@@ -527,12 +528,12 @@ function Switch({
       disabled,
       "aria-label": ariaLabel
     },
-    /* @__PURE__ */ React14.createElement(SwitchPrimitive.Thumb, { className: Switch_default.thumb })
+    /* @__PURE__ */ React15.createElement(SwitchPrimitive.Thumb, { className: Switch_default.thumb })
   );
 }
 
 // src/components/ui/navigation/Breadcrumbs.tsx
-import React15 from "react";
+import React16 from "react";
 import NextLink from "next/link";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Breadcrumbs.module.css
@@ -544,14 +545,14 @@ function Breadcrumbs({
   className,
   separator = "/"
 }) {
-  return /* @__PURE__ */ React15.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), "aria-label": "Breadcrumb" }, /* @__PURE__ */ React15.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
+  return /* @__PURE__ */ React16.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), "aria-label": "Breadcrumb" }, /* @__PURE__ */ React16.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
     const isLast = index === items.length - 1;
-    return /* @__PURE__ */ React15.createElement("li", { key: item.label, className: Breadcrumbs_default.item }, !isLast && item.href ? /* @__PURE__ */ React15.createElement(NextLink, { href: item.href, className: Breadcrumbs_default.link }, item.label) : /* @__PURE__ */ React15.createElement("span", { className: Breadcrumbs_default.current, "aria-current": "page" }, item.label), !isLast && /* @__PURE__ */ React15.createElement("span", { className: Breadcrumbs_default.separator, "aria-hidden": "true" }, separator));
+    return /* @__PURE__ */ React16.createElement("li", { key: item.label, className: Breadcrumbs_default.item }, !isLast && item.href ? /* @__PURE__ */ React16.createElement(NextLink, { href: item.href, className: Breadcrumbs_default.link }, item.label) : /* @__PURE__ */ React16.createElement("span", { className: Breadcrumbs_default.current, "aria-current": "page" }, item.label), !isLast && /* @__PURE__ */ React16.createElement("span", { className: Breadcrumbs_default.separator, "aria-hidden": "true" }, separator));
   })));
 }
 
 // src/components/ui/navigation/MobileMenu.tsx
-import React16 from "react";
+import React17 from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\MobileMenu.module.css
@@ -563,7 +564,7 @@ function MobileMenu({
   children,
   title = ""
 }) {
-  return /* @__PURE__ */ React16.createElement(DialogPrimitive.Root, null, /* @__PURE__ */ React16.createElement(DialogPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React16.createElement(DialogPrimitive.Portal, null, /* @__PURE__ */ React16.createElement(DialogPrimitive.Overlay, { className: MobileMenu_default.overlay }), /* @__PURE__ */ React16.createElement(DialogPrimitive.Content, { className: MobileMenu_default.content }, /* @__PURE__ */ React16.createElement(DialogPrimitive.Title, { className: MobileMenu_default.srOnly }, title || "Navigation Menu"), /* @__PURE__ */ React16.createElement(DialogPrimitive.Description, { className: MobileMenu_default.srOnly }, "Mobile navigation menu"), /* @__PURE__ */ React16.createElement("div", { className: MobileMenu_default.header }, /* @__PURE__ */ React16.createElement(DialogPrimitive.Close, { className: MobileMenu_default.close, "aria-label": "Close" }, /* @__PURE__ */ React16.createElement(
+  return /* @__PURE__ */ React17.createElement(DialogPrimitive.Root, null, /* @__PURE__ */ React17.createElement(DialogPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React17.createElement(DialogPrimitive.Portal, null, /* @__PURE__ */ React17.createElement(DialogPrimitive.Overlay, { className: MobileMenu_default.overlay }), /* @__PURE__ */ React17.createElement(DialogPrimitive.Content, { className: MobileMenu_default.content }, /* @__PURE__ */ React17.createElement(DialogPrimitive.Title, { className: MobileMenu_default.srOnly }, title || "Navigation Menu"), /* @__PURE__ */ React17.createElement(DialogPrimitive.Description, { className: MobileMenu_default.srOnly }, "Mobile navigation menu"), /* @__PURE__ */ React17.createElement("div", { className: MobileMenu_default.header }, /* @__PURE__ */ React17.createElement(DialogPrimitive.Close, { className: MobileMenu_default.close, "aria-label": "Close" }, /* @__PURE__ */ React17.createElement(
     "svg",
     {
       width: "32",
@@ -575,17 +576,17 @@ function MobileMenu({
       strokeLinecap: "round",
       strokeLinejoin: "round"
     },
-    /* @__PURE__ */ React16.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }),
-    /* @__PURE__ */ React16.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" })
-  ))), /* @__PURE__ */ React16.createElement("div", { className: MobileMenu_default.body }, children))));
+    /* @__PURE__ */ React17.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }),
+    /* @__PURE__ */ React17.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" })
+  ))), /* @__PURE__ */ React17.createElement("div", { className: MobileMenu_default.body }, children))));
 }
 
 // src/components/ui/navigation/MobileMenuContent.tsx
-import React18 from "react";
+import React19 from "react";
 import * as DialogPrimitive2 from "@radix-ui/react-dialog";
 
 // src/components/ui/navigation/NavLink.tsx
-import React17 from "react";
+import React18 from "react";
 import NextLink2 from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -607,7 +608,7 @@ function NavLink(_a) {
   ]);
   const pathname = usePathname();
   const isActive = isActiveProp !== void 0 ? isActiveProp : pathname === href || typeof href === "string" && href !== "/" && (pathname == null ? void 0 : pathname.startsWith(href));
-  return /* @__PURE__ */ React17.createElement(
+  return /* @__PURE__ */ React18.createElement(
     NextLink2,
     __spreadValues({
       href,
@@ -627,25 +628,25 @@ var MobileMenuContent_default = {};
 
 // src/components/ui/navigation/MobileMenuContent.tsx
 function MobileMenuContent({ links, actions }) {
-  return /* @__PURE__ */ React18.createElement("div", { className: MobileMenuContent_default.content }, /* @__PURE__ */ React18.createElement("div", { className: MobileMenuContent_default.logoArea }, /* @__PURE__ */ React18.createElement("img", { className: "logo-dark", src: "/media/logo/imadgen-logo-dark.png", alt: "IMADGEN" }), /* @__PURE__ */ React18.createElement("img", { className: "logo-light", src: "/media/logo/imadgen-logo-light.png", alt: "IMADGEN" }), /* @__PURE__ */ React18.createElement("span", null, "IMADGEN")), /* @__PURE__ */ React18.createElement("nav", { className: MobileMenuContent_default.linksStack }, /* @__PURE__ */ React18.createElement(DialogPrimitive2.Close, { asChild: true }, /* @__PURE__ */ React18.createElement(
+  return /* @__PURE__ */ React19.createElement("div", { className: MobileMenuContent_default.content }, /* @__PURE__ */ React19.createElement("div", { className: MobileMenuContent_default.logoArea }, /* @__PURE__ */ React19.createElement("img", { className: "logo-dark", src: "/media/logo/imadgen-logo-dark.png", alt: "IMADGEN" }), /* @__PURE__ */ React19.createElement("img", { className: "logo-light", src: "/media/logo/imadgen-logo-light.png", alt: "IMADGEN" }), /* @__PURE__ */ React19.createElement("span", null, "IMADGEN")), /* @__PURE__ */ React19.createElement("nav", { className: MobileMenuContent_default.linksStack }, /* @__PURE__ */ React19.createElement(DialogPrimitive2.Close, { asChild: true }, /* @__PURE__ */ React19.createElement(
     NavLink,
     {
       href: "/",
       className: MobileMenuContent_default.navLink
     },
     "Home"
-  )), links.map((link) => /* @__PURE__ */ React18.createElement(DialogPrimitive2.Close, { key: link.href, asChild: true }, /* @__PURE__ */ React18.createElement(
+  )), links.map((link) => /* @__PURE__ */ React19.createElement(DialogPrimitive2.Close, { key: link.href, asChild: true }, /* @__PURE__ */ React19.createElement(
     NavLink,
     {
       href: link.href,
       className: MobileMenuContent_default.navLink
     },
     link.label
-  )))), actions && /* @__PURE__ */ React18.createElement("div", { className: MobileMenuContent_default.actions }, actions));
+  )))), actions && /* @__PURE__ */ React19.createElement("div", { className: MobileMenuContent_default.actions }, actions));
 }
 
 // src/components/ui/navigation/Navbar.tsx
-import React19 from "react";
+import React20 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Navbar.module.css
 var Navbar_default = {};
@@ -658,25 +659,25 @@ function Navbar({
   className,
   sticky = true
 }) {
-  return /* @__PURE__ */ React19.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className) }, /* @__PURE__ */ React19.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ React19.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ React19.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ React19.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ React19.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ React19.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ React19.createElement(
+  return /* @__PURE__ */ React20.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className) }, /* @__PURE__ */ React20.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ React20.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ React20.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ React20.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ React20.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ React20.createElement(
     MobileMenu,
     {
-      trigger: /* @__PURE__ */ React19.createElement(
+      trigger: /* @__PURE__ */ React20.createElement(
         IconButton,
         {
           variant: "ghost",
           "aria-label": "Toggle menu",
           className: Navbar_default.burger
         },
-        /* @__PURE__ */ React19.createElement("svg", { width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" }, /* @__PURE__ */ React19.createElement("rect", { y: "4", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React19.createElement("rect", { y: "11", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React19.createElement("rect", { y: "18", width: "24", height: "2", rx: "1", fill: "currentColor" }))
+        /* @__PURE__ */ React20.createElement("svg", { width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" }, /* @__PURE__ */ React20.createElement("rect", { y: "4", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React20.createElement("rect", { y: "11", width: "24", height: "2", rx: "1", fill: "currentColor" }), /* @__PURE__ */ React20.createElement("rect", { y: "18", width: "24", height: "2", rx: "1", fill: "currentColor" }))
       )
     },
-    /* @__PURE__ */ React19.createElement(MobileMenuContent, { links, actions })
+    /* @__PURE__ */ React20.createElement(MobileMenuContent, { links, actions })
   ))))));
 }
 
 // src/components/ui/navigation/Pagination.tsx
-import React20 from "react";
+import React21 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Pagination.module.css
 var Pagination_default = {};
@@ -690,13 +691,13 @@ function Pagination({
 }) {
   const canGoPrev = currentPage > 1;
   const canGoNext = currentPage < totalPages;
-  return /* @__PURE__ */ React20.createElement(
+  return /* @__PURE__ */ React21.createElement(
     "nav",
     {
       className: cn(Pagination_default.pagination, className),
       "aria-label": "Pagination"
     },
-    /* @__PURE__ */ React20.createElement(
+    /* @__PURE__ */ React21.createElement(
       Button,
       {
         variant: "secondary",
@@ -707,8 +708,8 @@ function Pagination({
       },
       "Previous"
     ),
-    /* @__PURE__ */ React20.createElement("div", { className: Pagination_default.info }, "Page ", /* @__PURE__ */ React20.createElement("span", { className: Pagination_default.current }, currentPage), " of ", totalPages),
-    /* @__PURE__ */ React20.createElement(
+    /* @__PURE__ */ React21.createElement("div", { className: Pagination_default.info }, "Page ", /* @__PURE__ */ React21.createElement("span", { className: Pagination_default.current }, currentPage), " of ", totalPages),
+    /* @__PURE__ */ React21.createElement(
       Button,
       {
         variant: "secondary",
@@ -723,7 +724,7 @@ function Pagination({
 }
 
 // src/components/ui/navigation/Tabs.tsx
-import React21 from "react";
+import React22 from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\navigation\Tabs.module.css
@@ -737,7 +738,7 @@ function Tabs({
   items,
   className
 }) {
-  return /* @__PURE__ */ React21.createElement(
+  return /* @__PURE__ */ React22.createElement(
     TabsPrimitive.Root,
     {
       defaultValue,
@@ -745,7 +746,7 @@ function Tabs({
       onValueChange,
       className: cn(className)
     },
-    /* @__PURE__ */ React21.createElement(TabsPrimitive.List, { className: Tabs_default.list }, items.map((item) => /* @__PURE__ */ React21.createElement(
+    /* @__PURE__ */ React22.createElement(TabsPrimitive.List, { className: Tabs_default.list }, items.map((item) => /* @__PURE__ */ React22.createElement(
       TabsPrimitive.Trigger,
       {
         key: item.value,
@@ -754,7 +755,7 @@ function Tabs({
       },
       item.label
     ))),
-    items.map((item) => item.content && /* @__PURE__ */ React21.createElement(
+    items.map((item) => item.content && /* @__PURE__ */ React22.createElement(
       TabsPrimitive.Content,
       {
         key: item.value,
@@ -767,7 +768,7 @@ function Tabs({
 }
 
 // src/components/ui/data/Accordion.tsx
-import React22 from "react";
+import React23 from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Accordion.module.css
@@ -780,14 +781,14 @@ function Accordion({
   collapsible = true,
   className
 }) {
-  return /* @__PURE__ */ React22.createElement(
+  return /* @__PURE__ */ React23.createElement(
     AccordionPrimitive.Root,
     {
       type,
       collapsible,
       className: cn(Accordion_default.root, className)
     },
-    items.map((item) => /* @__PURE__ */ React22.createElement(
+    items.map((item) => /* @__PURE__ */ React23.createElement(
       AccordionPrimitive.Item,
       {
         key: item.value,
@@ -795,7 +796,7 @@ function Accordion({
         disabled: item.disabled,
         className: Accordion_default.item
       },
-      /* @__PURE__ */ React22.createElement(AccordionPrimitive.Header, { className: Accordion_default.header }, /* @__PURE__ */ React22.createElement(AccordionPrimitive.Trigger, { className: Accordion_default.trigger }, item.title, /* @__PURE__ */ React22.createElement(
+      /* @__PURE__ */ React23.createElement(AccordionPrimitive.Header, { className: Accordion_default.header }, /* @__PURE__ */ React23.createElement(AccordionPrimitive.Trigger, { className: Accordion_default.trigger }, item.title, /* @__PURE__ */ React23.createElement(
         "svg",
         {
           width: "16",
@@ -808,15 +809,15 @@ function Accordion({
           strokeLinejoin: "round",
           className: Accordion_default.chevron
         },
-        /* @__PURE__ */ React22.createElement("polyline", { points: "6 9 12 15 18 9" })
+        /* @__PURE__ */ React23.createElement("polyline", { points: "6 9 12 15 18 9" })
       ))),
-      /* @__PURE__ */ React22.createElement(AccordionPrimitive.Content, { className: Accordion_default.content }, /* @__PURE__ */ React22.createElement("div", { className: Accordion_default.contentInner }, item.content))
+      /* @__PURE__ */ React23.createElement(AccordionPrimitive.Content, { className: Accordion_default.content }, /* @__PURE__ */ React23.createElement("div", { className: Accordion_default.contentInner }, item.content))
     ))
   );
 }
 
 // src/components/ui/data/EmptyState.tsx
-import React23 from "react";
+import React24 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\EmptyState.module.css
 var EmptyState_default = {};
@@ -829,11 +830,11 @@ function EmptyState({
   action,
   className
 }) {
-  return /* @__PURE__ */ React23.createElement("div", { className: cn(EmptyState_default.emptyState, className) }, /* @__PURE__ */ React23.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ React23.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ React23.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React23.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ React23.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ React23.createElement("div", { className: EmptyState_default.action }, action)));
+  return /* @__PURE__ */ React24.createElement("div", { className: cn(EmptyState_default.emptyState, className) }, /* @__PURE__ */ React24.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ React24.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ React24.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React24.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ React24.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ React24.createElement("div", { className: EmptyState_default.action }, action)));
 }
 
 // src/components/ui/data/Skeleton.tsx
-import React24 from "react";
+import React25 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Skeleton.module.css
 var Skeleton_default = {};
@@ -846,7 +847,7 @@ function Skeleton({
   shimmer = true,
   className
 }) {
-  return /* @__PURE__ */ React24.createElement(
+  return /* @__PURE__ */ React25.createElement(
     "div",
     {
       className: cn(
@@ -864,7 +865,7 @@ function Skeleton({
 }
 
 // src/components/ui/data/StatCard.tsx
-import React25 from "react";
+import React26 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\StatCard.module.css
 var StatCard_default = {};
@@ -877,7 +878,7 @@ function StatCard({
   variant = "neutral",
   className
 }) {
-  return /* @__PURE__ */ React25.createElement(
+  return /* @__PURE__ */ React26.createElement(
     Surface,
     {
       padding: "lg",
@@ -885,12 +886,12 @@ function StatCard({
       radius: "lg",
       className: cn(StatCard_default.statCard, StatCard_default[`variant-${variant}`], className)
     },
-    /* @__PURE__ */ React25.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React25.createElement(Text, { size: "sm", tone: "muted", className: StatCard_default.label }, label), /* @__PURE__ */ React25.createElement(Heading, { as: "h3", size: "xl", className: StatCard_default.value }, value), note && /* @__PURE__ */ React25.createElement(Text, { size: "xs", tone: "muted", className: StatCard_default.note }, note))
+    /* @__PURE__ */ React26.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React26.createElement(Text, { size: "sm", tone: "muted", className: StatCard_default.label }, label), /* @__PURE__ */ React26.createElement(Heading, { as: "h3", size: "xl", className: StatCard_default.value }, value), note && /* @__PURE__ */ React26.createElement(Text, { size: "xs", tone: "muted", className: StatCard_default.note }, note))
   );
 }
 
 // src/components/ui/data/Table.tsx
-import React26 from "react";
+import React27 from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\data\Table.module.css
 var Table_default = {};
@@ -902,11 +903,11 @@ function Table({
   className,
   striped = false
 }) {
-  return /* @__PURE__ */ React26.createElement("div", { className: cn(Table_default.wrapper, className) }, /* @__PURE__ */ React26.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ React26.createElement("thead", null, /* @__PURE__ */ React26.createElement("tr", null, headers.map((header) => /* @__PURE__ */ React26.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ React26.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ React26.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ React26.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
+  return /* @__PURE__ */ React27.createElement("div", { className: cn(Table_default.wrapper, className) }, /* @__PURE__ */ React27.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ React27.createElement("thead", null, /* @__PURE__ */ React27.createElement("tr", null, headers.map((header) => /* @__PURE__ */ React27.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ React27.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ React27.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ React27.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
 }
 
 // src/components/ui/overlays/Dialog.tsx
-import React27 from "react";
+import React28 from "react";
 import * as DialogPrimitive3 from "@radix-ui/react-dialog";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Dialog.module.css
@@ -921,11 +922,11 @@ function Dialog({
   description,
   children
 }) {
-  return /* @__PURE__ */ React27.createElement(DialogPrimitive3.Root, { open, onOpenChange }, trigger && /* @__PURE__ */ React27.createElement(DialogPrimitive3.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React27.createElement(DialogPrimitive3.Portal, null, /* @__PURE__ */ React27.createElement(DialogPrimitive3.Overlay, { className: Dialog_default.overlay }), /* @__PURE__ */ React27.createElement(DialogPrimitive3.Content, { className: Dialog_default.content }, /* @__PURE__ */ React27.createElement("div", { className: Dialog_default.header }, title && /* @__PURE__ */ React27.createElement(DialogPrimitive3.Title, { className: Dialog_default.title }, title), description && /* @__PURE__ */ React27.createElement(DialogPrimitive3.Description, { className: Dialog_default.description }, description), /* @__PURE__ */ React27.createElement(DialogPrimitive3.Close, { className: Dialog_default.close, "aria-label": "Close" }, "\xC3\u2014")), /* @__PURE__ */ React27.createElement("div", { className: Dialog_default.body }, children))));
+  return /* @__PURE__ */ React28.createElement(DialogPrimitive3.Root, { open, onOpenChange }, trigger && /* @__PURE__ */ React28.createElement(DialogPrimitive3.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React28.createElement(DialogPrimitive3.Portal, null, /* @__PURE__ */ React28.createElement(DialogPrimitive3.Overlay, { className: Dialog_default.overlay }), /* @__PURE__ */ React28.createElement(DialogPrimitive3.Content, { className: Dialog_default.content }, /* @__PURE__ */ React28.createElement("div", { className: Dialog_default.header }, title && /* @__PURE__ */ React28.createElement(DialogPrimitive3.Title, { className: Dialog_default.title }, title), description && /* @__PURE__ */ React28.createElement(DialogPrimitive3.Description, { className: Dialog_default.description }, description), /* @__PURE__ */ React28.createElement(DialogPrimitive3.Close, { className: Dialog_default.close, "aria-label": "Close" }, "\xC3\u2014")), /* @__PURE__ */ React28.createElement("div", { className: Dialog_default.body }, children))));
 }
 
 // src/components/ui/overlays/Popover.tsx
-import React28 from "react";
+import React29 from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Popover.module.css
@@ -939,19 +940,19 @@ function Popover({
   onOpenChange,
   className
 }) {
-  return /* @__PURE__ */ React28.createElement(PopoverPrimitive.Root, { open, onOpenChange }, /* @__PURE__ */ React28.createElement(PopoverPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React28.createElement(PopoverPrimitive.Portal, null, /* @__PURE__ */ React28.createElement(
+  return /* @__PURE__ */ React29.createElement(PopoverPrimitive.Root, { open, onOpenChange }, /* @__PURE__ */ React29.createElement(PopoverPrimitive.Trigger, { asChild: true }, trigger), /* @__PURE__ */ React29.createElement(PopoverPrimitive.Portal, null, /* @__PURE__ */ React29.createElement(
     PopoverPrimitive.Content,
     {
       className: cn(Popover_default.content, className),
       sideOffset: 8
     },
     children,
-    /* @__PURE__ */ React28.createElement(PopoverPrimitive.Arrow, { className: Popover_default.arrow })
+    /* @__PURE__ */ React29.createElement(PopoverPrimitive.Arrow, { className: Popover_default.arrow })
   )));
 }
 
 // src/components/ui/overlays/Toast.tsx
-import React29, { createContext, useContext, useState, useCallback } from "react";
+import React30, { createContext, useContext, useState, useCallback } from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Toast.module.css
 var Toast_default = {};
@@ -973,7 +974,7 @@ function ToastProvider({ children }) {
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => removeToast(id), 5e3);
   }, [removeToast]);
-  return /* @__PURE__ */ React29.createElement(ToastContext.Provider, { value: { addToast, removeToast } }, children, /* @__PURE__ */ React29.createElement("div", { className: Toast_default.container }, toasts.map((toast) => /* @__PURE__ */ React29.createElement(
+  return /* @__PURE__ */ React30.createElement(ToastContext.Provider, { value: { addToast, removeToast } }, children, /* @__PURE__ */ React30.createElement("div", { className: Toast_default.container }, toasts.map((toast) => /* @__PURE__ */ React30.createElement(
     "div",
     {
       key: toast.id,
@@ -985,7 +986,7 @@ function ToastProvider({ children }) {
 }
 
 // src/components/ui/overlays/Tooltip.tsx
-import React30 from "react";
+import React31 from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\overlays\Tooltip.module.css
@@ -998,7 +999,7 @@ function Tooltip({
   side = "top",
   className
 }) {
-  return /* @__PURE__ */ React30.createElement(TooltipPrimitive.Provider, { delayDuration: 300 }, /* @__PURE__ */ React30.createElement(TooltipPrimitive.Root, null, /* @__PURE__ */ React30.createElement(TooltipPrimitive.Trigger, { asChild: true }, children), /* @__PURE__ */ React30.createElement(TooltipPrimitive.Portal, null, /* @__PURE__ */ React30.createElement(
+  return /* @__PURE__ */ React31.createElement(TooltipPrimitive.Provider, { delayDuration: 300 }, /* @__PURE__ */ React31.createElement(TooltipPrimitive.Root, null, /* @__PURE__ */ React31.createElement(TooltipPrimitive.Trigger, { asChild: true }, children), /* @__PURE__ */ React31.createElement(TooltipPrimitive.Portal, null, /* @__PURE__ */ React31.createElement(
     TooltipPrimitive.Content,
     {
       className: cn(Tooltip_default.content, className),
@@ -1006,15 +1007,15 @@ function Tooltip({
       sideOffset: 4
     },
     content,
-    /* @__PURE__ */ React30.createElement(TooltipPrimitive.Arrow, { className: Tooltip_default.arrow })
+    /* @__PURE__ */ React31.createElement(TooltipPrimitive.Arrow, { className: Tooltip_default.arrow })
   ))));
 }
 
 // src/components/ui/chatbox/ChatPage.tsx
-import React32, { useState as useState3, useRef as useRef2, useEffect } from "react";
+import React33, { useState as useState3, useRef as useRef2, useEffect } from "react";
 
 // src/components/ui/chatbox/ChatContext.tsx
-import React31, { createContext as createContext2, useContext as useContext2, useState as useState2, useRef, useCallback as useCallback2, useMemo } from "react";
+import React32, { createContext as createContext2, useContext as useContext2, useState as useState2, useRef, useCallback as useCallback2, useMemo } from "react";
 import { useChat } from "@ai-sdk/react";
 var MAX_FAILURES = 3;
 var ChatContext = createContext2(void 0);
@@ -1101,7 +1102,7 @@ function ChatProvider({ children }) {
     reportFailure,
     resetChat
   ]);
-  return /* @__PURE__ */ React31.createElement(ChatContext.Provider, { value }, children);
+  return /* @__PURE__ */ React32.createElement(ChatContext.Provider, { value }, children);
 }
 function useChatContext() {
   const context = useContext2(ChatContext);
@@ -1213,7 +1214,7 @@ function ChatPage({
       handleChatSubmit();
     }
   };
-  return /* @__PURE__ */ React32.createElement(
+  return /* @__PURE__ */ React33.createElement(
     Surface,
     {
       elevation: variant === "minimal" ? "none" : "md",
@@ -1227,7 +1228,7 @@ function ChatPage({
       ),
       padding: "none"
     },
-    /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.header }, /* @__PURE__ */ React32.createElement(Flex, { align: "center", justify: "between", gap: "12" }, /* @__PURE__ */ React32.createElement(Flex, { align: "center", gap: "12" }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.statusDot }), /* @__PURE__ */ React32.createElement(Stack, { gap: "0" }, /* @__PURE__ */ React32.createElement(Text, { weight: "semibold", size: "sm" }, "Imadgen AI"), /* @__PURE__ */ React32.createElement(Text, { size: "xs", tone: "muted" }, "Quantum-V2 Core"))), /* @__PURE__ */ React32.createElement(Flex, { align: "center", gap: "8" }, onClose && /* @__PURE__ */ React32.createElement(
+    /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.header }, /* @__PURE__ */ React33.createElement(Flex, { align: "center", justify: "between", gap: "12" }, /* @__PURE__ */ React33.createElement(Flex, { align: "center", gap: "12" }, /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.statusDot }), /* @__PURE__ */ React33.createElement(Stack, { gap: "0" }, /* @__PURE__ */ React33.createElement(Text, { weight: "semibold", size: "sm" }, "Imadgen AI"), /* @__PURE__ */ React33.createElement(Text, { size: "xs", tone: "muted" }, "Quantum-V2 Core"))), /* @__PURE__ */ React33.createElement(Flex, { align: "center", gap: "8" }, onClose && /* @__PURE__ */ React33.createElement(
       IconButton,
       {
         variant: "ghost",
@@ -1237,9 +1238,9 @@ function ChatPage({
         className: ChatPage_default.closeButton,
         disabled: isSaving
       },
-      /* @__PURE__ */ React32.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React32.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React32.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
+      /* @__PURE__ */ React33.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React33.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React33.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
     )))),
-    isDisabled && /* @__PURE__ */ React32.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.12)", borderBottom: "1px solid rgba(239, 68, 68, 0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" } }, /* @__PURE__ */ React32.createElement(Text, { size: "sm", tone: "danger" }, "Chat unavailable - service failed to connect. Please try again later."), /* @__PURE__ */ React32.createElement(
+    isDisabled && /* @__PURE__ */ React33.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.12)", borderBottom: "1px solid rgba(239, 68, 68, 0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" } }, /* @__PURE__ */ React33.createElement(Text, { size: "sm", tone: "danger" }, "Chat unavailable - service failed to connect. Please try again later."), /* @__PURE__ */ React33.createElement(
       "button",
       {
         onClick: resetChat,
@@ -1247,8 +1248,8 @@ function ChatPage({
       },
       "Retry"
     )),
-    error && !isDisabled && /* @__PURE__ */ React32.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.1)" } }, /* @__PURE__ */ React32.createElement(Text, { size: "sm", tone: "danger" }, error)),
-    /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.messagesArea, ref: scrollRef }, /* @__PURE__ */ React32.createElement(Stack, { gap: "16" }, messages.map((message) => /* @__PURE__ */ React32.createElement(
+    error && !isDisabled && /* @__PURE__ */ React33.createElement("div", { style: { padding: "12px 16px", backgroundColor: "rgba(239, 68, 68, 0.1)" } }, /* @__PURE__ */ React33.createElement(Text, { size: "sm", tone: "danger" }, error)),
+    /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.messagesArea, ref: scrollRef }, /* @__PURE__ */ React33.createElement(Stack, { gap: "16" }, messages.map((message) => /* @__PURE__ */ React33.createElement(
       "div",
       {
         key: message.id,
@@ -1257,13 +1258,13 @@ function ChatPage({
           message.role === "user" ? ChatPage_default.userWrapper : ChatPage_default.assistantWrapper
         )
       },
-      /* @__PURE__ */ React32.createElement("div", { className: cn(
+      /* @__PURE__ */ React33.createElement("div", { className: cn(
         ChatPage_default.bubble,
         message.role === "user" ? ChatPage_default.userBubble : ChatPage_default.assistantBubble
-      ) }, /* @__PURE__ */ React32.createElement(Text, { size: "sm" }, getMessageContent(message))),
-      /* @__PURE__ */ React32.createElement(Text, { size: "xs", tone: "muted", className: ChatPage_default.timestamp }, message.timestamp ? new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : (/* @__PURE__ */ new Date()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))
-    )), isStreaming && /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.assistantWrapper }, /* @__PURE__ */ React32.createElement("div", { className: cn(ChatPage_default.bubble, ChatPage_default.assistantBubble, ChatPage_default.typing) }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.dot }))))),
-    /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.inputArea }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.premiumWrapper }, /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.premiumGlow }), /* @__PURE__ */ React32.createElement("div", { className: ChatPage_default.premiumContainer }, /* @__PURE__ */ React32.createElement(
+      ) }, /* @__PURE__ */ React33.createElement(Text, { size: "sm" }, getMessageContent(message))),
+      /* @__PURE__ */ React33.createElement(Text, { size: "xs", tone: "muted", className: ChatPage_default.timestamp }, message.timestamp ? new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : (/* @__PURE__ */ new Date()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))
+    )), isStreaming && /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.assistantWrapper }, /* @__PURE__ */ React33.createElement("div", { className: cn(ChatPage_default.bubble, ChatPage_default.assistantBubble, ChatPage_default.typing) }, /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.dot }), /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.dot }))))),
+    /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.inputArea }, /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.premiumWrapper }, /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.premiumGlow }), /* @__PURE__ */ React33.createElement("div", { className: ChatPage_default.premiumContainer }, /* @__PURE__ */ React33.createElement(
       "input",
       {
         type: "text",
@@ -1274,7 +1275,7 @@ function ChatPage({
         onKeyDown: handleKeyDown,
         disabled: isDisabled || !canSend && variant !== "minimal"
       }
-    ), /* @__PURE__ */ React32.createElement(
+    ), /* @__PURE__ */ React33.createElement(
       "button",
       {
         className: ChatPage_default.premiumSendButton,
@@ -1282,7 +1283,7 @@ function ChatPage({
         disabled: isDisabled || (!input.trim() || !canSend) && variant !== "minimal",
         "aria-label": "Send message"
       },
-      /* @__PURE__ */ React32.createElement(
+      /* @__PURE__ */ React33.createElement(
         "svg",
         {
           className: ChatPage_default.premiumIcon,
@@ -1292,8 +1293,8 @@ function ChatPage({
           strokeLinecap: "round",
           strokeLinejoin: "round"
         },
-        /* @__PURE__ */ React32.createElement("path", { d: "M22 2L11 13" }),
-        /* @__PURE__ */ React32.createElement("path", { d: "M22 2L15 22L11 13L2 9L22 2Z" })
+        /* @__PURE__ */ React33.createElement("path", { d: "M22 2L11 13" }),
+        /* @__PURE__ */ React33.createElement("path", { d: "M22 2L15 22L11 13L2 9L22 2Z" })
       )
     ))))
   );
@@ -1625,7 +1626,7 @@ function SwarmsBGE() {
 }
 
 // src/components/effects/WaveformBackground.tsx
-import React33, { useEffect as useEffect7, useRef as useRef6 } from "react";
+import React34, { useEffect as useEffect7, useRef as useRef6 } from "react";
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\effects\WaveformBackground.module.css
 var WaveformBackground_default = {};
@@ -1673,7 +1674,7 @@ function WaveformBackground() {
       window.removeEventListener("resize", resize);
     };
   }, []);
-  return /* @__PURE__ */ React33.createElement("canvas", { ref: canvasRef, className: WaveformBackground_default.waveformCanvas });
+  return /* @__PURE__ */ React34.createElement("canvas", { ref: canvasRef, className: WaveformBackground_default.waveformCanvas });
 }
 export {
   Accordion,
