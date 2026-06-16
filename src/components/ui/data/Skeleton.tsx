@@ -29,6 +29,11 @@ export interface SkeletonProps {
      * @default true
      */
     shimmer?: boolean;
+
+    /**
+     * Inline styles
+     */
+    style?: React.CSSProperties;
 }
 
 /**
@@ -40,6 +45,7 @@ export function Skeleton({
     radius = 'md',
     shimmer = true,
     className,
+    style,
 }: SkeletonProps) {
     return (
         <div
@@ -52,6 +58,7 @@ export function Skeleton({
             style={{
                 width: typeof width === 'number' ? `${width}px` : width,
                 height: typeof height === 'number' ? `${height}px` : height,
+                ...style,
             }}
         />
     );

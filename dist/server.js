@@ -715,9 +715,10 @@ var Badge_default = { "badge": "imui_Badge_badge__jFbcP3", "variant-neutral": "i
 function Badge({
   variant = "neutral",
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ import_react21.default.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className) }, children);
+  return /* @__PURE__ */ import_react21.default.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className), style }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\marketing\PricingCard.module-css
@@ -884,3 +885,4 @@ function ThemeImage(_a) {
   ThemeImage,
   cn
 });
+//# sourceMappingURL=server.js.map

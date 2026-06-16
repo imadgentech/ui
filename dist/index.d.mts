@@ -6,9 +6,12 @@ import { UIMessage } from 'ai';
 import { UIMessage as UIMessage$1 } from '@ai-sdk/react';
 import 'next/image';
 
-declare function Providers({ children }: {
+interface ProvidersProps {
     children: React__default.ReactNode;
-}): React__default.JSX.Element;
+    defaultTheme?: string;
+    enableSystem?: boolean;
+}
+declare function Providers({ children, defaultTheme, enableSystem }: ProvidersProps): React__default.JSX.Element;
 
 interface ButtonProps extends React__default.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
@@ -663,6 +666,10 @@ interface BadgeProps {
      */
     className?: string;
     /**
+     * Inline styles
+     */
+    style?: React__default.CSSProperties;
+    /**
      * Content
      */
     children: React__default.ReactNode;
@@ -674,7 +681,7 @@ interface BadgeProps {
  * <Badge variant="success">Active</Badge>
  * <Badge variant="warning">Pending</Badge>
  */
-declare function Badge({ variant, className, children, }: BadgeProps): React__default.JSX.Element;
+declare function Badge({ variant, className, style, children, }: BadgeProps): React__default.JSX.Element;
 
 interface EmptyStateProps {
     /**
@@ -726,11 +733,15 @@ interface SkeletonProps {
      * @default true
      */
     shimmer?: boolean;
+    /**
+     * Inline styles
+     */
+    style?: React__default.CSSProperties;
 }
 /**
  * Skeleton component for loading state placeholders.
  */
-declare function Skeleton({ width, height, radius, shimmer, className, }: SkeletonProps): React__default.JSX.Element;
+declare function Skeleton({ width, height, radius, shimmer, className, style, }: SkeletonProps): React__default.JSX.Element;
 
 interface StatCardProps {
     /**

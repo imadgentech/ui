@@ -29,13 +29,13 @@ import {
   __objRest,
   __spreadValues,
   cn
-} from "./chunk-WHEOF3YO.mjs";
+} from "./chunk-6QW7CR4Z.mjs";
 
 // src/components/ui/Providers.tsx
 import React2 from "react";
 import { ThemeProvider } from "next-themes";
-function Providers({ children }) {
-  return /* @__PURE__ */ React2.createElement(ThemeProvider, { attribute: "data-theme", defaultTheme: "dark", enableSystem: true }, children);
+function Providers({ children, defaultTheme = "dark", enableSystem = true }) {
+  return /* @__PURE__ */ React2.createElement(ThemeProvider, { attribute: "data-theme", defaultTheme, enableSystem }, children);
 }
 
 // src/components/ui/forms/Button.tsx
@@ -845,7 +845,8 @@ function Skeleton({
   height = "1em",
   radius = "md",
   shimmer = true,
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React25.createElement(
     "div",
@@ -856,10 +857,10 @@ function Skeleton({
         shimmer && Skeleton_default.shimmer,
         className
       ),
-      style: {
+      style: __spreadValues({
         width: typeof width === "number" ? `${width}px` : width,
         height: typeof height === "number" ? `${height}px` : height
-      }
+      }, style)
     }
   );
 }
@@ -1746,3 +1747,4 @@ export {
   useChatContext,
   useToast
 };
+//# sourceMappingURL=index.mjs.map

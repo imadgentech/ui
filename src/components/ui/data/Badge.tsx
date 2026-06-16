@@ -15,6 +15,11 @@ export interface BadgeProps {
     className?: string;
 
     /**
+     * Inline styles
+     */
+    style?: React.CSSProperties;
+
+    /**
      * Content
      */
     children: React.ReactNode;
@@ -30,10 +35,11 @@ export interface BadgeProps {
 export function Badge({
     variant = 'neutral',
     className,
+    style,
     children,
 }: BadgeProps) {
     return (
-        <span className={cn(styles.badge, styles[`variant-${variant}`], className)}>
+        <span className={cn(styles.badge, styles[`variant-${variant}`], className)} style={style}>
             {children}
         </span>
     );

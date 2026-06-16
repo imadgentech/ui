@@ -1,6 +1,6 @@
 {
   "name": "@imadgentech/ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "imadgen shared UI component library",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -19,9 +19,13 @@
       "import": "./dist/server.mjs",
       "require": "./dist/server.js"
     },
-    "./dist/index.css": "./dist/index.css",
+    "./styles.css": "./dist/index.css",
+    "./server.css": "./dist/server.css",
     "./tokens.css": "./src/tokens/tokens.css"
   },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist",
     "src/tokens/tokens.css"

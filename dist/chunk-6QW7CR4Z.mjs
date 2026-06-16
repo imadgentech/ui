@@ -417,9 +417,10 @@ var Badge_default = { "badge": "imui_Badge_badge__jFbcP3", "variant-neutral": "i
 function Badge({
   variant = "neutral",
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ React13.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className) }, children);
+  return /* @__PURE__ */ React13.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className), style }, children);
 }
 
 // src/components/ui/typography/Heading.tsx
@@ -831,3 +832,4 @@ export {
   Testimonial,
   ThemeImage
 };
+//# sourceMappingURL=chunk-6QW7CR4Z.mjs.map

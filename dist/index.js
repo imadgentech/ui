@@ -139,8 +139,8 @@ function cn(...classes) {
 // src/components/ui/Providers.tsx
 var import_react = __toESM(require("react"));
 var import_next_themes = require("next-themes");
-function Providers({ children }) {
-  return /* @__PURE__ */ import_react.default.createElement(import_next_themes.ThemeProvider, { attribute: "data-theme", defaultTheme: "dark", enableSystem: true }, children);
+function Providers({ children, defaultTheme = "dark", enableSystem = true }) {
+  return /* @__PURE__ */ import_react.default.createElement(import_next_themes.ThemeProvider, { attribute: "data-theme", defaultTheme, enableSystem }, children);
 }
 
 // src/components/ui/forms/Button.tsx
@@ -1303,9 +1303,10 @@ var Badge_default = { "badge": "imui_Badge_badge__jFbcP3", "variant-neutral": "i
 function Badge({
   variant = "neutral",
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ import_react34.default.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className) }, children);
+  return /* @__PURE__ */ import_react34.default.createElement("span", { className: cn(Badge_default.badge, Badge_default[`variant-${variant}`], className), style }, children);
 }
 
 // src/components/ui/data/EmptyState.tsx
@@ -1412,7 +1413,8 @@ function Skeleton({
   height = "1em",
   radius = "md",
   shimmer = true,
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react38.default.createElement(
     "div",
@@ -1423,10 +1425,10 @@ function Skeleton({
         shimmer && Skeleton_default.shimmer,
         className
       ),
-      style: {
+      style: __spreadValues({
         width: typeof width === "number" ? `${width}px` : width,
         height: typeof height === "number" ? `${height}px` : height
-      }
+      }, style)
     }
   );
 }
@@ -2617,3 +2619,4 @@ function WaveformBackground() {
   useChatContext,
   useToast
 });
+//# sourceMappingURL=index.js.map
