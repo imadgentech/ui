@@ -12,6 +12,7 @@ export interface NavbarProps {
     links: Array<{ label: string; href: string }>;
     actions?: React.ReactNode;
     className?: string;
+    style?: React.CSSProperties;
     sticky?: boolean;
 }
 
@@ -20,10 +21,11 @@ export function Navbar({
     links,
     actions,
     className,
+    style,
     sticky = true,
 }: NavbarProps) {
     return (
-        <header className={cn(styles.navbar, sticky && styles.sticky, className)}>
+        <header className={cn(styles.navbar, sticky && styles.sticky, className)} style={style}>
             <div className="wrap" style={{ width: '100%', height: '100%' }}>
                 <Flex align="center" justify="between" className={styles.flex}>
                     <div className={styles.brand}>

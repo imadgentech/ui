@@ -32,6 +32,8 @@ export interface ClusterProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -41,7 +43,7 @@ export interface ClusterProps {
 /**
  * Cluster component for inline wrapping layouts (badges, buttons, tags).
  * Uses CSS flexbox with wrap and gap.
- * 
+ *
  * @example
  * <Cluster gap="12" justify="center">
  *   <button>Button 1</button>
@@ -54,6 +56,7 @@ export function Cluster({
     align = 'center',
     as: Component = 'div',
     className,
+    style,
     children,
 }: ClusterProps) {
     return (
@@ -65,6 +68,7 @@ export function Cluster({
                 styles[`align-${align}`],
                 className
             )}
+            style={style}
         >
             {children}
         </Component>

@@ -19,6 +19,8 @@ export interface BreadcrumbsProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Separator element
      * @default '/'
@@ -32,10 +34,11 @@ export interface BreadcrumbsProps {
 export function Breadcrumbs({
     items,
     className,
+    style,
     separator = '/',
 }: BreadcrumbsProps) {
     return (
-        <nav className={cn(styles.breadcrumbs, className)} aria-label="Breadcrumb">
+        <nav className={cn(styles.breadcrumbs, className)} style={style} aria-label="Breadcrumb">
             <ol className={styles.list}>
                 {items.map((item, index) => {
                     const isLast = index === items.length - 1;

@@ -32,15 +32,17 @@ export interface StatCardProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
  * StatCard component for displaying key metrics and statistics.
- * 
+ *
  * @example
- * <StatCard 
- *   label="Answered by AI" 
- *   value="80-90%" 
+ * <StatCard
+ *   label="Answered by AI"
+ *   value="80-90%"
  *   note="of routine calls"
  *   variant="success"
  * />
@@ -51,6 +53,7 @@ export function StatCard({
     note,
     variant = 'neutral',
     className,
+    style,
 }: StatCardProps) {
     return (
         <Surface
@@ -58,6 +61,7 @@ export function StatCard({
             elevation="sm"
             radius="lg"
             className={cn(styles.statCard, styles[`variant-${variant}`], className)}
+            style={style}
         >
             <Stack gap="8" align="center">
                 <Text size="sm" tone="muted" className={styles.label}>

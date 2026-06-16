@@ -19,6 +19,8 @@ export interface SpacerProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -28,6 +30,7 @@ export function Spacer({
     axis = 'vertical',
     size = '16',
     className,
+    style,
 }: SpacerProps) {
     return (
         <div
@@ -37,6 +40,7 @@ export function Spacer({
                 styles[`size-${size}`],
                 className
             )}
+            style={style}
             aria-hidden="true"
         />
     );

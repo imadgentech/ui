@@ -24,7 +24,7 @@ import {
   Text,
   ThemeImage,
   cn
-} from "./chunk-6QW7CR4Z.mjs";
+} from "./chunk-R5CBYSB2.mjs";
 export {
   AspectRatio,
   CTA,

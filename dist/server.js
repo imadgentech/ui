@@ -102,13 +102,14 @@ var AspectRatio_default = { "aspectRatio": "imui_AspectRatio_aspectRatio__LRcnbj
 function AspectRatio({
   ratio = "1/1",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ import_react.default.createElement(
     "div",
     {
       className: cn(AspectRatio_default.aspectRatio, className),
-      style: { aspectRatio: ratio }
+      style: __spreadValues({ aspectRatio: ratio }, style)
     },
     children
   );
@@ -127,6 +128,7 @@ function Cluster({
   align = "center",
   as: Component = "div",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ import_react2.default.createElement(
@@ -138,7 +140,8 @@ function Cluster({
         Cluster_default[`justify-${justify}`],
         Cluster_default[`align-${align}`],
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -154,9 +157,10 @@ var Container_default = { "container": "imui_Container_container__wrRVLX", "max-
 function Container({
   maxWidth = "layout",
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ import_react3.default.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className) }, children);
+  return /* @__PURE__ */ import_react3.default.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className), style }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Divider.module-css
@@ -294,6 +298,7 @@ function GridItem({
   span,
   start,
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ import_react6.default.createElement(
@@ -303,7 +308,8 @@ function GridItem({
         getResponsiveClasses2(span, "span"),
         getResponsiveClasses2(start, "start"),
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -347,7 +353,8 @@ var Spacer_default = { "spacer": "imui_Spacer_spacer__uab1d1", "axis-vertical": 
 function Spacer({
   axis = "vertical",
   size = "16",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react8.default.createElement(
     "div",
@@ -358,6 +365,7 @@ function Spacer({
         Spacer_default[`size-${size}`],
         className
       ),
+      style,
       "aria-hidden": "true"
     }
   );
@@ -436,12 +444,13 @@ var Code_default = { "inline": "imui_Code_inline__tEbdEd", "block": "imui_Code_b
 function Code({
   variant = "inline",
   className,
+  style,
   children
 }) {
   if (variant === "block") {
-    return /* @__PURE__ */ import_react11.default.createElement("pre", { className: cn(Code_default.block, className) }, /* @__PURE__ */ import_react11.default.createElement("code", null, children));
+    return /* @__PURE__ */ import_react11.default.createElement("pre", { className: cn(Code_default.block, className), style }, /* @__PURE__ */ import_react11.default.createElement("code", null, children));
   }
-  return /* @__PURE__ */ import_react11.default.createElement("code", { className: cn(Code_default.inline, className) }, children);
+  return /* @__PURE__ */ import_react11.default.createElement("code", { className: cn(Code_default.inline, className), style }, children);
 }
 
 // src/components/ui/typography/Heading.tsx
@@ -492,8 +501,8 @@ var import_react13 = __toESM(require("react"));
 var Kbd_default = { "kbd": "imui_Kbd_kbd__jdsxBy" };
 
 // src/components/ui/typography/Kbd.tsx
-function Kbd({ className, children }) {
-  return /* @__PURE__ */ import_react13.default.createElement("kbd", { className: cn(Kbd_default.kbd, className) }, children);
+function Kbd({ className, style, children }) {
+  return /* @__PURE__ */ import_react13.default.createElement("kbd", { className: cn(Kbd_default.kbd, className), style }, children);
 }
 
 // src/components/ui/typography/Link.tsx
@@ -510,6 +519,7 @@ function Link({
   tone = "default",
   external: externalProp,
   className,
+  style,
   children
 }) {
   const isExternal = externalProp != null ? externalProp : href.startsWith("http://") || href.startsWith("https://");
@@ -525,13 +535,14 @@ function Link({
       {
         href,
         className: linkClasses,
+        style,
         target: "_blank",
         rel: "noopener noreferrer"
       },
       children
     );
   }
-  return /* @__PURE__ */ import_react14.default.createElement(import_link.default, { href, className: linkClasses }, children);
+  return /* @__PURE__ */ import_react14.default.createElement(import_link.default, { href, className: linkClasses, style }, children);
 }
 
 // src/components/ui/typography/Text.tsx
@@ -580,13 +591,15 @@ function CTA({
   description,
   actions,
   variant = "brand",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react16.default.createElement(
     Surface,
     {
       padding: "lg",
       className: cn(CTA_default.cta, CTA_default[variant], className),
+      style,
       elevation: "lg",
       radius: "lg"
     },
@@ -666,9 +679,10 @@ function Hero({
   actions,
   visual,
   align = "center",
-  className
+  className,
+  style
 }) {
-  return /* @__PURE__ */ import_react19.default.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className) }, /* @__PURE__ */ import_react19.default.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ import_react19.default.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ import_react19.default.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ import_react19.default.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ import_react19.default.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ import_react19.default.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ import_react19.default.createElement(
+  return /* @__PURE__ */ import_react19.default.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className), style }, /* @__PURE__ */ import_react19.default.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ import_react19.default.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ import_react19.default.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ import_react19.default.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ import_react19.default.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ import_react19.default.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ import_react19.default.createElement(
     Text,
     {
       size: "lg",
@@ -776,7 +790,8 @@ function Avatar({
   fallback,
   size = "md",
   shape = "circle",
-  className
+  className,
+  style
 }) {
   const [error, setError] = import_react23.default.useState(false);
   return /* @__PURE__ */ import_react23.default.createElement(
@@ -787,7 +802,8 @@ function Avatar({
         Avatar_default[`size-${size}`],
         Avatar_default[`shape-${shape}`],
         className
-      )
+      ),
+      style
     },
     src && !error ? /* @__PURE__ */ import_react23.default.createElement(
       "img",

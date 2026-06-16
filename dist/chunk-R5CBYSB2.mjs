@@ -119,13 +119,14 @@ var AspectRatio_default = { "aspectRatio": "imui_AspectRatio_aspectRatio__LRcnbj
 function AspectRatio({
   ratio = "1/1",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ React4.createElement(
     "div",
     {
       className: cn(AspectRatio_default.aspectRatio, className),
-      style: { aspectRatio: ratio }
+      style: __spreadValues({ aspectRatio: ratio }, style)
     },
     children
   );
@@ -144,6 +145,7 @@ function Cluster({
   align = "center",
   as: Component = "div",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ React5.createElement(
@@ -155,7 +157,8 @@ function Cluster({
         Cluster_default[`justify-${justify}`],
         Cluster_default[`align-${align}`],
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -171,9 +174,10 @@ var Container_default = { "container": "imui_Container_container__wrRVLX", "max-
 function Container({
   maxWidth = "layout",
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ React6.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className) }, children);
+  return /* @__PURE__ */ React6.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className), style }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Divider.module-css
@@ -262,6 +266,7 @@ function GridItem({
   span,
   start,
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ React8.createElement(
@@ -271,7 +276,8 @@ function GridItem({
         getResponsiveClasses2(span, "span"),
         getResponsiveClasses2(start, "start"),
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -315,7 +321,8 @@ var Spacer_default = { "spacer": "imui_Spacer_spacer__uab1d1", "axis-vertical": 
 function Spacer({
   axis = "vertical",
   size = "16",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React10.createElement(
     "div",
@@ -326,6 +333,7 @@ function Spacer({
         Spacer_default[`size-${size}`],
         className
       ),
+      style,
       "aria-hidden": "true"
     }
   );
@@ -382,7 +390,8 @@ function Avatar({
   fallback,
   size = "md",
   shape = "circle",
-  className
+  className,
+  style
 }) {
   const [error, setError] = React12.useState(false);
   return /* @__PURE__ */ React12.createElement(
@@ -393,7 +402,8 @@ function Avatar({
         Avatar_default[`size-${size}`],
         Avatar_default[`shape-${shape}`],
         className
-      )
+      ),
+      style
     },
     src && !error ? /* @__PURE__ */ React12.createElement(
       "img",
@@ -508,12 +518,13 @@ var Code_default = { "inline": "imui_Code_inline__tEbdEd", "block": "imui_Code_b
 function Code({
   variant = "inline",
   className,
+  style,
   children
 }) {
   if (variant === "block") {
-    return /* @__PURE__ */ React16.createElement("pre", { className: cn(Code_default.block, className) }, /* @__PURE__ */ React16.createElement("code", null, children));
+    return /* @__PURE__ */ React16.createElement("pre", { className: cn(Code_default.block, className), style }, /* @__PURE__ */ React16.createElement("code", null, children));
   }
-  return /* @__PURE__ */ React16.createElement("code", { className: cn(Code_default.inline, className) }, children);
+  return /* @__PURE__ */ React16.createElement("code", { className: cn(Code_default.inline, className), style }, children);
 }
 
 // src/components/ui/typography/Kbd.tsx
@@ -523,8 +534,8 @@ import React17 from "react";
 var Kbd_default = { "kbd": "imui_Kbd_kbd__jdsxBy" };
 
 // src/components/ui/typography/Kbd.tsx
-function Kbd({ className, children }) {
-  return /* @__PURE__ */ React17.createElement("kbd", { className: cn(Kbd_default.kbd, className) }, children);
+function Kbd({ className, style, children }) {
+  return /* @__PURE__ */ React17.createElement("kbd", { className: cn(Kbd_default.kbd, className), style }, children);
 }
 
 // src/components/ui/typography/Link.tsx
@@ -541,6 +552,7 @@ function Link({
   tone = "default",
   external: externalProp,
   className,
+  style,
   children
 }) {
   const isExternal = externalProp != null ? externalProp : href.startsWith("http://") || href.startsWith("https://");
@@ -556,13 +568,14 @@ function Link({
       {
         href,
         className: linkClasses,
+        style,
         target: "_blank",
         rel: "noopener noreferrer"
       },
       children
     );
   }
-  return /* @__PURE__ */ React18.createElement(NextLink, { href, className: linkClasses }, children);
+  return /* @__PURE__ */ React18.createElement(NextLink, { href, className: linkClasses, style }, children);
 }
 
 // src/components/ui/marketing/CTA.tsx
@@ -577,13 +590,15 @@ function CTA({
   description,
   actions,
   variant = "brand",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React19.createElement(
     Surface,
     {
       padding: "lg",
       className: cn(CTA_default.cta, CTA_default[variant], className),
+      style,
       elevation: "lg",
       radius: "lg"
     },
@@ -663,9 +678,10 @@ function Hero({
   actions,
   visual,
   align = "center",
-  className
+  className,
+  style
 }) {
-  return /* @__PURE__ */ React22.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className) }, /* @__PURE__ */ React22.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ React22.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ React22.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ React22.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ React22.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ React22.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ React22.createElement(
+  return /* @__PURE__ */ React22.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className), style }, /* @__PURE__ */ React22.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ React22.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ React22.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ React22.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ React22.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ React22.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ React22.createElement(
     Text,
     {
       size: "lg",
@@ -832,4 +848,4 @@ export {
   Testimonial,
   ThemeImage
 };
-//# sourceMappingURL=chunk-6QW7CR4Z.mjs.map
+//# sourceMappingURL=chunk-R5CBYSB2.mjs.map

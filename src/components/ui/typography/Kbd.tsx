@@ -8,6 +8,8 @@ export interface KbdProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content (keyboard key)
      */
@@ -21,9 +23,9 @@ export interface KbdProps {
  * <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd>
  * <Kbd>âŒ˜</Kbd><Kbd>K</Kbd>
  */
-export function Kbd({ className, children }: KbdProps) {
+export function Kbd({ className, style, children }: KbdProps) {
     return (
-        <kbd className={cn(styles.kbd, className)}>
+        <kbd className={cn(styles.kbd, className)} style={style}>
             {children}
         </kbd>
     );

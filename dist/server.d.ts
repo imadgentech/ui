@@ -24,6 +24,7 @@ interface AspectRatioProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content to maintain aspect ratio
      */
@@ -32,7 +33,7 @@ interface AspectRatioProps {
 /**
  * AspectRatio component for maintaining consistent proportions for media or containers.
  */
-declare function AspectRatio({ ratio, className, children, }: AspectRatioProps): React__default.JSX.Element;
+declare function AspectRatio({ ratio, className, style, children, }: AspectRatioProps): React__default.JSX.Element;
 
 interface ClusterProps {
     /**
@@ -59,6 +60,7 @@ interface ClusterProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -74,7 +76,7 @@ interface ClusterProps {
  *   <button>Button 2</button>
  * </Cluster>
  */
-declare function Cluster({ gap, justify, align, as: Component, className, children, }: ClusterProps): React__default.JSX.Element;
+declare function Cluster({ gap, justify, align, as: Component, className, style, children, }: ClusterProps): React__default.JSX.Element;
 
 interface ContainerProps {
     /**
@@ -86,6 +88,7 @@ interface ContainerProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -99,7 +102,7 @@ interface ContainerProps {
  *   <Heading>Contained Content</Heading>
  * </Container>
  */
-declare function Container({ maxWidth, className, children, }: ContainerProps): React__default.JSX.Element;
+declare function Container({ maxWidth, className, style, children, }: ContainerProps): React__default.JSX.Element;
 
 interface DividerProps {
     /** Orientation of the divider */
@@ -229,6 +232,7 @@ interface GridItemProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -242,7 +246,7 @@ interface GridItemProps {
  *   Content
  * </GridItem>
  */
-declare function GridItem({ span, start, className, children, }: GridItemProps): React__default.JSX.Element;
+declare function GridItem({ span, start, className, style, children, }: GridItemProps): React__default.JSX.Element;
 
 interface SectionProps extends React__default.HTMLAttributes<HTMLElement> {
     /**
@@ -289,11 +293,12 @@ interface SpacerProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * Spacer component for fixed spacing between elements.
  */
-declare function Spacer({ axis, size, className, }: SpacerProps): React__default.JSX.Element;
+declare function Spacer({ axis, size, className, style, }: SpacerProps): React__default.JSX.Element;
 
 interface StackProps {
     /**
@@ -389,6 +394,7 @@ interface CodeProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -401,7 +407,7 @@ interface CodeProps {
  * <Code>const foo = 'bar';</Code>
  * <Code variant="block">{`function hello() {\n  return 'world';\n}`}</Code>
  */
-declare function Code({ variant, className, children, }: CodeProps): React__default.JSX.Element;
+declare function Code({ variant, className, style, children, }: CodeProps): React__default.JSX.Element;
 
 interface HeadingProps {
     /**
@@ -450,6 +456,7 @@ interface KbdProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content (keyboard key)
      */
@@ -462,7 +469,7 @@ interface KbdProps {
  * <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd>
  * <Kbd>âŒ˜</Kbd><Kbd>K</Kbd>
  */
-declare function Kbd({ className, children }: KbdProps): React__default.JSX.Element;
+declare function Kbd({ className, style, children }: KbdProps): React__default.JSX.Element;
 
 interface LinkProps {
     /**
@@ -488,6 +495,7 @@ interface LinkProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Content
      */
@@ -502,7 +510,7 @@ interface LinkProps {
  * <Link href="https://example.com" external>External Site</Link>
  * <Link href="/contact" tone="brand" underline="always">Contact</Link>
  */
-declare function Link({ href, underline, tone, external: externalProp, className, children, }: LinkProps): React__default.JSX.Element;
+declare function Link({ href, underline, tone, external: externalProp, className, style, children, }: LinkProps): React__default.JSX.Element;
 
 interface TextProps {
     /**
@@ -570,11 +578,12 @@ interface CTAProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * CTA (Call to Action) component for conversion sections.
  */
-declare function CTA({ title, description, actions, variant, className, }: CTAProps): React__default.JSX.Element;
+declare function CTA({ title, description, actions, variant, className, style, }: CTAProps): React__default.JSX.Element;
 
 interface Feature {
     icon?: React__default.ReactNode;
@@ -663,11 +672,12 @@ interface HeroProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * Hero component for high-impact landing sections.
  */
-declare function Hero({ badge, title, titleWeight, description, actions, visual, align, className, }: HeroProps): React__default.JSX.Element;
+declare function Hero({ badge, title, titleWeight, description, actions, visual, align, className, style, }: HeroProps): React__default.JSX.Element;
 
 interface LogoCloudProps {
     /**

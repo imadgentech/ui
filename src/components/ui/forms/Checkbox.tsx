@@ -40,6 +40,8 @@ export interface CheckboxProps {
      * Disabled state
      */
     disabled?: boolean;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -53,9 +55,10 @@ export function Checkbox({
     onCheckedChange,
     className,
     disabled,
+    style,
 }: CheckboxProps) {
     return (
-        <div className={cn(styles.wrapper, disabled && styles.disabled, className)}>
+        <div className={cn(styles.wrapper, disabled && styles.disabled, className)} style={style}>
             <CheckboxPrimitive.Root
                 id={id}
                 className={styles.checkbox}

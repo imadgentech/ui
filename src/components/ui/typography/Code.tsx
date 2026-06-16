@@ -14,6 +14,8 @@ export interface CodeProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -22,7 +24,7 @@ export interface CodeProps {
 
 /**
  * Code component for displaying code inline or in blocks.
- * 
+ *
  * @example
  * <Code>const foo = 'bar';</Code>
  * <Code variant="block">{`function hello() {\n  return 'world';\n}`}</Code>
@@ -30,18 +32,19 @@ export interface CodeProps {
 export function Code({
     variant = 'inline',
     className,
+    style,
     children,
 }: CodeProps) {
     if (variant === 'block') {
         return (
-            <pre className={cn(styles.block, className)}>
+            <pre className={cn(styles.block, className)} style={style}>
                 <code>{children}</code>
             </pre>
         );
     }
 
     return (
-        <code className={cn(styles.inline, className)}>
+        <code className={cn(styles.inline, className)} style={style}>
             {children}
         </code>
     );

@@ -23,6 +23,8 @@ export interface PaginationProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -33,6 +35,7 @@ export function Pagination({
     totalPages,
     onPageChange,
     className,
+    style,
 }: PaginationProps) {
     const canGoPrev = currentPage > 1;
     const canGoNext = currentPage < totalPages;
@@ -40,6 +43,7 @@ export function Pagination({
     return (
         <nav
             className={cn(styles.pagination, className)}
+            style={style}
             aria-label="Pagination"
         >
             <Button

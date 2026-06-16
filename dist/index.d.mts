@@ -109,11 +109,12 @@ interface CheckboxProps {
      * Disabled state
      */
     disabled?: boolean;
+    style?: React__default.CSSProperties;
 }
 /**
  * Checkbox component using Radix Primitives for accessibility.
  */
-declare function Checkbox({ id, label, checked, defaultChecked, onCheckedChange, className, disabled, }: CheckboxProps): React__default.JSX.Element;
+declare function Checkbox({ id, label, checked, defaultChecked, onCheckedChange, className, disabled, style, }: CheckboxProps): React__default.JSX.Element;
 
 interface ErrorTextProps {
     /**
@@ -229,6 +230,7 @@ interface FormFieldProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * The form control (Input, Select, etc.)
      */
@@ -237,13 +239,14 @@ interface FormFieldProps {
 /**
  * FormField wrapper that composes Label, Control, and feedback text.
  */
-declare function FormField({ id, label, hint, error, required, className, children, }: FormFieldProps): React__default.JSX.Element;
+declare function FormField({ id, label, hint, error, required, className, style, children, }: FormFieldProps): React__default.JSX.Element;
 
 interface HelperTextProps {
     /**
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Helper text content
      */
@@ -252,7 +255,7 @@ interface HelperTextProps {
 /**
  * HelperText component for provided hints or information.
  */
-declare function HelperText({ className, children }: HelperTextProps): React__default.JSX.Element;
+declare function HelperText({ className, style, children }: HelperTextProps): React__default.JSX.Element;
 
 interface IconButtonProps extends React__default.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
@@ -359,11 +362,12 @@ interface RadioGroupProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * RadioGroup component using Radix Primitives for accessibility.
  */
-declare function RadioGroup({ value, defaultValue, onValueChange, items, orientation, className, }: RadioGroupProps): React__default.JSX.Element;
+declare function RadioGroup({ value, defaultValue, onValueChange, items, orientation, className, style, }: RadioGroupProps): React__default.JSX.Element;
 
 interface SelectProps extends React__default.SelectHTMLAttributes<HTMLSelectElement> {
     /**
@@ -417,11 +421,12 @@ interface SwitchProps {
      * Disabled state
      */
     disabled?: boolean;
+    style?: React__default.CSSProperties;
 }
 /**
  * Switch component for binary toggles.
  */
-declare function Switch({ id, 'aria-label': ariaLabel, checked, defaultChecked, onCheckedChange, className, disabled, }: SwitchProps): React__default.JSX.Element;
+declare function Switch({ id, 'aria-label': ariaLabel, checked, defaultChecked, onCheckedChange, className, disabled, style, }: SwitchProps): React__default.JSX.Element;
 
 interface TextareaProps extends React__default.TextareaHTMLAttributes<HTMLTextAreaElement> {
     /**
@@ -457,6 +462,7 @@ interface BreadcrumbsProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Separator element
      * @default '/'
@@ -466,7 +472,7 @@ interface BreadcrumbsProps {
 /**
  * Breadcrumbs component for secondary navigation and user path orientation.
  */
-declare function Breadcrumbs({ items, className, separator, }: BreadcrumbsProps): React__default.JSX.Element;
+declare function Breadcrumbs({ items, className, style, separator, }: BreadcrumbsProps): React__default.JSX.Element;
 
 interface MobileMenuProps {
     /**
@@ -505,9 +511,10 @@ interface NavbarProps {
     }>;
     actions?: React__default.ReactNode;
     className?: string;
+    style?: React__default.CSSProperties;
     sticky?: boolean;
 }
-declare function Navbar({ brand, links, actions, className, sticky, }: NavbarProps): React__default.JSX.Element;
+declare function Navbar({ brand, links, actions, className, style, sticky, }: NavbarProps): React__default.JSX.Element;
 
 interface NavLinkProps extends LinkProps {
     /**
@@ -545,11 +552,12 @@ interface PaginationProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * Pagination component for navigating through paged data.
  */
-declare function Pagination({ currentPage, totalPages, onPageChange, className, }: PaginationProps): React__default.JSX.Element;
+declare function Pagination({ currentPage, totalPages, onPageChange, className, style, }: PaginationProps): React__default.JSX.Element;
 
 interface TabsProps {
     /**
@@ -576,6 +584,7 @@ interface TabsProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * Tabs component using Radix primitives for keyboard navigation.
@@ -589,7 +598,7 @@ interface TabsProps {
  *   ]}
  * />
  */
-declare function Tabs({ defaultValue, value, onValueChange, items, className, }: TabsProps): React__default.JSX.Element;
+declare function Tabs({ defaultValue, value, onValueChange, items, className, style, }: TabsProps): React__default.JSX.Element;
 
 interface AccordionItem {
     value: string;
@@ -616,11 +625,12 @@ interface AccordionProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * Accordion component for organized collapsible content.
  */
-declare function Accordion({ items, type, collapsible, className, }: AccordionProps): React__default.JSX.Element;
+declare function Accordion({ items, type, collapsible, className, style, }: AccordionProps): React__default.JSX.Element;
 
 interface AvatarProps {
     /**
@@ -649,11 +659,12 @@ interface AvatarProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * Avatar component for user profiles and identifiers.
  */
-declare function Avatar({ src, alt, fallback, size, shape, className, }: AvatarProps): React__default.JSX.Element;
+declare function Avatar({ src, alt, fallback, size, shape, className, style, }: AvatarProps): React__default.JSX.Element;
 
 interface BadgeProps {
     /**
@@ -704,11 +715,12 @@ interface EmptyStateProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * EmptyState component for cases with no data or results.
  */
-declare function EmptyState({ icon, title, description, action, className, }: EmptyStateProps): React__default.JSX.Element;
+declare function EmptyState({ icon, title, description, action, className, style, }: EmptyStateProps): React__default.JSX.Element;
 
 interface SkeletonProps {
     /**
@@ -765,6 +777,7 @@ interface StatCardProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
 }
 /**
  * StatCard component for displaying key metrics and statistics.
@@ -777,7 +790,7 @@ interface StatCardProps {
  *   variant="success"
  * />
  */
-declare function StatCard({ label, value, note, variant, className, }: StatCardProps): React__default.JSX.Element;
+declare function StatCard({ label, value, note, variant, className, style, }: StatCardProps): React__default.JSX.Element;
 
 interface TableProps {
     /**
@@ -789,6 +802,7 @@ interface TableProps {
      * Additional CSS classes
      */
     className?: string;
+    style?: React__default.CSSProperties;
     /**
      * Zebra striping
      * @default false
@@ -798,7 +812,7 @@ interface TableProps {
 /**
  * Table component for displaying structured tabular data.
  */
-declare function Table({ headers, rows, className, striped, }: TableProps): React__default.JSX.Element;
+declare function Table({ headers, rows, className, style, striped, }: TableProps): React__default.JSX.Element;
 
 interface DialogProps {
     /**

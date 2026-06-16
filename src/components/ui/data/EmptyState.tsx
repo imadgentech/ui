@@ -30,6 +30,8 @@ export interface EmptyStateProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -41,9 +43,10 @@ export function EmptyState({
     description,
     action,
     className,
+    style,
 }: EmptyStateProps) {
     return (
-        <div className={cn(styles.emptyState, className)}>
+        <div className={cn(styles.emptyState, className)} style={style}>
             <Stack gap="16" align="center">
                 {icon && <div className={styles.icon}>{icon}</div>}
                 <Stack gap="8" align="center">

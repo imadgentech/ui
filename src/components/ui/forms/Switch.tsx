@@ -40,6 +40,8 @@ export interface SwitchProps {
      * Disabled state
      */
     disabled?: boolean;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -53,11 +55,13 @@ export function Switch({
     onCheckedChange,
     className,
     disabled,
+    style,
 }: SwitchProps) {
     return (
         <SwitchPrimitive.Root
             id={id}
             className={cn(styles.switch, className)}
+            style={style}
             checked={checked}
             defaultChecked={defaultChecked}
             onCheckedChange={onCheckedChange}

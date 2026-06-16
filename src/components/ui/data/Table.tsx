@@ -14,6 +14,8 @@ export interface TableProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Zebra striping
      * @default false
@@ -28,10 +30,11 @@ export function Table({
     headers,
     rows,
     className,
+    style,
     striped = false,
 }: TableProps) {
     return (
-        <div className={cn(styles.wrapper, className)}>
+        <div className={cn(styles.wrapper, className)} style={style}>
             <table className={cn(styles.table, striped && styles.striped)}>
                 <thead>
                     <tr>

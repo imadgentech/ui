@@ -32,6 +32,8 @@ export interface CTAProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -43,11 +45,13 @@ export function CTA({
     actions,
     variant = 'brand',
     className,
+    style,
 }: CTAProps) {
     return (
         <Surface
             padding="lg"
             className={cn(styles.cta, styles[variant], className)}
+            style={style}
             elevation="lg"
             radius="lg"
         >

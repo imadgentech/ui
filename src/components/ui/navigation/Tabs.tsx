@@ -34,11 +34,13 @@ export interface TabsProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
  * Tabs component using Radix primitives for keyboard navigation.
- * 
+ *
  * @example
  * <Tabs
  *   defaultValue="tab1"
@@ -54,6 +56,7 @@ export function Tabs({
     onValueChange,
     items,
     className,
+    style,
 }: TabsProps) {
     return (
         <TabsPrimitive.Root
@@ -61,6 +64,7 @@ export function Tabs({
             value={value}
             onValueChange={onValueChange}
             className={cn(className)}
+            style={style}
         >
             <TabsPrimitive.List className={styles.list}>
                 {items.map((item) => (

@@ -34,6 +34,8 @@ export interface AvatarProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -46,6 +48,7 @@ export function Avatar({
     size = 'md',
     shape = 'circle',
     className,
+    style,
 }: AvatarProps) {
     const [error, setError] = React.useState(false);
 
@@ -57,6 +60,7 @@ export function Avatar({
                 styles[`shape-${shape}`],
                 className
             )}
+            style={style}
         >
             {src && !error ? (
                 <img

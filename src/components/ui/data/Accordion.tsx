@@ -34,6 +34,8 @@ export interface AccordionProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -44,12 +46,14 @@ export function Accordion({
     type = 'single',
     collapsible = true,
     className,
+    style,
 }: AccordionProps) {
     return (
         <AccordionPrimitive.Root
             type={type as 'single' | 'multiple'}
             collapsible={collapsible}
             className={cn(styles.root, className)}
+            style={style}
         >
             {items.map((item) => (
                 <AccordionPrimitive.Item

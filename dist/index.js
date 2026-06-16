@@ -217,9 +217,10 @@ function Checkbox({
   defaultChecked,
   onCheckedChange,
   className,
-  disabled
+  disabled,
+  style
 }) {
-  return /* @__PURE__ */ import_react3.default.createElement("div", { className: cn(Checkbox_default.wrapper, disabled && Checkbox_default.disabled, className) }, /* @__PURE__ */ import_react3.default.createElement(
+  return /* @__PURE__ */ import_react3.default.createElement("div", { className: cn(Checkbox_default.wrapper, disabled && Checkbox_default.disabled, className), style }, /* @__PURE__ */ import_react3.default.createElement(
     CheckboxPrimitive.Root,
     {
       id,
@@ -523,8 +524,8 @@ var import_react11 = __toESM(require("react"));
 var HelperText_default = { "helperText": "imui_HelperText_helperText__YWUutB" };
 
 // src/components/ui/forms/HelperText.tsx
-function HelperText({ className, children }) {
-  return /* @__PURE__ */ import_react11.default.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
+function HelperText({ className, style, children }) {
+  return /* @__PURE__ */ import_react11.default.createElement("p", { className: cn(HelperText_default.helperText, className), style }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\FormField.module-css
@@ -538,9 +539,10 @@ function FormField({
   error,
   required,
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ import_react12.default.createElement("div", { className: cn(FormField_default.formField, className) }, label && /* @__PURE__ */ import_react12.default.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ import_react12.default.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ import_react12.default.createElement(HelperText, null, hint) : null);
+  return /* @__PURE__ */ import_react12.default.createElement("div", { className: cn(FormField_default.formField, className), style }, label && /* @__PURE__ */ import_react12.default.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ import_react12.default.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ import_react12.default.createElement(HelperText, null, hint) : null);
 }
 
 // src/components/ui/forms/IconButton.tsx
@@ -607,12 +609,14 @@ function RadioGroup({
   onValueChange,
   items,
   orientation = "vertical",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react14.default.createElement(
     RadioGroupPrimitive.Root,
     {
       className: cn(RadioGroup_default.root, RadioGroup_default[orientation], className),
+      style,
       value,
       defaultValue,
       onValueChange
@@ -694,13 +698,15 @@ function Switch({
   defaultChecked,
   onCheckedChange,
   className,
-  disabled
+  disabled,
+  style
 }) {
   return /* @__PURE__ */ import_react16.default.createElement(
     SwitchPrimitive.Root,
     {
       id,
       className: cn(Switch_default.switch, className),
+      style,
       checked,
       defaultChecked,
       onCheckedChange,
@@ -721,13 +727,14 @@ var AspectRatio_default = { "aspectRatio": "imui_AspectRatio_aspectRatio__LRcnbj
 function AspectRatio({
   ratio = "1/1",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ import_react17.default.createElement(
     "div",
     {
       className: cn(AspectRatio_default.aspectRatio, className),
-      style: { aspectRatio: ratio }
+      style: __spreadValues({ aspectRatio: ratio }, style)
     },
     children
   );
@@ -746,6 +753,7 @@ function Cluster({
   align = "center",
   as: Component = "div",
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ import_react18.default.createElement(
@@ -757,7 +765,8 @@ function Cluster({
         Cluster_default[`justify-${justify}`],
         Cluster_default[`align-${align}`],
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -773,9 +782,10 @@ var Container_default = { "container": "imui_Container_container__wrRVLX", "max-
 function Container({
   maxWidth = "layout",
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ import_react19.default.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className) }, children);
+  return /* @__PURE__ */ import_react19.default.createElement("div", { className: cn(Container_default.container, Container_default[`max-${maxWidth}`], className), style }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\layout\Divider.module-css
@@ -864,6 +874,7 @@ function GridItem({
   span,
   start,
   className,
+  style,
   children
 }) {
   return /* @__PURE__ */ import_react21.default.createElement(
@@ -873,7 +884,8 @@ function GridItem({
         getResponsiveClasses2(span, "span"),
         getResponsiveClasses2(start, "start"),
         className
-      )
+      ),
+      style
     },
     children
   );
@@ -917,7 +929,8 @@ var Spacer_default = { "spacer": "imui_Spacer_spacer__uab1d1", "axis-vertical": 
 function Spacer({
   axis = "vertical",
   size = "16",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react23.default.createElement(
     "div",
@@ -928,6 +941,7 @@ function Spacer({
         Spacer_default[`size-${size}`],
         className
       ),
+      style,
       "aria-hidden": "true"
     }
   );
@@ -982,9 +996,10 @@ var Breadcrumbs_default = { "breadcrumbs": "imui_Breadcrumbs_breadcrumbs__PI05oR
 function Breadcrumbs({
   items,
   className,
+  style,
   separator = "/"
 }) {
-  return /* @__PURE__ */ import_react25.default.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), "aria-label": "Breadcrumb" }, /* @__PURE__ */ import_react25.default.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
+  return /* @__PURE__ */ import_react25.default.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), style, "aria-label": "Breadcrumb" }, /* @__PURE__ */ import_react25.default.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
     const isLast = index === items.length - 1;
     return /* @__PURE__ */ import_react25.default.createElement("li", { key: item.label, className: Breadcrumbs_default.item }, !isLast && item.href ? /* @__PURE__ */ import_react25.default.createElement(import_link.default, { href: item.href, className: Breadcrumbs_default.link }, item.label) : /* @__PURE__ */ import_react25.default.createElement("span", { className: Breadcrumbs_default.current, "aria-current": "page" }, item.label), !isLast && /* @__PURE__ */ import_react25.default.createElement("span", { className: Breadcrumbs_default.separator, "aria-hidden": "true" }, separator));
   })));
@@ -1096,9 +1111,10 @@ function Navbar({
   links,
   actions,
   className,
+  style,
   sticky = true
 }) {
-  return /* @__PURE__ */ import_react29.default.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className) }, /* @__PURE__ */ import_react29.default.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ import_react29.default.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ import_react29.default.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ import_react29.default.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ import_react29.default.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ import_react29.default.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className), style }, /* @__PURE__ */ import_react29.default.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ import_react29.default.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ import_react29.default.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ import_react29.default.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ import_react29.default.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ import_react29.default.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ import_react29.default.createElement(
     MobileMenu,
     {
       trigger: /* @__PURE__ */ import_react29.default.createElement(
@@ -1126,7 +1142,8 @@ function Pagination({
   currentPage,
   totalPages,
   onPageChange,
-  className
+  className,
+  style
 }) {
   const canGoPrev = currentPage > 1;
   const canGoNext = currentPage < totalPages;
@@ -1134,6 +1151,7 @@ function Pagination({
     "nav",
     {
       className: cn(Pagination_default.pagination, className),
+      style,
       "aria-label": "Pagination"
     },
     /* @__PURE__ */ import_react30.default.createElement(
@@ -1175,7 +1193,8 @@ function Tabs({
   value,
   onValueChange,
   items,
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react31.default.createElement(
     TabsPrimitive.Root,
@@ -1183,7 +1202,8 @@ function Tabs({
       defaultValue,
       value,
       onValueChange,
-      className: cn(className)
+      className: cn(className),
+      style
     },
     /* @__PURE__ */ import_react31.default.createElement(TabsPrimitive.List, { className: Tabs_default.list }, items.map((item) => /* @__PURE__ */ import_react31.default.createElement(
       TabsPrimitive.Trigger,
@@ -1218,14 +1238,16 @@ function Accordion({
   items,
   type = "single",
   collapsible = true,
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react32.default.createElement(
     AccordionPrimitive.Root,
     {
       type,
       collapsible,
-      className: cn(Accordion_default.root, className)
+      className: cn(Accordion_default.root, className),
+      style
     },
     items.map((item) => /* @__PURE__ */ import_react32.default.createElement(
       AccordionPrimitive.Item,
@@ -1268,7 +1290,8 @@ function Avatar({
   fallback,
   size = "md",
   shape = "circle",
-  className
+  className,
+  style
 }) {
   const [error, setError] = import_react33.default.useState(false);
   return /* @__PURE__ */ import_react33.default.createElement(
@@ -1279,7 +1302,8 @@ function Avatar({
         Avatar_default[`size-${size}`],
         Avatar_default[`shape-${shape}`],
         className
-      )
+      ),
+      style
     },
     src && !error ? /* @__PURE__ */ import_react33.default.createElement(
       "img",
@@ -1396,9 +1420,10 @@ function EmptyState({
   title,
   description,
   action,
-  className
+  className,
+  style
 }) {
-  return /* @__PURE__ */ import_react37.default.createElement("div", { className: cn(EmptyState_default.emptyState, className) }, /* @__PURE__ */ import_react37.default.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ import_react37.default.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ import_react37.default.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ import_react37.default.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ import_react37.default.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ import_react37.default.createElement("div", { className: EmptyState_default.action }, action)));
+  return /* @__PURE__ */ import_react37.default.createElement("div", { className: cn(EmptyState_default.emptyState, className), style }, /* @__PURE__ */ import_react37.default.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ import_react37.default.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ import_react37.default.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ import_react37.default.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ import_react37.default.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ import_react37.default.createElement("div", { className: EmptyState_default.action }, action)));
 }
 
 // src/components/ui/data/Skeleton.tsx
@@ -1445,7 +1470,8 @@ function StatCard({
   value,
   note,
   variant = "neutral",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react39.default.createElement(
     Surface,
@@ -1453,7 +1479,8 @@ function StatCard({
       padding: "lg",
       elevation: "sm",
       radius: "lg",
-      className: cn(StatCard_default.statCard, StatCard_default[`variant-${variant}`], className)
+      className: cn(StatCard_default.statCard, StatCard_default[`variant-${variant}`], className),
+      style
     },
     /* @__PURE__ */ import_react39.default.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ import_react39.default.createElement(Text, { size: "sm", tone: "muted", className: StatCard_default.label }, label), /* @__PURE__ */ import_react39.default.createElement(Heading, { as: "h3", size: "xl", className: StatCard_default.value }, value), note && /* @__PURE__ */ import_react39.default.createElement(Text, { size: "xs", tone: "muted", className: StatCard_default.note }, note))
   );
@@ -1470,9 +1497,10 @@ function Table({
   headers,
   rows,
   className,
+  style,
   striped = false
 }) {
-  return /* @__PURE__ */ import_react40.default.createElement("div", { className: cn(Table_default.wrapper, className) }, /* @__PURE__ */ import_react40.default.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ import_react40.default.createElement("thead", null, /* @__PURE__ */ import_react40.default.createElement("tr", null, headers.map((header) => /* @__PURE__ */ import_react40.default.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ import_react40.default.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ import_react40.default.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ import_react40.default.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
+  return /* @__PURE__ */ import_react40.default.createElement("div", { className: cn(Table_default.wrapper, className), style }, /* @__PURE__ */ import_react40.default.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ import_react40.default.createElement("thead", null, /* @__PURE__ */ import_react40.default.createElement("tr", null, headers.map((header) => /* @__PURE__ */ import_react40.default.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ import_react40.default.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ import_react40.default.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ import_react40.default.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
 }
 
 // src/components/ui/overlays/Dialog.tsx
@@ -1590,12 +1618,13 @@ var Code_default = { "inline": "imui_Code_inline__tEbdEd", "block": "imui_Code_b
 function Code({
   variant = "inline",
   className,
+  style,
   children
 }) {
   if (variant === "block") {
-    return /* @__PURE__ */ import_react45.default.createElement("pre", { className: cn(Code_default.block, className) }, /* @__PURE__ */ import_react45.default.createElement("code", null, children));
+    return /* @__PURE__ */ import_react45.default.createElement("pre", { className: cn(Code_default.block, className), style }, /* @__PURE__ */ import_react45.default.createElement("code", null, children));
   }
-  return /* @__PURE__ */ import_react45.default.createElement("code", { className: cn(Code_default.inline, className) }, children);
+  return /* @__PURE__ */ import_react45.default.createElement("code", { className: cn(Code_default.inline, className), style }, children);
 }
 
 // src/components/ui/typography/Kbd.tsx
@@ -1605,8 +1634,8 @@ var import_react46 = __toESM(require("react"));
 var Kbd_default = { "kbd": "imui_Kbd_kbd__jdsxBy" };
 
 // src/components/ui/typography/Kbd.tsx
-function Kbd({ className, children }) {
-  return /* @__PURE__ */ import_react46.default.createElement("kbd", { className: cn(Kbd_default.kbd, className) }, children);
+function Kbd({ className, style, children }) {
+  return /* @__PURE__ */ import_react46.default.createElement("kbd", { className: cn(Kbd_default.kbd, className), style }, children);
 }
 
 // src/components/ui/typography/Link.tsx
@@ -1623,6 +1652,7 @@ function Link({
   tone = "default",
   external: externalProp,
   className,
+  style,
   children
 }) {
   const isExternal = externalProp != null ? externalProp : href.startsWith("http://") || href.startsWith("https://");
@@ -1638,13 +1668,14 @@ function Link({
       {
         href,
         className: linkClasses,
+        style,
         target: "_blank",
         rel: "noopener noreferrer"
       },
       children
     );
   }
-  return /* @__PURE__ */ import_react47.default.createElement(import_link3.default, { href, className: linkClasses }, children);
+  return /* @__PURE__ */ import_react47.default.createElement(import_link3.default, { href, className: linkClasses, style }, children);
 }
 
 // src/components/ui/marketing/CTA.tsx
@@ -1659,13 +1690,15 @@ function CTA({
   description,
   actions,
   variant = "brand",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ import_react48.default.createElement(
     Surface,
     {
       padding: "lg",
       className: cn(CTA_default.cta, CTA_default[variant], className),
+      style,
       elevation: "lg",
       radius: "lg"
     },
@@ -1745,9 +1778,10 @@ function Hero({
   actions,
   visual,
   align = "center",
-  className
+  className,
+  style
 }) {
-  return /* @__PURE__ */ import_react51.default.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className) }, /* @__PURE__ */ import_react51.default.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ import_react51.default.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ import_react51.default.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ import_react51.default.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ import_react51.default.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ import_react51.default.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ import_react51.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement(Section, { size: "sm", className: cn(Hero_default.hero, Hero_default[align], className), style }, /* @__PURE__ */ import_react51.default.createElement(Container, { maxWidth: "layout" }, /* @__PURE__ */ import_react51.default.createElement("div", { className: Hero_default.layout }, /* @__PURE__ */ import_react51.default.createElement("div", { className: Hero_default.content }, /* @__PURE__ */ import_react51.default.createElement(Stack, { gap: "24", align: align === "center" ? "center" : "start" }, badge && /* @__PURE__ */ import_react51.default.createElement("div", { className: Hero_default.badge }, badge), /* @__PURE__ */ import_react51.default.createElement(Heading, { as: "h1", size: "display", align, weight: titleWeight }, title), /* @__PURE__ */ import_react51.default.createElement(
     Text,
     {
       size: "lg",

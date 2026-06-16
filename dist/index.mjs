@@ -29,7 +29,7 @@ import {
   __objRest,
   __spreadValues,
   cn
-} from "./chunk-6QW7CR4Z.mjs";
+} from "./chunk-R5CBYSB2.mjs";
 
 // src/components/ui/Providers.tsx
 import React2 from "react";
@@ -112,9 +112,10 @@ function Checkbox({
   defaultChecked,
   onCheckedChange,
   className,
-  disabled
+  disabled,
+  style
 }) {
-  return /* @__PURE__ */ React4.createElement("div", { className: cn(Checkbox_default.wrapper, disabled && Checkbox_default.disabled, className) }, /* @__PURE__ */ React4.createElement(
+  return /* @__PURE__ */ React4.createElement("div", { className: cn(Checkbox_default.wrapper, disabled && Checkbox_default.disabled, className), style }, /* @__PURE__ */ React4.createElement(
     CheckboxPrimitive.Root,
     {
       id,
@@ -344,8 +345,8 @@ import React10 from "react";
 var HelperText_default = { "helperText": "imui_HelperText_helperText__YWUutB" };
 
 // src/components/ui/forms/HelperText.tsx
-function HelperText({ className, children }) {
-  return /* @__PURE__ */ React10.createElement("p", { className: cn(HelperText_default.helperText, className) }, children);
+function HelperText({ className, style, children }) {
+  return /* @__PURE__ */ React10.createElement("p", { className: cn(HelperText_default.helperText, className), style }, children);
 }
 
 // css-module-local:D:\Yushrut\PROJECTS\ui\src\components\ui\forms\FormField.module-css
@@ -359,9 +360,10 @@ function FormField({
   error,
   required,
   className,
+  style,
   children
 }) {
-  return /* @__PURE__ */ React11.createElement("div", { className: cn(FormField_default.formField, className) }, label && /* @__PURE__ */ React11.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ React11.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ React11.createElement(HelperText, null, hint) : null);
+  return /* @__PURE__ */ React11.createElement("div", { className: cn(FormField_default.formField, className), style }, label && /* @__PURE__ */ React11.createElement(Label, { htmlFor: id, required }, label), children, error ? /* @__PURE__ */ React11.createElement(ErrorText, null, error) : hint ? /* @__PURE__ */ React11.createElement(HelperText, null, hint) : null);
 }
 
 // src/components/ui/forms/IconButton.tsx
@@ -428,12 +430,14 @@ function RadioGroup({
   onValueChange,
   items,
   orientation = "vertical",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React13.createElement(
     RadioGroupPrimitive.Root,
     {
       className: cn(RadioGroup_default.root, RadioGroup_default[orientation], className),
+      style,
       value,
       defaultValue,
       onValueChange
@@ -515,13 +519,15 @@ function Switch({
   defaultChecked,
   onCheckedChange,
   className,
-  disabled
+  disabled,
+  style
 }) {
   return /* @__PURE__ */ React15.createElement(
     SwitchPrimitive.Root,
     {
       id,
       className: cn(Switch_default.switch, className),
+      style,
       checked,
       defaultChecked,
       onCheckedChange,
@@ -543,9 +549,10 @@ var Breadcrumbs_default = { "breadcrumbs": "imui_Breadcrumbs_breadcrumbs__PI05oR
 function Breadcrumbs({
   items,
   className,
+  style,
   separator = "/"
 }) {
-  return /* @__PURE__ */ React16.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), "aria-label": "Breadcrumb" }, /* @__PURE__ */ React16.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
+  return /* @__PURE__ */ React16.createElement("nav", { className: cn(Breadcrumbs_default.breadcrumbs, className), style, "aria-label": "Breadcrumb" }, /* @__PURE__ */ React16.createElement("ol", { className: Breadcrumbs_default.list }, items.map((item, index) => {
     const isLast = index === items.length - 1;
     return /* @__PURE__ */ React16.createElement("li", { key: item.label, className: Breadcrumbs_default.item }, !isLast && item.href ? /* @__PURE__ */ React16.createElement(NextLink, { href: item.href, className: Breadcrumbs_default.link }, item.label) : /* @__PURE__ */ React16.createElement("span", { className: Breadcrumbs_default.current, "aria-current": "page" }, item.label), !isLast && /* @__PURE__ */ React16.createElement("span", { className: Breadcrumbs_default.separator, "aria-hidden": "true" }, separator));
   })));
@@ -657,9 +664,10 @@ function Navbar({
   links,
   actions,
   className,
+  style,
   sticky = true
 }) {
-  return /* @__PURE__ */ React20.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className) }, /* @__PURE__ */ React20.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ React20.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ React20.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ React20.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ React20.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ React20.createElement(
+  return /* @__PURE__ */ React20.createElement("header", { className: cn(Navbar_default.navbar, sticky && Navbar_default.sticky, className), style }, /* @__PURE__ */ React20.createElement("div", { className: "wrap", style: { width: "100%", height: "100%" } }, /* @__PURE__ */ React20.createElement(Flex, { align: "center", justify: "between", className: Navbar_default.flex }, /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.brand }, brand), /* @__PURE__ */ React20.createElement("nav", { className: Navbar_default.desktopNav }, /* @__PURE__ */ React20.createElement(Flex, { gap: "24", align: "center" }, links.map((link) => /* @__PURE__ */ React20.createElement(NavLink, { key: link.href, href: link.href }, link.label)))), /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.rightSection }, actions && /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.actions }, actions), /* @__PURE__ */ React20.createElement("div", { className: Navbar_default.mobileNav }, /* @__PURE__ */ React20.createElement(
     MobileMenu,
     {
       trigger: /* @__PURE__ */ React20.createElement(
@@ -687,7 +695,8 @@ function Pagination({
   currentPage,
   totalPages,
   onPageChange,
-  className
+  className,
+  style
 }) {
   const canGoPrev = currentPage > 1;
   const canGoNext = currentPage < totalPages;
@@ -695,6 +704,7 @@ function Pagination({
     "nav",
     {
       className: cn(Pagination_default.pagination, className),
+      style,
       "aria-label": "Pagination"
     },
     /* @__PURE__ */ React21.createElement(
@@ -736,7 +746,8 @@ function Tabs({
   value,
   onValueChange,
   items,
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React22.createElement(
     TabsPrimitive.Root,
@@ -744,7 +755,8 @@ function Tabs({
       defaultValue,
       value,
       onValueChange,
-      className: cn(className)
+      className: cn(className),
+      style
     },
     /* @__PURE__ */ React22.createElement(TabsPrimitive.List, { className: Tabs_default.list }, items.map((item) => /* @__PURE__ */ React22.createElement(
       TabsPrimitive.Trigger,
@@ -779,14 +791,16 @@ function Accordion({
   items,
   type = "single",
   collapsible = true,
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React23.createElement(
     AccordionPrimitive.Root,
     {
       type,
       collapsible,
-      className: cn(Accordion_default.root, className)
+      className: cn(Accordion_default.root, className),
+      style
     },
     items.map((item) => /* @__PURE__ */ React23.createElement(
       AccordionPrimitive.Item,
@@ -828,9 +842,10 @@ function EmptyState({
   title,
   description,
   action,
-  className
+  className,
+  style
 }) {
-  return /* @__PURE__ */ React24.createElement("div", { className: cn(EmptyState_default.emptyState, className) }, /* @__PURE__ */ React24.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ React24.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ React24.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React24.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ React24.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ React24.createElement("div", { className: EmptyState_default.action }, action)));
+  return /* @__PURE__ */ React24.createElement("div", { className: cn(EmptyState_default.emptyState, className), style }, /* @__PURE__ */ React24.createElement(Stack, { gap: "16", align: "center" }, icon && /* @__PURE__ */ React24.createElement("div", { className: EmptyState_default.icon }, icon), /* @__PURE__ */ React24.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React24.createElement(Heading, { as: "h3", size: "lg", align: "center" }, title), description && /* @__PURE__ */ React24.createElement(Text, { tone: "muted", align: "center", className: EmptyState_default.description }, description)), action && /* @__PURE__ */ React24.createElement("div", { className: EmptyState_default.action }, action)));
 }
 
 // src/components/ui/data/Skeleton.tsx
@@ -877,7 +892,8 @@ function StatCard({
   value,
   note,
   variant = "neutral",
-  className
+  className,
+  style
 }) {
   return /* @__PURE__ */ React26.createElement(
     Surface,
@@ -885,7 +901,8 @@ function StatCard({
       padding: "lg",
       elevation: "sm",
       radius: "lg",
-      className: cn(StatCard_default.statCard, StatCard_default[`variant-${variant}`], className)
+      className: cn(StatCard_default.statCard, StatCard_default[`variant-${variant}`], className),
+      style
     },
     /* @__PURE__ */ React26.createElement(Stack, { gap: "8", align: "center" }, /* @__PURE__ */ React26.createElement(Text, { size: "sm", tone: "muted", className: StatCard_default.label }, label), /* @__PURE__ */ React26.createElement(Heading, { as: "h3", size: "xl", className: StatCard_default.value }, value), note && /* @__PURE__ */ React26.createElement(Text, { size: "xs", tone: "muted", className: StatCard_default.note }, note))
   );
@@ -902,9 +919,10 @@ function Table({
   headers,
   rows,
   className,
+  style,
   striped = false
 }) {
-  return /* @__PURE__ */ React27.createElement("div", { className: cn(Table_default.wrapper, className) }, /* @__PURE__ */ React27.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ React27.createElement("thead", null, /* @__PURE__ */ React27.createElement("tr", null, headers.map((header) => /* @__PURE__ */ React27.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ React27.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ React27.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ React27.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
+  return /* @__PURE__ */ React27.createElement("div", { className: cn(Table_default.wrapper, className), style }, /* @__PURE__ */ React27.createElement("table", { className: cn(Table_default.table, striped && Table_default.striped) }, /* @__PURE__ */ React27.createElement("thead", null, /* @__PURE__ */ React27.createElement("tr", null, headers.map((header) => /* @__PURE__ */ React27.createElement("th", { key: header, className: Table_default.th }, header)))), /* @__PURE__ */ React27.createElement("tbody", null, rows.map((row, rowIndex) => /* @__PURE__ */ React27.createElement("tr", { key: rowIndex, className: Table_default.tr }, row.map((cell, cellIndex) => /* @__PURE__ */ React27.createElement("td", { key: cellIndex, className: Table_default.td }, cell)))))));
 }
 
 // src/components/ui/overlays/Dialog.tsx

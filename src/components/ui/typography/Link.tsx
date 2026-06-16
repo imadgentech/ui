@@ -32,6 +32,8 @@ export interface LinkProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -41,7 +43,7 @@ export interface LinkProps {
 /**
  * Link component that wraps Next.js Link for internal navigation
  * and <a> for external links. Includes focus-visible styling.
- * 
+ *
  * @example
  * <Link href="/about">About Us</Link>
  * <Link href="https://example.com" external>External Site</Link>
@@ -53,9 +55,9 @@ export function Link({
     tone = 'default',
     external: externalProp,
     className,
+    style,
     children,
 }: LinkProps) {
-    // Auto-detect external links
     const isExternal = externalProp ?? (href.startsWith('http://') || href.startsWith('https://'));
 
     const linkClasses = cn(
@@ -70,6 +72,7 @@ export function Link({
             <a
                 href={href}
                 className={linkClasses}
+                style={style}
                 target="_blank"
                 rel="noopener noreferrer"
             >
@@ -79,7 +82,7 @@ export function Link({
     }
 
     return (
-        <NextLink href={href} className={linkClasses}>
+        <NextLink href={href} className={linkClasses} style={style}>
             {children}
         </NextLink>
     );

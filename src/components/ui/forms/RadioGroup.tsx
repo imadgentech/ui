@@ -41,6 +41,8 @@ export interface RadioGroupProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -53,10 +55,12 @@ export function RadioGroup({
     items,
     orientation = 'vertical',
     className,
+    style,
 }: RadioGroupProps) {
     return (
         <RadioGroupPrimitive.Root
             className={cn(styles.root, styles[orientation], className)}
+            style={style}
             value={value}
             defaultValue={defaultValue}
             onValueChange={onValueChange}

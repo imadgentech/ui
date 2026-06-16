@@ -14,6 +14,8 @@ export interface ContainerProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -22,7 +24,7 @@ export interface ContainerProps {
 
 /**
  * Container component for constraining content width with responsive padding.
- * 
+ *
  * @example
  * <Container maxWidth="md">
  *   <Heading>Contained Content</Heading>
@@ -31,10 +33,11 @@ export interface ContainerProps {
 export function Container({
     maxWidth = 'layout',
     className,
+    style,
     children,
 }: ContainerProps) {
     return (
-        <div className={cn(styles.container, styles[`max-${maxWidth}`], className)}>
+        <div className={cn(styles.container, styles[`max-${maxWidth}`], className)} style={style}>
             {children}
         </div>
     );

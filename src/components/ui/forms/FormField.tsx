@@ -36,6 +36,8 @@ export interface FormFieldProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * The form control (Input, Select, etc.)
      */
@@ -52,10 +54,11 @@ export function FormField({
     error,
     required,
     className,
+    style,
     children,
 }: FormFieldProps) {
     return (
-        <div className={cn(styles.formField, className)}>
+        <div className={cn(styles.formField, className)} style={style}>
             {label && (
                 <Label htmlFor={id} required={required}>
                     {label}

@@ -38,6 +38,8 @@ export interface GridItemProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content
      */
@@ -46,7 +48,7 @@ export interface GridItemProps {
 
 /**
  * Grid item with responsive span and start position.
- * 
+ *
  * @example
  * <GridItem span={{ base: 12, md: 6, lg: 4 }}>
  *   Content
@@ -56,6 +58,7 @@ export function GridItem({
     span,
     start,
     className,
+    style,
     children,
 }: GridItemProps) {
     return (
@@ -65,6 +68,7 @@ export function GridItem({
                 getResponsiveClasses(start, 'start'),
                 className
             )}
+            style={style}
         >
             {children}
         </div>

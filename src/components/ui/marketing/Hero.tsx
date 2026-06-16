@@ -48,6 +48,8 @@ export interface HeroProps {
      * Additional CSS classes
      */
     className?: string;
+
+    style?: React.CSSProperties;
 }
 
 /**
@@ -62,9 +64,10 @@ export function Hero({
     visual,
     align = 'center',
     className,
+    style,
 }: HeroProps) {
     return (
-        <Section size="sm" className={cn(styles.hero, styles[align], className)}>
+        <Section size="sm" className={cn(styles.hero, styles[align], className)} style={style}>
             <Container maxWidth="layout">
                 <div className={styles.layout}>
                     <div className={styles.content}>

@@ -14,6 +14,8 @@ export interface AspectRatioProps {
      */
     className?: string;
 
+    style?: React.CSSProperties;
+
     /**
      * Content to maintain aspect ratio
      */
@@ -26,12 +28,13 @@ export interface AspectRatioProps {
 export function AspectRatio({
     ratio = '1/1',
     className,
+    style,
     children,
 }: AspectRatioProps) {
     return (
         <div
             className={cn(styles.aspectRatio, className)}
-            style={{ aspectRatio: ratio } as React.CSSProperties}
+            style={{ aspectRatio: ratio, ...style } as React.CSSProperties}
         >
             {children}
         </div>
