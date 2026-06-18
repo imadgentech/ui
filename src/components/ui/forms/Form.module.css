@@ -1,8 +1,8 @@
 .form {
-    border-radius: var(--radius2);
-    background: var(--card);
-    border: 1px solid var(--cardBorder);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-xl);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    box-shadow: var(--shadow-md);
     padding: 18px;
     display: flex;
     flex-direction: column;
@@ -33,9 +33,9 @@
 .form input {
     width: 100%;
     font-family: inherit;
-    color: var(--text);
-    background: var(--btnBg);
-    border: 1px solid var(--btnBorder);
+    color: var(--color-text-default);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
     border-radius: 20px;
     padding: 16px 16px;
     outline: none;
@@ -50,14 +50,14 @@
 
 .form textarea::placeholder,
 .form input::placeholder {
-    color: var(--muted2);
+    color: var(--color-text-subtle);
     font-weight: 400;
 }
 
 .form textarea:focus,
 .form input:focus {
-    border-color: var(--orange);
-    background: var(--btnHover);
+    border-color: var(--color-brand-primary);
+    background: var(--color-bg-surface-hover);
 }
 
 .actions {

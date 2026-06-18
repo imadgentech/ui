@@ -20,6 +20,7 @@
       "require": "./dist/server.js"
     },
     "./styles.css": "./dist/index.css",
+    "./dist/index.css": "./dist/index.css",
     "./server.css": "./dist/server.css",
     "./tokens.css": "./src/tokens/tokens.css"
   },

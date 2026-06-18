@@ -66,14 +66,20 @@
   /* 12px */
   --space-16: 1rem;
   /* 16px */
+  --space-20: 1.25rem;
+  /* 20px */
   --space-24: 1.5rem;
   /* 24px */
   --space-32: 2rem;
   /* 32px */
+  --space-40: 2.5rem;
+  /* 40px */
   --space-48: 3rem;
   /* 48px */
   --space-64: 4rem;
   /* 64px */
+  --space-80: 5rem;
+  /* 80px */
 
   /* ============================================
      BORDER RADIUS
@@ -104,6 +110,7 @@
   --z-tooltip: 400;
   --z-navbar: 1000;
   --z-sticky: 1000;
+  --z-overlay: 1050;
   --z-modal: 1100;
   --z-toast: 1200;
 
@@ -165,6 +172,7 @@
   --tracking-tight: -0.02em;
   --tracking-normal: 0;
   --tracking-wide: 0.025em;
+  --tracking-widest: 0.1em;
 
   /* ============================================
      BREAKPOINTS (reference only)
@@ -178,6 +186,12 @@
   /* 1024px */
   --breakpoint-xl: 80rem;
   /* 1280px */
+
+  /* ============================================
+     MISC / EFFECTS
+     ============================================ */
+  /* Noise texture as a token so CSS modules bundlers can't corrupt the data URL */
+  --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.33%200.33%200.33%200%200%200.33%200.33%200.33%200%200%200.33%200.33%200.33%200%200%200%200%200%200.15%200'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ============================================

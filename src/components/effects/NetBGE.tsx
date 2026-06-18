@@ -24,8 +24,8 @@ export default function NetBGE() {
 
         const rnd = (a: number, b: number) => a + Math.random() * (b - a)
 
-        const getPurple = () => getComputedStyle(document.documentElement).getPropertyValue('--orange').trim() || '#ff6a00'
-        const getOrange2 = () => getComputedStyle(document.documentElement).getPropertyValue('--orange2').trim() || '#ff8a1f'
+        const getPurple = () => getComputedStyle(document.documentElement).getPropertyValue('--color-brand-primary').trim() || '#ff6a00'
+        const getOrange2 = () => getComputedStyle(document.documentElement).getPropertyValue('--color-brand-secondary').trim() || '#ff8a1f'
 
         const resize = () => {
             const rect = c.getBoundingClientRect()
