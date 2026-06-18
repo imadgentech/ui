@@ -26,13 +26,17 @@ const maskGlobalSelectors = (css: string) => {
   const globals: string[] = []
 
   return {
+    // Token starts with ':' (not a word char) so the class-name regex (/\.([a-zA-Z][\w-]*)/)
+    // stops at the preceding class name instead of absorbing the token into it.
+    // e.g. '.navLink:global(.active)' → '.navLink:IMUI_GLOBAL_0' — navLink is captured
+    // correctly, not 'navLink__IMUI_GLOBAL_0__' as one mangled identifier.
     css: css.replace(/:global\(([^)]*)\)/g, (_, selector: string) => {
-      const token = `__IMUI_GLOBAL_${globals.length}__`
+      const token = `:IMUI_GLOBAL_${globals.length}`
       globals.push(selector)
       return token
     }),
     restore(value: string) {
-      return value.replace(/__IMUI_GLOBAL_(\d+)__/g, (_, index: string) => globals[Number(index)])
+      return value.replace(/:IMUI_GLOBAL_(\d+)/g, (_, index: string) => globals[Number(index)])
     },
   }
 }
