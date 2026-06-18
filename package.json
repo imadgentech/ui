@@ -1,6 +1,6 @@
 {
   "name": "@imadgentech/ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "imadgen shared UI component library",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
