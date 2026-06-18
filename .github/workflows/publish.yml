@@ -6,17 +6,16 @@ on:
 
 jobs:
   publish:
-    name: Bump version, build & publish to GitHub Packages
+    name: Publish to GitHub Packages
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write   # needed to push the version-bump commit + tag
-      packages: write   # needed to publish to GitHub Packages
+      contents: write
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
         with:
-          # Use a PAT or the default token with write access so the push succeeds
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v4
@@ -35,15 +34,16 @@ jobs:
       - name: Smoke tests
         run: npm test
 
-      - name: Configure git for version bump commit
+      - name: Configure git
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Bump patch version
-        run: npm version patch -m "chore: release v%s [skip ci]"
+        run: |
+          npm version patch -m "chore: release v%s [skip ci]"
 
-      - name: Push version bump commit and tag
+      - name: Push version bump
         run: git push --follow-tags
 
       - name: Build
