@@ -1,9 +1,10 @@
 node_modules/
 .next/
+dist/
 .npmrc
 *.tsbuildinfo
 .env
 .env.local
 .claude/
 .agents/
-ui-package-issues.md
+UI_PACKAGE_ISSUES.md
