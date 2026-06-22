@@ -20,7 +20,9 @@ export default function NetBGE() {
         const NODE_ALPHA = 0.10
         const THICKNESS = 1
 
-        const nodes: any[] = []
+        interface Node { x: number; y: number; vx: number; vy: number; phase: number }
+
+        const nodes: Node[] = []
 
         const rnd = (a: number, b: number) => a + Math.random() * (b - a)
 
@@ -48,7 +50,7 @@ export default function NetBGE() {
             }
         }
 
-        const wrap = (n: any) => {
+        const wrap = (n: Node) => {
             const pad = 24
             if (n.x < -pad) n.x = w + pad
             if (n.x > w + pad) n.x = -pad

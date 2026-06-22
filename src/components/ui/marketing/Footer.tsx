@@ -1,6 +1,4 @@
 import React from 'react';
-import { Container } from '../layout/Container';
-import { Text } from '../typography/Text';
 import styles from './Footer.module.css';
 
 export interface FooterSocial {

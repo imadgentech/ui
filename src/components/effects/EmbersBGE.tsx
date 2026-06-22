@@ -12,9 +12,11 @@ export default function EmbersBGE() {
         const ctx = c.getContext('2d')
         if (!ctx) return
 
+        interface Particle { x: number; y: number; r: number; vx: number; vy: number; a: number }
+
         let w: number, h: number, dpr: number
         const N = 90
-        const pts: any[] = []
+        const pts: Particle[] = []
 
         const rnd = (a: number, b: number) => a + Math.random() * (b - a)
 

@@ -62,6 +62,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     /**
      * Allow any other props (e.g. href for Link)
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 

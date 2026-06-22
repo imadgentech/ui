@@ -100,6 +100,7 @@ import WaveformBackground from '../components/effects/WaveformBackground';
 
 describe('Utility', () => {
   it('cn merges class names', () => {
+    // eslint-disable-next-line no-constant-binary-expression
     const result = cn('a', false && 'b', 'c');
     expect(result).toBe('a c');
   });

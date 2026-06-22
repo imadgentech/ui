@@ -2,7 +2,6 @@
 
 import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { cn } from '../../../lib/cn';
 import styles from './Dialog.module.css';
 
 export interface DialogProps {

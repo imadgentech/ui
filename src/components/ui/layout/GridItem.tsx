@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import { cn } from '../../../lib/cn';
-import styles from './GridItem.module.css';
 
 type ResponsiveValue<T> = T | { base?: T; md?: T; lg?: T };
 

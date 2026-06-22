@@ -35,7 +35,7 @@ export function Navbar({
                     <nav className={styles.desktopNav}>
                         <Flex gap="24" align="center">
                             {links.map((link) => (
-                                <NavLink key={link.href} href={link.href}>
+                                <NavLink key={link.label} href={link.href}>
                                     {link.label}
                                 </NavLink>
                             ))}

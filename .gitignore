@@ -1,10 +1,16 @@
+# Local development and build artifacts
 node_modules/
 .next/
+out/
 dist/
+
+# Local config and caches
 .npmrc
 *.tsbuildinfo
 .env
 .env.local
+
+# Workspace and tool directories
 .claude/
 .agents/
 UI_PACKAGE_ISSUES.md

@@ -5,11 +5,14 @@ import { useTheme } from 'next-themes'
 
 export default function LightTheme() {
     const [mounted, setMounted] = useState(false)
-    const { theme, setTheme, resolvedTheme } = useTheme()
+    const { setTheme, resolvedTheme } = useTheme()
 
-    // useEffect only runs on the client, so now we can safely show the UI
     useEffect(() => {
-        setMounted(true)
+        const frame = requestAnimationFrame(() => {
+            setMounted(true)
+        })
+
+        return () => cancelAnimationFrame(frame)
     }, [])
 
     if (!mounted) {

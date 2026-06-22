@@ -46,7 +46,6 @@ export interface ChatPageProps {
 }
 
 export function ChatPage({
-  initialMessages,
   className,
   onSendMessage,
   onClose,
@@ -82,14 +81,14 @@ export function ChatPage({
 
 
   // Helper function to extract message content
-  const getMessageContent = (msg: any): string => {
+  const getMessageContent = (msg: UIMessage): string => {
     if (msg.parts && Array.isArray(msg.parts)) {
-      return msg.parts
-        .filter((part: any) => part.type === 'text')
-        .map((part: any) => part.text)
+      return (msg.parts as Array<{ type: string; text?: string }>)
+        .filter((part) => part.type === 'text')
+        .map((part) => part.text ?? '')
         .join('');
     }
-    return msg.content || '';
+    return (msg as unknown as { content?: string }).content ?? '';
   };
 
   // Auto-scroll to bottom when messages change
@@ -104,19 +103,19 @@ export function ChatPage({
     if (!onSessionCreate || hasCreatedSession.current) return;
     hasCreatedSession.current = true;
 
-    onSessionCreate(sessionId, { started_at: new Date().toISOString() }).catch((err: any) => {
+    onSessionCreate(sessionId, { started_at: new Date().toISOString() }).catch((err: unknown) => {
       console.error('[ChatPage] Session creation error:', err);
-      setError(`Session creation failed: ${err.message || 'Unknown error'}`);
+      setError(`Session creation failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
       reportFailure();
     });
-  }, [sessionId, onSessionCreate]);
+  }, [sessionId, onSessionCreate, reportFailure]);
 
   const buildConversationPayload = () => ({
     session_id: sessionId,
     messages: messages.map((msg) => ({
       role: (msg.role === 'assistant' ? 'assistant' : 'user') as 'user' | 'assistant',
       content: getMessageContent(msg),
-      timestamp: (msg as any).timestamp || new Date().toISOString(),
+      timestamp: (msg as Message).timestamp || new Date().toISOString(),
     })),
   });
 
@@ -128,9 +127,9 @@ export function ChatPage({
 
     try {
       await onSaveConversation(buildConversationPayload());
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('[ChatPage] Failed to save conversation:', err);
-      setError(`Failed to save: ${err.message || 'Unknown error'}`);
+      setError(`Failed to save: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setIsSaving(false);
     }
@@ -254,8 +253,8 @@ export function ChatPage({
                 </Text>
               </div>
               <Text size="xs" tone="muted" className={styles.timestamp}>
-                {(message as any).timestamp
-                  ? new Date((message as any).timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                {(message as Message).timestamp
+                  ? new Date((message as Message).timestamp as string).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                   : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                 }
               </Text>
