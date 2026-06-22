@@ -1,0 +1,43 @@
+.form {
+    width: 100%;
+}
+
+.forgotRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: calc(var(--space-8) * -1);
+}
+
+.textLink {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-brand-primary);
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.textLink:hover:not(:disabled) {
+    color: var(--color-brand-secondary);
+    text-decoration: underline;
+}
+
+.textLink:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.textLink:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.footer {
+    text-align: center;
+    padding-top: var(--space-16);
+    border-top: 1px solid var(--color-border-subtle);
+}

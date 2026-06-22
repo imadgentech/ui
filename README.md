@@ -419,6 +419,71 @@ Higher-level form with declarative field definitions and mouse-tracking gradient
 
 Requires `CursorGlow` to be mounted globally for the gradient effect.
 
+#### LoginForm
+
+Combined login and signup form with an internal mode toggle. All auth calls happen in your handlers — no SDK is imported.
+
+```tsx
+import { LoginForm } from '@imadgentech/ui';
+
+<LoginForm
+  onLogin={async ({ email, password }) => {
+    await signInWithEmailAndPassword(auth, email, password);
+  }}
+  onSignup={async ({ firstName, lastName, companyName, email, password }) => {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    await createUserProfile(cred.user.uid, { firstName, lastName, companyName });
+  }}
+  onForgotPassword={(email) => {
+    sendPasswordResetEmail(auth, email);
+  }}
+  loading={isSubmitting}
+  error={authError}
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `onLogin` | `(data: { email, password }) => Promise<void> \| void` | **Required** | Called on login submit |
+| `onSignup` | `(data: { firstName, lastName, companyName, email, password }) => Promise<void> \| void` | **Required** | Called on signup submit |
+| `onForgotPassword` | `(email: string) => void` | **Required** | Called when "Forgot password?" is clicked; receives current email field value |
+| `loading` | `boolean` | `false` | Disables inputs and shows spinner on submit button |
+| `error` | `string \| null` | — | Error message rendered below the submit button |
+| `defaultMode` | `'login' \| 'signup'` | `'login'` | Initial mode |
+
+**Login mode** renders: email, password, "Forgot password?" link, "Sign In" button, "Sign up" toggle at the bottom.
+
+**Signup mode** renders: first name + last name (side by side), company name, email, password, confirm password (with client-side match validation), "Create Account" button, "Sign in" toggle at the bottom.
+
+#### OtpForm
+
+6-digit OTP verification with individual input boxes, auto-advance, backspace navigation, and paste support.
+
+```tsx
+import { OtpForm } from '@imadgentech/ui';
+
+<OtpForm
+  onSubmit={async (otp) => {
+    await verifyOtp(otp);
+  }}
+  onResend={async () => {
+    await resendCode();
+  }}
+  loading={isVerifying}
+  error={otpError}
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `onSubmit` | `(otp: string) => Promise<void> \| void` | **Required** | Called with the joined digit string (e.g. `"123456"`) when Verify is clicked |
+| `onResend` | `() => Promise<void> \| void` | **Required** | Called when "Resend code" is clicked |
+| `loading` | `boolean` | `false` | Disables inputs and shows spinner |
+| `error` | `string \| null` | — | Error message rendered below the boxes |
+| `length` | `number` | `6` | Number of digit boxes |
+
+Verify button is disabled until all boxes are filled. Paste a full code to auto-fill all boxes.
+
 #### ErrorText / HelperText
 
 Simple wrappers for consistent form feedback text. `ErrorText` renders with `role="alert"`.
@@ -1060,6 +1125,28 @@ function AIChatSection() {
 `ChatProvider` internally calls `useChat` from `@ai-sdk/react`. Your Next.js app must expose an `/api/chat` route (or configure via `useChat`'s `api` option — inject via context if needed).
 
 Auto-disables after 3 consecutive failures to prevent abuse.
+
+#### Authenticated chat (user tiers)
+
+Pass a `getToken` callback to `ChatProvider` to forward an auth token with every message. Your backend reads the token to identify the user tier (visitor / signed-up user / paid client) and applies limits accordingly.
+
+```tsx
+// Authenticated user — token is sent as Authorization: Bearer <token>
+<ChatProvider getToken={() => firebaseUser.getIdToken()}>
+  <ChatPage ... />
+</ChatProvider>
+
+// Visitor (not logged in) — omit getToken entirely
+<ChatProvider>
+  <ChatPage ... />
+</ChatProvider>
+```
+
+`getToken` is called per message, not on mount. Firebase's `getIdToken()` returns a cached in-memory token and only hits the network when the token expires (~1 hour), so there is no added latency in the common case.
+
+| `ChatProvider` prop | Type | Default | Description |
+|---|---|---|---|
+| `getToken` | `() => Promise<string>` | — | Returns the bearer token to attach to each chat message request |
 
 #### ChatPage Props
 

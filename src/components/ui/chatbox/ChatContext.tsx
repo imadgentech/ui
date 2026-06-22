@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useRef, useCallback, useMemo } from 'react';
 import { useChat, UIMessage } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 
 const MAX_FAILURES = 3;
 
@@ -25,7 +26,12 @@ interface ChatContextType {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export function ChatProvider({ children }: { children: React.ReactNode }) {
+export interface ChatProviderProps {
+    children: React.ReactNode;
+    getToken?: () => Promise<string>;
+}
+
+export function ChatProvider({ children, getToken }: ChatProviderProps) {
     const [isChatActive, setIsChatActive] = useState(false);
     const [input, setInput] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
@@ -46,12 +52,27 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         setIsDisabled(false);
     }, []);
 
+    const getTokenRef = useRef(getToken);
+    getTokenRef.current = getToken;
+
+    const transportRef = useRef(
+        getToken
+            ? new DefaultChatTransport({
+                headers: async () => {
+                    const token = await getTokenRef.current!();
+                    return { Authorization: `Bearer ${token}` };
+                },
+            })
+            : undefined
+    );
+
     const {
         messages,
         sendMessage: sdkSendMessage,
         status,
         setMessages
     } = useChat({
+        transport: transportRef.current,
         onError: () => {
             reportFailure();
         },
@@ -71,18 +92,14 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         setInput('');
 
         try {
-            await sdkSendMessage({
-                text: messageText
-            });
+            await sdkSendMessage({ text: messageText });
         } catch (error) {
             console.error('Failed to send message:', error);
         }
     }, [input, isLoading, isDisabled, sdkSendMessage]);
 
     const append = useCallback(async (message: { role: 'user' | 'assistant' | 'system'; content: string }) => {
-        await sdkSendMessage({
-            text: message.content
-        });
+        await sdkSendMessage({ text: message.content });
     }, [sdkSendMessage]);
 
     const value = useMemo(() => ({

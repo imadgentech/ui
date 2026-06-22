@@ -12,6 +12,10 @@ export type { ButtonProps } from './components/ui/forms/Button';
 export { Checkbox } from './components/ui/forms/Checkbox';
 export { ErrorText } from './components/ui/forms/ErrorText';
 export { Form } from './components/ui/forms/Form';
+export { LoginForm } from './components/ui/forms/LoginForm';
+export type { LoginFormProps } from './components/ui/forms/LoginForm';
+export { OtpForm } from './components/ui/forms/OtpForm';
+export type { OtpFormProps } from './components/ui/forms/OtpForm';
 export { FormField } from './components/ui/forms/FormField';
 export { HelperText } from './components/ui/forms/HelperText';
 export { IconButton } from './components/ui/forms/IconButton';
@@ -80,6 +84,7 @@ export { ThemeImage } from './components/ui/marketing/ThemeImage';
 export { ChatPage } from './components/ui/chatbox/ChatPage';
 export type { ChatPageProps, ConversationMessage, Message as ChatMessage } from './components/ui/chatbox/ChatPage';
 export { ChatProvider, useChatContext } from './components/ui/chatbox/ChatContext';
+export type { ChatProviderProps } from './components/ui/chatbox/ChatContext';
 
 // Effects / Backgrounds
 export { CursorGlow } from './components/effects/CursorGlow';
