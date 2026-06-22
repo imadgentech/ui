@@ -14,3 +14,7 @@ dist/
 .claude/
 .agents/
 UI_PACKAGE_ISSUES.md
+
+# Showcase app and static docs (local only)
+app/
+docs/showcase/
