@@ -1169,6 +1169,8 @@ Available: `messages`, `input`, `handleInputChange`, `handleSubmit`, `append`, `
 
 All effects are `'use client'`, render at fixed `z-index: -1`, and have no props. Drop them in a layout and they fill the background.
 
+> **Note:** Effect components expect `React` to be available as a global default import in the consuming project's bundle. This is always the case in Next.js + TypeScript projects.
+
 | Component | Description |
 |---|---|
 | `EmbersBGE` | Floating orange ember particles (canvas) |
