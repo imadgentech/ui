@@ -1,4 +1,6 @@
-﻿import React from 'react';
+﻿'use client';
+
+import React from 'react';
 import { Flex } from '../layout/Flex';
 import { NavLink } from './NavLink';
 import { MobileMenu } from './MobileMenu';

@@ -20,19 +20,17 @@
       "require": "./dist/server.js"
     },
     "./styles.css": "./dist/index.css",
-    "./dist/index.css": "./dist/index.css",
     "./server.css": "./dist/server.css",
-    "./tokens.css": "./src/tokens/tokens.css"
+    "./tokens.css": "./dist/tokens.css"
   },
   "sideEffects": [
     "**/*.css"
   ],
   "files": [
-    "dist",
-    "src/tokens/tokens.css"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node -e \"require('fs').copyFileSync('src/tokens/tokens.css','dist/tokens.css')\"",
     "showcase:dev": "next dev",
     "showcase:build": "next build",
     "showcase:start": "next start",

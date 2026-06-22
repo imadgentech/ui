@@ -134,9 +134,21 @@ const cssModulesPlugin: Plugin = {
 export default defineConfig({
   entry: ['src/index.ts', 'src/server.ts'],
   format: ['esm', 'cjs'],
-  dts: true,
+  dts: { tsconfig: 'tsconfig.build.json' },
   outDir: 'dist',
   clean: true,
   sourcemap: true,
+  external: [
+    'react',
+    'react-dom',
+    'next',
+    'next/link',
+    'next/image',
+    'next/navigation',
+    'next-themes',
+    '@ai-sdk/react',
+    'ai',
+    /^@radix-ui\/.*/,
+  ],
   esbuildPlugins: [cssModulesPlugin],
 })
