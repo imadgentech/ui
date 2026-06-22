@@ -34,8 +34,11 @@
   "scripts": {
     "build": "tsup",
     "type-check": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "lint:fix": "eslint src --fix",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "@ai-sdk/react": ">=3",
@@ -55,20 +58,29 @@
   },
   "devDependencies": {
     "@ai-sdk/react": "^3.0.176",
+    "@eslint/js": "^10.0.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^25.7.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^8.61.1",
+    "@typescript-eslint/parser": "^8.61.1",
     "@vitejs/plugin-react": "^4.3.4",
     "ai": "^6.0.174",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "husky": "^9.1.7",
     "jsdom": "^26.1.0",
+    "lint-staged": "^17.0.8",
     "next": "^15.3.2",
     "next-themes": "^0.4.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tsup": "^8.5.1",
     "typescript": "^5",
+    "typescript-eslint": "^8.61.1",
     "vitest": "^3.2.0"
   },
   "dependencies": {
@@ -88,6 +100,12 @@
     "design-system",
     "imadgen"
   ],
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "tsc --noEmit"
+    ]
+  },
   "license": "UNLICENSED",
   "author": "imadgen"
 }
