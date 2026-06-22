@@ -1258,6 +1258,14 @@ The token file defines the full set of CSS custom properties. To add custom toke
 
 ## Changelog
 
+### v1.0.13 — 2026-06-22
+
+**Fixes (React imports in effect components):**
+- Fixed `ReferenceError: React is not defined` in compiled ESM/CJS output from background effect components
+- `ImBgAurora.tsx` — added missing `import React from 'react'`
+- `LightTheme.tsx` — updated import to include React namespace: `import React, { useState, useEffect } from 'react'`
+- Both components were using JSX without explicitly importing React, causing compiled `React.createElement` calls to have no definition. This affected Next.js apps consuming the package when these components were rendered (especially server-side or in RSC contexts where React wasn't bound in the bundle).
+
 ### v1.0.6 — 2026-06-18
 
 **Fixes (token system):**
