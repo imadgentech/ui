@@ -84,7 +84,6 @@ export { ThemeImage } from './components/ui/marketing/ThemeImage';
 export { ChatPage } from './components/ui/chatbox/ChatPage';
 export type { ChatPageProps, ConversationMessage, Message as ChatMessage } from './components/ui/chatbox/ChatPage';
 export { ChatProvider, useChatContext } from './components/ui/chatbox/ChatContext';
-export type { ChatProviderProps } from './components/ui/chatbox/ChatContext';
 
 // Effects / Backgrounds
 export { CursorGlow } from './components/effects/CursorGlow';

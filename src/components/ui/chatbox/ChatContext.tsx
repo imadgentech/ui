@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useRef, useCallback, useMemo } from 'react';
 import { useChat, UIMessage } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
 
 const MAX_FAILURES = 3;
 
@@ -26,12 +25,7 @@ interface ChatContextType {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export interface ChatProviderProps {
-    children: React.ReactNode;
-    getToken?: () => Promise<string>;
-}
-
-export function ChatProvider({ children, getToken }: ChatProviderProps) {
+export function ChatProvider({ children }: { children: React.ReactNode }) {
     const [isChatActive, setIsChatActive] = useState(false);
     const [input, setInput] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
@@ -52,27 +46,12 @@ export function ChatProvider({ children, getToken }: ChatProviderProps) {
         setIsDisabled(false);
     }, []);
 
-    const getTokenRef = useRef(getToken);
-    getTokenRef.current = getToken;
-
-    const transportRef = useRef(
-        getToken
-            ? new DefaultChatTransport({
-                headers: async () => {
-                    const token = await getTokenRef.current!();
-                    return { Authorization: `Bearer ${token}` };
-                },
-            })
-            : undefined
-    );
-
     const {
         messages,
         sendMessage: sdkSendMessage,
         status,
         setMessages
     } = useChat({
-        transport: transportRef.current,
         onError: () => {
             reportFailure();
         },

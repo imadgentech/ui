@@ -1126,27 +1126,6 @@ function AIChatSection() {
 
 Auto-disables after 3 consecutive failures to prevent abuse.
 
-#### Authenticated chat (user tiers)
-
-Pass a `getToken` callback to `ChatProvider` to forward an auth token with every message. Your backend reads the token to identify the user tier (visitor / signed-up user / paid client) and applies limits accordingly.
-
-```tsx
-// Authenticated user — token is sent as Authorization: Bearer <token>
-<ChatProvider getToken={() => firebaseUser.getIdToken()}>
-  <ChatPage ... />
-</ChatProvider>
-
-// Visitor (not logged in) — omit getToken entirely
-<ChatProvider>
-  <ChatPage ... />
-</ChatProvider>
-```
-
-`getToken` is called per message, not on mount. Firebase's `getIdToken()` returns a cached in-memory token and only hits the network when the token expires (~1 hour), so there is no added latency in the common case.
-
-| `ChatProvider` prop | Type | Default | Description |
-|---|---|---|---|
-| `getToken` | `() => Promise<string>` | — | Returns the bearer token to attach to each chat message request |
 
 #### ChatPage Props
 
