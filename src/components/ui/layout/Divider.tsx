@@ -1,3 +1,4 @@
+import React from 'react';
 import { CSSProperties } from 'react';
 import styles from './Divider.module.css';
 
