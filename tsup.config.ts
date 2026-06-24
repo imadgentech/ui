@@ -131,12 +131,10 @@ const cssModulesPlugin: Plugin = {
   },
 }
 
-export default defineConfig({
-  entry: ['src/index.ts', 'src/server.ts'],
-  format: ['esm', 'cjs'],
+const shared = {
+  format: ['esm', 'cjs'] as const,
   dts: { tsconfig: 'tsconfig.build.json' },
   outDir: 'dist',
-  clean: true,
   sourcemap: true,
   external: [
     'react',
@@ -151,4 +149,18 @@ export default defineConfig({
     /^@radix-ui\/.*/,
   ],
   esbuildPlugins: [cssModulesPlugin],
-})
+}
+
+export default defineConfig([
+  {
+    ...shared,
+    entry: ['src/index.ts', 'src/chat.ts'],
+    banner: { js: "'use client';" },
+    clean: true,
+  },
+  {
+    ...shared,
+    entry: ['src/server.ts'],
+    clean: false,
+  },
+])

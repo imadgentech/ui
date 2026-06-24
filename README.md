@@ -42,14 +42,26 @@ npm install @imadgentech/ui
 
 Peer dependencies required:
 
-| Peer | Version |
-|---|---|
-| `react` | `>=18` |
-| `react-dom` | `>=18` |
-| `next` | `>=14` |
-| `next-themes` | `>=0.4` |
-| `@ai-sdk/react` | `>=3` *(optional — only needed for ChatPage)* |
-| `ai` | `>=6` *(optional — only needed for ChatPage)* |
+| Peer | Version | Required? |
+|---|---|---|
+| `react` | `>=18` | Always |
+| `react-dom` | `>=18` | Always |
+| `next` | `>=14` | Always |
+| `next-themes` | `>=0.4` | Always |
+| `@ai-sdk/react` | `>=3` | Only if using `@imadgentech/ui/chat` |
+| `ai` | `>=6` | Only if using `@imadgentech/ui/chat` |
+
+**If you are not using the AI chat widget**, you do not need `@ai-sdk/react` or `ai`. These packages (and their transitive dependency `swr`) are isolated to the `@imadgentech/ui/chat` entry and will not be pulled into your bundle otherwise.
+
+### Entry points
+
+| Import path | Contents | `'use client'`? |
+|---|---|---|
+| `@imadgentech/ui` | All interactive UI components | Yes (bundle-level) |
+| `@imadgentech/ui/chat` | ChatPage, ChatProvider, useChatContext | Yes (bundle-level) |
+| `@imadgentech/ui/server` | Layout, typography, marketing — server-safe | No |
+
+> The main and chat bundles both carry a top-level `'use client'` directive, so importing them directly inside a React Server Component is safe — Next.js will treat them as a client boundary automatically.
 
 ---
 
@@ -1100,9 +1112,15 @@ Renders two images — one for light, one for dark — with no flash or layout s
 
 #### Setup
 
+Install optional peer deps first:
+
+```bash
+npm install @ai-sdk/react ai
+```
+
 ```tsx
-// In your page or layout
-import { ChatProvider, ChatPage } from '@imadgentech/ui';
+// In your page or layout — import from the /chat entry, not the main entry
+import { ChatProvider, ChatPage } from '@imadgentech/ui/chat';
 
 function AIChatSection() {
   return (
@@ -1148,7 +1166,7 @@ Auto-disables after 3 consecutive failures to prevent abuse.
 #### Exported Types
 
 ```ts
-import type { ChatPageProps, ConversationMessage, ChatMessage } from '@imadgentech/ui';
+import type { ChatPageProps, ConversationMessage, ChatMessage } from '@imadgentech/ui/chat';
 ```
 
 #### useChatContext
@@ -1156,7 +1174,7 @@ import type { ChatPageProps, ConversationMessage, ChatMessage } from '@imadgente
 If you need to control the chat from a sibling component:
 
 ```tsx
-import { useChatContext } from '@imadgentech/ui';
+import { useChatContext } from '@imadgentech/ui/chat';
 
 const { messages, addToast, resetChat, isDisabled } = useChatContext();
 ```
@@ -1257,6 +1275,13 @@ The token file defines the full set of CSS custom properties. To add custom toke
 ---
 
 ## Changelog
+
+### v1.0.17
+
+**Fixes (RSC / webpack compatibility):**
+- Split `ChatPage`, `ChatProvider`, and `useChatContext` into a dedicated `@imadgentech/ui/chat` entry — apps that don't use chat no longer pull in `@ai-sdk/react`, `ai`, or `swr`
+- Added top-level `'use client'` directive to the main and chat bundle outputs — prevents `createContext` errors when importing from React Server Components in Next.js
+- Added `./chat` to `package.json` exports map
 
 ### v1.0.13 — 2026-06-22
 

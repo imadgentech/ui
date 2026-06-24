@@ -14,6 +14,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./chat": {
+      "types": "./dist/chat.d.ts",
+      "import": "./dist/chat.mjs",
+      "require": "./dist/chat.js"
+    },
     "./server": {
       "types": "./dist/server.d.ts",
       "import": "./dist/server.mjs",

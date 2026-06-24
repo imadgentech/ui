@@ -78,11 +78,6 @@ export { PricingCard } from './components/ui/marketing/PricingCard';
 export { Testimonial } from './components/ui/marketing/Testimonial';
 export { ThemeImage } from './components/ui/marketing/ThemeImage';
 
-// Chatbox
-export { ChatPage } from './components/ui/chatbox/ChatPage';
-export type { ChatPageProps, ConversationMessage, Message as ChatMessage } from './components/ui/chatbox/ChatPage';
-export { ChatProvider, useChatContext } from './components/ui/chatbox/ChatContext';
-
 // Effects / Backgrounds
 export { CursorGlow } from './components/effects/CursorGlow';
 export { default as EmbersBGE } from './components/effects/EmbersBGE';
