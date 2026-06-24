@@ -5,6 +5,10 @@
 // Utility
 export { cn } from './lib/cn';
 
+// Navigation (server-safe subset)
+export { Breadcrumbs } from './components/ui/navigation/Breadcrumbs';
+export type { BreadcrumbItem, BreadcrumbsProps } from './components/ui/navigation/Breadcrumbs';
+
 // Layout
 export { AspectRatio } from './components/ui/layout/AspectRatio';
 export { Cluster } from './components/ui/layout/Cluster';
