@@ -53,6 +53,14 @@
   /* Focus ring */
   --color-focus-ring: rgba(255, 106, 0, 0.4);
 
+  /* Short aliases (fallbacks to the canonical tokens above — CSS custom
+     properties fail silently on typos, these cover the "obvious" shorter
+     names consumers tend to reach for from memory) */
+  --color-brand: var(--color-brand-primary);
+  --color-text: var(--color-text-default);
+  --color-border: var(--color-border-default);
+  --color-danger: var(--color-error);
+
   /* ============================================
      SPACING SCALE (8px base)
      ============================================ */
@@ -160,6 +168,7 @@
   --font-medium: 425;
   --font-semibold: 450;
   --font-bold: 500;
+  --font-extrabold: 700;
 
   /* Line heights */
   --leading-tight: 1.1;

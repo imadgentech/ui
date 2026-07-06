@@ -8,6 +8,10 @@ export { Providers } from './components/ui/Providers';
 export { Button } from './components/ui/forms/Button';
 export type { ButtonProps } from './components/ui/forms/Button';
 export { Checkbox } from './components/ui/forms/Checkbox';
+export { Combobox } from './components/ui/forms/Combobox';
+export type { ComboboxProps, ComboboxOption } from './components/ui/forms/Combobox';
+export { DatePicker } from './components/ui/forms/DatePicker';
+export type { DatePickerProps } from './components/ui/forms/DatePicker';
 export { ErrorText } from './components/ui/forms/ErrorText';
 export { Form } from './components/ui/forms/Form';
 export { LoginForm } from './components/ui/forms/LoginForm';
@@ -23,6 +27,8 @@ export { RadioGroup } from './components/ui/forms/RadioGroup';
 export { Select } from './components/ui/forms/Select';
 export { Switch } from './components/ui/forms/Switch';
 export { Textarea } from './components/ui/forms/Textarea';
+export { ToggleGroup } from './components/ui/forms/ToggleGroup';
+export type { ToggleGroupProps, ToggleGroupItem, ToggleGroupSingleProps, ToggleGroupMultipleProps } from './components/ui/forms/ToggleGroup';
 
 // Layout
 export { AspectRatio } from './components/ui/layout/AspectRatio';
@@ -48,15 +54,29 @@ export { Tabs } from './components/ui/navigation/Tabs';
 
 // Data display
 export { Accordion } from './components/ui/data/Accordion';
+export { Alert } from './components/ui/data/Alert';
+export type { AlertProps } from './components/ui/data/Alert';
 export { Avatar } from './components/ui/data/Avatar';
 export { Badge } from './components/ui/data/Badge';
 export { EmptyState } from './components/ui/data/EmptyState';
+export { Progress } from './components/ui/data/Progress';
+export type { ProgressProps } from './components/ui/data/Progress';
 export { Skeleton } from './components/ui/data/Skeleton';
+export { Spinner } from './components/ui/data/Spinner';
+export type { SpinnerProps } from './components/ui/data/Spinner';
 export { StatCard } from './components/ui/data/StatCard';
 export { Table } from './components/ui/data/Table';
+export { Tag } from './components/ui/data/Tag';
+export type { TagProps } from './components/ui/data/Tag';
 
 // Overlays
+export { AlertDialog } from './components/ui/overlays/AlertDialog';
+export type { AlertDialogProps } from './components/ui/overlays/AlertDialog';
 export { Dialog } from './components/ui/overlays/Dialog';
+export { Drawer } from './components/ui/overlays/Drawer';
+export type { DrawerProps } from './components/ui/overlays/Drawer';
+export { DropdownMenu } from './components/ui/overlays/DropdownMenu';
+export type { DropdownMenuProps, DropdownMenuItem, DropdownMenuEntry } from './components/ui/overlays/DropdownMenu';
 export { Popover } from './components/ui/overlays/Popover';
 export { ToastProvider, useToast } from './components/ui/overlays/Toast';
 export { Tooltip } from './components/ui/overlays/Tooltip';

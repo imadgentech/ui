@@ -23,10 +23,12 @@ export interface StatCardProps {
     note?: string;
 
     /**
-     * Color variant for status indication
+     * Color variant for status indication.
+     * 'neutral' renders the value in the default text color; use 'brand'
+     * for the orange accent treatment.
      * @default 'neutral'
      */
-    variant?: 'neutral' | 'success' | 'warning' | 'danger';
+    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
 
     /**
      * Additional CSS classes

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { cn } from '../../../lib/cn';
 import styles from './Dialog.module.css';
 
 export interface DialogProps {
@@ -31,6 +32,21 @@ export interface DialogProps {
     description?: string;
 
     /**
+     * Preset content width.
+     * - 'sm': compact forms (~480px)
+     * - 'md': default (500px) — unchanged from prior versions
+     * - 'lg': wide content viewers (~1000px, capped at 88vw)
+     * @default 'md'
+     */
+    size?: 'sm' | 'md' | 'lg';
+
+    /**
+     * Raw CSS max-width, for cases the size scale doesn't cover.
+     * Takes precedence over `size` when set.
+     */
+    maxWidth?: string;
+
+    /**
      * Content
      */
     children: React.ReactNode;
@@ -51,6 +67,8 @@ export function Dialog({
     trigger,
     title,
     description,
+    size = 'md',
+    maxWidth,
     children,
 }: DialogProps) {
     return (
@@ -64,7 +82,10 @@ export function Dialog({
             <DialogPrimitive.Portal>
                 <DialogPrimitive.Overlay className={styles.overlay} />
 
-                <DialogPrimitive.Content className={styles.content}>
+                <DialogPrimitive.Content
+                    className={cn(styles.content, styles[`size-${size}`])}
+                    style={maxWidth ? { maxWidth } : undefined}
+                >
                     <div className={styles.header}>
                         {title && (
                             <DialogPrimitive.Title className={styles.title}>
@@ -77,7 +98,7 @@ export function Dialog({
                             </DialogPrimitive.Description>
                         )}
                         <DialogPrimitive.Close className={styles.close} aria-label="Close">
-                            Ã—
+                            ×
                         </DialogPrimitive.Close>
                     </div>
 

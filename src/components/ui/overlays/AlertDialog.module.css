@@ -1,17 +1,15 @@
-/* Overlay */
 .overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.7);
     z-index: var(--z-overlay);
-    animation: fadeIn 0.2s ease-out;
+    animation: imui-alertdialog-fade-in 0.2s ease-out;
 }
 
 .overlay[data-state='closed'] {
-    animation: fadeOut 0.2s ease-in;
+    animation: imui-alertdialog-fade-out 0.2s ease-in;
 }
 
-/* Content */
 .content {
     position: fixed;
     top: 50%;
@@ -22,47 +20,25 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
     padding: var(--space-24);
-    max-width: 500px;
+    max-width: 440px;
     width: calc(100vw - var(--space-32));
-    max-height: calc(100vh - var(--space-32));
-    overflow-y: auto;
     z-index: var(--z-modal);
-    animation: slideIn 0.2s ease-out;
+    animation: imui-alertdialog-slide-in 0.2s ease-out;
 }
 
 .content[data-state='closed'] {
-    animation: slideOut 0.2s ease-in;
+    animation: imui-alertdialog-slide-out 0.2s ease-in;
 }
 
 .content:focus {
     outline: none;
 }
 
-/* Size presets (see DialogProps.size) */
-.size-sm {
-    max-width: min(480px, 90vw);
-}
-
-.size-md {
-    max-width: 500px;
-}
-
-.size-lg {
-    max-width: min(1000px, 88vw);
-}
-
-/* Header */
-.header {
-    position: relative;
-    margin-bottom: var(--space-16);
-}
-
 .title {
-    font-size: var(--heading-lg);
+    font-size: var(--heading-md);
     font-weight: var(--font-semibold);
     color: var(--color-text-default);
     margin: 0;
-    padding-right: var(--space-32);
 }
 
 .description {
@@ -72,42 +48,18 @@
     line-height: var(--leading-relaxed);
 }
 
-/* Close button */
-.close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-md);
-    border: none;
-    background: transparent;
-    color: var(--color-text-muted);
-    font-size: 24px;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.close:hover {
-    background: var(--color-bg-surface-hover);
-    color: var(--color-text-default);
-}
-
-.close:focus-visible {
-    outline: 2px solid var(--color-brand-primary);
-    outline-offset: 2px;
-}
-
-/* Body */
 .body {
-    /* Content goes here */
+    margin-top: var(--space-16);
 }
 
-/* Animations */
-@keyframes fadeIn {
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-8);
+    margin-top: var(--space-24);
+}
+
+@keyframes imui-alertdialog-fade-in {
     from {
         opacity: 0;
     }
@@ -117,7 +69,7 @@
     }
 }
 
-@keyframes fadeOut {
+@keyframes imui-alertdialog-fade-out {
     from {
         opacity: 1;
     }
@@ -127,7 +79,7 @@
     }
 }
 
-@keyframes slideIn {
+@keyframes imui-alertdialog-slide-in {
     from {
         opacity: 0;
         transform: translate(-50%, -48%);
@@ -139,7 +91,7 @@
     }
 }
 
-@keyframes slideOut {
+@keyframes imui-alertdialog-slide-out {
     from {
         opacity: 1;
         transform: translate(-50%, -50%);
@@ -151,7 +103,6 @@
     }
 }
 
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
     .overlay,

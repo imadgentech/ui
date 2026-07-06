@@ -38,6 +38,10 @@
     color: var(--color-brand-primary);
 }
 
+.tone-success {
+    color: var(--color-success);
+}
+
 .tone-danger {
     color: var(--color-error);
 }
@@ -53,6 +57,10 @@
 
 .weight-semibold {
     font-weight: var(--font-semibold);
+}
+
+.weight-bold {
+    font-weight: var(--font-extrabold);
 }
 
 /* Alignment variants */

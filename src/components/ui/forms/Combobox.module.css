@@ -1,0 +1,190 @@
+.root {
+    position: relative;
+    width: 100%;
+}
+
+.hidden {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
+}
+
+/* Trigger is pinned to the same padding/font-size/min-height scale as
+   Input's standalone sizes (see Input.module.css) so it renders at the
+   same real height as a sibling Input/Select at the same size. */
+.trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-family: var(--font-sans);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    color: var(--color-text-default);
+    cursor: pointer;
+    text-align: left;
+    gap: var(--space-4);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.trigger:hover:not(:disabled) {
+    border-color: var(--color-border-hover);
+}
+
+.triggerOpen {
+    border-color: var(--color-brand-primary);
+    box-shadow: var(--shadow-focus);
+    outline: none;
+}
+
+.invalid {
+    border-color: var(--color-error);
+}
+
+.disabled,
+.trigger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Sizes — match Input.module.css .inputStandalone.size-* exactly */
+.size-sm {
+    padding: var(--space-8) var(--space-12);
+    font-size: var(--text-sm);
+    min-height: 32px;
+}
+
+.size-md {
+    padding: var(--space-12) var(--space-16);
+    font-size: var(--text-md);
+    min-height: 40px;
+}
+
+.size-lg {
+    padding: var(--space-16) var(--space-24);
+    font-size: var(--text-lg);
+    min-height: 48px;
+}
+
+.selectedLabel {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text-default);
+}
+
+.placeholder {
+    flex: 1;
+    color: var(--color-text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+}
+
+.clearBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.clearBtn:hover {
+    color: var(--color-text-default);
+    background: var(--color-bg-surface-hover);
+}
+
+.arrow {
+    font-size: 10px;
+    color: var(--color-text-muted);
+}
+
+/* Dropdown — portal-rendered to document.body, themed via CSS variables so
+   it follows light/dark like every other overlay in the kit. */
+.dropdown {
+    width: max-content;
+    max-width: 320px;
+    background: var(--color-bg-surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: var(--z-popover);
+    overflow: hidden;
+}
+
+.searchInput {
+    display: block;
+    width: 100%;
+    padding: var(--space-8) var(--space-12);
+    font-size: var(--text-sm);
+    font-family: var(--font-sans);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-border-default);
+    color: var(--color-text-default);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+    color: var(--color-text-muted);
+}
+
+.list {
+    max-height: 220px;
+    overflow-y: auto;
+    padding: var(--space-4) 0;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: var(--space-8) var(--space-12);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    user-select: none;
+    color: var(--color-text-default);
+}
+
+.option:hover {
+    background: var(--color-bg-surface-hover);
+}
+
+.optionActive {
+    background: var(--color-focus-ring);
+}
+
+.optionLabel {
+    font-weight: var(--font-medium);
+}
+
+.optionSub {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+.empty {
+    padding: var(--space-12);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+}

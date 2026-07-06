@@ -1,0 +1,67 @@
+.track {
+    position: relative;
+    width: 100%;
+    background: var(--color-border-subtle);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.size-sm {
+    height: 5px;
+}
+
+.size-md {
+    height: 8px;
+}
+
+.fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.tone-brand {
+    background: linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-primary-hover));
+}
+
+.tone-success {
+    background: var(--color-success);
+}
+
+.tone-warning {
+    background: var(--color-warning);
+}
+
+.tone-danger {
+    background: var(--color-error);
+}
+
+.tone-info {
+    background: var(--color-info);
+}
+
+.indeterminate {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    animation: imui-progress-indeterminate 1.2s ease-in-out infinite;
+}
+
+@keyframes imui-progress-indeterminate {
+    0% {
+        left: -40%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .indeterminate {
+        animation: none;
+        left: 0;
+        width: 100%;
+        opacity: 0.5;
+    }
+}

@@ -62,7 +62,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                     )}
                 </select>
                 <span className={styles.icon} aria-hidden="true">
-                    â–¼
+                    ▼
                 </span>
             </div>
         );

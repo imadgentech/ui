@@ -1,0 +1,78 @@
+'use client';
+
+import React from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { cn } from '../../../lib/cn';
+import styles from './Drawer.module.css';
+
+export interface DrawerProps {
+    open?: boolean;
+
+    onOpenChange?: (open: boolean) => void;
+
+    trigger?: React.ReactNode;
+
+    title?: string;
+
+    description?: string;
+
+    /**
+     * Edge the panel slides in from
+     * @default 'right'
+     */
+    side?: 'left' | 'right' | 'bottom';
+
+    children: React.ReactNode;
+
+    className?: string;
+}
+
+/**
+ * Side panel — for filters, side-form editors, and similar content that
+ * doesn't need a full-screen takeover. For full-screen mobile navigation,
+ * use `MobileMenu` instead.
+ *
+ * @example
+ * <Drawer trigger={<Button>Filters</Button>} title="Filters" side="right">
+ *   <FilterForm />
+ * </Drawer>
+ */
+export function Drawer({
+    open,
+    onOpenChange,
+    trigger,
+    title,
+    description,
+    side = 'right',
+    children,
+    className,
+}: DrawerProps) {
+    return (
+        <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+            {trigger && <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>}
+            <DialogPrimitive.Portal>
+                <DialogPrimitive.Overlay className={styles.overlay} />
+                <DialogPrimitive.Content className={cn(styles.content, styles[`side-${side}`], className)}>
+                    <div className={styles.header}>
+                        <DialogPrimitive.Title className={title ? styles.title : styles.srOnly}>
+                            {title || 'Panel'}
+                        </DialogPrimitive.Title>
+                        {description ? (
+                            <DialogPrimitive.Description className={styles.description}>
+                                {description}
+                            </DialogPrimitive.Description>
+                        ) : (
+                            <DialogPrimitive.Description className={styles.srOnly}>
+                                Panel content
+                            </DialogPrimitive.Description>
+                        )}
+                        <DialogPrimitive.Close className={styles.close} aria-label="Close">
+                            ×
+                        </DialogPrimitive.Close>
+                    </div>
+                    <div className={styles.body}>{children}</div>
+                </DialogPrimitive.Content>
+            </DialogPrimitive.Portal>
+        </DialogPrimitive.Root>
+    );
+}

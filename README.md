@@ -2,6 +2,8 @@
 
 Shared React component library for all IMADGEN Next.js projects. Built on CSS Modules + Radix UI primitives, published to GitHub Packages.
 
+> **Upgrading?** Check [CHANGELOG.md](./CHANGELOG.md) first — the top entry lists every breaking change since your installed version, with the exact call sites that need attention. This README always documents the current API only; it does not carry "as of version X" notes, so it can go out of sync with what you have installed until you upgrade.
+
 ---
 
 ## Table of Contents
@@ -157,6 +159,15 @@ Tokens are CSS custom properties defined in `src/tokens/tokens.css` and shipped 
 
 Light theme overrides are applied automatically under `[data-theme="light"]`.
 
+**Short aliases** — fall back to the canonical tokens above, for the shorter names people tend to reach for from memory. A typo in a CSS custom property fails silently (the property resolves to nothing, no error), so these exist to make the "obvious" name work too:
+
+| Alias | Resolves to |
+|---|---|
+| `--color-brand` | `--color-brand-primary` |
+| `--color-text` | `--color-text-default` |
+| `--color-border` | `--color-border-default` |
+| `--color-danger` | `--color-error` |
+
 ### Spacing
 
 Base-8 scale. All values are `rem`.
@@ -212,7 +223,7 @@ Base-8 scale. All values are `rem`.
 
 **Heading sizes** (fluid/responsive): `--heading-sm` through `--heading-display`
 
-**Font weights:** `--font-light (350)`, `--font-normal (400)`, `--font-medium (425)`, `--font-semibold (450)`, `--font-bold (500)`
+**Font weights:** `--font-light (350)`, `--font-normal (400)`, `--font-medium (425)`, `--font-semibold (450)`, `--font-bold (500)`, `--font-extrabold (700)`
 
 **Line heights:** `--leading-tight` → `--leading-loose`
 
@@ -256,8 +267,8 @@ import { Button } from '@imadgentech/ui';
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'brand' \| 'subtle'` | `'primary'` | |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
+| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'brand' \| 'brand-solid' \| 'subtle'` | `'primary'` | `brand` is a ghost/tinted orange; `brand-solid` is solid-filled — use it for primary actions that need to read as filled |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Padding/font-size are on the same `rem` scale as `Input`/`Select`, so a `Button` height-matches a sibling field at the same size |
 | `loading` | `boolean` | `false` | Shows spinner, disables button |
 | `leftIcon` | `ReactNode` | — | Icon before label |
 | `rightIcon` | `ReactNode` | — | Icon after label |
@@ -302,6 +313,28 @@ import { Button } from '@imadgentech/ui';
 
 Extends all `<input>` HTML attributes. Use `ref` for imperative focus.
 
+#### DatePicker
+
+A calendar date picker — not a styled wrapper around the browser's native `<input type="date">` popup (which can't be restyled with CSS). The calendar itself is portal-rendered to `document.body` and themed via CSS variables, so it follows the app's theme instead of falling back to OS chrome.
+
+```tsx
+<DatePicker
+  value={dueDate}
+  onChange={setDueDate}
+  placeholder="Choose date"
+  size="md"
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | **Required** | ISO date string (`yyyy-mm-dd`), matching native `<input type="date">` |
+| `onChange` | `(value: string) => void` | **Required** | |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Matches `Input`'s size scale |
+| `min` / `max` | `string` | — | ISO date strings; out-of-range days render disabled |
+| `format` | `(date: Date) => string` | `dd-mm-yyyy` | Customize the trigger's display text |
+| `name`, `required`, `disabled`, `invalid`, `id` | — | — | A visually-hidden native `<input type="date">` mirrors `value`, so `required`/`name` still participate in native form validation and `FormData` |
+
 #### Textarea
 
 | Prop | Type | Default |
@@ -329,6 +362,33 @@ Extends all `<input>` HTML attributes. Use `ref` for imperative focus.
 | `options` | `Array<{ label: string; value: string \| number }>` | — |
 
 If `options` is omitted, render `<option>` elements as `children`.
+
+#### Combobox
+
+Searchable/filterable select — for option lists a plain `<select>` makes tedious to scan, or where each option needs a secondary line (e.g. a PO number under a project name). The trigger matches `Input`/`Select`'s sizing; the dropdown is portal-rendered to `document.body` and positioned off the trigger's bounding rect, so it isn't clipped by a parent `overflow` container like a scrollable table.
+
+```tsx
+<Combobox
+  value={projectId}
+  onChange={setProjectId}
+  options={projects.map(p => ({ value: p.id, label: p.name, sub: p.poNumber }))}
+  placeholder="Select project…"
+  size="md"
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | **Required** | |
+| `onChange` | `(value: string) => void` | **Required** | |
+| `options` | `Array<{ value, label, sub? }>` | **Required** | `sub` renders as a smaller muted line under `label`; both are matched against the search query |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Matches `Input`'s size scale |
+| `placeholder` | `string` | `'Select…'` | |
+| `invalid` | `boolean` | `false` | |
+| `disabled` | `boolean` | `false` | |
+| `name`, `required`, `id` | — | — | A visually-hidden native `<select required>` mirrors `value`, so `required`/`name` still participate in native form validation |
+
+Filtering is client-side substring match (case-insensitive). `Escape` closes and clears the search; `Enter` selects when exactly one result remains.
 
 #### Checkbox
 
@@ -375,6 +435,39 @@ Same API shape as Checkbox but renders a toggle slider. Props: `id?`, `aria-labe
 | `value` | `string` | — |
 | `defaultValue` | `string` | — |
 | `onValueChange` | `(value: string) => void` | — |
+
+#### ToggleGroup
+
+Segmented control — button-group single/multi select, lighter weight than `Tabs`. For view switchers, filter pills, time-range pickers.
+
+```tsx
+<ToggleGroup
+  items={[
+    { value: '7d', label: '7D' },
+    { value: '30d', label: '30D' },
+    { value: '90d', label: '90D' },
+  ]}
+  value={range}
+  onValueChange={setRange}
+/>
+
+<ToggleGroup
+  type="multiple"
+  items={[{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }]}
+  value={selected}
+  onValueChange={setSelected}
+/>
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `type` | `'single' \| 'multiple'` | `'single'` |
+| `items` | `Array<{ value, label, disabled? }>` | **Required** |
+| `value` | `string` (single) \| `string[]` (multiple) | — |
+| `defaultValue` | `string` (single) \| `string[]` (multiple) | — |
+| `onValueChange` | `(value: string) => void` (single) \| `(value: string[]) => void` (multiple) | — |
+
+`type` discriminates the TypeScript shape of `value`/`onValueChange` — set it to `'multiple'` to get array-typed props.
 
 #### Label
 
@@ -746,6 +839,28 @@ Disables Prev at page 1, Next at last page.
 
 ### Data Display
 
+#### Alert
+
+Persistent inline message box — form-level errors, empty-state notices, standing warnings. For ephemeral feedback that disappears on its own, use `Toast` instead.
+
+```tsx
+<Alert tone="danger" title="Couldn't save changes">
+  Check the highlighted fields and try again.
+</Alert>
+
+<Alert tone="warning" onDismiss={() => setDismissed(true)}>
+  Moderation adds ~50–150ms to every message.
+</Alert>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `tone` | `'neutral' \| 'info' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | |
+| `title` | `string` | — | Bold lead-in line above the message |
+| `children` | `ReactNode` | **Required** | Message body |
+| `action` | `ReactNode` | — | e.g. a `Button`, rendered next to the dismiss button |
+| `onDismiss` | `() => void` | — | Renders a × dismiss button only if provided; omit for a persistent alert |
+
 #### Accordion
 
 ```tsx
@@ -794,7 +909,7 @@ Disables Prev at page 1, Next at last page.
 />
 ```
 
-`variant`: `'neutral' | 'success' | 'warning' | 'danger'` (default `'neutral'`)
+`variant`: `'neutral' | 'brand' | 'success' | 'warning' | 'danger'` (default `'neutral'`). `neutral` renders the value in the default text color; use `brand` for the orange accent treatment.
 
 #### Badge
 
@@ -803,6 +918,20 @@ Disables Prev at page 1, Next at last page.
 ```
 
 `variant`: `'neutral' | 'brand' | 'success' | 'warning' | 'danger'`
+
+#### Tag
+
+Removable/interactive pill — filters, multi-select summaries, keyword lists. For a static label, use `Badge` instead.
+
+```tsx
+<Tag variant="brand" onRemove={() => removeFilter(id)}>Overdue</Tag>
+<Tag>Static label</Tag>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `'neutral' \| 'brand' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | Same set as `Badge` |
+| `onRemove` | `() => void` | — | Renders a × remove button only if provided; omit for a static tag |
 
 #### Avatar
 
@@ -830,6 +959,37 @@ Falls back to initials text if image fails to load.
 | `height` | `string \| number` | `'1em'` |
 | `radius` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | `'md'` |
 | `shimmer` | `boolean` | `true` |
+
+#### Progress
+
+Determinate or indeterminate progress bar.
+
+```tsx
+<Progress value={uploadPct} tone="brand" />
+<Progress /> {/* indeterminate — omit value for unknown-duration work */}
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `value` | `number` | — (omit for indeterminate) |
+| `max` | `number` | `100` |
+| `tone` | `'brand' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'brand'` |
+| `size` | `'sm' \| 'md'` | `'md'` |
+| `label` | `string` | — (aria-label) |
+
+#### Spinner
+
+Standalone loading indicator, for full-page or section-level loading. `Button`/`IconButton` already have a built-in spinner for inline button loading — use this one everywhere else.
+
+```tsx
+<Spinner size="lg" />
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `tone` | `'brand' \| 'muted' \| 'current'` | `'brand'` |
+| `label` | `string` | `'Loading'` (aria-label) |
 
 #### EmptyState
 
@@ -859,15 +1019,86 @@ Falls back to initials text if image fails to load.
 </Dialog>
 ```
 
-| Prop | Type | Default |
-|---|---|---|
-| `title` | `string` | **Required** |
-| `trigger` | `ReactNode` | — |
-| `description` | `string` | — |
-| `open` | `boolean` | — |
-| `onOpenChange` | `(open: boolean) => void` | — |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `string` | **Required** | |
+| `trigger` | `ReactNode` | — | |
+| `description` | `string` | — | |
+| `open` | `boolean` | — | |
+| `onOpenChange` | `(open: boolean) => void` | — | |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | `sm` ≈ 480px, `md` = 500px (unchanged default), `lg` ≈ 1000px capped at 88vw |
+| `maxWidth` | `string` | — | Raw CSS value, for widths the size scale doesn't cover. Takes precedence over `size` |
 
 Includes overlay, close button, focus trap, and ESC key support. Uses `--z-overlay` (1050) for the backdrop and `--z-modal` (1100) for the content.
+
+#### AlertDialog
+
+Confirm/destructive-action dialog. Unlike `Dialog`, it isn't dismissed by clicking outside and focuses Cancel by default (Radix's alert-dialog accessibility model) — built-in Cancel/Confirm buttons, no hand-composed footer needed.
+
+```tsx
+<AlertDialog
+  trigger={<Button variant="danger">Delete</Button>}
+  title="Delete this project?"
+  description="This cannot be undone."
+  onConfirm={async () => {
+    await deleteProject(id);
+  }}
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `string` | **Required** | |
+| `description` | `string` | — | |
+| `trigger` | `ReactNode` | — | |
+| `children` | `ReactNode` | — | Extra content below the description (e.g. a confirmation input) |
+| `onConfirm` | `() => void \| Promise<void>` | **Required** | May be async — the confirm button shows a loading state and the dialog only closes once it resolves |
+| `confirmLabel` | `string` | `'Confirm'` | |
+| `cancelLabel` | `string` | `'Cancel'` | |
+| `confirmVariant` | `ButtonProps['variant']` | `'danger'` | Override for non-destructive confirms |
+| `open` / `onOpenChange` | `boolean` / `(open: boolean) => void` | — | Optional — works uncontrolled with just `trigger` |
+
+#### Drawer
+
+Side panel — filters, side-form editors, and similar content that doesn't need a full-screen takeover. For full-screen mobile navigation, use `MobileMenu` instead.
+
+```tsx
+<Drawer trigger={<Button>Filters</Button>} title="Filters" side="right">
+  <FilterForm />
+</Drawer>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `string` | — | |
+| `description` | `string` | — | |
+| `trigger` | `ReactNode` | — | |
+| `side` | `'left' \| 'right' \| 'bottom'` | `'right'` | |
+| `open` / `onOpenChange` | `boolean` / `(open: boolean) => void` | — | |
+
+Fixed width (~400px, capped at 90vw) for `left`/`right`; capped height (~500px, 85vh) for `bottom` — unlike `MobileMenu`, which always takes the full screen.
+
+#### DropdownMenu
+
+Actions menu — table row "..." actions, overflow menus, account menus. Built on Radix for keyboard navigation and typeahead.
+
+```tsx
+<DropdownMenu
+  trigger={<IconButton aria-label="Actions"><DotsIcon /></IconButton>}
+  items={[
+    { label: 'Edit', icon: <EditIcon />, onClick: onEdit },
+    { separator: true },
+    { label: 'Delete', variant: 'danger', onClick: onDelete },
+  ]}
+/>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `trigger` | `ReactNode` | **Required** | |
+| `items` | `Array<{ label, icon?, onClick?, variant?, disabled?, shortcut? } \| { separator: true }>` | **Required** | `variant: 'danger'` renders the item in red |
+| `align` | `'start' \| 'center' \| 'end'` | `'end'` | |
+| `open` / `onOpenChange` | `boolean` / `(open: boolean) => void` | — | |
 
 #### Tooltip
 
@@ -947,8 +1178,8 @@ Default size mapping: `h1→xxl`, `h2→xl`, `h3→lg`, `h4→md`, `h5/h6→sm`.
 |---|---|---|
 | `as` | `'p' \| 'span'` | `'p'` |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` |
-| `tone` | `'default' \| 'muted' \| 'brand' \| 'danger'` | `'default'` |
-| `weight` | `'normal' \| 'medium' \| 'semibold'` | `'normal'` |
+| `tone` | `'default' \| 'muted' \| 'brand' \| 'success' \| 'danger'` | `'default'` |
+| `weight` | `'normal' \| 'medium' \| 'semibold' \| 'bold'` | `'normal'` |
 | `align` | `'left' \| 'center' \| 'right'` | — |
 
 #### Link
@@ -1282,4 +1513,4 @@ The token file defines the full set of CSS custom properties. To add custom toke
 
 ## Changelog
 
-See [CHANGELOG.md](CHANGELOG.md) for the full version history.
+Version history, migration notes, and — most importantly — **every breaking change**, lives in [CHANGELOG.md](./CHANGELOG.md), not here. This README documents the current API only; it's updated in the same commit as any code change, so it never lags behind what's actually shipped in `src/`.

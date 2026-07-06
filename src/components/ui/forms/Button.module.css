@@ -48,25 +48,32 @@
     border-radius: var(--radius-full) !important;
 }
 
-/* Sizes */
+/* Sizes
+   Vertical padding + font-size are pinned to the same rem-based scale as
+   Input/Select at each tier (see Select.module.css) so a Button renders at
+   the same real height as a sibling Input/Select/Select regardless of the
+   consuming app's root font-size. Horizontal padding is Button-specific
+   (buttons want more breathing room around a label) and doesn't affect
+   height. min-height mirrors Input's declared floor, converted to rem. */
 .size-sm {
-    padding: 10px 14px;
-    font-size: 13px;
+    min-height: 2rem;
+    padding: var(--space-8) var(--space-16);
+    font-size: var(--text-sm);
     font-weight: 600;
     gap: 8px;
 }
 
 .size-md {
-    height: auto;
-    padding: 12px 20px;
-    font-size: 14px;
+    min-height: 2.5rem;
+    padding: var(--space-12) var(--space-24);
+    font-size: var(--text-md);
     gap: 10px;
 }
 
 .size-lg {
-    height: auto;
-    padding: 14px 28px;
-    font-size: 16px;
+    min-height: 3rem;
+    padding: var(--space-16) var(--space-32);
+    font-size: var(--text-lg);
     gap: 12px;
 }
 
@@ -130,6 +137,26 @@
 .variant-brand:hover:not(:disabled) {
     background: rgba(255, 106, 0, 0.15);
     border-color: #ff6a00;
+}
+
+/* Solid-filled brand button, for primary actions (e.g. "Save", "Create")
+   that need to read as filled rather than the ghost-tint 'brand' above. */
+.variant-brand-solid {
+    background: #c85c0e;
+    border-color: #c85c0e;
+    color: #fff;
+}
+
+.variant-brand-solid:hover:not(:disabled) {
+    background: #b35209;
+    border-color: #b35209;
+    color: #fff;
+}
+
+.variant-brand-solid:disabled {
+    background: rgba(200, 92, 14, 0.35);
+    border-color: transparent;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .variant-subtle {

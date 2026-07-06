@@ -35,6 +35,10 @@
     color: var(--color-error);
 }
 
-.variant-neutral .value {
+.variant-brand .value {
     color: var(--color-brand-primary);
+}
+
+.variant-neutral .value {
+    color: var(--color-text-default);
 }

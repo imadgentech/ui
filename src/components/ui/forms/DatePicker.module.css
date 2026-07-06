@@ -1,0 +1,187 @@
+.wrap {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+}
+
+.hiddenInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    border: none;
+}
+
+/* Trigger is pinned to the same padding/font-size/min-height scale as
+   Input's standalone sizes (see Input.module.css) so it renders at the
+   same real height as a sibling Input/Select at the same size. */
+.trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    width: 100%;
+    font-family: var(--font-sans);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    color: var(--color-text-default);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.trigger:hover:not(:disabled) {
+    border-color: var(--color-border-hover);
+}
+
+.triggerOpen {
+    border-color: var(--color-brand-primary);
+    box-shadow: var(--shadow-focus);
+    outline: none;
+}
+
+.invalid {
+    border-color: var(--color-error);
+}
+
+.trigger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.size-sm {
+    padding: var(--space-8) var(--space-12);
+    font-size: var(--text-sm);
+    min-height: 32px;
+}
+
+.size-md {
+    padding: var(--space-12) var(--space-16);
+    font-size: var(--text-md);
+    min-height: 40px;
+}
+
+.size-lg {
+    padding: var(--space-16) var(--space-24);
+    font-size: var(--text-lg);
+    min-height: 48px;
+}
+
+.dateText {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.placeholder {
+    color: var(--color-text-muted);
+}
+
+/* Popup */
+.popup {
+    width: 280px;
+    background: var(--color-bg-surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: var(--z-popover);
+    padding: var(--space-12);
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+}
+
+.monthLabel {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text-default);
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: 1;
+    cursor: pointer;
+}
+
+.navBtn:hover {
+    background: var(--color-bg-surface-hover);
+    color: var(--color-text-default);
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: var(--space-4);
+}
+
+.weekday {
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-text-default);
+    font-size: var(--text-sm);
+    font-family: var(--font-sans);
+    cursor: pointer;
+}
+
+.day:hover:not(:disabled) {
+    background: var(--color-bg-surface-hover);
+}
+
+.dayOutside {
+    color: var(--color-text-subtle);
+}
+
+.dayToday {
+    box-shadow: inset 0 0 0 1px var(--color-border-hover);
+}
+
+.daySelected {
+    background: var(--color-brand-primary);
+    color: #fff;
+}
+
+.daySelected:hover:not(:disabled) {
+    background: var(--color-brand-primary-hover);
+}
+
+.dayDisabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}

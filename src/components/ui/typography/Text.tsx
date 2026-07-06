@@ -19,13 +19,13 @@ export interface TextProps {
      * Text tone/color
      * @default 'default'
      */
-    tone?: 'default' | 'muted' | 'brand' | 'danger';
+    tone?: 'default' | 'muted' | 'brand' | 'success' | 'danger';
 
     /**
      * Font weight
      * @default 'normal'
      */
-    weight?: 'normal' | 'medium' | 'semibold';
+    weight?: 'normal' | 'medium' | 'semibold' | 'bold';
 
     /**
      * Text alignment

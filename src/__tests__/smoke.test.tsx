@@ -16,6 +16,8 @@ import { Providers } from '../components/ui/Providers';
 // ─── Forms ────────────────────────────────────────────────────────────────────
 import { Button } from '../components/ui/forms/Button';
 import { Checkbox } from '../components/ui/forms/Checkbox';
+import { Combobox } from '../components/ui/forms/Combobox';
+import { DatePicker } from '../components/ui/forms/DatePicker';
 import { ErrorText } from '../components/ui/forms/ErrorText';
 import { Form } from '../components/ui/forms/Form';
 import { FormField } from '../components/ui/forms/FormField';
@@ -27,6 +29,7 @@ import { RadioGroup } from '../components/ui/forms/RadioGroup';
 import { Select } from '../components/ui/forms/Select';
 import { Switch } from '../components/ui/forms/Switch';
 import { Textarea } from '../components/ui/forms/Textarea';
+import { ToggleGroup } from '../components/ui/forms/ToggleGroup';
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
 import { AspectRatio } from '../components/ui/layout/AspectRatio';
@@ -53,15 +56,22 @@ import { Tabs } from '../components/ui/navigation/Tabs';
 
 // ─── Data display ─────────────────────────────────────────────────────────────
 import { Accordion } from '../components/ui/data/Accordion';
+import { Alert } from '../components/ui/data/Alert';
 import { Avatar } from '../components/ui/data/Avatar';
 import { Badge } from '../components/ui/data/Badge';
 import { EmptyState } from '../components/ui/data/EmptyState';
+import { Progress } from '../components/ui/data/Progress';
 import { Skeleton } from '../components/ui/data/Skeleton';
+import { Spinner } from '../components/ui/data/Spinner';
 import { StatCard } from '../components/ui/data/StatCard';
 import { Table } from '../components/ui/data/Table';
+import { Tag } from '../components/ui/data/Tag';
 
 // ─── Overlays ─────────────────────────────────────────────────────────────────
+import { AlertDialog } from '../components/ui/overlays/AlertDialog';
 import { Dialog } from '../components/ui/overlays/Dialog';
+import { Drawer } from '../components/ui/overlays/Drawer';
+import { DropdownMenu } from '../components/ui/overlays/DropdownMenu';
 import { Popover } from '../components/ui/overlays/Popover';
 import { ToastProvider } from '../components/ui/overlays/Toast';
 import { Tooltip } from '../components/ui/overlays/Tooltip';
@@ -118,6 +128,20 @@ describe('Forms', () => {
 
   it('Checkbox renders', () => { render(<Checkbox id="agree" label="I agree" />); });
 
+  it('Combobox renders with options', () => {
+    render(
+      <Combobox
+        value=""
+        onChange={vi.fn()}
+        options={[{ label: 'One', value: '1' }, { label: 'Two', value: '2', sub: 'note' }]}
+      />
+    );
+  });
+
+  it('DatePicker renders', () => {
+    render(<DatePicker value="" onChange={vi.fn()} />);
+  });
+
   it('ErrorText renders', () => { render(<ErrorText>Error message</ErrorText>); });
 
   it('Form renders', () => {
@@ -167,6 +191,27 @@ describe('Forms', () => {
   it('Switch renders', () => { render(<Switch />); });
 
   it('Textarea renders', () => { render(<Textarea placeholder="Write here" />); });
+
+  it('ToggleGroup renders (single)', () => {
+    render(
+      <ToggleGroup
+        items={[{ value: '7d', label: '7D' }, { value: '30d', label: '30D' }]}
+        value="7d"
+        onValueChange={vi.fn()}
+      />
+    );
+  });
+
+  it('ToggleGroup renders (multiple)', () => {
+    render(
+      <ToggleGroup
+        type="multiple"
+        items={[{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }]}
+        value={['a']}
+        onValueChange={vi.fn()}
+      />
+    );
+  });
 });
 
 describe('Layout', () => {
@@ -258,17 +303,33 @@ describe('Data display', () => {
     render(<Avatar src="https://example.com/photo.jpg" alt="Jane" fallback="J" />);
   });
 
+  it('Alert renders', () => {
+    render(<Alert tone="danger" title="Couldn't save">Check the highlighted fields.</Alert>);
+  });
+
   it('Badge renders', () => { render(<Badge>Active</Badge>); });
 
   it('EmptyState renders', () => {
     render(<EmptyState title="No results" description="Try a different search." />);
   });
 
+  it('Progress renders (determinate)', () => { render(<Progress value={60} />); });
+
+  it('Progress renders (indeterminate)', () => { render(<Progress />); });
+
   it('Skeleton renders', () => { render(<Skeleton />); });
 
   it('StatCard renders', () => {
     render(<StatCard label="Users" value="1,234" />);
   });
+
+  it('Spinner renders', () => { render(<Spinner />); });
+
+  it('Tag renders (removable)', () => {
+    render(<Tag variant="brand" onRemove={vi.fn()}>Overdue</Tag>);
+  });
+
+  it('Tag renders (static)', () => { render(<Tag>Static</Tag>); });
 
   it('Table renders', () => {
     render(
@@ -281,11 +342,44 @@ describe('Data display', () => {
 });
 
 describe('Overlays', () => {
+  it('AlertDialog renders (closed)', () => {
+    render(
+      <AlertDialog
+        title="Delete this project?"
+        description="This cannot be undone."
+        open={false}
+        onOpenChange={vi.fn()}
+        onConfirm={vi.fn()}
+      />
+    );
+  });
+
   it('Dialog renders (uncontrolled)', () => {
     render(
       <Dialog title="Confirm" open={false} onOpenChange={vi.fn()}>
         <p>Are you sure?</p>
       </Dialog>
+    );
+  });
+
+  it('Drawer renders (closed)', () => {
+    render(
+      <Drawer title="Filters" open={false} onOpenChange={vi.fn()}>
+        <p>Filter controls</p>
+      </Drawer>
+    );
+  });
+
+  it('DropdownMenu renders', () => {
+    render(
+      <DropdownMenu
+        trigger={<button>Actions</button>}
+        items={[
+          { label: 'Edit', onClick: vi.fn() },
+          { separator: true },
+          { label: 'Delete', variant: 'danger', onClick: vi.fn() },
+        ]}
+      />
     );
   });
 
