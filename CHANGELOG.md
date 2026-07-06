@@ -2,7 +2,13 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
-## [Unreleased] — 2026-07-06
+## [Unreleased]
+
+### Added
+
+- `Combobox`: new `searchable` prop (default `true`, non-breaking). Set `false` for a plain listbox with no search input — arrow keys move a highlighted option, Enter selects it, Escape closes. Added `role="listbox"`/`role="option"`/`aria-selected`/`aria-activedescendant` wiring and `aria-haspopup`/`aria-expanded` on the trigger regardless of this prop, since that ARIA gap existed either way.
+
+## [1.0.20] — 2026-07-06
 
 ### Breaking
 

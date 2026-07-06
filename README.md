@@ -384,11 +384,12 @@ Searchable/filterable select — for option lists a plain `<select>` makes tedio
 | `options` | `Array<{ value, label, sub? }>` | **Required** | `sub` renders as a smaller muted line under `label`; both are matched against the search query |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Matches `Input`'s size scale |
 | `placeholder` | `string` | `'Select…'` | |
+| `searchable` | `boolean` | `true` | `false` renders a plain listbox with no search input — arrow keys move a highlighted option, Enter selects it |
 | `invalid` | `boolean` | `false` | |
 | `disabled` | `boolean` | `false` | |
 | `name`, `required`, `id` | — | — | A visually-hidden native `<select required>` mirrors `value`, so `required`/`name` still participate in native form validation |
 
-Filtering is client-side substring match (case-insensitive). `Escape` closes and clears the search; `Enter` selects when exactly one result remains.
+Filtering is client-side substring match (case-insensitive). `Escape` closes; `Enter` selects the highlighted/single-matching option. Full `role="listbox"`/`role="option"` ARIA wiring either way.
 
 #### Checkbox
 
