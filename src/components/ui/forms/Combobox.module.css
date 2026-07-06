@@ -173,6 +173,10 @@
     background: var(--color-focus-ring);
 }
 
+.optionHighlighted {
+    background: var(--color-bg-surface-hover);
+}
+
 .optionLabel {
     font-weight: var(--font-medium);
 }

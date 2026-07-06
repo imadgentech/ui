@@ -45,6 +45,14 @@ export interface ComboboxProps {
      */
     size?: 'sm' | 'md' | 'lg';
 
+    /**
+     * Show a search input at the top of the dropdown for client-side
+     * filtering. When `false`, the dropdown is a plain listbox — arrow
+     * keys move a highlighted option, Enter selects it.
+     * @default true
+     */
+    searchable?: boolean;
+
     className?: string;
 }
 
@@ -73,13 +81,16 @@ export function Combobox({
     disabled,
     invalid,
     size = 'md',
+    searchable = true,
     className,
 }: ComboboxProps) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
+    const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const [dropPos, setDropPos] = useState<{ top: number; left: number; width: number } | null>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const listRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -88,7 +99,7 @@ export function Combobox({
     }, []);
 
     const selected = options.find((o) => o.value === value);
-    const filtered = query
+    const filtered = searchable && query
         ? options.filter(
               (o) =>
                   o.label.toLowerCase().includes(query.toLowerCase()) ||
@@ -127,8 +138,19 @@ export function Combobox({
     }, [open, id]);
 
     useEffect(() => {
-        if (open) setTimeout(() => inputRef.current?.focus(), 0);
-    }, [open]);
+        if (!open) return;
+        const frame = requestAnimationFrame(() => {
+            if (searchable) {
+                inputRef.current?.focus();
+            } else {
+                const initialIndex = filtered.findIndex((o) => o.value === value);
+                setHighlightedIndex(initialIndex >= 0 ? initialIndex : 0);
+                listRef.current?.focus();
+            }
+        });
+        return () => cancelAnimationFrame(frame);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open, searchable]);
 
     function select(opt: ComboboxOption) {
         onChange(opt.value);
@@ -142,7 +164,29 @@ export function Combobox({
         setQuery('');
     }
 
+    function handleListKeyDown(e: React.KeyboardEvent) {
+        if (e.key === 'Escape') {
+            setOpen(false);
+            return;
+        }
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setHighlightedIndex((i) => (filtered.length === 0 ? -1 : (i + 1) % filtered.length));
+            return;
+        }
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setHighlightedIndex((i) => (filtered.length === 0 ? -1 : (i - 1 + filtered.length) % filtered.length));
+            return;
+        }
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (highlightedIndex >= 0 && filtered[highlightedIndex]) select(filtered[highlightedIndex]);
+        }
+    }
+
     const dropdownId = `${id ?? 'imui-combobox'}-dropdown`;
+    const listboxId = `${id ?? 'imui-combobox'}-listbox`;
 
     const dropdown = dropPos && (
         <div
@@ -150,27 +194,49 @@ export function Combobox({
             className={styles.dropdown}
             style={{ position: 'fixed', top: dropPos.top, left: dropPos.left, minWidth: dropPos.width }}
         >
-            <input
-                ref={inputRef}
-                className={styles.searchInput}
-                placeholder="Search…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Escape') {
-                        setOpen(false);
-                        setQuery('');
-                    }
-                    if (e.key === 'Enter' && filtered.length === 1) select(filtered[0]);
-                }}
-            />
-            <div className={styles.list}>
-                {filtered.length === 0 && <div className={styles.empty}>No results</div>}
-                {filtered.map((o) => (
+            {searchable && (
+                <input
+                    ref={inputRef}
+                    className={styles.searchInput}
+                    placeholder="Search…"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Escape') {
+                            setOpen(false);
+                            setQuery('');
+                        }
+                        if (e.key === 'Enter' && filtered.length === 1) select(filtered[0]);
+                    }}
+                />
+            )}
+            <div
+                ref={listRef}
+                id={listboxId}
+                role="listbox"
+                className={styles.list}
+                tabIndex={searchable ? -1 : 0}
+                onKeyDown={searchable ? undefined : handleListKeyDown}
+                aria-activedescendant={
+                    !searchable && highlightedIndex >= 0 ? `${listboxId}-option-${highlightedIndex}` : undefined
+                }
+            >
+                {filtered.length === 0 && (
+                    <div className={styles.empty}>{searchable ? 'No results' : 'No options'}</div>
+                )}
+                {filtered.map((o, i) => (
                     <div
                         key={o.value}
-                        className={cn(styles.option, o.value === value && styles.optionActive)}
+                        id={`${listboxId}-option-${i}`}
+                        role="option"
+                        aria-selected={o.value === value}
+                        className={cn(
+                            styles.option,
+                            o.value === value && styles.optionActive,
+                            !searchable && i === highlightedIndex && styles.optionHighlighted
+                        )}
                         onMouseDown={() => select(o)}
+                        onMouseEnter={() => !searchable && setHighlightedIndex(i)}
                     >
                         <span className={styles.optionLabel}>{o.label}</span>
                         {o.sub && <span className={styles.optionSub}>{o.sub}</span>}
@@ -201,6 +267,8 @@ export function Combobox({
                 ref={triggerRef}
                 type="button"
                 disabled={disabled}
+                aria-haspopup="listbox"
+                aria-expanded={open}
                 className={cn(
                     styles.trigger,
                     styles[`size-${size}`],
