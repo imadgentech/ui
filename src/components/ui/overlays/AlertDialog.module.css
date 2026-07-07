@@ -24,6 +24,7 @@
     width: calc(100vw - var(--space-32));
     z-index: var(--z-modal);
     animation: imui-alertdialog-slide-in 0.2s ease-out;
+    box-sizing: border-box;
 }
 
 .content[data-state='closed'] {

@@ -114,13 +114,17 @@
      ============================================ */
   --z-base: 0;
   --z-background: -1;
-  --z-popover: 300;
-  --z-tooltip: 400;
   --z-navbar: 1000;
   --z-sticky: 1000;
   --z-overlay: 1050;
   --z-modal: 1100;
-  --z-toast: 1200;
+  /* Popover/DropdownMenu/Combobox/Select/DatePicker all portal to
+     document.body, same as Dialog/Drawer. These must outrank --z-modal —
+     otherwise a popover triggered from inside a Dialog paints under the
+     Dialog's own content and is visually present but unclickable. */
+  --z-popover: 1150;
+  --z-tooltip: 1200;
+  --z-toast: 1300;
 
   /* ============================================
      LAYOUT TOKENS

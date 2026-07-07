@@ -7,6 +7,7 @@
     box-shadow: var(--shadow-md);
     z-index: var(--z-popover);
     animation: imui-dropdown-fade-in 0.15s ease-out;
+    box-sizing: border-box;
 }
 
 .content:focus {
