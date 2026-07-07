@@ -53,7 +53,7 @@ export function CTA({
             className={cn(styles.cta, styles[variant], className)}
             style={style}
             elevation="lg"
-            radius="lg"
+            radius="md"
         >
             <Stack gap="32" align="center">
                 <Stack gap="16" align="center">

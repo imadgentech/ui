@@ -64,7 +64,7 @@ export function PricingCard({
             padding="lg"
             elevation={featured ? 'lg' : 'sm'}
             className={cn(styles.card, featured && styles.featured)}
-            radius="lg"
+            radius="md"
         >
             <Stack gap="32">
                 <Stack gap="16">

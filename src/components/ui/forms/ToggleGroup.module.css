@@ -1,17 +1,19 @@
 .group {
     display: inline-flex;
+    align-items: stretch;
     padding: var(--space-2);
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-md);
     gap: 2px;
+    box-sizing: border-box;
 }
 
 .item {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-8) var(--space-16);
+    padding: 0 var(--space-16);
     border: 1px solid transparent;
     /* Nested inside .group's 2px inset — radius must be outer_radius - inset
        to stay concentric with the group's rounded corners. */
@@ -24,6 +26,44 @@
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     white-space: nowrap;
+    box-sizing: border-box;
+}
+
+/* Sizes — min-height matches Input/Select/Combobox's sm/md/lg exactly, so a
+   ToggleGroup renders at the same real height as a sibling Input/Select at
+   the same size. .group's own 2px padding + 1px border (4px total) and each
+   .item's 1px border are already accounted for below; items stretch to fill
+   the remaining height (see align-items on .group), so only .group needs an
+   explicit min-height. */
+.size-sm {
+    min-height: 32px;
+}
+
+.size-sm .item {
+    padding: 0 var(--space-12);
+}
+
+.size-md {
+    min-height: 40px;
+}
+
+.size-lg {
+    min-height: 48px;
+    font-size: var(--text-md);
+}
+
+.size-lg .item {
+    padding: 0 var(--space-24);
+    font-size: var(--text-md);
+}
+
+/* Touch devices: bump the sm size up to a 44px tap target, matching
+   Input/Select/Combobox's sm so all four stay height-matched. Desktop
+   (mouse/trackpad) keeps the denser 32px sizing above. */
+@media (pointer: coarse) {
+    .size-sm {
+        min-height: 44px;
+    }
 }
 
 .item:hover:not([data-disabled]) {

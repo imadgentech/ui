@@ -193,7 +193,7 @@ Base-8 scale. All values are `rem`.
 | Token | Value | Equivalent to |
 |---|---|---|
 | `--radius-sm` | `0.25rem` | 4px |
-| `--radius-md` | `0.75rem` | 12px |
+| `--radius-md` | `0.625rem` | 10px |
 | `--radius-lg` | `1.125rem` | 18px |
 | `--radius-xl` | `1.625rem` | 26px |
 | `--radius-full` | `9999px` | pill |
@@ -478,8 +478,11 @@ Segmented control — button-group single/multi select, lighter weight than `Tab
 | `value` | `string` (single) \| `string[]` (multiple) | — |
 | `defaultValue` | `string` (single) \| `string[]` (multiple) | — |
 | `onValueChange` | `(value: string) => void` (single) \| `(value: string[]) => void` (multiple) | — |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
 
 `type` discriminates the TypeScript shape of `value`/`onValueChange` — set it to `'multiple'` to get array-typed props.
+
+`size` is pinned to the same 32/40/48px min-height scale as `Input`/`Select`/`Combobox`, so a `ToggleGroup` lines up with a sibling form control at the same size (e.g. next to a search `Input` in a toolbar row).
 
 #### Label
 

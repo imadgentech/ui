@@ -4,7 +4,20 @@ All notable changes to `@imadgentech/ui` are documented here, newest first. Entr
 
 ## [Unreleased]
 
+### Breaking
+
+- **`--radius-md` token** (`tokens.css`) — changed from `0.75rem` (12px) to `0.625rem` (10px), and `Button`'s previously-hardcoded `8px` corner now reads from this token too, so both moved to the same 10px value. `Select`, `Input`, `Combobox`, `DropdownMenu`, `Popover`, `DatePicker`, `Toast`, `Alert`, `Accordion`, `Drawer`'s close button, `Table`, `Textarea`, and `IconButton` all consume `--radius-md` and will render with visibly tighter corners. `Dialog`, `AlertDialog`, `Drawer`'s bottom-sheet corners, `PricingCard`, and `CTA` moved from `--radius-lg` (18px) to `--radius-md`; the contact `Form`'s outer container and inputs moved from `--radius-xl`/hardcoded `20px` to `--radius-md`. **Any consuming app relying on the previous 12px/18px/26px look for these components will see a visibly less-rounded UI** — re-check card- and modal-heavy screens after upgrading.
+
+### Fixed
+
+- `ToggleGroup`: the active item's corner radius (`--radius-sm`, 4px) didn't nest inside the group's rounded container (`--radius-md`) at its 2px padding, leaving a visible sliver of the outer background at each corner. Now `calc(var(--radius-md) - var(--space-2))` so the active box stays concentric with the outer pill.
+- `DropdownMenu`: same nested-radius mismatch between `.content`'s 4px padding/`--radius-md` corner and `.item`'s `--radius-sm` corner. Now `calc(var(--radius-md) - var(--space-4))`.
+- `StatCard`, `EmptyState`: hardcoded `radius="lg"` (18px), inconsistent with every other flat card-style surface in the kit defaulting to `--radius-md`. Now `radius="md"`.
+- `ToggleGroup`: unlike `Button`/`Input`/`Select`/`Combobox`/`DatePicker`/`IconButton`, it had no `min-height` at all, so it rendered a few pixels shorter than a sibling `Input` at the default size — visibly uneven when the two sit in the same toolbar row (e.g. a search `Input` next to a status filter `ToggleGroup`). Added a `size` prop (`'sm' | 'md' | 'lg'`, default `'md'`) pinned to the same 32/40/48px scale as the rest of the kit; see Added below.
+
 ### Added
+
+- `ToggleGroup`: new `size` prop (`'sm' | 'md' | 'lg'`, default `'md'`), matching `Input`/`Select`/`Combobox`'s min-height scale (32/40/48px, with the usual 44px `@media (pointer: coarse)` bump on `sm`). Non-breaking — existing usages render identically at the new `'md'` default.
 
 - `Combobox`: new `searchable` prop (default `true`, non-breaking). Set `false` for a plain listbox with no search input — arrow keys move a highlighted option, Enter selects it, Escape closes. Added `role="listbox"`/`role="option"`/`aria-selected`/`aria-activedescendant` wiring and `aria-haspopup`/`aria-expanded` on the trigger regardless of this prop, since that ARIA gap existed either way.
 - `Flex`: `direction` now accepts a responsive breakpoint map (`{ base, sm, md, lg }`), the same pattern `Grid.columns`/`GridItem.span` already use, so a row can collapse to a column below a breakpoint (e.g. `direction={{ base: 'column', md: 'row' }}`). Plain `'row' | 'column'` still works unchanged.

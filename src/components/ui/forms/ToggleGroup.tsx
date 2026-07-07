@@ -17,6 +17,13 @@ export interface ToggleGroupSingleProps {
     value?: string;
     defaultValue?: string;
     onValueChange?: (value: string) => void;
+    /**
+     * Size — pinned to the same min-height scale as Input/Select/Combobox
+     * (32/40/48px) so a ToggleGroup renders at the same real height as a
+     * sibling form control at the same size.
+     * @default 'md'
+     */
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 
@@ -26,6 +33,13 @@ export interface ToggleGroupMultipleProps {
     value?: string[];
     defaultValue?: string[];
     onValueChange?: (value: string[]) => void;
+    /**
+     * Size — pinned to the same min-height scale as Input/Select/Combobox
+     * (32/40/48px) so a ToggleGroup renders at the same real height as a
+     * sibling form control at the same size.
+     * @default 'md'
+     */
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 
@@ -43,13 +57,14 @@ export type ToggleGroupProps = ToggleGroupSingleProps | ToggleGroupMultipleProps
  * />
  */
 export function ToggleGroup(props: ToggleGroupProps) {
-    const { items, className } = props;
+    const { items, className, size = 'md' } = props;
+    const groupClassName = cn(styles.group, styles[`size-${size}`], className);
 
     if (props.type === 'multiple') {
         return (
             <ToggleGroupPrimitive.Root
                 type="multiple"
-                className={cn(styles.group, className)}
+                className={groupClassName}
                 value={props.value}
                 defaultValue={props.defaultValue}
                 onValueChange={props.onValueChange}
@@ -71,7 +86,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
     return (
         <ToggleGroupPrimitive.Root
             type="single"
-            className={cn(styles.group, className)}
+            className={groupClassName}
             value={props.value}
             defaultValue={props.defaultValue}
             onValueChange={props.onValueChange}

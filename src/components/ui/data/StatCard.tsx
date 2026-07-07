@@ -61,7 +61,7 @@ export function StatCard({
         <Surface
             padding="lg"
             elevation="sm"
-            radius="lg"
+            radius="md"
             className={cn(styles.statCard, styles[`variant-${variant}`], className)}
             style={style}
         >

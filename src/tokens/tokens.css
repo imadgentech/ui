@@ -93,7 +93,7 @@
      BORDER RADIUS
      ============================================ */
   --radius-sm: 0.25rem;   /* 4px */
-  --radius-md: 0.5rem;    /* 8px — matches Button's corner radius */
+  --radius-md: 0.625rem;  /* 10px — matches Button's corner radius */
   --radius-lg: 1.125rem;  /* 18px — matches site --radius */
   --radius-xl: 1.625rem;  /* 26px — matches site --radius2 */
   --radius-full: 9999px;

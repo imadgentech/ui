@@ -46,7 +46,7 @@
     right: 0;
     bottom: 0;
     max-height: min(500px, 85vh);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     animation: imui-drawer-slide-in-bottom 0.25s ease-out;
 }
 
