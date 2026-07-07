@@ -1,13 +1,16 @@
 ﻿import React from 'react';
 import { cn } from '../../../lib/cn';
+import { getResponsiveClasses, type ResponsiveValue } from '../../../lib/responsive';
 import styles from './Flex.module.css';
 
 export interface FlexProps {
     /**
-     * Layout direction
+     * Layout direction. Accepts a single value or a breakpoint map (e.g.
+     * `{ base: 'column', md: 'row' }`) to collapse a row layout to a column
+     * on narrow viewports.
      * @default 'row'
      */
-    direction?: 'row' | 'column';
+    direction?: ResponsiveValue<'row' | 'column'>;
 
     /**
      * Flex wrap
@@ -73,11 +76,13 @@ export function Flex({
     style,
     children,
 }: FlexProps) {
+    const directionClasses = getResponsiveClasses(direction, 'direction', styles);
+
     return (
         <Component
             className={cn(
                 styles.flex,
-                styles[`direction-${direction}`],
+                directionClasses,
                 styles[`wrap-${wrap}`],
                 styles[`align-${align}`],
                 styles[`justify-${justify}`],

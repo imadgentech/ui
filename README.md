@@ -11,6 +11,7 @@ Shared React component library for all IMADGEN Next.js projects. Built on CSS Mo
 - [Installation](#installation)
 - [Setup](#setup)
 - [Token System](#token-system)
+- [Mobile & Responsive Behavior](#mobile--responsive-behavior)
 - [Components](#components)
   - [Forms](#forms)
   - [Layout](#layout)
@@ -250,6 +251,16 @@ Override any token by targeting `:root` in your global CSS **after** importing `
 ```
 
 ---
+
+## Mobile & Responsive Behavior
+
+The kit's breakpoint scale is `sm` 640px / `md` 768px / `lg` 1024px, used consistently by `Grid`, `GridItem`, `Flex`, and `Navbar`.
+
+- **Touch targets.** Interactive controls that render below the ~44px accessibility floor at their `sm` size (`Button`, `IconButton`, `Input`, `Select`, `Combobox`) automatically grow to 44px under `@media (pointer: coarse)` — i.e. on touch devices — while keeping the denser desktop sizing for mouse/trackpad. `Checkbox`, `RadioGroup`, and `Switch` expand their tappable hit area via an invisible `::before` overlay without growing the visible control.
+- **Responsive layout props.** `Grid.columns`, `GridItem.span`/`start`, and `Flex.direction` all accept either a single value or a breakpoint map (`{ base, sm, md, lg }`), e.g. `<Flex direction={{ base: 'column', md: 'row' }}>` to stack on phones and go side-by-side on tablet+.
+- **Overflow-prone components.** `Table` scrolls horizontally instead of breaking layout; `Tabs` scrolls its trigger row horizontally (scrollbar hidden) instead of wrapping or overflowing; `Combobox`'s portal-rendered dropdown clamps its position and width to the viewport so it can't render off-screen near a screen edge.
+- **Dialog/Drawer/AlertDialog** are viewport-relative (`min(…, 90vw)`-style widths), so they fit down to ~320px-wide phone screens without extra configuration.
+- **Navbar** switches from the burger `MobileMenu` to the desktop nav at 1024px (the `lg` breakpoint) — fixed by design for consistency with the rest of the scale; override by passing a `className` with higher specificity if a project needs a different cutover point.
 
 ## Components
 
@@ -617,18 +628,25 @@ Vertical flex stack. The most-used layout primitive.
 
 #### Flex
 
-Horizontal flex with full control.
+Horizontal flex with full control. `direction` accepts a responsive map
+(`{ base, sm, md, lg }`) the same way `Grid`'s `columns` does, so a row can
+collapse to a column below a breakpoint.
 
 ```tsx
 <Flex direction="row" justify="between" align="center" gap="12">
   <Logo />
   <Nav />
 </Flex>
+
+<Flex direction={{ base: 'column', md: 'row' }} gap="16">
+  <Sidebar />
+  <MainContent />
+</Flex>
 ```
 
 | Prop | Type | Default |
 |---|---|---|
-| `direction` | `'row' \| 'column'` | `'row'` |
+| `direction` | `'row' \| 'column' \| { base?, sm?, md?, lg? }` | `'row'` |
 | `wrap` | `'nowrap' \| 'wrap'` | `'nowrap'` |
 | `align` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'stretch'` |
 | `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around'` | `'start'` |

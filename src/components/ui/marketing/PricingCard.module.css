@@ -9,6 +9,8 @@
 
 .header {
     display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
     justify-content: space-between;
     align-items: flex-start;
 }
@@ -44,4 +46,10 @@
 
 .action {
     margin-top: auto;
+}
+
+@media (max-width: 640px) {
+    .price {
+        font-size: 28px;
+    }
 }

@@ -94,6 +94,16 @@
     min-height: auto;
 }
 
+/* Touch devices: bump the sm size up to a 44px tap target, matching
+   Select/Combobox's sm so all three stay height-matched. Desktop (mouse/
+   trackpad) keeps the denser 32px sizing above. */
+@media (pointer: coarse) {
+    .inputStandalone.size-sm,
+    .wrapper.size-sm {
+        min-height: 44px;
+    }
+}
+
 .wrapper .input:focus {
     box-shadow: none;
 }

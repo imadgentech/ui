@@ -78,7 +78,6 @@
     width: 28px;
     height: 28px;
     color: var(--color-text-default);
-/* removed invalid extra closing brace */
 }
 
 .burger span {
@@ -89,6 +88,11 @@
     transition: 0.3s;
 }
 
+/* Desktop nav kicks in at 1024px — matches Grid/GridItem's `lg` breakpoint
+   rather than a one-off value, so it lines up with the rest of the kit's
+   responsive scale (sm 640 / md 768 / lg 1024). Not exposed as a CSS var:
+   @media conditions can't consume custom properties in any browser, so
+   overriding this requires a wrapping className with higher specificity. */
 @media (min-width: 1024px) {
     .desktopNav {
         display: block;

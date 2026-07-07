@@ -15,6 +15,37 @@
     flex-direction: column;
 }
 
+/* Responsive direction overrides — mirrors Grid's columns breakpoints. */
+@media (min-width: 640px) {
+    .direction-sm-row {
+        flex-direction: row;
+    }
+
+    .direction-sm-column {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 768px) {
+    .direction-md-row {
+        flex-direction: row;
+    }
+
+    .direction-md-column {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1024px) {
+    .direction-lg-row {
+        flex-direction: row;
+    }
+
+    .direction-lg-column {
+        flex-direction: column;
+    }
+}
+
 /* Wrap */
 .wrap-nowrap {
     flex-wrap: nowrap;

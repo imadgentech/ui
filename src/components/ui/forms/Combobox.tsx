@@ -87,7 +87,7 @@ export function Combobox({
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
-    const [dropPos, setDropPos] = useState<{ top: number; left: number; width: number } | null>(null);
+    const [dropPos, setDropPos] = useState<{ top: number; left: number; width: number; maxWidth: number } | null>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
@@ -112,9 +112,15 @@ export function Combobox({
 
         function reposition() {
             const rect = triggerRef.current?.getBoundingClientRect();
-            if (rect) {
-                setDropPos({ top: rect.bottom + 4, left: rect.left, width: rect.width });
-            }
+            if (!rect) return;
+
+            const viewportMargin = 8;
+            const maxWidth = Math.min(320, window.innerWidth - viewportMargin * 2);
+            const left = Math.min(
+                Math.max(viewportMargin, rect.left),
+                window.innerWidth - maxWidth - viewportMargin
+            );
+            setDropPos({ top: rect.bottom + 4, left, width: rect.width, maxWidth });
         }
 
         function handleOutside(e: MouseEvent) {
@@ -192,7 +198,13 @@ export function Combobox({
         <div
             id={dropdownId}
             className={styles.dropdown}
-            style={{ position: 'fixed', top: dropPos.top, left: dropPos.left, minWidth: dropPos.width }}
+            style={{
+                position: 'fixed',
+                top: dropPos.top,
+                left: dropPos.left,
+                minWidth: Math.min(dropPos.width, dropPos.maxWidth),
+                maxWidth: dropPos.maxWidth,
+            }}
         >
             {searchable && (
                 <input
@@ -285,11 +297,20 @@ export function Combobox({
                 )}
                 <span className={styles.icons}>
                     {selected && !disabled && (
-                        <span className={styles.clearBtn} onMouseDown={clear}>
-                            ×
+                        <span
+                            className={styles.clearBtn}
+                            onMouseDown={clear}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
                         </span>
                     )}
-                    <span className={styles.arrow}>▾</span>
+                    <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
                 </span>
             </button>
 

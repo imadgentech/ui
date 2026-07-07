@@ -7,6 +7,24 @@ All notable changes to `@imadgentech/ui` are documented here, newest first. Entr
 ### Added
 
 - `Combobox`: new `searchable` prop (default `true`, non-breaking). Set `false` for a plain listbox with no search input — arrow keys move a highlighted option, Enter selects it, Escape closes. Added `role="listbox"`/`role="option"`/`aria-selected`/`aria-activedescendant` wiring and `aria-haspopup`/`aria-expanded` on the trigger regardless of this prop, since that ARIA gap existed either way.
+- `Flex`: `direction` now accepts a responsive breakpoint map (`{ base, sm, md, lg }`), the same pattern `Grid.columns`/`GridItem.span` already use, so a row can collapse to a column below a breakpoint (e.g. `direction={{ base: 'column', md: 'row' }}`). Plain `'row' | 'column'` still works unchanged.
+- New shared `lib/responsive.ts` (`ResponsiveValue`, `getResponsiveClasses`) extracted from `Grid`'s existing implementation and reused by `Flex`; no behavior change for `Grid`.
+- Mobile/touch-target pass across the kit — see new [Mobile & Responsive Behavior](README.md#mobile--responsive-behavior) README section. Summary below under Fixed/Changed.
+
+### Fixed
+
+- `Combobox`: clicking the clear (`×`) button also toggled the dropdown open/closed. The clear handler only stopped propagation on `mousedown`; the browser's subsequent `click` event still bubbled from the clear button up through the trigger `<button>` and fired its `onClick`, silently reopening (or closing) the dropdown right after clearing. Now stops the `click` event too.
+- `Combobox`: the portal-rendered dropdown could render partially off-screen when the trigger sat near the right/bottom edge of a narrow (e.g. phone-width) viewport — its position and max-width are now clamped to `window.innerWidth`.
+- Touch targets below the ~44px accessibility floor: `Checkbox`, `RadioGroup`, and `Switch` had 20–24px hit boxes with no expanded click area; `Tag`'s remove button was 14×14px. All four now expand their tappable area via an invisible `::before` overlay without changing the visible control size. `Tag`'s remove hit area grows to ~32px (a full 44px would overlap neighboring tags in a dense `Cluster`).
+- `Button`, `IconButton`, `Input`, `Select`, `Combobox`: `sm` size now grows to a 44px tap target under `@media (pointer: coarse)` (i.e. touch devices), while keeping the existing denser sizing for mouse/trackpad. `Select`/`Combobox`/`Input`'s `sm`/`md`/`lg` `min-height`s are now pinned identically so all three stay height-matched at every size, including the new touch bump.
+- `Tabs`: the trigger row had no overflow handling — many tabs would run off the edge of a narrow container with no way to reach them. Now scrolls horizontally (scrollbar hidden) instead.
+- `Pagination`: prev/info/next could overflow a narrow (~320px) container since the row never wrapped. Now wraps, with "Page X of Y" moving to its own centered row below Prev/Next under 480px.
+- `PricingCard`: the name + "Recommended" badge header could overflow on a narrow card; now wraps. Price font-size scales down under 640px viewports.
+- Removed a stray leftover comment (`/* removed invalid extra closing brace */`) in `Navbar.module.css`.
+
+### Changed
+
+- Unicode glyph icons (`×`, `▼`/`▾`) across `Select`, `Combobox`, `Dialog`, `Drawer`, `Tag`, and `Alert` replaced with inline SVG icons (matching the stroke-based convention already used by `Accordion`/`Checkbox`/`DatePicker`) — crisper and more visibly sized than the tiny/inconsistently-rendered text glyphs, and immune to source-encoding mishaps like the mojibake fixed in 1.0.20.
 
 ## [1.0.20] — 2026-07-06
 

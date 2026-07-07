@@ -50,6 +50,15 @@
     font-size: 24px;
 }
 
+/* Touch devices: bump the sm size up to a 44px tap target. Desktop (mouse/
+   trackpad) keeps the denser 32px sizing above. */
+@media (pointer: coarse) {
+    .size-sm {
+        width: 44px;
+        height: 44px;
+    }
+}
+
 /* Variants */
 .variant-primary {
     background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary));

@@ -70,6 +70,14 @@
     min-height: 48px;
 }
 
+/* Touch devices: bump the sm size up to a 44px tap target, matching
+   Input/Select's sm so all three stay height-matched. */
+@media (pointer: coarse) {
+    .size-sm {
+        min-height: 44px;
+    }
+}
+
 .selectedLabel {
     flex: 1;
     overflow: hidden;
@@ -112,7 +120,7 @@
 }
 
 .arrow {
-    font-size: 10px;
+    flex-shrink: 0;
     color: var(--color-text-muted);
 }
 

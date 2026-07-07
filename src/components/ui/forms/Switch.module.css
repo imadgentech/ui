@@ -10,6 +10,14 @@
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
+/* Expands the tappable area to a 44px-tall hit box without growing the
+   visual track. */
+.switch::before {
+    content: '';
+    position: absolute;
+    inset: -10px 0;
+}
+
 .switch:hover {
     border-color: var(--color-border-hover);
 }

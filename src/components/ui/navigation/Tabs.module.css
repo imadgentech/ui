@@ -3,6 +3,14 @@
     gap: var(--space-4);
     border-bottom: 1px solid var(--color-border-default);
     margin-bottom: var(--space-24);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+    display: none;
 }
 
 .trigger {
@@ -18,6 +26,8 @@
     margin-bottom: -1px;
     transition: color 0.2s ease, border-color 0.2s ease;
     position: relative;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .trigger:hover {

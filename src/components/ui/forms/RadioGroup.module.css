@@ -29,6 +29,13 @@
     position: relative;
 }
 
+/* Expands the tappable area to ~44px without growing the visual dot. */
+.item::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+}
+
 .item:hover:not([disabled]) {
     border-color: var(--color-border-hover);
 }

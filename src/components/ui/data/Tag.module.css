@@ -29,6 +29,14 @@
     line-height: 1;
     cursor: pointer;
     opacity: 0.7;
+    position: relative;
+}
+
+/* Expands the tappable area to ~32px without growing the visual pill. */
+.remove::before {
+    content: '';
+    position: absolute;
+    inset: -9px;
 }
 
 .remove:hover {

@@ -77,6 +77,14 @@
     gap: 12px;
 }
 
+/* Touch devices: bump the sm size up to a 44px tap target. Desktop (mouse/
+   trackpad) keeps the denser 2rem sizing above. */
+@media (pointer: coarse) {
+    .size-sm {
+        min-height: 2.75rem;
+    }
+}
+
 /* Variants */
 .variant-primary {
     background: transparent;
