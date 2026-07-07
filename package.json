@@ -2,6 +2,14 @@
   "name": "@imadgentech/ui",
   "version": "1.0.24",
   "description": "imadgen shared UI component library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imadgentech/ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imadgentech/ui/issues"
+  },
+  "homepage": "https://github.com/imadgentech/ui#readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -27,13 +35,18 @@
     "./styles.css": "./dist/index.css",
     "./chat.css": "./dist/chat.css",
     "./server.css": "./dist/server.css",
-    "./tokens.css": "./dist/tokens.css"
+    "./tokens.css": "./dist/tokens.css",
+    "./package.json": "./package.json"
   },
   "sideEffects": [
     "**/*.css"
   ],
   "files": [
-    "dist",
+    "dist/**/*.js",
+    "dist/**/*.mjs",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.mts",
+    "dist/**/*.css",
     "CHANGELOG.md"
   ],
   "scripts": {
@@ -113,5 +126,8 @@
     "imadgen"
   ],
   "license": "UNLICENSED",
-  "author": "imadgen"
+  "author": "imadgen",
+  "engines": {
+    "node": ">=20"
+  }
 }
