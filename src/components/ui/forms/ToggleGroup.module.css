@@ -13,7 +13,9 @@
     justify-content: center;
     padding: var(--space-8) var(--space-16);
     border: 1px solid transparent;
-    border-radius: var(--radius-sm);
+    /* Nested inside .group's 2px inset — radius must be outer_radius - inset
+       to stay concentric with the group's rounded corners. */
+    border-radius: calc(var(--radius-md) - var(--space-2));
     background: transparent;
     color: var(--color-text-muted);
     font-size: var(--text-sm);
