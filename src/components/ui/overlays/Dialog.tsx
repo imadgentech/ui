@@ -47,6 +47,20 @@ export interface DialogProps {
     maxWidth?: string;
 
     /**
+     * 'solid' gives the content surface an opaque background — the right
+     * choice for most modals, since translucency over a large area reads as
+     * unfinished rather than deliberate. 'translucent' restores the prior
+     * frosted (but unblurred) surface for cases that want it.
+     * @default 'solid'
+     */
+    background?: 'solid' | 'translucent';
+
+    /**
+     * Additional class name applied to the dialog's content surface.
+     */
+    className?: string;
+
+    /**
      * Content
      */
     children: React.ReactNode;
@@ -69,6 +83,8 @@ export function Dialog({
     description,
     size = 'md',
     maxWidth,
+    background = 'solid',
+    className,
     children,
 }: DialogProps) {
     return (
@@ -83,7 +99,12 @@ export function Dialog({
                 <DialogPrimitive.Overlay className={styles.overlay} />
 
                 <DialogPrimitive.Content
-                    className={cn(styles.content, styles[`size-${size}`])}
+                    className={cn(
+                        styles.content,
+                        styles[`size-${size}`],
+                        background === 'translucent' && styles['bg-translucent'],
+                        className
+                    )}
                     style={maxWidth ? { maxWidth } : undefined}
                 >
                     <div className={styles.header}>

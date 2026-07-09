@@ -21,6 +21,57 @@ export interface ConversationMessage {
   timestamp: string;
 }
 
+// Module scope, not a closure — pure function of its argument, so it's
+// stable across renders and safe to call from the memo comparator below.
+function getMessageContent(msg: UIMessage): string {
+  if (msg.parts && Array.isArray(msg.parts)) {
+    return (msg.parts as Array<{ type: string; text?: string }>)
+      .filter((part) => part.type === 'text')
+      .map((part) => part.text ?? '')
+      .join('');
+  }
+  return (msg as unknown as { content?: string }).content ?? '';
+}
+
+// `messages` gets a new array reference on every streamed token while the
+// assistant's reply is growing. Without this, every prior message in the
+// conversation re-renders (re-running getMessageContent + rebuilding JSX)
+// on every single streamed chunk, not just the one actually changing.
+// Comparator is content-based rather than relying on object identity, so
+// this holds regardless of whether the upstream array preserves reference
+// equality for untouched messages.
+const ChatMessageBubble = React.memo(
+  function ChatMessageBubble({ message }: { message: Message }) {
+    return (
+      <div
+        className={cn(
+          styles.messageWrapper,
+          message.role === 'user' ? styles.userWrapper : styles.assistantWrapper
+        )}
+      >
+        <div className={cn(
+          styles.bubble,
+          message.role === 'user' ? styles.userBubble : styles.assistantBubble
+        )}>
+          <Text size="sm">
+            {getMessageContent(message)}
+          </Text>
+        </div>
+        <Text size="xs" tone="muted" className={styles.timestamp}>
+          {message.timestamp
+            ? new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          }
+        </Text>
+      </div>
+    );
+  },
+  (prev, next) =>
+    prev.message.id === next.message.id &&
+    prev.message.timestamp === next.message.timestamp &&
+    getMessageContent(prev.message) === getMessageContent(next.message)
+);
+
 export interface ChatPageProps {
   initialMessages?: Message[];
   className?: string;
@@ -29,6 +80,16 @@ export interface ChatPageProps {
   isFullPage?: boolean;
   variant?: 'full' | 'compact' | 'minimal';
   placeholder?: string;
+  /**
+   * Header title text.
+   * @default 'Imadgen AI'
+   */
+  title?: string;
+  /**
+   * Header subtitle text.
+   * @default 'Quantum-V2 Core'
+   */
+  subtitle?: string;
   /**
    * Called once on mount with the generated session ID.
    * Use this to persist the session in your backend.
@@ -52,6 +113,8 @@ export function ChatPage({
   isFullPage,
   variant = 'full',
   placeholder = "Ask anything...",
+  title = 'Imadgen AI',
+  subtitle = 'Quantum-V2 Core',
   onSessionCreate,
   onSaveConversation,
 }: ChatPageProps) {
@@ -78,18 +141,6 @@ export function ChatPage({
 
   const isStreaming = isChatLoading || status === 'submitted' || status === 'streaming';
   const canSend = status === 'ready' || !status;
-
-
-  // Helper function to extract message content
-  const getMessageContent = (msg: UIMessage): string => {
-    if (msg.parts && Array.isArray(msg.parts)) {
-      return (msg.parts as Array<{ type: string; text?: string }>)
-        .filter((part) => part.type === 'text')
-        .map((part) => part.text ?? '')
-        .join('');
-    }
-    return (msg as unknown as { content?: string }).content ?? '';
-  };
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -188,8 +239,8 @@ export function ChatPage({
           <Flex align="center" gap="12">
             <div className={styles.statusDot} />
             <Stack gap="0">
-              <Text weight="semibold" size="sm">Imadgen AI</Text>
-              <Text size="xs" tone="muted">Quantum-V2 Core</Text>
+              <Text weight="semibold" size="sm">{title}</Text>
+              <Text size="xs" tone="muted">{subtitle}</Text>
             </Stack>
           </Flex>
 
@@ -215,11 +266,11 @@ export function ChatPage({
 
       {/* Service unavailable banner */}
       {isDisabled && (
-        <div style={{ padding: '12px 16px', backgroundColor: 'rgba(239, 68, 68, 0.12)', borderBottom: '1px solid rgba(239, 68, 68, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+        <div style={{ padding: '12px 16px', backgroundColor: 'rgba(var(--color-error-rgb), 0.12)', borderBottom: '1px solid rgba(var(--color-error-rgb), 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
           <Text size="sm" tone="danger">Chat unavailable - service failed to connect. Please try again later.</Text>
           <button
             onClick={resetChat}
-            style={{ flexShrink: 0, fontSize: '12px', padding: '4px 10px', borderRadius: '6px', border: '1px solid rgba(239, 68, 68, 0.4)', background: 'transparent', color: 'inherit', cursor: 'pointer' }}
+            style={{ flexShrink: 0, fontSize: '12px', padding: '4px 10px', borderRadius: '6px', border: '1px solid rgba(var(--color-error-rgb), 0.4)', background: 'transparent', color: 'inherit', cursor: 'pointer' }}
           >
             Retry
           </button>
@@ -228,7 +279,7 @@ export function ChatPage({
 
       {/* Error Message */}
       {error && !isDisabled && (
-        <div style={{ padding: '12px 16px', backgroundColor: 'rgba(239, 68, 68, 0.1)' }}>
+        <div style={{ padding: '12px 16px', backgroundColor: 'rgba(var(--color-error-rgb), 0.1)' }}>
           <Text size="sm" tone="danger">{error}</Text>
         </div>
       )}
@@ -237,28 +288,7 @@ export function ChatPage({
       <div className={styles.messagesArea} ref={scrollRef}>
         <Stack gap="16">
           {messages.map((message) => (
-            <div
-              key={message.id}
-              className={cn(
-                styles.messageWrapper,
-                message.role === 'user' ? styles.userWrapper : styles.assistantWrapper
-              )}
-            >
-              <div className={cn(
-                styles.bubble,
-                message.role === 'user' ? styles.userBubble : styles.assistantBubble
-              )}>
-                <Text size="sm">
-                  {getMessageContent(message)}
-                </Text>
-              </div>
-              <Text size="xs" tone="muted" className={styles.timestamp}>
-                {(message as Message).timestamp
-                  ? new Date((message as Message).timestamp as string).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                  : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                }
-              </Text>
-            </div>
+            <ChatMessageBubble key={message.id} message={message as Message} />
           ))}
           {isStreaming && (
             <div className={styles.assistantWrapper}>

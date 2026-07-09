@@ -1,26 +1,9 @@
 ﻿import React from 'react';
 import { cn } from '../../../lib/cn';
+import { getResponsiveClasses, type ResponsiveValue } from '../../../lib/responsive';
+import styles from './GridItem.module.css';
 
-type ResponsiveValue<T> = T | { base?: T; md?: T; lg?: T };
-
-function getResponsiveClasses<T extends string | number>(
-    value: ResponsiveValue<T> | undefined,
-    prefix: string
-): string {
-    if (!value) return '';
-
-    if (typeof value === 'object') {
-        const classes: string[] = [];
-        if (value.base) classes.push(`${prefix}-${value.base}`);
-        if (value.md) classes.push(`${prefix}-md-${value.md}`);
-        if (value.lg) classes.push(`${prefix}-lg-${value.lg}`);
-        return classes.join(' ');
-    }
-
-    return `${prefix}-${value}`;
-}
-
-export interface GridItemProps {
+export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * Column span (1-12)
      * @default 1
@@ -53,24 +36,24 @@ export interface GridItemProps {
  *   Content
  * </GridItem>
  */
-export function GridItem({
-    span,
-    start,
-    className,
-    style,
-    children,
-}: GridItemProps) {
-    return (
-        <div
-            className={cn(
-                getResponsiveClasses(span, 'span'),
-                getResponsiveClasses(start, 'start'),
-                className
-            )}
-            style={style}
-        >
-            {children}
-        </div>
-    );
-}
+export const GridItem = React.forwardRef<HTMLDivElement, GridItemProps>(
+    ({ span, start, className, style, children, ...rest }, ref) => {
+        return (
+            <div
+                ref={ref}
+                className={cn(
+                    getResponsiveClasses(span, 'span', styles),
+                    getResponsiveClasses(start, 'start', styles),
+                    className
+                )}
+                style={style}
+                {...rest}
+            >
+                {children}
+            </div>
+        );
+    }
+);
+
+GridItem.displayName = 'GridItem';
 

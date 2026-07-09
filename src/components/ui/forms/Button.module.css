@@ -14,14 +14,14 @@
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
+    box-shadow: var(--shadow-md);
 }
 
 .button:hover:not(:disabled) {
     transform: translateY(-1px);
     background: var(--color-bg-surface-hover);
     border-color: var(--color-border-hover);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+    box-shadow: var(--shadow-lg);
 }
 
 .button:active:not(:disabled) {
@@ -88,15 +88,15 @@
 /* Variants */
 .variant-primary {
     background: transparent;
-    border-color: rgba(255, 106, 0, 0.3);
+    border-color: rgba(var(--color-brand-primary-rgb), 0.3);
     color: var(--color-text-default);
 }
 
 .variant-primary:hover:not(:disabled) {
-    background: rgba(255, 106, 0, 0.10);
-    border-color: rgba(255, 106, 0, 0.6);
+    background: rgba(var(--color-brand-primary-rgb), 0.10);
+    border-color: rgba(var(--color-brand-primary-rgb), 0.6);
     color: var(--color-text-default);
-    box-shadow: 0 5px 20px rgba(255, 106, 0, 0.10);
+    box-shadow: 0 5px 20px rgba(var(--color-brand-primary-rgb), 0.10);
 }
 
 .variant-secondary {
@@ -126,45 +126,55 @@
 }
 
 .variant-danger {
-    background: rgba(255, 50, 50, 0.1);
-    border-color: rgba(255, 50, 50, 0.3);
-    color: #ff4d4d;
+    background: rgba(var(--color-error-rgb), 0.1);
+    border-color: rgba(var(--color-error-rgb), 0.3);
+    color: var(--color-error);
 }
 
 .variant-danger:hover:not(:disabled) {
-    background: rgba(255, 50, 50, 0.15);
-    border-color: #ff4d4d;
+    background: rgba(var(--color-error-rgb), 0.15);
+    border-color: var(--color-error);
 }
 
 .variant-brand {
-    background: rgba(255, 106, 0, 0.1);
-    border-color: rgba(255, 106, 0, 0.3);
+    background: rgba(var(--color-brand-primary-rgb), 0.1);
+    border-color: rgba(var(--color-brand-primary-rgb), 0.3);
     color: var(--color-text-default);
 }
 
 .variant-brand:hover:not(:disabled) {
-    background: rgba(255, 106, 0, 0.15);
-    border-color: #ff6a00;
+    background: rgba(var(--color-brand-primary-rgb), 0.15);
+    border-color: var(--color-brand-primary);
 }
 
 /* Solid-filled brand button, for primary actions (e.g. "Save", "Create")
-   that need to read as filled rather than the ghost-tint 'brand' above. */
+   that need to read as filled rather than the ghost-tint 'brand' above.
+   NOTE: #c85c0e / #b35209 are NOT pure black-darkened shades of
+   --color-brand-primary (#ff6a00) — they carry a small blue component
+   (0x0e / 0x09) that a plain `color-mix(..., black)` darken can never
+   reproduce (mixing a zero-blue color with black keeps blue at zero).
+   That means these are hand-picked hover/solid shades, not a mechanical
+   derivation, so they're left as literals rather than guessing a
+   color-mix percentage that would only approximately match and would
+   silently drift if --color-brand-primary is rebranded. Revisit if/when
+   the design system defines dedicated --color-brand-primary-{600,700}
+   step tokens.*/
 .variant-brand-solid {
     background: #c85c0e;
     border-color: #c85c0e;
-    color: #fff;
+    color: var(--color-text-on-brand);
 }
 
 .variant-brand-solid:hover:not(:disabled) {
     background: #b35209;
     border-color: #b35209;
-    color: #fff;
+    color: var(--color-text-on-brand);
 }
 
 .variant-brand-solid:disabled {
     background: rgba(200, 92, 14, 0.35);
     border-color: transparent;
-    color: rgba(255, 255, 255, 0.5);
+    color: color-mix(in srgb, var(--color-text-on-brand) 50%, transparent);
 }
 
 .variant-subtle {

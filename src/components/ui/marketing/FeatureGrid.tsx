@@ -24,6 +24,11 @@ export interface FeatureGridProps {
      * @default 3
      */
     columns?: 1 | 2 | 3 | 4;
+
+    /**
+     * Additional CSS classes
+     */
+    className?: string;
 }
 
 /**
@@ -32,11 +37,13 @@ export interface FeatureGridProps {
 export function FeatureGrid({
     features,
     columns = 3,
+    className,
 }: FeatureGridProps) {
     return (
         <Grid
             columns={{ base: 1, md: 2, lg: columns }}
             gap="24"
+            className={className}
         >
             {features.map((feature, index) => (
                 <GridItem key={index}>

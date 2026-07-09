@@ -22,6 +22,29 @@ export interface DrawerProps {
      */
     side?: 'left' | 'right' | 'bottom';
 
+    /**
+     * Raw CSS width, for `side="left" | "right"` panels that need to be
+     * narrower or wider than the default (`min(400px, 90vw)`).
+     * Ignored for `side="bottom"` — use `height` instead.
+     */
+    width?: string;
+
+    /**
+     * Raw CSS max-height, for `side="bottom"` panels that need to be
+     * shorter or taller than the default (`min(500px, 85vh)`).
+     * Ignored for `side="left" | "right"`.
+     */
+    height?: string;
+
+    /**
+     * 'solid' gives the panel an opaque background — the right choice for
+     * most drawers, since translucency over a large area reads as unfinished
+     * rather than deliberate. 'translucent' restores the prior frosted (but
+     * unblurred) surface for cases that want it.
+     * @default 'solid'
+     */
+    background?: 'solid' | 'translucent';
+
     children: React.ReactNode;
 
     className?: string;
@@ -44,15 +67,31 @@ export function Drawer({
     title,
     description,
     side = 'right',
+    width,
+    height,
+    background = 'solid',
     children,
     className,
 }: DrawerProps) {
+    const sizeStyle =
+        side === 'bottom'
+            ? (height ? { maxHeight: height } : undefined)
+            : (width ? { width } : undefined);
+
     return (
         <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
             {trigger && <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>}
             <DialogPrimitive.Portal>
                 <DialogPrimitive.Overlay className={styles.overlay} />
-                <DialogPrimitive.Content className={cn(styles.content, styles[`side-${side}`], className)}>
+                <DialogPrimitive.Content
+                    className={cn(
+                        styles.content,
+                        styles[`side-${side}`],
+                        background === 'translucent' && styles['bg-translucent'],
+                        className
+                    )}
+                    style={sizeStyle}
+                >
                     <div className={styles.header}>
                         <DialogPrimitive.Title className={title ? styles.title : styles.srOnly}>
                             {title || 'Panel'}

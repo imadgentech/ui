@@ -2,7 +2,7 @@
 import { cn } from '../../../lib/cn';
 import styles from './Cluster.module.css';
 
-export interface ClusterProps {
+export interface ClusterProps extends React.HTMLAttributes<HTMLElement> {
     /**
      * Gap between items
      * @default '8'
@@ -50,28 +50,42 @@ export interface ClusterProps {
  *   <button>Button 2</button>
  * </Cluster>
  */
-export function Cluster({
-    gap = '8',
-    justify = 'start',
-    align = 'center',
-    as: Component = 'div',
-    className,
-    style,
-    children,
-}: ClusterProps) {
-    return (
-        <Component
-            className={cn(
-                styles.cluster,
-                styles[`gap-${gap}`],
-                styles[`justify-${justify}`],
-                styles[`align-${align}`],
-                className
-            )}
-            style={style}
-        >
-            {children}
-        </Component>
-    );
-}
+export const Cluster = React.forwardRef<HTMLElement, ClusterProps>(
+    (
+        {
+            gap = '8',
+            justify = 'start',
+            align = 'center',
+            as: Component = 'div',
+            className,
+            style,
+            children,
+            ...rest
+        },
+        ref
+    ) => {
+        // See Stack.tsx for why this uses createElement instead of JSX: `as`
+        // is typed as `keyof JSX.IntrinsicElements`, and JSX would check this
+        // component's HTMLAttributes-shaped props against every element in
+        // that union (including SVG elements with incompatible prop types).
+        return React.createElement(
+            Component as React.ElementType,
+            {
+                ref,
+                className: cn(
+                    styles.cluster,
+                    styles[`gap-${gap}`],
+                    styles[`justify-${justify}`],
+                    styles[`align-${align}`],
+                    className
+                ),
+                style,
+                ...rest,
+            },
+            children
+        );
+    }
+);
+
+Cluster.displayName = 'Cluster';
 

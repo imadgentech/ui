@@ -3,7 +3,7 @@ import { cn } from '../../../lib/cn';
 import { getResponsiveClasses, type ResponsiveValue } from '../../../lib/responsive';
 import styles from './Flex.module.css';
 
-export interface FlexProps {
+export interface FlexProps extends React.HTMLAttributes<HTMLElement> {
     /**
      * Layout direction. Accepts a single value or a breakpoint map (e.g.
      * `{ base: 'column', md: 'row' }`) to collapse a row layout to a column
@@ -64,36 +64,50 @@ export interface FlexProps {
 /**
  * Flex component for flexible layouts.
  */
-export function Flex({
-    direction = 'row',
-    wrap = 'nowrap',
-    align = 'stretch',
-    justify = 'start',
-    gap = '0',
-    as: Component = 'div',
-    fullWidth = false,
-    className,
-    style,
-    children,
-}: FlexProps) {
-    const directionClasses = getResponsiveClasses(direction, 'direction', styles);
+export const Flex = React.forwardRef<HTMLElement, FlexProps>(
+    (
+        {
+            direction = 'row',
+            wrap = 'nowrap',
+            align = 'stretch',
+            justify = 'start',
+            gap = '0',
+            as: Component = 'div',
+            fullWidth = false,
+            className,
+            style,
+            children,
+            ...rest
+        },
+        ref
+    ) => {
+        const directionClasses = getResponsiveClasses(direction, 'direction', styles);
 
-    return (
-        <Component
-            className={cn(
-                styles.flex,
-                directionClasses,
-                styles[`wrap-${wrap}`],
-                styles[`align-${align}`],
-                styles[`justify-${justify}`],
-                styles[`gap-${gap}`],
-                fullWidth && styles.fullWidth,
-                className
-            )}
-            style={style}
-        >
-            {children}
-        </Component>
-    );
-}
+        // See Stack.tsx for why this uses createElement instead of JSX: `as`
+        // is typed as `keyof JSX.IntrinsicElements`, and JSX would check this
+        // component's HTMLAttributes-shaped props against every element in
+        // that union (including SVG elements with incompatible prop types).
+        return React.createElement(
+            Component as React.ElementType,
+            {
+                ref,
+                className: cn(
+                    styles.flex,
+                    directionClasses,
+                    styles[`wrap-${wrap}`],
+                    styles[`align-${align}`],
+                    styles[`justify-${justify}`],
+                    styles[`gap-${gap}`],
+                    fullWidth && styles.fullWidth,
+                    className
+                ),
+                style,
+                ...rest,
+            },
+            children
+        );
+    }
+);
+
+Flex.displayName = 'Flex';
 

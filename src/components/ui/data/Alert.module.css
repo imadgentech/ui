@@ -68,8 +68,8 @@
 }
 
 .tone-info {
-    background: rgba(255, 174, 0, 0.08);
-    border-color: rgba(255, 174, 0, 0.25);
+    background: rgba(var(--color-brand-accent-rgb), 0.08);
+    border-color: rgba(var(--color-brand-accent-rgb), 0.25);
 }
 
 .tone-info .message {
@@ -77,8 +77,8 @@
 }
 
 .tone-success {
-    background: rgba(34, 197, 94, 0.08);
-    border-color: rgba(34, 197, 94, 0.25);
+    background: rgba(var(--color-success-rgb), 0.08);
+    border-color: rgba(var(--color-success-rgb), 0.25);
 }
 
 .tone-success .message {
@@ -86,8 +86,8 @@
 }
 
 .tone-warning {
-    background: rgba(245, 158, 11, 0.08);
-    border-color: rgba(245, 158, 11, 0.25);
+    background: rgba(var(--color-warning-rgb), 0.08);
+    border-color: rgba(var(--color-warning-rgb), 0.25);
 }
 
 .tone-warning .message {
@@ -95,10 +95,19 @@
 }
 
 .tone-danger {
-    background: rgba(239, 68, 68, 0.08);
-    border-color: rgba(239, 68, 68, 0.25);
+    background: rgba(var(--color-error-rgb), 0.08);
+    border-color: rgba(var(--color-error-rgb), 0.25);
 }
 
 .tone-danger .message {
     color: var(--color-error);
+}
+
+.tone-custom {
+    background: none;
+    border-color: transparent;
+}
+
+.tone-custom .message {
+    color: inherit;
 }

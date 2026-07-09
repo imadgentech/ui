@@ -57,6 +57,24 @@ export function FormField({
     style,
     children,
 }: FormFieldProps) {
+    const errorId = error ? `${id}-error` : undefined;
+    const hintId = hint ? `${id}-hint` : undefined;
+    // Error takes precedence over hint when both are provided.
+    const describedById = errorId ?? hintId;
+
+    const control =
+        React.isValidElement(children)
+            ? React.cloneElement(children as React.ReactElement<Record<string, unknown>>, {
+                  'aria-invalid': !!error,
+                  'aria-describedby': [
+                      describedById,
+                      (children.props as { 'aria-describedby'?: string })['aria-describedby'],
+                  ]
+                      .filter(Boolean)
+                      .join(' ') || undefined,
+              })
+            : children;
+
     return (
         <div className={cn(styles.formField, className)} style={style}>
             {label && (
@@ -65,12 +83,12 @@ export function FormField({
                 </Label>
             )}
 
-            {children}
+            {control}
 
             {error ? (
-                <ErrorText>{error}</ErrorText>
+                <ErrorText id={errorId}>{error}</ErrorText>
             ) : hint ? (
-                <HelperText>{hint}</HelperText>
+                <HelperText id={hintId}>{hint}</HelperText>
             ) : null}
         </div>
     );

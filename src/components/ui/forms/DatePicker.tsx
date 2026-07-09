@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '../../../lib/cn';
 import styles from './DatePicker.module.css';
@@ -44,6 +44,26 @@ export interface DatePickerProps {
      */
     format?: (date: Date) => string;
 
+    /**
+     * Short weekday labels for the calendar header, Sunday-first (same order
+     * as the default `WEEKDAYS` array), regardless of `weekStartsOn`.
+     * @default ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+     */
+    weekdayLabels?: string[];
+
+    /**
+     * Month labels, January-first.
+     * @default ['January', ..., 'December']
+     */
+    monthLabels?: string[];
+
+    /**
+     * First day of the week shown in the calendar grid.
+     * `0` = Sunday, `1` = Monday.
+     * @default 0
+     */
+    weekStartsOn?: 0 | 1;
+
     className?: string;
 }
 
@@ -77,11 +97,15 @@ function isSameDay(a: Date, b: Date): boolean {
     return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 }
 
-function buildGrid(viewDate: Date): Date[] {
+function buildGrid(viewDate: Date, weekStartsOn: 0 | 1 = 0): Date[] {
     const year = viewDate.getFullYear();
     const month = viewDate.getMonth();
     const firstOfMonth = new Date(year, month, 1);
-    const startOffset = firstOfMonth.getDay();
+    // Days between the grid's first column and the 1st of the month. For a
+    // Sunday-start grid this is just `getDay()`; for a Monday-start grid,
+    // Sunday (getDay() === 0) needs to land in the last column rather than
+    // being dropped, hence the `+ 7) % 7` wrap.
+    const startOffset = (firstOfMonth.getDay() - weekStartsOn + 7) % 7;
     const gridStart = new Date(year, month, 1 - startOffset);
 
     return Array.from({ length: 42 }, (_, i) => new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + i));
@@ -121,6 +145,9 @@ export function DatePicker({
     max,
     size = 'md',
     format = defaultFormat,
+    weekdayLabels = WEEKDAYS,
+    monthLabels = MONTHS,
+    weekStartsOn = 0,
     className,
 }: DatePickerProps) {
     const [open, setOpen] = useState(false);
@@ -129,6 +156,11 @@ export function DatePicker({
     const selectedDate = value ? parseISODate(value) : null;
     const [viewDate, setViewDate] = useState(() => selectedDate ?? new Date());
     const triggerRef = useRef<HTMLButtonElement>(null);
+
+    // Otherwise this rebuilds (42 Date allocations + formatting) on every
+    // render, including ones unrelated to the calendar itself — e.g. the
+    // scroll/resize reposition handler below re-renders the whole component.
+    const grid = useMemo(() => buildGrid(viewDate, weekStartsOn), [viewDate, weekStartsOn]);
 
     useEffect(() => {
         const frame = requestAnimationFrame(() => setMounted(true));
@@ -205,7 +237,7 @@ export function DatePicker({
                     ‹
                 </button>
                 <span className={styles.monthLabel}>
-                    {MONTHS[viewDate.getMonth()]} {viewDate.getFullYear()}
+                    {monthLabels[viewDate.getMonth()]} {viewDate.getFullYear()}
                 </span>
                 <button
                     type="button"
@@ -218,13 +250,16 @@ export function DatePicker({
             </div>
 
             <div className={styles.weekdays}>
-                {WEEKDAYS.map((w) => (
-                    <span key={w} className={styles.weekday}>{w}</span>
+                {(weekStartsOn === 1
+                    ? [...weekdayLabels.slice(1), weekdayLabels[0]]
+                    : weekdayLabels
+                ).map((w, i) => (
+                    <span key={`${w}-${i}`} className={styles.weekday}>{w}</span>
                 ))}
             </div>
 
             <div className={styles.grid}>
-                {buildGrid(viewDate).map((date) => {
+                {grid.map((date) => {
                     const outside = date.getMonth() !== viewDate.getMonth();
                     const dayDisabled = isDisabled(date);
                     return (

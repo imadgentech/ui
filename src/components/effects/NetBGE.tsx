@@ -27,8 +27,20 @@ export default function NetBGE() {
 
         const rnd = (a: number, b: number) => a + Math.random() * (b - a)
 
-        const getPurple = () => getComputedStyle(document.documentElement).getPropertyValue('--color-brand-primary').trim() || '#ff6a00'
-        const getOrange2 = () => getComputedStyle(document.documentElement).getPropertyValue('--color-brand-secondary').trim() || '#ff8a1f'
+        // These only change on a theme toggle, but the draw loop runs at
+        // 60fps — re-reading via getComputedStyle twice per frame is a real
+        // (if small) per-frame cost. Cache them and only re-read when the
+        // theme actually changes.
+        let cachedPurple = ''
+        let cachedOrange2 = ''
+        const readColors = () => {
+            const style = getComputedStyle(document.documentElement)
+            cachedPurple = style.getPropertyValue('--color-brand-primary').trim() || '#ff6a00'
+            cachedOrange2 = style.getPropertyValue('--color-brand-secondary').trim() || '#ff8a1f'
+        }
+        readColors()
+        const themeObserver = new MutationObserver(readColors)
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
 
         const resize = () => {
             const rect = c.getBoundingClientRect()
@@ -59,12 +71,12 @@ export default function NetBGE() {
             if (n.y > h + pad) n.y = -pad
         }
 
-        let animId: number
+        let animId: number = 0
         const draw = (t: number) => {
             ctx.clearRect(0, 0, w, h)
 
-            const startColor = getPurple()
-            const endColor = getOrange2()
+            const startColor = cachedPurple
+            const endColor = cachedOrange2
 
             const grad = ctx.createLinearGradient(0, 0, w, h)
             grad.addColorStop(0, startColor)
@@ -113,7 +125,16 @@ export default function NetBGE() {
         }
 
         resize()
-        animId = requestAnimationFrame(draw)
+
+        // If the user prefers reduced motion, draw a single static frame
+        // (t = 0) and don't start the animation loop.
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        if (prefersReducedMotion) {
+            draw(0)
+            cancelAnimationFrame(animId)
+        } else {
+            animId = requestAnimationFrame(draw)
+        }
 
         const onResize = () => { resize() }
         window.addEventListener('resize', onResize)
@@ -121,6 +142,7 @@ export default function NetBGE() {
         return () => {
             window.removeEventListener('resize', onResize)
             cancelAnimationFrame(animId)
+            themeObserver.disconnect()
         }
     }, [])
 

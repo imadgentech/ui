@@ -43,18 +43,60 @@ export default function EmbersBGE() {
             }
         }
 
-        let animId: number
+        // Only changes on a theme toggle; cache it instead of re-reading
+        // via getComputedStyle on every animation frame.
+        let cachedBrandRgb = '255, 106, 0'
+        const readBrandRgb = () => {
+            cachedBrandRgb = getComputedStyle(document.documentElement).getPropertyValue('--color-brand-primary-rgb').trim() || '255, 106, 0'
+        }
+        readBrandRgb()
+
+        // Each ember's glow is a radial gradient baked once into an offscreen
+        // sprite and reused via drawImage — building a fresh
+        // createRadialGradient + arc/fill per particle per frame (90
+        // particles x 60fps) is the dominant per-frame cost in this effect;
+        // the gradient shape is identical for every ember (only x/y differ),
+        // so there's nothing to recompute per-particle once it's rasterized.
+        const SPRITE_SIZE = 256
+        let glowSprite: HTMLCanvasElement | null = null
+        const buildGlowSprite = () => {
+            const sprite = document.createElement('canvas')
+            sprite.width = SPRITE_SIZE
+            sprite.height = SPRITE_SIZE
+            const sctx = sprite.getContext('2d')
+            if (!sctx) return null
+            const cx = SPRITE_SIZE / 2
+            const cy = SPRITE_SIZE / 2
+            const radius = SPRITE_SIZE / 2
+            const g = sctx.createRadialGradient(cx, cy, 0, cx, cy, radius)
+            g.addColorStop(0, `rgba(${cachedBrandRgb},1)`)
+            g.addColorStop(0.45, `rgba(255,138,31,0.55)`)
+            g.addColorStop(1, `rgba(255,138,31,0)`)
+            sctx.fillStyle = g
+            sctx.beginPath()
+            sctx.arc(cx, cy, radius, 0, Math.PI * 2)
+            sctx.fill()
+            return sprite
+        }
+        glowSprite = buildGlowSprite()
+        // Theme toggles are rare — re-read the color and rebuild the sprite
+        // then, instead of on every animation frame.
+        const themeObserver = new MutationObserver(() => {
+            readBrandRgb()
+            glowSprite = buildGlowSprite()
+        })
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+
+        let animId: number = 0
         const draw = () => {
             ctx.clearRect(0, 0, w, h)
             for (const p of pts) {
-                const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 8)
-                g.addColorStop(0, `rgba(255,106,0,${p.a})`)
-                g.addColorStop(0.45, `rgba(255,138,31,${p.a * 0.55})`)
-                g.addColorStop(1, `rgba(255,138,31,0)`)
-                ctx.fillStyle = g
-                ctx.beginPath()
-                ctx.arc(p.x, p.y, p.r * 8, 0, Math.PI * 2)
-                ctx.fill()
+                if (glowSprite) {
+                    const size = p.r * 16
+                    ctx.globalAlpha = p.a
+                    ctx.drawImage(glowSprite, p.x - size / 2, p.y - size / 2, size, size)
+                    ctx.globalAlpha = 1
+                }
 
                 ctx.fillStyle = `rgba(255,255,255,${p.a * 0.55})`
                 ctx.beginPath()
@@ -73,7 +115,16 @@ export default function EmbersBGE() {
 
         resize()
         seed()
+
+        // draw() schedules its own next frame via requestAnimationFrame; if
+        // the user prefers reduced motion we let it draw exactly one static
+        // frame and then cancel the frame it just scheduled, instead of
+        // letting the loop continue indefinitely.
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         draw()
+        if (prefersReducedMotion) {
+            cancelAnimationFrame(animId)
+        }
 
         const onResize = () => { resize(); seed(); }
         window.addEventListener('resize', onResize)
@@ -81,6 +132,7 @@ export default function EmbersBGE() {
         return () => {
             window.removeEventListener('resize', onResize)
             cancelAnimationFrame(animId)
+            themeObserver.disconnect()
         }
     }, [])
 

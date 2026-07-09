@@ -28,7 +28,7 @@ export interface StatCardProps {
      * for the orange accent treatment.
      * @default 'neutral'
      */
-    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger' | 'custom';
 
     /**
      * Additional CSS classes

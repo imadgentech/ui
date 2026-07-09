@@ -14,17 +14,20 @@
 /* Content */
 .content {
     position: fixed;
-    top: 50%;
+    /* Centers in the content area below a fixed navbar when the consuming
+       app sets --overlay-center-offset (defaults to 0px, so this is a no-op
+       for existing layouts with no fixed top navbar). */
+    top: calc(50% + var(--overlay-center-offset) / 2);
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--color-bg-surface);
+    background: var(--color-bg-surface-solid);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-xl);
     padding: var(--space-24);
     max-width: 500px;
     width: calc(100vw - var(--space-32));
-    max-height: calc(100vh - var(--space-32));
+    max-height: calc(100vh - var(--space-32) - var(--overlay-center-offset));
     overflow-y: auto;
     z-index: var(--z-modal);
     animation: slideIn 0.2s ease-out;
@@ -39,13 +42,13 @@
     outline: none;
 }
 
+.bg-translucent {
+    background: var(--color-bg-surface);
+}
+
 /* Size presets (see DialogProps.size) */
 .size-sm {
     max-width: min(480px, 90vw);
-}
-
-.size-md {
-    max-width: 500px;
 }
 
 .size-lg {

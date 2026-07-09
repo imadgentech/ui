@@ -9,7 +9,7 @@ export interface AlertProps {
      * Color/semantic tone
      * @default 'neutral'
      */
-    tone?: 'neutral' | 'info' | 'success' | 'warning' | 'danger';
+    tone?: 'neutral' | 'info' | 'success' | 'warning' | 'danger' | 'custom';
 
     /**
      * Bold lead-in line above the message

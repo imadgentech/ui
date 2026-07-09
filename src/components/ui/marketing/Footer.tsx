@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '../../../lib/cn';
 import styles from './Footer.module.css';
 
 export interface FooterSocial {
@@ -32,6 +33,18 @@ export interface FooterProps {
      * Social links
      */
     socials?: FooterSocial[];
+
+    /**
+     * Raw CSS max-width for the footer's inner content row. Defaults to the
+     * same `--max` token `Container`/`Navbar` use, so the footer lines up
+     * with page content automatically.
+     */
+    maxWidth?: string;
+
+    /**
+     * Additional CSS classes
+     */
+    className?: string;
 }
 
 /**
@@ -43,10 +56,12 @@ export function Footer({
     copyright,
     message,
     socials,
+    maxWidth,
+    className,
 }: FooterProps) {
     return (
-        <footer className={styles.footer}>
-            <div className="wrap">
+        <footer className={cn(styles.footer, className)}>
+            <div className={styles.wrap} style={maxWidth ? { maxWidth } : undefined}>
                 <div className={styles.finebar}>
                     <div className={styles.fineLeft}>
                         <div>{copyright}</div>

@@ -36,46 +36,48 @@ export interface SurfaceProps extends React.HTMLAttributes<HTMLElement> {
      * Content
      */
     children: React.ReactNode;
-
-    /**
-     * Allow any other props (e.g. href for Link)
-     */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
 }
 
 /**
  * Surface component for cards and elevated content areas.
  * Optimized for dark background (#050505).
- * 
+ *
  * @example
  * <Surface padding="lg" elevation="md">
  *   <Heading size="lg">Card Title</Heading>
  *   <Text>Card content</Text>
  * </Surface>
  */
-export function Surface({
-    padding = 'md',
-    elevation = 'sm',
-    radius = 'md',
-    as: Component = 'div',
-    className,
-    children,
-    ...props
-}: SurfaceProps) {
-    return (
-        <Component
-            {...props}
-            className={cn(
-                styles.surface,
-                styles[`padding-${padding}`],
-                styles[`elevation-${elevation}`],
-                styles[`radius-${radius}`],
-                className
-            )}
-        >
-            {children}
-        </Component>
-    );
-}
+export const Surface = React.forwardRef<HTMLElement, SurfaceProps>(
+    (
+        {
+            padding = 'md',
+            elevation = 'sm',
+            radius = 'md',
+            as: Component = 'div',
+            className,
+            children,
+            ...props
+        },
+        ref
+    ) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                className={cn(
+                    styles.surface,
+                    styles[`padding-${padding}`],
+                    styles[`elevation-${elevation}`],
+                    styles[`radius-${radius}`],
+                    className
+                )}
+            >
+                {children}
+            </Component>
+        );
+    }
+);
+
+Surface.displayName = 'Surface';
 

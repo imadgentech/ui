@@ -45,6 +45,17 @@ export interface PricingCardProps {
      * @default false
      */
     featured?: boolean;
+
+    /**
+     * Label shown in the badge when `featured` is true
+     * @default 'Recommended'
+     */
+    featuredLabel?: string;
+
+    /**
+     * Additional CSS classes
+     */
+    className?: string;
 }
 
 /**
@@ -58,12 +69,14 @@ export function PricingCard({
     features,
     action,
     featured = false,
+    featuredLabel = 'Recommended',
+    className,
 }: PricingCardProps) {
     return (
         <Surface
             padding="lg"
             elevation={featured ? 'lg' : 'sm'}
-            className={cn(styles.card, featured && styles.featured)}
+            className={cn(styles.card, featured && styles.featured, className)}
             radius="md"
         >
             <Stack gap="32">
@@ -73,7 +86,7 @@ export function PricingCard({
                             {name}
                         </Heading>
                         {featured && (
-                            <Badge variant="brand">Recommended</Badge>
+                            <Badge variant="brand">{featuredLabel}</Badge>
                         )}
                     </div>
 

@@ -2,7 +2,7 @@
 import { cn } from '../../../lib/cn';
 import styles from './Kbd.module.css';
 
-export interface KbdProps {
+export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
     /**
      * Additional CSS classes
      */
@@ -18,16 +18,20 @@ export interface KbdProps {
 
 /**
  * Kbd component for displaying keyboard shortcuts and keys.
- * 
+ *
  * @example
  * <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd>
  * <Kbd>âŒ˜</Kbd><Kbd>K</Kbd>
  */
-export function Kbd({ className, style, children }: KbdProps) {
-    return (
-        <kbd className={cn(styles.kbd, className)} style={style}>
-            {children}
-        </kbd>
-    );
-}
+export const Kbd = React.forwardRef<HTMLElement, KbdProps>(
+    ({ className, style, children, ...rest }, ref) => {
+        return (
+            <kbd ref={ref} className={cn(styles.kbd, className)} style={style} {...rest}>
+                {children}
+            </kbd>
+        );
+    }
+);
+
+Kbd.displayName = 'Kbd';
 

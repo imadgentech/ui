@@ -5,7 +5,7 @@ import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { cn } from '../../../lib/cn';
 import styles from './Switch.module.css';
 
-export interface SwitchProps {
+export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root> {
     /**
      * Switch ID
      */
@@ -56,6 +56,7 @@ export function Switch({
     className,
     disabled,
     style,
+    ...rest
 }: SwitchProps) {
     return (
         <SwitchPrimitive.Root
@@ -67,6 +68,7 @@ export function Switch({
             onCheckedChange={onCheckedChange}
             disabled={disabled}
             aria-label={ariaLabel}
+            {...rest}
         >
             <SwitchPrimitive.Thumb className={styles.thumb} />
         </SwitchPrimitive.Root>

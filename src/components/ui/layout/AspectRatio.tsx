@@ -2,7 +2,7 @@
 import { cn } from '../../../lib/cn';
 import styles from './AspectRatio.module.css';
 
-export interface AspectRatioProps {
+export interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * Aspect ratio (e.g., "16/9" or 1.777)
      * @default '1/1'
@@ -25,19 +25,20 @@ export interface AspectRatioProps {
 /**
  * AspectRatio component for maintaining consistent proportions for media or containers.
  */
-export function AspectRatio({
-    ratio = '1/1',
-    className,
-    style,
-    children,
-}: AspectRatioProps) {
-    return (
-        <div
-            className={cn(styles.aspectRatio, className)}
-            style={{ aspectRatio: ratio, ...style } as React.CSSProperties}
-        >
-            {children}
-        </div>
-    );
-}
+export const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(
+    ({ ratio = '1/1', className, style, children, ...rest }, ref) => {
+        return (
+            <div
+                ref={ref}
+                className={cn(styles.aspectRatio, className)}
+                style={{ aspectRatio: ratio, ...style } as React.CSSProperties}
+                {...rest}
+            >
+                {children}
+            </div>
+        );
+    }
+);
+
+AspectRatio.displayName = 'AspectRatio';
 

@@ -16,6 +16,32 @@ export interface NavbarProps {
     className?: string;
     style?: React.CSSProperties;
     sticky?: boolean;
+
+    /**
+     * Raw CSS max-width for the navbar's inner content row. Defaults to the
+     * same `--max` token `Container` uses, so the navbar lines up with page
+     * content automatically without hand-copying a width into both places.
+     */
+    maxWidth?: string;
+
+    /**
+     * Custom logo/brand block for the mobile menu. Passed through to
+     * `MobileMenuContent`'s `logo` prop. Defaults to the IMADGEN logo when
+     * omitted.
+     */
+    mobileMenuLogo?: React.ReactNode;
+
+    /**
+     * Whether to render the "Home" nav link in the mobile menu.
+     * @default true
+     */
+    mobileMenuShowHome?: boolean;
+
+    /**
+     * Href for the "Home" nav link in the mobile menu.
+     * @default '/'
+     */
+    mobileMenuHomeHref?: string;
 }
 
 export function Navbar({
@@ -25,10 +51,14 @@ export function Navbar({
     className,
     style,
     sticky = true,
+    maxWidth,
+    mobileMenuLogo,
+    mobileMenuShowHome,
+    mobileMenuHomeHref,
 }: NavbarProps) {
     return (
         <header className={cn(styles.navbar, sticky && styles.sticky, className)} style={style}>
-            <div className="wrap" style={{ width: '100%', height: '100%' }}>
+            <div className={styles.container} style={maxWidth ? { maxWidth } : undefined}>
                 <Flex align="center" justify="between" className={styles.flex}>
                     <div className={styles.brand}>
                         {brand}
@@ -68,7 +98,13 @@ export function Navbar({
                                     </IconButton>
                                 }
                             >
-                                <MobileMenuContent links={links} actions={actions} />
+                                <MobileMenuContent
+                                    logo={mobileMenuLogo}
+                                    showHome={mobileMenuShowHome}
+                                    homeHref={mobileMenuHomeHref}
+                                    links={links}
+                                    actions={actions}
+                                />
                             </MobileMenu>
                         </div>
                     </div>

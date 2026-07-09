@@ -9,7 +9,7 @@ export interface TagProps {
      * Color variant, matching `Badge`'s variant set.
      * @default 'neutral'
      */
-    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger' | 'custom';
 
     /**
      * If provided, renders a remove (×) button that calls this on click.

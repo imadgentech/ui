@@ -5,7 +5,7 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { cn } from '../../../lib/cn';
 import styles from './RadioGroup.module.css';
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
     /**
      * Value of the selected radio (controlled)
      */
@@ -26,7 +26,7 @@ export interface RadioGroupProps {
      */
     items: Array<{
         value: string;
-        label: string;
+        label: React.ReactNode;
         id: string;
         disabled?: boolean;
     }>;
@@ -56,6 +56,7 @@ export function RadioGroup({
     orientation = 'vertical',
     className,
     style,
+    ...rest
 }: RadioGroupProps) {
     return (
         <RadioGroupPrimitive.Root
@@ -64,6 +65,7 @@ export function RadioGroup({
             value={value}
             defaultValue={defaultValue}
             onValueChange={onValueChange}
+            {...rest}
         >
             {items.map((item) => (
                 <div key={item.value} className={styles.itemWrapper}>

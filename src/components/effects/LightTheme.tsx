@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
+import styles from './LightTheme.module.css'
 
 export default function LightTheme() {
     const [mounted, setMounted] = useState(false)
@@ -16,7 +17,7 @@ export default function LightTheme() {
     }, [])
 
     if (!mounted) {
-        return <div className="toggle-placeholder" style={{ width: '80px', height: '32px' }}></div>
+        return <div className={styles.togglePlaceholder}></div>
     }
 
     const toggleTheme = () => {
@@ -28,7 +29,7 @@ export default function LightTheme() {
 
     return (
         <button
-            className="toggle"
+            className={styles.toggle}
             id="themeToggle"
             type="button"
             aria-label="Toggle light/dark mode"

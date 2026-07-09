@@ -62,10 +62,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     as?: React.ElementType;
 
     /**
-     * Allow any other props (e.g. href for Link)
+     * Anchor attributes, used when `as="a"`. Typed explicitly (rather than
+     * an open index signature) so passing an unrecognized prop name still
+     * surfaces a type error.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
+    href?: string;
+    target?: string;
+    rel?: string;
 }
 
 /**

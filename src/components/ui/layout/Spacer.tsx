@@ -2,7 +2,7 @@
 import { cn } from '../../../lib/cn';
 import styles from './Spacer.module.css';
 
-export interface SpacerProps {
+export interface SpacerProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * Spacing axis
      * @default 'vertical'
@@ -26,23 +26,24 @@ export interface SpacerProps {
 /**
  * Spacer component for fixed spacing between elements.
  */
-export function Spacer({
-    axis = 'vertical',
-    size = '16',
-    className,
-    style,
-}: SpacerProps) {
-    return (
-        <div
-            className={cn(
-                styles.spacer,
-                styles[`axis-${axis}`],
-                styles[`size-${size}`],
-                className
-            )}
-            style={style}
-            aria-hidden="true"
-        />
-    );
-}
+export const Spacer = React.forwardRef<HTMLDivElement, SpacerProps>(
+    ({ axis = 'vertical', size = '16', className, style, ...rest }, ref) => {
+        return (
+            <div
+                ref={ref}
+                className={cn(
+                    styles.spacer,
+                    styles[`axis-${axis}`],
+                    styles[`size-${size}`],
+                    className
+                )}
+                style={style}
+                aria-hidden="true"
+                {...rest}
+            />
+        );
+    }
+);
+
+Spacer.displayName = 'Spacer';
 

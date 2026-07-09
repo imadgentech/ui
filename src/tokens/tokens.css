@@ -24,6 +24,10 @@
   --color-bg-surface: rgba(255, 255, 255, 0.05);
   --color-bg-surface-hover: rgba(255, 255, 255, 0.07);
   --color-bg-surface-subtle: rgba(255, 255, 255, 0.04);
+  --color-bg-surface-solid: #17181b;
+  /* Opaque counterpart of --color-bg-surface, for overlays whose surface
+     spans a large area (Dialog/AlertDialog/Drawer/Toast) — translucent-only
+     reads as unfinished at that scale, unlike a small popup. */
   --color-bg-code: rgba(255, 255, 255, 0.08);
   --navbar-bg: rgba(5, 5, 5, 0.85);
 
@@ -32,6 +36,13 @@
   --color-text-muted: rgba(255, 255, 255, 0.68);
   --color-text-subtle: rgba(255, 255, 255, 0.52);
   --color-text-inverted: rgba(10, 10, 10, 0.92);
+  --color-text-on-brand: #fff;
+  /* For text/icons on a solid brand-orange fill (Button's brand-solid
+     variant, DatePicker's selected day) — deliberately theme-invariant,
+     unlike --color-text-inverted, because the brand-orange fill itself
+     doesn't change between themes. Using --color-text-inverted here would
+     be wrong: it flips to near-black in dark mode, which isn't what a
+     constant-orange fill needs in either theme. */
 
   /* Brand colors */
   --color-brand-primary: #ff6a00;
@@ -44,6 +55,15 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: var(--color-brand-accent);
+
+  /* RGB channel triplets for the tokens above — lets tinted backgrounds
+     (rgba(var(--color-brand-primary-rgb), .15)) actually follow a rebrand,
+     instead of components hardcoding the literal rgba() of today's hex. */
+  --color-brand-primary-rgb: 255, 106, 0;
+  --color-brand-accent-rgb: 255, 174, 0;
+  --color-success-rgb: 34, 197, 94;
+  --color-warning-rgb: 245, 158, 11;
+  --color-error-rgb: 239, 68, 68;
 
   /* Borders */
   --color-border-default: rgba(255, 255, 255, 0.12);
@@ -131,6 +151,16 @@
      ============================================ */
   --navbar-height: 67px;
   --sidebar-width: 0px;
+  --max: 87.5rem;
+  /* 1400px — Container's `maxWidth="layout"` default and the company-wide
+     desktop content width. Override in a consuming app's globals.css to
+     change the standard page width everywhere at once. */
+  --overlay-center-offset: 0px;
+  /* Dialog/AlertDialog center on the full viewport by default (0px, no
+     behavior change for existing consumers). Projects with a fixed top
+     navbar should set this to the navbar's real height (often the same
+     value as --navbar-height) so modals center in the content area below
+     it instead of sitting visibly low relative to the page content. */
 
   /* ============================================
      TYPOGRAPHY
@@ -188,6 +218,20 @@
   --tracking-widest: 0.1em;
 
   /* ============================================
+     MOTION
+     ============================================ */
+  /* Foundation tokens for the durations/easings already in use across the
+     package (0.2s ease is by far the most common pairing today). Existing
+     component CSS isn't retrofitted to consume these yet — new/updated
+     component CSS should reach for these instead of another ad hoc value. */
+  --duration-fast: 0.15s;
+  --duration-base: 0.2s;
+  --duration-slow: 0.3s;
+  --easing-standard: ease;
+  --easing-in: ease-in;
+  --easing-out: ease-out;
+
+  /* ============================================
      BREAKPOINTS (reference only)
      Note: Use in @media queries, not directly in CSS
      ============================================ */
@@ -216,6 +260,7 @@
   --color-bg-surface: rgba(255, 255, 255, 0.70);
   --color-bg-surface-hover: rgba(255, 255, 255, 0.85);
   --color-bg-surface-subtle: rgba(255, 255, 255, 0.55);
+  --color-bg-surface-solid: #ffffff;
   --color-bg-code: rgba(10, 10, 10, 0.06);
   --navbar-bg: rgba(244, 230, 221, 0.85);
 
@@ -235,4 +280,20 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 2px 4px -1px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.12);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.20), 0 10px 10px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   MOBILE TYPE SCALE
+   ============================================ */
+/* Secondary text sizes get a small bump on phone-width viewports — never
+   go smaller for "fits more" on the viewport people are most likely to
+   actually read on. --text-md/lg/xl are untouched; they're already a
+   comfortable body-text floor at every viewport. */
+@media (max-width: 640px) {
+  :root {
+    --text-xs: 0.8125rem;
+    /* 13px, up from 12px */
+    --text-sm: 0.9375rem;
+    /* 15px, up from 14px */
+  }
 }

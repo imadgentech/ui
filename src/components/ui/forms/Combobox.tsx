@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '../../../lib/cn';
 import styles from './Combobox.module.css';
@@ -29,9 +29,11 @@ export interface ComboboxProps {
     placeholder?: string;
 
     /**
-     * Renders a hidden native `<select required>` mirroring `value` so
-     * native HTML5 form validation still fires (the visible control is a
-     * `<button>`, not a real form control).
+     * When `name` is set, a hidden native `<select>` mirrors `value` so the
+     * field still participates in `FormData`/native form submission (the
+     * visible control is a `<button>`, not a real form control). Setting
+     * `required` additionally makes that hidden control participate in
+     * native HTML5 validation.
      */
     required?: boolean;
 
@@ -98,14 +100,20 @@ export function Combobox({
         return () => cancelAnimationFrame(frame);
     }, []);
 
-    const selected = options.find((o) => o.value === value);
-    const filtered = searchable && query
-        ? options.filter(
-              (o) =>
-                  o.label.toLowerCase().includes(query.toLowerCase()) ||
-                  (o.sub ?? '').toLowerCase().includes(query.toLowerCase())
-          )
-        : options;
+    // Recomputing these on every render (not just when value/options/query
+    // change) means moving the mouse over the list — which updates
+    // highlightedIndex via onMouseEnter below — re-filters the whole option
+    // list on every hovered item. Memoized so that only actually re-runs.
+    const selected = useMemo(() => options.find((o) => o.value === value), [options, value]);
+    const filtered = useMemo(() => (
+        searchable && query
+            ? options.filter(
+                  (o) =>
+                      o.label.toLowerCase().includes(query.toLowerCase()) ||
+                      (o.sub ?? '').toLowerCase().includes(query.toLowerCase())
+              )
+            : options
+    ), [options, query, searchable]);
 
     useEffect(() => {
         if (!open) return;
@@ -260,9 +268,9 @@ export function Combobox({
 
     return (
         <div className={cn(styles.root, className)}>
-            {required && (
+            {name && (
                 <select
-                    required
+                    required={required}
                     name={name}
                     value={value}
                     onChange={() => {}}

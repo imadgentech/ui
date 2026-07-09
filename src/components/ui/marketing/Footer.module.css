@@ -4,6 +4,13 @@
     width: 100%;
 }
 
+.wrap {
+    max-width: var(--max, 87.5rem);
+    margin: 0 auto;
+    padding: 0 var(--space-32);
+    box-sizing: border-box;
+}
+
 @media (min-width: 1025px) {
     .footer {
         width: calc(100% - var(--sidebar-width, 0px));
@@ -13,6 +20,12 @@
 
 :global([data-theme="light"]) .footer {
     border-top: 1px solid rgba(10, 10, 10, .08);
+    /* Intentionally not var(--color-bg-base) (#fbf7f3 in light theme): that
+       token is a near-white page background, while this footer wants a
+       visibly darker/warmer tan band to read as a distinct section below
+       the page content. Swapping in --color-bg-base would make the footer
+       blend into the page and lose that separation, so the literal is
+       left as-is. */
     background: #F4E6DD;
 }
 
@@ -62,7 +75,7 @@
 .iconBtn:hover {
     transform: translateY(-1px);
     background: var(--color-bg-surface-hover);
-    border-color: color-mix(in srgb, var(--color-border-default) 60%, rgba(255, 106, 0, .20));
+    border-color: color-mix(in srgb, var(--color-border-default) 60%, rgba(var(--color-brand-primary-rgb), .20));
 }
 
 .iconBtn svg {
@@ -84,7 +97,7 @@
     width: 22px;
     height: 22px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(255, 106, 0, .18));
+    filter: drop-shadow(0 0 10px rgba(var(--color-brand-primary-rgb), .18));
     opacity: .9;
     display: flex;
     align-items: center;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '../../../lib/cn';
 import { Flex } from '../layout/Flex';
 import Image from 'next/image';
 import styles from './LogoCloud.module.css';
@@ -15,15 +16,28 @@ export interface LogoCloudProps {
     logos: readonly {
         src: string;
         alt: string;
+        /**
+         * @default 120
+         */
+        width?: number;
+        /**
+         * @default 40
+         */
+        height?: number;
     }[];
+
+    /**
+     * Additional CSS classes
+     */
+    className?: string;
 }
 
 /**
  * LogoCloud component for social proof and brand trust.
  */
-export function LogoCloud({ title, logos }: LogoCloudProps) {
+export function LogoCloud({ title, logos, className }: LogoCloudProps) {
     return (
-        <div className={styles.logoCloud}>
+        <div className={cn(styles.logoCloud, className)}>
             {title && (
                 <p className={styles.title}>
                     {title}
@@ -35,8 +49,8 @@ export function LogoCloud({ title, logos }: LogoCloudProps) {
                         <Image
                             src={logo.src}
                             alt={logo.alt}
-                            width={120}
-                            height={40}
+                            width={logo.width ?? 120}
+                            height={logo.height ?? 40}
                             className={styles.logo}
                             style={{ objectFit: 'contain' }}
                         />

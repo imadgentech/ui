@@ -11,6 +11,7 @@ Shared React component library for all IMADGEN Next.js projects. Built on CSS Mo
 - [Installation](#installation)
 - [Setup](#setup)
 - [Token System](#token-system)
+- [Design Principles](#design-principles)
 - [Mobile & Responsive Behavior](#mobile--responsive-behavior)
 - [Components](#components)
   - [Forms](#forms)
@@ -138,14 +139,16 @@ Tokens are CSS custom properties defined in `src/tokens/tokens.css` and shipped 
 | Token | Dark value | Description |
 |---|---|---|
 | `--color-bg-base` | `#050505` | Page background |
-| `--color-bg-surface` | `rgba(255,255,255,0.05)` | Card / elevated container |
+| `--color-bg-surface` | `rgba(255,255,255,0.05)` | Card / elevated container — translucent by design |
 | `--color-bg-surface-hover` | `rgba(255,255,255,0.07)` | Hover state of surface |
 | `--color-bg-surface-subtle` | `rgba(255,255,255,0.04)` | Nested surface |
+| `--color-bg-surface-solid` | `#17181b` | Opaque counterpart of `--color-bg-surface`, used by large overlay surfaces (`Dialog`, `AlertDialog`, `Drawer`, `Toast`) where translucency-with-no-blur would read as unfinished rather than deliberate |
 | `--color-bg-code` | `rgba(255,255,255,0.08)` | Inline code background |
 | `--color-text-default` | `rgba(255,255,255,0.92)` | Primary text |
 | `--color-text-muted` | `rgba(255,255,255,0.68)` | Secondary text |
 | `--color-text-subtle` | `rgba(255,255,255,0.52)` | Placeholder / tertiary text |
-| `--color-text-inverted` | `rgba(10,10,10,0.92)` | Text on brand-colored surfaces |
+| `--color-text-inverted` | `rgba(10,10,10,0.92)` | Flips per theme — text for a surface whose own color also flips with the theme |
+| `--color-text-on-brand` | `#fff` | Deliberately theme-invariant — text/icons on a solid brand-orange fill (`Button`'s `brand-solid`, `DatePicker`'s selected day), since the orange itself doesn't change between themes |
 | `--color-brand-primary` | `#ff6a00` | Brand orange |
 | `--color-brand-primary-hover` | `#ff8a1f` | Hover state |
 | `--color-brand-secondary` | `#ff8a1f` | Gradient partner |
@@ -168,6 +171,16 @@ Light theme overrides are applied automatically under `[data-theme="light"]`.
 | `--color-text` | `--color-text-default` |
 | `--color-border` | `--color-border-default` |
 | `--color-danger` | `--color-error` |
+
+**RGB triplets** — for tinted backgrounds that need a custom alpha (`rgba(var(--color-brand-primary-rgb), .15)`), rather than a hardcoded literal that stops following the hex token above once a project rebrands:
+
+| Token | Value |
+|---|---|
+| `--color-brand-primary-rgb` | `255, 106, 0` |
+| `--color-brand-accent-rgb` | `255, 174, 0` |
+| `--color-success-rgb` | `34, 197, 94` |
+| `--color-warning-rgb` | `245, 158, 11` |
+| `--color-error-rgb` | `239, 68, 68` |
 
 ### Spacing
 
@@ -202,6 +215,10 @@ Base-8 scale. All values are `rem`.
 
 `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl`, `--shadow-focus`
 
+### Motion
+
+`--duration-fast` (0.15s), `--duration-base` (0.2s), `--duration-slow` (0.3s), `--easing-standard` (`ease`), `--easing-in` (`ease-in`), `--easing-out` (`ease-out`). These are the foundation for the durations/easings already used across the kit (`0.2s ease` is the most common pairing today) — existing component CSS isn't retrofitted to consume them yet, but new or updated component CSS should reach for these instead of another one-off value. Every animated component already respects `prefers-reduced-motion` independent of this.
+
 ### Z-Index
 
 | Token | Value | Used by |
@@ -220,7 +237,7 @@ Base-8 scale. All values are `rem`.
 
 **Font families:** `--font-sans`, `--font-mono`
 
-**Font sizes:** `--text-xs` → `--text-xl` (12px → 20px)
+**Font sizes:** `--text-xs` → `--text-xl` (12px → 20px). `--text-xs`/`--text-sm` bump slightly (13px/15px) under `@media (max-width: 640px)` — never use them for primary/body content regardless of viewport; `--text-md` (16px) is the floor for anything a user is meant to actually read.
 
 **Heading sizes** (fluid/responsive): `--heading-sm` through `--heading-display`
 
@@ -237,6 +254,8 @@ Base-8 scale. All values are `rem`.
 | `--navbar-height` | `67px` | Reserve space below fixed navbar |
 | `--navbar-bg` | `rgba(5,5,5,0.85)` | Navbar background |
 | `--sidebar-width` | `0px` | Override in apps that have a sidebar |
+| `--max` | `87.5rem` (1400px) | `Container`'s `maxWidth="layout"` default and `Navbar`/`Footer`'s inner content width — the company-wide desktop content width. Override once to change it everywhere those three read it. |
+| `--overlay-center-offset` | `0px` | `Dialog`/`AlertDialog` center on the full viewport by default. Set this to your fixed navbar's height (often the same value as `--navbar-height`) so modals center in the content area below it instead of sitting visibly low. No effect on sidebar-only layouts that leave it at `0px`. |
 
 ### Customizing Tokens
 
@@ -250,17 +269,50 @@ Override any token by targeting `:root` in your global CSS **after** importing `
 }
 ```
 
+### Density
+
+Every spacing, radius, and font-size token in this file is defined in `rem`. That means a single root font-size override scales the entire system — spacing, type, and radii together — with zero component-level changes:
+
+```css
+/* app/globals.css, after importing tokens.css/styles.css */
+html {
+  font-size: 17px; /* browser default is 16px; every rem token now scales up ~6% */
+}
+```
+
+This is the sanctioned way to make an app read "bigger and more readable" without hardcoding font sizes anywhere in your own page code — keep using `Heading`/`Text`'s `size` props, and the density change happens once, at the root. 16–18px is a reasonable range; don't go outside it without checking touch-target and line-length effects. Two apps on the same design system with different (or no) root override will visibly differ in density — treat this as a deliberate per-app choice, not something to leave at the browser default by accident.
+
+---
+
+## Design Principles
+
+A few conventions worth knowing before you start composing screens — none of these are enforced by the compiler, they're judgment calls the components are built to support.
+
+**Reach for the highest-level piece that fits.** Components fall into three rough tiers:
+
+- **Primitives** — `Button`, `Input`, `Text`, `Heading`, `Badge`, `Checkbox`, etc. The smallest useful unit; almost everything else is built from these.
+- **Layout shells** — `Navbar`, `Container`, `Section`, `Grid`/`GridItem`, `Stack`/`Flex`. Own page structure and spacing, not content.
+- **Composite patterns** — `Surface` (a styled card container), `Table`, `FormField`, `EmptyState`, `PricingCard`, `Dialog`. Assemble primitives into a recognizable, reusable unit so nobody hand-rolls the same "label + input + error" grouping twice.
+
+Before reaching for a raw `<div>`/`<a>`/`<button>`, check whether a primitive already covers it — that's where visual/behavioral inconsistency (missing focus states, wrong spacing scale, untracked hardcoded colors) creeps back in fastest.
+
+**Dense data reads as rows, not cards.** `Surface`/card-style wrapping is for widgets, galleries, and settings groups — discrete, self-contained things. A list of many similar items (a table of invoices, a settings list, a log) should use `Table` or a plain row layout instead; wrapping every row in its own card just to "look consistent" makes dense data visually noisy and harder to scan.
+
+**Pick the page frame before the content.** Decide the shell — navbar vs. sidebar, `Container`'s width, whether the page is full-bleed — before composing what goes inside it. The company standard is a fixed top `Navbar` (not a sidebar) over a 1400px-wide `Container` (the `--max` token's default) — see Mobile & Responsive Behavior below and the `Navbar`/`Container`/`Dialog` entries in Components for the tokens that keep them aligned.
+
 ---
 
 ## Mobile & Responsive Behavior
 
-The kit's breakpoint scale is `sm` 640px / `md` 768px / `lg` 1024px, used consistently by `Grid`, `GridItem`, `Flex`, and `Navbar`.
+The kit's breakpoint scale is `sm` 640px / `md` 768px / `lg` 1024px, used consistently by `Grid`, `GridItem`, `Flex`, and `Navbar`. `tokens.css` also defines `--breakpoint-sm/md/lg/xl` for reference — these exist for readability in the source and in case a future build step can consume them, but CSS custom properties cannot be used inside `@media` conditions in any browser today, so overriding them in a consuming app's `:root` has no effect on any component's actual responsive behavior. Changing a breakpoint means forking the relevant `.module.css` file.
 
 - **Touch targets.** Interactive controls that render below the ~44px accessibility floor at their `sm` size (`Button`, `IconButton`, `Input`, `Select`, `Combobox`) automatically grow to 44px under `@media (pointer: coarse)` — i.e. on touch devices — while keeping the denser desktop sizing for mouse/trackpad. `Checkbox`, `RadioGroup`, and `Switch` expand their tappable hit area via an invisible `::before` overlay without growing the visible control.
 - **Responsive layout props.** `Grid.columns`, `GridItem.span`/`start`, and `Flex.direction` all accept either a single value or a breakpoint map (`{ base, sm, md, lg }`), e.g. `<Flex direction={{ base: 'column', md: 'row' }}>` to stack on phones and go side-by-side on tablet+.
 - **Overflow-prone components.** `Table` scrolls horizontally instead of breaking layout; `Tabs` scrolls its trigger row horizontally (scrollbar hidden) instead of wrapping or overflowing; `Combobox`'s portal-rendered dropdown clamps its position and width to the viewport so it can't render off-screen near a screen edge.
 - **Dialog/Drawer/AlertDialog** are viewport-relative (`min(…, 90vw)`-style widths), so they fit down to ~320px-wide phone screens without extra configuration.
-- **Navbar** switches from the burger `MobileMenu` to the desktop nav at 1024px (the `lg` breakpoint) — fixed by design for consistency with the rest of the scale; override by passing a `className` with higher specificity if a project needs a different cutover point.
+- **Navbar** switches from the burger `MobileMenu` to the desktop nav at 1024px (the `lg` breakpoint) — fixed by design for consistency with the rest of the scale. The elements gated by that breakpoint are internal to `Navbar.module.css`, so a `className` on `Navbar` itself can't reach them — there's currently no supported way to change the cutover point short of forking the component's CSS.
+- **Container's `maxWidth="layout"` default, and `Navbar`/`Footer`'s content width**, all resolve to the same `--max` token (1400px) — set it once to change the standard page width everywhere at once. `Navbar`/`Footer` also each accept their own `maxWidth` prop for a one-off override.
+- **`GridItem`'s `span`/`start` props** are responsive at all four breakpoints (`base`/`sm`/`md`/`lg`), matching `Grid.columns` and `Flex.direction`.
 
 ## Components
 
@@ -344,6 +396,9 @@ A calendar date picker — not a styled wrapper around the browser's native `<in
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Matches `Input`'s size scale |
 | `min` / `max` | `string` | — | ISO date strings; out-of-range days render disabled |
 | `format` | `(date: Date) => string` | `dd-mm-yyyy` | Customize the trigger's display text |
+| `weekdayLabels` | `string[]` (7, Sunday-first) | English short labels | Localize the calendar's weekday header row |
+| `monthLabels` | `string[]` (12) | English month names | Localize the month name shown in the calendar header |
+| `weekStartsOn` | `0 \| 1` | `0` (Sunday) | `1` starts the week on Monday |
 | `name`, `required`, `disabled`, `invalid`, `id` | — | — | A visually-hidden native `<input type="date">` mirrors `value`, so `required`/`name` still participate in native form validation and `FormData` |
 
 #### Textarea
@@ -398,7 +453,7 @@ Searchable/filterable select — for option lists a plain `<select>` makes tedio
 | `searchable` | `boolean` | `true` | `false` renders a plain listbox with no search input — arrow keys move a highlighted option, Enter selects it |
 | `invalid` | `boolean` | `false` | |
 | `disabled` | `boolean` | `false` | |
-| `name`, `required`, `id` | — | — | A visually-hidden native `<select required>` mirrors `value`, so `required`/`name` still participate in native form validation |
+| `name`, `required`, `id` | — | — | Setting `name` renders a visually-hidden native `<select>` mirroring `value`, so the field participates in `FormData`/native form submission; additionally setting `required` makes that hidden control participate in native HTML5 validation too |
 
 Filtering is client-side substring match (case-insensitive). `Escape` closes; `Enter` selects the highlighted/single-matching option. Full `role="listbox"`/`role="option"` ARIA wiring either way.
 
@@ -422,9 +477,11 @@ Filtering is client-side substring match (case-insensitive). `Escape` closes; `E
 | `onCheckedChange` | `(checked: boolean) => void` | — |
 | `disabled` | `boolean` | — |
 
+`label` accepts `ReactNode` (not just `string`), so a label with an embedded link (e.g. "Accept the [Terms](/terms)") works without forking. Extends the underlying Radix `Checkbox.Root` props — `name`, `value`, `required`, `data-*`, and other native/ARIA attributes all pass through.
+
 #### Switch
 
-Same API shape as Checkbox but renders a toggle slider. Props: `id?`, `aria-label?`, `checked?`, `defaultChecked?`, `onCheckedChange?`, `disabled?`.
+Same API shape as Checkbox but renders a toggle slider. Props: `id?`, `aria-label?`, `checked?`, `defaultChecked?`, `onCheckedChange?`, `disabled?`. Extends the underlying Radix `Switch.Root` props, same as `Checkbox`.
 
 #### RadioGroup
 
@@ -447,6 +504,8 @@ Same API shape as Checkbox but renders a toggle slider. Props: `id?`, `aria-labe
 | `value` | `string` | — |
 | `defaultValue` | `string` | — |
 | `onValueChange` | `(value: string) => void` | — |
+
+`items[].label` accepts `ReactNode`. Extends the underlying Radix `RadioGroup.Root` props.
 
 #### ToggleGroup
 
@@ -484,6 +543,8 @@ Segmented control — button-group single/multi select, lighter weight than `Tab
 
 `size` is pinned to the same 32/40/48px min-height scale as `Input`/`Select`/`Combobox`, so a `ToggleGroup` lines up with a sibling form control at the same size (e.g. next to a search `Input` in a toolbar row).
 
+For `type="single"`, clicking the currently-selected item deselects it, firing `onValueChange('')` — this is Radix's underlying `ToggleGroup` behavior (which this component passes through unmodified), not something specific to this package. Guard against it in your handler if a selection must always stay non-empty.
+
 #### Label
 
 ```tsx
@@ -510,7 +571,7 @@ Composes a label + control + error/hint into an accessible unit.
 | `hint` | `string` | — |
 | `required` | `boolean` | — |
 
-Error takes precedence over hint when both are provided.
+Error takes precedence over hint when both are provided. When the single child control is a valid React element, `FormField` clones it with `aria-describedby` pointing at whichever of the error/hint text is rendered and `aria-invalid={!!error}`, so screen readers announce the error/hint as belonging to the field automatically — no manual wiring needed. `ErrorText`/`HelperText` both accept an optional `id` prop if you need to reference them directly.
 
 #### Form
 
@@ -533,7 +594,7 @@ Higher-level form with declarative field definitions and mouse-tracking gradient
 | `fields` | `FormField[]` | **Required** |
 | `onSubmit` | `(e, data: Record<string, FormDataEntryValue>) => void` | **Required** |
 | `submitLabel` | `string` | `'Submit'` |
-| `submitVariant` | `'primary' \| 'secondary' \| 'tertiary' \| 'danger'` | `'primary'` |
+| `submitVariant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger'` | `'primary'` |
 | `showSubmit` | `boolean` | `true` |
 | `children` | `ReactNode` | — |
 
@@ -703,7 +764,7 @@ Constrains content width and centers it.
 | `'md'` | 768px |
 | `'lg'` | 1024px |
 | `'xl'` | 1280px |
-| `'layout'` | Site default (default) |
+| `'layout'` | `var(--max)` — 1400px by default, the company-wide desktop width (default) |
 | `'full'` | 100% |
 
 #### Section
@@ -783,12 +844,16 @@ Full responsive navbar with desktop nav links + mobile hamburger menu.
 />
 ```
 
-| Prop | Type | Default |
-|---|---|---|
-| `brand` | `ReactNode` | **Required** |
-| `links` | `Array<{ label: string; href: string }>` | **Required** |
-| `actions` | `ReactNode` | — |
-| `sticky` | `boolean` | `true` |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `brand` | `ReactNode` | **Required** | |
+| `links` | `Array<{ label: string; href: string }>` | **Required** | |
+| `actions` | `ReactNode` | — | |
+| `sticky` | `boolean` | `true` | |
+| `maxWidth` | `string` | — | Raw CSS max-width for the navbar's inner content row. Defaults to the `--max` token (same one `Container` uses), so the navbar lines up with page content automatically |
+| `mobileMenuLogo` | `ReactNode` | — | Custom logo/brand block for the mobile menu, passed through to `MobileMenuContent`'s `logo` prop. Defaults to the IMADGEN logo when omitted — pass this in any other project |
+| `mobileMenuShowHome` | `boolean` | `true` | Whether to render the "Home" link in the mobile menu |
+| `mobileMenuHomeHref` | `string` | `'/'` | Href for the mobile menu's "Home" link |
 
 The mobile menu is handled internally by `MobileMenu` + `MobileMenuContent`.
 
@@ -815,7 +880,7 @@ Use these if building a custom mobile nav outside of `Navbar`.
 </MobileMenu>
 ```
 
-`MobileMenuContent` includes the IMADGEN logo and a Home link by default.
+`MobileMenuContent` includes the IMADGEN logo and a Home link by default — pass `logo` (a `ReactNode`) to replace the logo block, or `showHome={false}` to omit the Home link, or `homeHref`/`homeLabel` to repoint/relabel it. Any project other than IMADGEN's own site should set at least `logo`, since the default logo is a fixed image path (`/media/logo/imadgen-logo-dark.png`) that only resolves in IMADGEN's own `public/` folder.
 
 #### Breadcrumbs
 
@@ -855,7 +920,7 @@ Controlled via `value` + `onValueChange`. Powered by Radix UI.
 />
 ```
 
-Disables Prev at page 1, Next at last page.
+Disables Prev at page 1, Next at last page. Accepts optional `prevLabel`/`nextLabel` (default `'Previous'`/`'Next'`) and `renderPageInfo?: (current, total) => ReactNode` (default renders "Page X of Y") for non-English or custom copy.
 
 ---
 
@@ -877,7 +942,7 @@ Persistent inline message box — form-level errors, empty-state notices, standi
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `tone` | `'neutral' \| 'info' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | |
+| `tone` | `'neutral' \| 'info' \| 'success' \| 'warning' \| 'danger' \| 'custom'` | `'neutral'` | `custom` applies no built-in color/background, for full re-theming via `className` |
 | `title` | `string` | — | Bold lead-in line above the message |
 | `children` | `ReactNode` | **Required** | Message body |
 | `action` | `ReactNode` | — | e.g. a `Button`, rendered next to the dismiss button |
@@ -919,6 +984,7 @@ Persistent inline message box — form-level errors, empty-state notices, standi
 | `headers` | `string[]` | **Required** |
 | `rows` | `ReactNode[][]` | **Required** |
 | `striped` | `boolean` | `false` |
+| `getRowKey` | `(row, index) => React.Key` | `(row, index) => index` | Derives a stable React key per row — pass this if rows can be sorted/filtered/reordered, since the array-index default otherwise causes stale cell state across re-renders |
 
 #### StatCard
 
@@ -931,7 +997,7 @@ Persistent inline message box — form-level errors, empty-state notices, standi
 />
 ```
 
-`variant`: `'neutral' | 'brand' | 'success' | 'warning' | 'danger'` (default `'neutral'`). `neutral` renders the value in the default text color; use `brand` for the orange accent treatment.
+`variant`: `'neutral' | 'brand' | 'success' | 'warning' | 'danger' | 'custom'` (default `'neutral'`). `neutral` renders the value in the default text color; use `brand` for the orange accent treatment. `custom` applies no built-in color/background — pair it with `className` to fully re-theme a single instance without forking.
 
 #### Badge
 
@@ -939,7 +1005,7 @@ Persistent inline message box — form-level errors, empty-state notices, standi
 <Badge variant="brand">New</Badge>
 ```
 
-`variant`: `'neutral' | 'brand' | 'success' | 'warning' | 'danger'`
+`variant`: `'neutral' | 'brand' | 'success' | 'warning' | 'danger' | 'custom'`
 
 #### Tag
 
@@ -952,7 +1018,7 @@ Removable/interactive pill — filters, multi-select summaries, keyword lists. F
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `'neutral' \| 'brand' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | Same set as `Badge` |
+| `variant` | `'neutral' \| 'brand' \| 'success' \| 'warning' \| 'danger' \| 'custom'` | `'neutral'` | Same set as `Badge` |
 | `onRemove` | `() => void` | — | Renders a × remove button only if provided; omit for a static tag |
 
 #### Avatar
@@ -1048,10 +1114,12 @@ Standalone loading indicator, for full-page or section-level loading. `Button`/`
 | `description` | `string` | — | |
 | `open` | `boolean` | — | |
 | `onOpenChange` | `(open: boolean) => void` | — | |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | `sm` ≈ 480px, `md` = 500px (unchanged default), `lg` ≈ 1000px capped at 88vw |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | `sm` ≈ 480px, `md` = 500px (the same as the unsized default), `lg` ≈ 1000px capped at 88vw |
 | `maxWidth` | `string` | — | Raw CSS value, for widths the size scale doesn't cover. Takes precedence over `size` |
+| `background` | `'solid' \| 'translucent'` | `'solid'` | `'solid'` gives the content surface an opaque background — the right choice for most modals, since translucency over a large area reads as unfinished rather than deliberate. `'translucent'` restores the previous frosted (but unblurred) surface |
+| `className` | `string` | — | Applied to the dialog's content surface |
 
-Includes overlay, close button, focus trap, and ESC key support. Uses `--z-overlay` (1050) for the backdrop and `--z-modal` (1100) for the content.
+Includes overlay, close button, focus trap, and ESC key support. Uses `--z-overlay` (1050) for the backdrop and `--z-modal` (1100) for the content. Centers via `top: calc(50% + var(--overlay-center-offset) / 2)` — set the `--overlay-center-offset` token (see Token System → Layout) to your fixed navbar's height if you have one, so the dialog centers in the content area below it instead of the full viewport.
 
 #### AlertDialog
 
@@ -1074,11 +1142,14 @@ Confirm/destructive-action dialog. Unlike `Dialog`, it isn't dismissed by clicki
 | `description` | `string` | — | |
 | `trigger` | `ReactNode` | — | |
 | `children` | `ReactNode` | — | Extra content below the description (e.g. a confirmation input) |
-| `onConfirm` | `() => void \| Promise<void>` | **Required** | May be async — the confirm button shows a loading state and the dialog only closes once it resolves |
+| `onConfirm` | `() => void \| Promise<void>` | **Required** | May be async — the confirm button shows a loading state and the dialog only closes once it resolves. If it throws/rejects, the dialog stays open and the error message is shown via `ErrorText` instead of surfacing as an unhandled promise rejection |
 | `confirmLabel` | `string` | `'Confirm'` | |
 | `cancelLabel` | `string` | `'Cancel'` | |
 | `confirmVariant` | `ButtonProps['variant']` | `'danger'` | Override for non-destructive confirms |
 | `open` / `onOpenChange` | `boolean` / `(open: boolean) => void` | — | Optional — works uncontrolled with just `trigger` |
+| `className` | `string` | — | Applied to the dialog's content surface |
+
+Pressing Escape while `onConfirm` is in flight is ignored, so a slow confirm action can't be interrupted out from under itself. Content surface uses the same opaque `--color-bg-surface-solid` background as `Dialog`, and centers using `--overlay-center-offset` the same way.
 
 #### Drawer
 
@@ -1096,9 +1167,12 @@ Side panel — filters, side-form editors, and similar content that doesn't need
 | `description` | `string` | — | |
 | `trigger` | `ReactNode` | — | |
 | `side` | `'left' \| 'right' \| 'bottom'` | `'right'` | |
+| `width` | `string` | — | Raw CSS width override for `left`/`right`; ignored for `bottom` |
+| `height` | `string` | — | Raw CSS max-height override for `bottom`; ignored for `left`/`right` |
+| `background` | `'solid' \| 'translucent'` | `'solid'` | Same as `Dialog`'s `background` prop — `'solid'` is an opaque panel, `'translucent'` restores the previous frosted (unblurred) surface |
 | `open` / `onOpenChange` | `boolean` / `(open: boolean) => void` | — | |
 
-Fixed width (~400px, capped at 90vw) for `left`/`right`; capped height (~500px, 85vh) for `bottom` — unlike `MobileMenu`, which always takes the full screen.
+Default width (~400px, capped at 90vw) for `left`/`right`; default capped height (~500px, 85vh) for `bottom` — override with `width`/`height` — unlike `MobileMenu`, which always takes the full screen.
 
 #### DropdownMenu
 
@@ -1121,6 +1195,9 @@ Actions menu — table row "..." actions, overflow menus, account menus. Built o
 | `items` | `Array<{ label, icon?, onClick?, variant?, disabled?, shortcut? } \| { separator: true }>` | **Required** | `variant: 'danger'` renders the item in red |
 | `align` | `'start' \| 'center' \| 'end'` | `'end'` | |
 | `open` / `onOpenChange` | `boolean` / `(open: boolean) => void` | — | |
+| `className` | `string` | — | Applied to the menu's content surface |
+
+Content surface pairs its translucent background with `backdrop-filter: blur(12px)`, same as `Combobox`/`DatePicker`'s popovers.
 
 #### Tooltip
 
@@ -1130,7 +1207,7 @@ Actions menu — table row "..." actions, overflow menus, account menus. Built o
 </Tooltip>
 ```
 
-`side`: `'top' | 'right' | 'bottom' | 'left'` (default `'top'`). 300ms delay, arrow included.
+`side`: `'top' | 'right' | 'bottom' | 'left'` (default `'top'`). 300ms delay, arrow included. Accepts `className`. Content surface pairs its translucent background with `backdrop-filter: blur(12px)`, same as `Combobox`/`DatePicker`'s popovers.
 
 #### Popover
 
@@ -1143,7 +1220,7 @@ Actions menu — table row "..." actions, overflow menus, account menus. Built o
 </Popover>
 ```
 
-Controlled via `open` / `onOpenChange`. `sideOffset={8}`.
+Controlled via `open` / `onOpenChange`. `sideOffset={8}`. Accepts `className`. Content surface pairs its translucent background with `backdrop-filter: blur(12px)`, same as `Combobox`/`DatePicker`'s popovers.
 
 #### Toast
 
@@ -1152,7 +1229,7 @@ Wrap your app (or a page) in `ToastProvider`, then call `addToast` from any chil
 ```tsx
 // layout.tsx
 import { ToastProvider } from '@imadgentech/ui';
-<ToastProvider>{children}</ToastProvider>
+<ToastProvider position="bottom-right">{children}</ToastProvider>
 ```
 
 ```tsx
@@ -1161,11 +1238,16 @@ import { useToast } from '@imadgentech/ui';
 
 const { addToast } = useToast();
 addToast('Saved successfully', 'success');
+addToast('This stays until dismissed', 'error', { duration: 0 });
 ```
 
-`addToast(message, type?)` — type: `'success' | 'error' | 'info' | 'warning'`
+| `ToastProvider` prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left' \| 'top-center' \| 'bottom-center'` | `'bottom-right'` | Corner (or edge-center) toasts render in |
 
-Toasts auto-dismiss after 5 seconds. Clickable to dismiss early.
+`addToast(message, type?, options?)` — type: `'success' | 'error' | 'info' | 'warning'`. `options.duration` (ms) overrides the default 5000ms auto-dismiss; pass `0` to disable auto-dismiss entirely (the toast then stays until clicked).
+
+Clickable to dismiss early.
 
 ---
 
@@ -1287,7 +1369,7 @@ Renders `<kbd>` with appropriate styling.
 />
 ```
 
-`columns`: `1 | 2 | 3 | 4` (default `3`). Responsive: collapses to 1 on mobile, 2 on tablet.
+`columns`: `1 | 2 | 3 | 4` (default `3`). Responsive: collapses to 1 on mobile, 2 on tablet. Accepts `className`.
 
 #### PricingCard
 
@@ -1303,7 +1385,7 @@ Renders `<kbd>` with appropriate styling.
 />
 ```
 
-`featured`: adds "Recommended" badge and higher visual elevation.
+`featured`: adds a "Recommended" badge (override its text with `featuredLabel`) and higher visual elevation. Accepts `className`.
 
 #### Testimonial
 
@@ -1316,6 +1398,8 @@ Renders `<kbd>` with appropriate styling.
 />
 ```
 
+Accepts `className`.
+
 #### LogoCloud
 
 ```tsx
@@ -1327,7 +1411,7 @@ Renders `<kbd>` with appropriate styling.
 />
 ```
 
-Uses `next/image` at 120×40px. Images are grayscale by default, color on hover.
+Uses `next/image` at 120×40px by default. Images are grayscale by default, color on hover. Each `logos` entry accepts optional per-logo `width`/`height` (in px) to override the box for logos that aren't ~3:1. Accepts `className`.
 
 #### Footer
 
@@ -1342,6 +1426,8 @@ Uses `next/image` at 120×40px. Images are grayscale by default, color on hover.
   ]}
 />
 ```
+
+Accepts an optional `maxWidth` prop (raw CSS value) for the footer's inner content row — defaults to the `--max` token, same as `Container`/`Navbar`, so the footer lines up with page content automatically.
 
 #### ThemeImage
 
@@ -1399,22 +1485,35 @@ function AIChatSection() {
 }
 ```
 
-`ChatProvider` internally calls `useChat` from `@ai-sdk/react`. Your Next.js app must expose an `/api/chat` route (or configure via `useChat`'s `api` option — inject via context if needed).
+`ChatProvider` internally calls `useChat` from `@ai-sdk/react`. Your Next.js app must expose an `/api/chat` route by default — or point it elsewhere with the `api` prop:
 
-Auto-disables after 3 consecutive failures to prevent abuse.
+```tsx
+<ChatProvider api="/api/ai/assistant" maxFailures={5}>
+  <ChatPage />
+</ChatProvider>
+```
+
+| `ChatProvider` prop | Type | Default | Description |
+|---|---|---|---|
+| `api` | `string` | `/api/chat` (the `@ai-sdk/react` default) | Endpoint `useChat` sends messages to |
+| `maxFailures` | `number` | `3` | Consecutive send failures before the chat auto-disables |
+
+Auto-disables after `maxFailures` consecutive failures to prevent abuse.
 
 
 #### ChatPage Props
 
-| Prop | Type | Default |
-|---|---|---|
-| `variant` | `'full' \| 'compact' \| 'minimal'` | `'full'` |
-| `placeholder` | `string` | `'Ask anything...'` |
-| `initialMessages` | `Message[]` | — |
-| `onClose` | `() => void` | — |
-| `isFullPage` | `boolean` | — |
-| `onSessionCreate` | `(sessionId: string, meta: { started_at: string }) => Promise<void>` | — |
-| `onSaveConversation` | `(data: { session_id: string; messages: ConversationMessage[] }) => Promise<void>` | — |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `'full' \| 'compact' \| 'minimal'` | `'full'` | |
+| `title` | `string` | `'Imadgen AI'` | Header title — override for any project other than IMADGEN's own |
+| `subtitle` | `string` | `'Quantum-V2 Core'` | Header subtitle |
+| `placeholder` | `string` | `'Ask anything...'` | |
+| `initialMessages` | `Message[]` | — | |
+| `onClose` | `() => void` | — | |
+| `isFullPage` | `boolean` | — | |
+| `onSessionCreate` | `(sessionId: string, meta: { started_at: string }) => Promise<void>` | — | |
+| `onSaveConversation` | `(data: { session_id: string; messages: ConversationMessage[] }) => Promise<void>` | — | |
 
 #### Variants
 
@@ -1444,7 +1543,7 @@ Available: `messages`, `input`, `handleInputChange`, `handleSubmit`, `append`, `
 
 ### Background Effects
 
-All effects are `'use client'`, render at fixed `z-index: -1`, and have no props. Drop them in a layout and they fill the background.
+All effects are `'use client'`, render at fixed `z-index: -1`, and have no props. All four canvas effects (`EmbersBGE`, `NetBGE`, `SwarmsBGE`, `WaveformBackground`) read `--color-brand-primary` from CSS at draw time rather than hardcoding it, so overriding that token to rebrand also recolors the background effects — and all four respect `prefers-reduced-motion`, rendering a single static frame instead of animating when the user has that preference set. Drop them in a layout and they fill the background.
 
 > **Note:** Effect components expect `React` to be available as a global default import in the consuming project's bundle. This is always the case in Next.js + TypeScript projects.
 
@@ -1490,6 +1589,8 @@ import { Container, Stack, Heading, Text, Surface } from '@imadgentech/ui/server
 Available server exports: `cn`, all **Layout** components, all **Typography** components, all **Marketing** components, and `Breadcrumbs` (the only navigation component with no client-side dependencies).
 
 **Not available** from `/server`: forms, overlays (Dialog, Tooltip, Popover, Toast), navigation (Navbar, MobileMenu, NavLink, Tabs, Pagination, Breadcrumbs is the exception), data display with interactive state (Accordion, Checkbox, etc.), ChatPage, effects, Providers.
+
+**If your app also imports `@imadgentech/ui/styles.css` anywhere** (the common case — most apps mix RSC pages with client-interactive ones), don't additionally import `@imadgentech/ui/server.css`. `server.css` is a strict subset of `styles.css` — every class it defines is already present, byte-for-byte, in the main stylesheet — so loading both means downloading the same ~39KB of CSS twice for no visual difference. Only reach for `server.css` on its own in an app (or a standalone RSC-only module) that never loads `styles.css` at all.
 
 ---
 

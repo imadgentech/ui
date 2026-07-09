@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '../../../lib/cn';
 import { Surface } from '../layout/Surface';
 import { Stack } from '../layout/Stack';
 import { Text } from '../typography/Text';
@@ -25,6 +26,11 @@ export interface TestimonialProps {
      * Author avatar source
      */
     avatarSrc?: string;
+
+    /**
+     * Additional CSS classes
+     */
+    className?: string;
 }
 
 /**
@@ -35,9 +41,10 @@ export function Testimonial({
     author,
     role,
     avatarSrc,
+    className,
 }: TestimonialProps) {
     return (
-        <Surface padding="lg" elevation="sm" className={styles.card}>
+        <Surface padding="lg" elevation="sm" className={cn(styles.card, className)}>
             <Stack gap="24">
                 <Text size="lg" className={styles.quote}>
                     &quot;{quote}&quot;

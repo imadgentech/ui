@@ -27,6 +27,24 @@ export interface PaginationProps {
     className?: string;
 
     style?: React.CSSProperties;
+
+    /**
+     * Label for the "previous page" button.
+     * @default 'Previous'
+     */
+    prevLabel?: string;
+
+    /**
+     * Label for the "next page" button.
+     * @default 'Next'
+     */
+    nextLabel?: string;
+
+    /**
+     * Customize the "Page X of Y" text.
+     * @default (current, total) => <>Page <span>{current}</span> of {total}</>
+     */
+    renderPageInfo?: (current: number, total: number) => React.ReactNode;
 }
 
 /**
@@ -38,6 +56,9 @@ export function Pagination({
     onPageChange,
     className,
     style,
+    prevLabel = 'Previous',
+    nextLabel = 'Next',
+    renderPageInfo,
 }: PaginationProps) {
     const canGoPrev = currentPage > 1;
     const canGoNext = currentPage < totalPages;
@@ -55,11 +76,17 @@ export function Pagination({
                 onClick={() => onPageChange(currentPage - 1)}
                 className={styles.prev}
             >
-                Previous
+                {prevLabel}
             </Button>
 
             <div className={styles.info}>
-                Page <span className={styles.current}>{currentPage}</span> of {totalPages}
+                {renderPageInfo ? (
+                    renderPageInfo(currentPage, totalPages)
+                ) : (
+                    <>
+                        Page <span className={styles.current}>{currentPage}</span> of {totalPages}
+                    </>
+                )}
             </div>
 
             <Button
@@ -69,7 +96,7 @@ export function Pagination({
                 onClick={() => onPageChange(currentPage + 1)}
                 className={styles.next}
             >
-                Next
+                {nextLabel}
             </Button>
         </nav>
     );

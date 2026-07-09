@@ -28,7 +28,7 @@
 }
 
 .max-layout {
-    max-width: var(--max);
+    max-width: var(--max, 87.5rem);
 }
 
 .max-full {

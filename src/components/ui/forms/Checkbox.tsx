@@ -5,7 +5,7 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cn } from '../../../lib/cn';
 import styles from './Checkbox.module.css';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
     /**
      * Checkbox ID
      */
@@ -14,7 +14,7 @@ export interface CheckboxProps {
     /**
      * Label content
      */
-    label?: string;
+    label?: React.ReactNode;
 
     /**
      * Checked state (controlled)
@@ -56,6 +56,7 @@ export function Checkbox({
     className,
     disabled,
     style,
+    ...rest
 }: CheckboxProps) {
     return (
         <div className={cn(styles.wrapper, disabled && styles.disabled, className)} style={style}>
@@ -66,6 +67,7 @@ export function Checkbox({
                 defaultChecked={defaultChecked}
                 onCheckedChange={onCheckedChange}
                 disabled={disabled}
+                {...rest}
             >
                 <CheckboxPrimitive.Indicator className={styles.indicator}>
                     <svg

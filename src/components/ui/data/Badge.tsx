@@ -7,7 +7,7 @@ export interface BadgeProps {
      * Badge variant
      * @default 'neutral'
      */
-    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+    variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger' | 'custom';
 
     /**
      * Additional CSS classes

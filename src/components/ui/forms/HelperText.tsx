@@ -4,6 +4,12 @@ import styles from './HelperText.module.css';
 
 export interface HelperTextProps {
     /**
+     * Element ID (used to associate this text with a control via
+     * `aria-describedby`)
+     */
+    id?: string;
+
+    /**
      * Additional CSS classes
      */
     className?: string;
@@ -19,9 +25,9 @@ export interface HelperTextProps {
 /**
  * HelperText component for provided hints or information.
  */
-export function HelperText({ className, style, children }: HelperTextProps) {
+export function HelperText({ id, className, style, children }: HelperTextProps) {
     return (
-        <p className={cn(styles.helperText, className)} style={style}>
+        <p id={id} className={cn(styles.helperText, className)} style={style}>
             {children}
         </p>
     );

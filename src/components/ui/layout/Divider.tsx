@@ -2,7 +2,7 @@ import React from 'react';
 import { CSSProperties } from 'react';
 import styles from './Divider.module.css';
 
-interface DividerProps {
+interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Orientation of the divider */
   orientation?: 'horizontal' | 'vertical';
   /** Scale/thickness multiplier */
@@ -19,31 +19,41 @@ interface DividerProps {
   length?: string | number;
 }
 
-export const Divider = ({
-  orientation = 'horizontal',
-  scale = 1,
-  className = '',
-  style = {},
-  opacity = 0.2,
-  color = 'currentColor',
-  length = '100%',
-}: DividerProps) => {
-  const isHorizontal = orientation === 'horizontal';
+export const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
+  (
+    {
+      orientation = 'horizontal',
+      scale = 1,
+      className = '',
+      style = {},
+      opacity = 0.2,
+      color = 'currentColor',
+      length = '100%',
+      ...rest
+    },
+    ref
+  ) => {
+    const isHorizontal = orientation === 'horizontal';
 
-  const dividerStyle: CSSProperties = {
-    ...style,
-    color,
-    opacity,
-    [isHorizontal ? 'width' : 'height']: length,
-    '--divider-scale': `${scale}`,
-  } as CSSProperties & { '--divider-scale': string };
+    const dividerStyle: CSSProperties = {
+      ...style,
+      color,
+      opacity,
+      [isHorizontal ? 'width' : 'height']: length,
+      '--divider-scale': `${scale}`,
+    } as CSSProperties & { '--divider-scale': string };
 
-  return (
-    <div
-      className={`${styles.divider} ${styles[orientation]} ${className}`}
-      style={dividerStyle}
-      role="separator"
-      aria-orientation={orientation}
-    />
-  );
-};
+    return (
+      <div
+        ref={ref}
+        className={`${styles.divider} ${styles[orientation]} ${className}`}
+        style={dividerStyle}
+        role="separator"
+        aria-orientation={orientation}
+        {...rest}
+      />
+    );
+  }
+);
+
+Divider.displayName = 'Divider';

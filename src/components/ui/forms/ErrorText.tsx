@@ -4,6 +4,12 @@ import styles from './ErrorText.module.css';
 
 export interface ErrorTextProps {
     /**
+     * Element ID (used to associate this text with a control via
+     * `aria-describedby`)
+     */
+    id?: string;
+
+    /**
      * Additional CSS classes
      */
     className?: string;
@@ -19,9 +25,9 @@ export interface ErrorTextProps {
 /**
  * ErrorText component for validation feedback.
  */
-export function ErrorText({ className, style, children }: ErrorTextProps) {
+export function ErrorText({ id, className, style, children }: ErrorTextProps) {
     return (
-        <p className={cn(styles.errorText, className)} style={style} role="alert">
+        <p id={id} className={cn(styles.errorText, className)} style={style} role="alert">
             {children}
         </p>
     );

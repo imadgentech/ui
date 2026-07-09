@@ -83,7 +83,7 @@ export function OtpForm({
               ref={el => { inputRefs.current[i] = el; }}
               type="text"
               inputMode="numeric"
-              maxLength={2}
+              maxLength={1}
               value={digit}
               className={`${styles.box}${digit ? ` ${styles.filled}` : ''}`}
               onChange={e => handleChange(i, e.target.value)}

@@ -41,6 +41,102 @@ All notable changes to `@imadgentech/ui` are documented here, newest first. Entr
 
 - Unicode glyph icons (`×`, `▼`/`▾`) across `Select`, `Combobox`, `Dialog`, `Drawer`, `Tag`, and `Alert` replaced with inline SVG icons (matching the stroke-based convention already used by `Accordion`/`Checkbox`/`DatePicker`) — crisper and more visibly sized than the tiny/inconsistently-rendered text glyphs, and immune to source-encoding mishaps like the mojibake fixed in 1.0.20.
 
+---
+
+This next block resulted from a full audit of the package for reuse-blocking rigidity and correctness bugs — everything the package would need to work as well in a second, differently-branded project as it does in IMADGEN's own. See the "Field report: POcket" and "Navbar / 1400px / mobile type" sections of that audit for the reasoning behind the layout-related changes specifically.
+
+### Breaking
+
+- **Overlay content surfaces default to solid instead of translucent** — `Dialog`, `AlertDialog`, `Drawer`, and `Toast` all used the same translucent `--color-bg-surface` token with no `backdrop-filter`, which read as a washed-out, half-see-through panel rather than deliberate frosted glass (that treatment only works, and was only ever paired with a blur, on small popups like `Combobox`/`DatePicker`). They now default to a new opaque `--color-bg-surface-solid` token. `Dialog` and `Drawer` gained a `background="solid" | "translucent"` prop if you specifically want the old look back; `AlertDialog`/`Toast` don't have a translucent option since there was no design case for it. **Re-check any custom CSS overrides targeting these components' previous translucency.**
+- **`Container`'s default (`maxWidth="layout"`) now actually constrains width** — it was silently resolving to an undefined CSS variable (`var(--max)`, never defined anywhere in the package) and rendering edge-to-edge with no max-width at all. `--max` is now defined (1400px, the company-wide desktop content width) and the CSS has a `75rem` fallback besides. **Any project that was unknowingly relying on the previous no-op behavior for full-bleed layout will now see default-configured `Container`s width-constrained to 1400px** — pass `maxWidth="full"` explicitly if that's actually what you want.
+- **`Button`'s open `[key: string]: any` index signature removed** — it silently accepted (and type-checked) any prop name, including typos (`varaint`, `onClik`, etc.). Explicit `href`/`target`/`rel` props were added to keep the documented `as="a" href="..."` pattern working. **Any code that was relying on passing an unrecognized prop name through `Button` (typo or otherwise) will now fail to type-check.**
+- **`Form`'s `submitVariant` no longer accepts `'tertiary'`** — it was never a real `Button` variant (a pre-existing, unrelated latent bug — `Button` only ever had `'ghost'`/`'subtle'` in that weight class). Use `'ghost'` instead.
+- **`GridItem`'s `span`/`start` behavior changes** — it never imported its own compiled stylesheet; the classnames it generated (`"span-6"`, etc.) were plain, unscoped strings that could never match this package's actual hashed build output (confirmed empirically: `grid-column` didn't appear anywhere in the shipped `dist/index.css` before this fix). In practice, `GridItem`'s column span/start positioning has likely never applied any styling in the published package, at any breakpoint. It's fixed now (and gained the previously-missing `sm` breakpoint tier as a side effect) — **any layout that was silently falling back to implicit grid auto-placement because of this bug will visually change** once `span`/`start` actually take effect.
+
+### Added
+
+- **New tokens** (`tokens.css`): `--max` (1400px, `Container`/`Navbar`/`Footer`'s shared content-width token), `--overlay-center-offset` (0px default; set to your fixed navbar's height so `Dialog`/`AlertDialog` center in the content area below it instead of the full viewport), `--color-bg-surface-solid` (opaque surface for large overlays), `--color-brand-primary-rgb`/`--color-success-rgb`/`--color-warning-rgb`/`--color-error-rgb` (for `rgba(var(--...-rgb), alpha)` tints that actually follow a rebrand). `--text-xs`/`--text-sm` now bump slightly (13px/15px) under `@media (max-width: 640px)` for phone-screen readability.
+- `Dialog`, `Drawer`: `background` prop (`'solid' | 'translucent'`, default `'solid'`).
+- `Dialog`, `AlertDialog`: `className` prop (previously only `Drawer`/`Popover`/`DropdownMenu`/`Tooltip` had one).
+- `AlertDialog`: a thrown/rejected `onConfirm` now surfaces inline via `ErrorText` instead of becoming an unhandled promise rejection with no UI; Escape is now ignored while `onConfirm` is in flight instead of unmounting the dialog mid-confirm.
+- `ToastProvider`: `position` prop (`'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'top-center' | 'bottom-center'`, default `'bottom-right'`, matching the previous hardcoded corner). `addToast(message, type?, { duration })` — `duration: 0` disables auto-dismiss.
+- `DropdownMenu`, `Popover`, `Tooltip`: content surfaces now pair their translucent background with `backdrop-filter: blur(12px)`, matching `Combobox`/`DatePicker`'s existing small-popup treatment (their `className` prop already existed in code but wasn't documented — now is).
+- `Navbar`: `maxWidth` (defaults to the `--max` token, so the navbar's content row lines up with `Container`-based page content automatically), `mobileMenuLogo`, `mobileMenuShowHome`, `mobileMenuHomeHref` (threaded through to `MobileMenuContent`).
+- `MobileMenuContent`: `logo` (ReactNode slot, replaces the hardcoded IMADGEN logo when provided), `showHome` (default `true`), `homeHref` (default `'/'`), `homeLabel` (default `'Home'`).
+- `Footer`: `maxWidth` (same `--max` token as `Navbar`/`Container`), `className`.
+- `FeatureGrid`, `Testimonial`, `LogoCloud`: `className` (bringing them in line with `Hero`/`CTA`/`PricingCard`).
+- `PricingCard`: `featuredLabel` (override the "Recommended" badge text), `className`.
+- `LogoCloud`: per-logo `width`/`height` (default 120×40), for logos that aren't ~3:1.
+- `Pagination`: `prevLabel`, `nextLabel`, `renderPageInfo?: (current, total) => ReactNode`.
+- `DatePicker`: `weekdayLabels`, `monthLabels`, `weekStartsOn` (`0 | 1`, default `0`/Sunday) for non-English/Monday-start calendars.
+- `Badge`, `Tag`, `Alert`, `StatCard`: `'custom'` variant/tone — applies no built-in color/background, for full re-theming of a single instance via `className`.
+- `Table`: `getRowKey?: (row, index) => React.Key` — derive a stable row key instead of the array-index default, for tables whose rows can be sorted/filtered/reordered.
+- `Checkbox`, `Switch`, `RadioGroup`: now extend the underlying Radix primitive's own props and spread the rest onto it — `name`, `value`, `required`, `data-*`, and other native/ARIA attributes all reach the primitive now. `Checkbox`'s `label` and `RadioGroup`'s `items[].label` widened from `string` to `ReactNode` (matching `ToggleGroup`'s existing `label` type), so a label with an embedded link now works.
+- `FormField`: automatically wires `aria-describedby` (pointing at whichever of the error/hint text is rendered) and `aria-invalid` onto its child control, when that child is a single valid element. `ErrorText`, `HelperText`: new `id` prop.
+- `ChatPage`: `title` (default `'Imadgen AI'`), `subtitle` (default `'Quantum-V2 Core'`) — previously hardcoded with no override.
+- `ChatProvider`: `maxFailures` (default `3`, previously a hardcoded constant), `api` (points `useChat` at a different endpoint than the `@ai-sdk/react` default of `/api/chat`).
+- `forwardRef` added across every layout/typography primitive (`Stack`, `Flex`, `Cluster`, `Grid`, `GridItem`, `Section`, `Surface`, `Container`, `Divider`, `Spacer`, `AspectRatio`, `Heading`, `Text`, `Link`, `Code`, `Kbd`), each now properly extending the relevant `React.HTMLAttributes` and spreading rest props (`Surface` previously used an open `[key: string]: any` instead) — `id`, `onClick`, `data-testid`, `aria-*`, and a DOM `ref` all reach the rendered element now.
+- `EmbersBGE`, `NetBGE`, `SwarmsBGE`, `WaveformBackground`: now respect `prefers-reduced-motion` (render one static frame instead of animating), and derive their brand-colored particles/orbs from `--color-brand-primary`/`--color-brand-primary-rgb` at draw time instead of a hardcoded hex/rgba — overriding those tokens to rebrand now recolors the background effects too.
+- `LightTheme`: moved from unscoped global class names (`"toggle"`, `"toggle-placeholder"`) to a proper CSS Module — previously only rendered correctly if the host app happened to define matching global selectors.
+
+### Fixed
+
+- `Combobox`: `name` only mirrored into a hidden native `<select>` when `required` was also set, so a `name`-only field silently dropped out of `FormData` with no warning. Now renders whenever `name` is set; `required` only gates the HTML `required` attribute.
+- `WaveformBackground`: its `requestAnimationFrame` loop was never cancelled on unmount (the other three canvas effects already did this correctly) — a real, unbounded animation leak on every mount in an app with client-side navigation.
+- `OtpForm`: digit inputs had `maxLength={2}`, only behaving correctly today because the change handler manually slices to the last character. Now `maxLength={1}`.
+- `Navbar`, `Footer`: both rendered `className="wrap"` — a literal, non-module class name matching nothing anywhere in this package — so content-width centering silently did nothing in a fresh project unless it happened to define an unrelated global `.wrap` class. Now real CSS Module classes reading the new `--max` token.
+- `Table`: header cells were keyed by their own label text, causing duplicate-key warnings for two blank/identical headers (e.g. adjacent icon-only action columns). Now keyed by label + index.
+- `Dialog`: `size="md"` was a byte-for-byte duplicate of the unsized default (both set `max-width: 500px`) — a no-op preset that suggested the three-tier size system wasn't fully reasoned through. Removed the redundant rule.
+- `Badge`, `Tag`, `Alert`, `DropdownMenu` (danger-hover): tint backgrounds were hardcoded `rgba()` literals matching today's brand/semantic hex values — overriding the corresponding token (the package's own documented rebrand path) recolored text but not these backgrounds. Now derived from the new `-rgb` tokens.
+- `Button`: resting/hover `box-shadow` was a flat literal ignoring the theme-aware `--shadow-md`/`--shadow-lg` tokens (which have different opacities per theme) — now uses them, so the shadow lightens correctly under the light theme.
+- `Form`: the `CursorGlow`-driven mouse gradient (`var(--mx)`/`var(--my)`, no fallback) silently failed to render *at all* if `CursorGlow` wasn't mounted, since an unresolvable `var()` invalidates the whole `background` declaration. Now falls back to `50%`.
+- `Link`: external-link detection only matched `http://`/`https://`, so `mailto:`, `tel:`, and protocol-relative (`//…`) hrefs fell through to `next/link`, which tried to client-side-route to them instead of letting the browser open the mail client/dialer/host. Now detects any URI scheme or protocol-relative URL, special-casing `mailto:`/`tel:` to render as a plain anchor without `target="_blank"`.
+- `AlertDialog`: see Added above (ESC-during-loading and unhandled-rejection fixes are behavior changes, but non-breaking).
+- `Toast`: the auto-dismiss `setTimeout` was never cleared on manual (click) dismiss or on `ToastProvider` unmount. Timers are now tracked per toast and cleared in both places.
+
+### Docs
+
+- Corrected the claim that `Navbar`'s 1024px mobile/desktop cutover can be overridden via a `className` with higher specificity — it can't; the elements gated by that breakpoint are internal to the CSS Module and never exposed. Changing it means forking the component's CSS.
+- Documented `--breakpoint-sm/md/lg/xl` as reference-only — CSS custom properties can't be used inside `@media` conditions in any browser, so overriding them has no effect on any component's actual responsive behavior.
+- Documented the `html { font-size }` rem-cascade trick (Token System → Density) as the sanctioned, company-wide way to make an app read "bigger" without touching component code.
+- Documented `--max`/`--overlay-center-offset` and the `Navbar`/`Footer`/`Dialog`/`AlertDialog` props that consume them, for the navbar-first, 1400px-desktop company standard.
+- Added `className` to the `Popover`/`DropdownMenu`/`Tooltip` prop tables (already accepted in code, previously undocumented) and documented `Toast`'s default position.
+- Added a **Design Principles** section (component tiers — primitives / layout shells / composite patterns; dense data as rows, not cards; pick the page frame before the content) — conventions the components are built to support but that weren't written down anywhere.
+
+---
+
+A short follow-up pass against a general "design system foundations" checklist, done before the above was released:
+
+### Added
+
+- **Motion tokens** (`tokens.css`): `--duration-fast` (0.15s), `--duration-base` (0.2s), `--duration-slow` (0.3s), `--easing-standard`/`--easing-in`/`--easing-out`. The package had color/spacing/radius/shadow tokens but nothing for animation — every component hardcoded its own duration/easing, with real drift between them (`0.2s ease` vs `0.3s ease` vs `0.18s ease` vs inconsistently-formatted `.2s ease` for components using literally the same value). These are foundation tokens only — existing component CSS is **not** retrofitted to consume them in this pass; new/updated component CSS should reach for these instead of another ad hoc value.
+- `--color-brand-accent-rgb` (255, 174, 0) — closes the last remaining hardcoded-hex gap in `Alert`'s `info` tone, `ChatPage`'s premium-glow gradient, and `ImBgAurora`'s third blob, all of which previously left `--color-brand-accent` (`#ffae00`) as a literal specifically because this token didn't exist yet.
+- `--color-text-on-brand` (`#fff`) — dedicated, deliberately theme-invariant token for text/icons on a solid brand-orange fill (`Button`'s `brand-solid` variant, `DatePicker`'s selected day). Previously hardcoded `#fff` directly; `--color-text-inverted` was the wrong existing token to reach for here since it flips to near-black in dark mode, which a constant-orange fill doesn't want in either theme.
+
+### Fixed
+
+- `Button`'s `danger` variant used `#ff4d4d`/`rgba(255,50,50,…)` — a **different red than `--color-error` (#ef4444)** used everywhere else in the kit (`Alert`, `Badge`, `Tag`, `DropdownMenu`'s danger item). Now derived from `--color-error`/`--color-error-rgb`, so a danger `Button` matches the rest of the system's danger color exactly.
+
+---
+
+A performance and security pass, done before release: a security audit (ReDoS, XSS/injection sinks, prototype pollution, dependency pinning, storage) came back clean except for one real finding below; rendering-performance and bundle/runtime-cost audits surfaced the fixes that follow.
+
+### Fixed
+
+- **Security**: `Link.tsx` rendered any `href` — including `javascript:`/`data:`/`vbscript:` schemes — as a real, clickable, code-executing anchor. Low severity (requires a click, and `href` is normally developer-authored config, not end-user input) but cheap to close: a dangerous-scheme `href` now renders its children as inert text instead of a navigable link.
+- **Performance — `ChatPage`**: the entire message history re-rendered on every streamed token while an assistant reply was generating (no per-message memoization), the most visible jank source found in the audit. Extracted a `React.memo`'d message-bubble component with a content-based (not reference-based) equality check, so only the message actually changing re-renders.
+- **Performance — `Toast`**: `ToastContext`'s value object was rebuilt on every `ToastProvider` render (i.e. every toast add/remove anywhere in the app), even though `addToast`/`removeToast` were already stable — any component reading only `addToast` re-rendered on every unrelated toast. Now memoized.
+- **Performance — `Combobox`**: the search filter and selected-option lookup ran unconditionally in the render body, including on `highlightedIndex` updates from mouse hover — moving the mouse over a large option list re-filtered the whole list on every hovered item. Now memoized against `options`/`query`/`value`.
+- **Performance — `DatePicker`**: the calendar grid (42 `Date` allocations + formatting) rebuilt on every render, including ones unrelated to the calendar (e.g. the scroll/resize reposition handler). Now memoized against `viewDate`/`weekStartsOn`.
+- **Performance — `CursorGlow`**: wrote 4 CSS custom properties directly inside the raw `mousemove`/`touchmove` handler with no coalescing — `mousemove` can fire far faster than the display refresh rate, forcing a style recalculation on every event. Now coalesces to at most once per animation frame, matching the pattern the canvas effects already use.
+- **Performance — canvas effects** (`NetBGE`, `EmbersBGE`, `SwarmsBGE`, `WaveformBackground`): all four called `getComputedStyle` to read the brand color on every animation frame (`NetBGE` twice per frame) even though it only changes on a theme toggle. Now cached and only re-read via a `MutationObserver` watching the `data-theme` attribute.
+- **Performance — `EmbersBGE`/`SwarmsBGE`**: both built a fresh `createRadialGradient` per particle per frame (~90 and ~80 particles respectively, at 60fps — the dominant per-frame cost in these two effects, more than their O(n²) particle-link loops). Now bake the glow into an offscreen-canvas sprite once (rebuilt only on a theme change) and reuse it via `drawImage`.
+- **Performance — `ChatPage`**: `.container`/`.premiumWrapper`'s `backdrop-filter` blur radii (32px/36px — 3x+ the 12px used by small popups elsewhere in the kit) reduced to 18px. `backdrop-filter` cost scales with blur radius, and `.premiumWrapper` also animates its own transform on focus, forcing the browser to recompute the blur every frame of that transition.
+
+### Docs
+
+- Documented that `@imadgentech/ui/server.css` is a strict subset of `@imadgentech/ui/styles.css` (confirmed: 100% of `server.css`'s classes already exist in `index.css`) — apps that load both (the common pattern when mixing RSC and client components) are shipping the same ~39KB of CSS twice for no benefit; only load `server.css` on its own if `styles.css` is never loaded at all.
+
 ## [1.0.20] — 2026-07-06
 
 ### Breaking

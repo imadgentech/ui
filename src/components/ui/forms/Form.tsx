@@ -59,7 +59,7 @@ export interface FormProps extends Omit<React.FormHTMLAttributes<HTMLFormElement
      * Submit button variant
      * @default 'primary'
      */
-    submitVariant?: 'primary' | 'secondary' | 'tertiary' | 'danger'
+    submitVariant?: 'primary' | 'secondary' | 'ghost' | 'danger'
 
     /**
      * Show submit button

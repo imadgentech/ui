@@ -10,7 +10,7 @@
 .im-bghaze {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 106, 0, 0.05), transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(var(--color-brand-primary-rgb), 0.05), transparent 70%);
 }
 
 .im-bgblob {
@@ -24,7 +24,7 @@
 .im-bgblob--a {
     width: 60vw;
     height: 60vh;
-    background: radial-gradient(circle, rgba(255, 106, 0, 0.15), transparent 60%);
+    background: radial-gradient(circle, rgba(var(--color-brand-primary-rgb), 0.15), transparent 60%);
     top: -20vh;
     left: -20vw;
     animation-delay: 0s;
@@ -33,6 +33,9 @@
 .im-bgblob--b {
     width: 50vw;
     height: 50vh;
+    /* rgba(255, 138, 31, ...) is a lighter tint of the brand hue with no
+       matching CSS token (not exactly --color-brand-primary or
+       --color-brand-accent), so it's left as a literal. */
     background: radial-gradient(circle, rgba(255, 138, 31, 0.12), transparent 60%);
     bottom: -10vh;
     right: -10vw;
@@ -43,7 +46,7 @@
 .im-bgblob--c {
     width: 40vw;
     height: 40vh;
-    background: radial-gradient(circle, rgba(255, 174, 0, 0.08), transparent 60%);
+    background: radial-gradient(circle, rgba(var(--color-brand-accent-rgb), 0.08), transparent 60%);
     top: 40vh;
     left: 30vw;
     animation-delay: -10s;

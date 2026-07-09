@@ -30,8 +30,8 @@
 }
 
 .box.filled {
-    border-color: rgba(255, 106, 0, 0.4);
-    background: rgba(255, 106, 0, 0.05);
+    border-color: rgba(var(--color-brand-primary-rgb), 0.4);
+    background: rgba(var(--color-brand-primary-rgb), 0.05);
 }
 
 .box:disabled {

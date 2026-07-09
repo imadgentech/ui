@@ -4,7 +4,7 @@
 
 .featured {
     border-color: var(--color-brand-primary);
-    background: rgba(255, 106, 0, 0.02);
+    background: rgba(var(--color-brand-primary-rgb), 0.02);
 }
 
 .header {

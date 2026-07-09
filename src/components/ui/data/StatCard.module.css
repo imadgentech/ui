@@ -42,3 +42,7 @@
 .variant-neutral .value {
     color: var(--color-text-default);
 }
+
+.variant-custom .value {
+    color: inherit;
+}

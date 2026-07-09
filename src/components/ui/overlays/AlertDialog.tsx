@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { Button, type ButtonProps } from '../forms/Button';
+import { ErrorText } from '../forms/ErrorText';
+import { cn } from '../../../lib/cn';
 import styles from './AlertDialog.module.css';
 
 export interface AlertDialogProps {
@@ -46,8 +48,16 @@ export interface AlertDialogProps {
     /**
      * Called when Confirm is clicked. May be async — the confirm button
      * shows a loading state and the dialog only closes after it resolves.
+     * If it throws/rejects, the dialog stays open and the rejection reason
+     * is shown via `ErrorText` instead of surfacing as an unhandled promise
+     * rejection.
      */
     onConfirm: () => void | Promise<void>;
+
+    /**
+     * Additional class name applied to the dialog's content surface.
+     */
+    className?: string;
 }
 
 /**
@@ -74,12 +84,15 @@ export function AlertDialog({
     cancelLabel = 'Cancel',
     confirmVariant = 'danger',
     onConfirm,
+    className,
 }: AlertDialogProps) {
     const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
     const isOpen = open ?? uncontrolledOpen;
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     function setOpen(next: boolean) {
+        if (next) setError(null);
         setUncontrolledOpen(next);
         onOpenChange?.(next);
     }
@@ -87,8 +100,11 @@ export function AlertDialog({
     async function handleConfirm() {
         try {
             setLoading(true);
+            setError(null);
             await onConfirm();
             setOpen(false);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -99,7 +115,10 @@ export function AlertDialog({
             {trigger && <AlertDialogPrimitive.Trigger asChild>{trigger}</AlertDialogPrimitive.Trigger>}
             <AlertDialogPrimitive.Portal>
                 <AlertDialogPrimitive.Overlay className={styles.overlay} />
-                <AlertDialogPrimitive.Content className={styles.content}>
+                <AlertDialogPrimitive.Content
+                    className={cn(styles.content, className)}
+                    onEscapeKeyDown={(e) => { if (loading) e.preventDefault(); }}
+                >
                     <AlertDialogPrimitive.Title className={styles.title}>{title}</AlertDialogPrimitive.Title>
                     {description && (
                         <AlertDialogPrimitive.Description className={styles.description}>
@@ -107,6 +126,7 @@ export function AlertDialog({
                         </AlertDialogPrimitive.Description>
                     )}
                     {children && <div className={styles.body}>{children}</div>}
+                    {error && <ErrorText>{error}</ErrorText>}
                     <div className={styles.actions}>
                         <AlertDialogPrimitive.Cancel asChild>
                             <Button variant="secondary" disabled={loading}>

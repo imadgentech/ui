@@ -1,5 +1,7 @@
 .content {
     background: var(--color-bg-surface-hover);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--color-text-default);
     padding: var(--space-4) var(--space-12);
     border-radius: var(--radius-sm);

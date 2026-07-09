@@ -12,10 +12,10 @@
 
 .content {
     position: fixed;
-    top: 50%;
+    top: calc(50% + var(--overlay-center-offset) / 2);
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--color-bg-surface);
+    background: var(--color-bg-surface-solid);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-xl);

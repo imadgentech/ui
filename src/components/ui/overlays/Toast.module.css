@@ -1,7 +1,5 @@
 .container {
     position: fixed;
-    bottom: var(--space-24);
-    right: var(--space-24);
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
@@ -9,12 +7,44 @@
     pointer-events: none;
 }
 
+.position-bottom-right {
+    bottom: var(--space-24);
+    right: var(--space-24);
+}
+
+.position-bottom-left {
+    bottom: var(--space-24);
+    left: var(--space-24);
+}
+
+.position-top-right {
+    top: var(--space-24);
+    right: var(--space-24);
+}
+
+.position-top-left {
+    top: var(--space-24);
+    left: var(--space-24);
+}
+
+.position-top-center {
+    top: var(--space-24);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.position-bottom-center {
+    bottom: var(--space-24);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .toast {
     pointer-events: auto;
     min-width: 280px;
     max-width: 400px;
     padding: var(--space-12) var(--space-16);
-    background: var(--color-bg-surface);
+    background: var(--color-bg-surface-solid);
     color: var(--color-text-default);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-md);

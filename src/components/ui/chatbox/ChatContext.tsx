@@ -2,8 +2,7 @@
 
 import React, { createContext, useContext, useState, useRef, useCallback, useMemo } from 'react';
 import { useChat, UIMessage } from '@ai-sdk/react';
-
-const MAX_FAILURES = 3;
+import { DefaultChatTransport } from 'ai';
 
 interface ChatContextType {
     messages: UIMessage[];
@@ -25,7 +24,21 @@ interface ChatContextType {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export function ChatProvider({ children }: { children: React.ReactNode }) {
+export interface ChatProviderProps {
+    children: React.ReactNode;
+    /**
+     * Number of consecutive failures before the chat is disabled.
+     * @default 3
+     */
+    maxFailures?: number;
+    /**
+     * API endpoint `useChat` sends messages to.
+     * @default '/api/chat'
+     */
+    api?: string;
+}
+
+export function ChatProvider({ children, maxFailures = 3, api }: ChatProviderProps) {
     const [isChatActive, setIsChatActive] = useState(false);
     const [input, setInput] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
@@ -35,10 +48,10 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     const reportFailure = useCallback(() => {
         failureRef.current += 1;
         setFailureCount(failureRef.current);
-        if (failureRef.current >= MAX_FAILURES) {
+        if (failureRef.current >= maxFailures) {
             setIsDisabled(true);
         }
-    }, []);
+    }, [maxFailures]);
 
     const resetChat = useCallback(() => {
         failureRef.current = 0;
@@ -46,12 +59,18 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         setIsDisabled(false);
     }, []);
 
+    const transport = useMemo(
+        () => (api ? new DefaultChatTransport({ api }) : undefined),
+        [api]
+    );
+
     const {
         messages,
         sendMessage: sdkSendMessage,
         status,
         setMessages
     } = useChat({
+        transport,
         onError: () => {
             reportFailure();
         },

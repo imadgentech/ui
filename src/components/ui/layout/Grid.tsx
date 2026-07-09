@@ -40,29 +40,27 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
  *   <GridItem>Content</GridItem>
  * </Grid>
  */
-export function Grid({
-    columns = 12,
-    gap = '16',
-    align,
-    className,
-    children,
-    ...props
-}: GridProps) {
-    const columnClasses = getResponsiveClasses(columns, 'columns', styles);
+export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
+    ({ columns = 12, gap = '16', align, className, children, ...props }, ref) => {
+        const columnClasses = getResponsiveClasses(columns, 'columns', styles);
 
-    return (
-        <div
-            {...props}
-            className={cn(
-                styles.grid,
-                columnClasses,
-                styles[`gap-${gap}`],
-                align && styles[`align-${align}`],
-                className
-            )}
-        >
-            {children}
-        </div>
-    );
-}
+        return (
+            <div
+                ref={ref}
+                {...props}
+                className={cn(
+                    styles.grid,
+                    columnClasses,
+                    styles[`gap-${gap}`],
+                    align && styles[`align-${align}`],
+                    className
+                )}
+            >
+                {children}
+            </div>
+        );
+    }
+);
+
+Grid.displayName = 'Grid';
 

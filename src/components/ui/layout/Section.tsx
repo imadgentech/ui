@@ -34,20 +34,19 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
  *   <Heading>Section Title</Heading>
  * </Section>
  */
-export function Section({
-    size = 'md',
-    as: Component = 'section',
-    className,
-    children,
-    ...props
-}: SectionProps) {
-    return (
-        <Component
-            {...props}
-            className={cn(styles.section, styles[`size-${size}`], className)}
-        >
-            {children}
-        </Component>
-    );
-}
+export const Section = React.forwardRef<HTMLElement, SectionProps>(
+    ({ size = 'md', as: Component = 'section', className, children, ...props }, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                className={cn(styles.section, styles[`size-${size}`], className)}
+            >
+                {children}
+            </Component>
+        );
+    }
+);
+
+Section.displayName = 'Section';
 

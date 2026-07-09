@@ -2,7 +2,7 @@
 import { cn } from '../../../lib/cn';
 import styles from './Heading.module.css';
 
-export interface HeadingProps {
+export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
     /**
      * HTML heading element to render
      * @default 'h2'
@@ -49,40 +49,50 @@ export interface HeadingProps {
  * <Heading as="h2" size="xl">Section Title</Heading>
  * <Heading as="h3" align="center">Centered Title</Heading>
  */
-export function Heading({
-    as: Component = 'h2',
-    size,
-    weight,
-    align = 'left',
-    className,
-    style,
-    children,
-}: HeadingProps) {
-    // Default size based on heading level if not specified
-    const defaultSizes: Record<string, HeadingProps['size']> = {
-        h1: 'xxl',
-        h2: 'xl',
-        h3: 'lg',
-        h4: 'md',
-        h5: 'sm',
-        h6: 'sm',
-    };
+export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
+    (
+        {
+            as: Component = 'h2',
+            size,
+            weight,
+            align = 'left',
+            className,
+            style,
+            children,
+            ...rest
+        },
+        ref
+    ) => {
+        // Default size based on heading level if not specified
+        const defaultSizes: Record<string, HeadingProps['size']> = {
+            h1: 'xxl',
+            h2: 'xl',
+            h3: 'lg',
+            h4: 'md',
+            h5: 'sm',
+            h6: 'sm',
+        };
 
-    const appliedSize = size || defaultSizes[Component];
+        const appliedSize = size || defaultSizes[Component];
 
-    return (
-        <Component
-            className={cn(
-                styles.heading,
-                styles[`size-${appliedSize}`],
-                styles[`align-${align}`],
-                weight && styles[`weight-${weight}`],
-                className
-            )}
-            style={style}
-        >
-            {children}
-        </Component>
-    );
-}
+        return (
+            <Component
+                ref={ref}
+                className={cn(
+                    styles.heading,
+                    styles[`size-${appliedSize}`],
+                    styles[`align-${align}`],
+                    weight && styles[`weight-${weight}`],
+                    className
+                )}
+                style={style}
+                {...rest}
+            >
+                {children}
+            </Component>
+        );
+    }
+);
+
+Heading.displayName = 'Heading';
 
