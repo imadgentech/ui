@@ -28,8 +28,7 @@
       {
         "name": "next"
       }
-    ],
-    "incremental": true
+    ]
   },
   "include": [
     "app",
