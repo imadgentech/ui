@@ -138,10 +138,11 @@
   --z-sticky: 1000;
   --z-overlay: 1050;
   --z-modal: 1100;
-  /* Popover/DropdownMenu/Combobox/Select/DatePicker all portal to
-     document.body, same as Dialog/Drawer. These must outrank --z-modal —
-     otherwise a popover triggered from inside a Dialog paints under the
-     Dialog's own content and is visually present but unclickable. */
+  /* Popover/DropdownMenu/Combobox/DatePicker all portal to document.body,
+     same as Dialog/Drawer (Select is a native <select> and doesn't portal —
+     not affected). These must outrank --z-modal — otherwise a popover
+     triggered from inside a Dialog paints under the Dialog's own content
+     and is visually present but unclickable. */
   --z-popover: 1150;
   --z-tooltip: 1200;
   --z-toast: 1300;

@@ -82,7 +82,13 @@
     color: var(--color-text-muted);
 }
 
-/* Popup */
+/* Popup — portal-rendered to document.body (same approach as Combobox).
+   pointer-events is explicit because a Radix Dialog/AlertDialog ancestor
+   sets `body { pointer-events: none }` while open and only re-enables it
+   for layers in its own DismissableLayer stack — this plain createPortal
+   node isn't one of those, so without the override the calendar renders
+   but its days are unclickable whenever the trigger sits inside a
+   Radix-based modal. */
 .popup {
     width: 280px;
     background: var(--color-bg-surface);
@@ -93,6 +99,7 @@
     z-index: var(--z-popover);
     padding: var(--space-12);
     box-sizing: border-box;
+    pointer-events: auto;
 }
 
 .header {

@@ -125,7 +125,13 @@
 }
 
 /* Dropdown — portal-rendered to document.body, themed via CSS variables so
-   it follows light/dark like every other overlay in the kit. */
+   it follows light/dark like every other overlay in the kit.
+   pointer-events is explicit because a Radix Dialog/AlertDialog ancestor
+   sets `body { pointer-events: none }` while open and only re-enables it
+   for layers it manages itself (its own DismissableLayer stack) — this
+   plain createPortal node isn't one of those, so without the override its
+   options render but are unclickable whenever the trigger sits inside a
+   Radix-based modal. */
 .dropdown {
     width: max-content;
     max-width: 320px;
@@ -136,6 +142,7 @@
     box-shadow: var(--shadow-lg);
     z-index: var(--z-popover);
     overflow: hidden;
+    pointer-events: auto;
 }
 
 .searchInput {
