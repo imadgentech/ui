@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { FocusScope } from '@radix-ui/react-focus-scope';
+import { RemoveScroll } from 'react-remove-scroll';
 import { cn } from '../../../lib/cn';
 import styles from './DatePicker.module.css';
 
@@ -153,6 +155,7 @@ export function DatePicker({
     const [open, setOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
     const [dropPos, setDropPos] = useState<{ top: number; left: number } | null>(null);
+    const [insideDialog, setInsideDialog] = useState(false);
     const selectedDate = value ? parseISODate(value) : null;
     const [viewDate, setViewDate] = useState(() => selectedDate ?? new Date());
     const triggerRef = useRef<HTMLButtonElement>(null);
@@ -194,6 +197,14 @@ export function DatePicker({
             if (e.key === 'Escape') setOpen(false);
         }
 
+        // See Combobox for why this is needed: a Radix Dialog/AlertDialog
+        // ancestor's focus trap/scroll lock only recognizes its own content
+        // subtree, and this popup is portaled to document.body as a sibling
+        // of it. Currently a no-op here (no focusable/scrollable content in
+        // the popup), kept in sync so future additions (e.g. a scrollable
+        // year picker) don't silently regress inside a dialog.
+        setInsideDialog(!!triggerRef.current?.closest('[role="dialog"], [role="alertdialog"]'));
+
         reposition();
         document.addEventListener('mousedown', handleOutside);
         document.addEventListener('keydown', handleEscape);
@@ -225,7 +236,7 @@ export function DatePicker({
 
     const popupId = `${id ?? 'imui-datepicker'}-popup`;
 
-    const popup = dropPos && (
+    const popupContent = dropPos && (
         <div id={popupId} className={styles.popup} style={{ position: 'fixed', top: dropPos.top, left: dropPos.left }}>
             <div className={styles.header}>
                 <button
@@ -283,6 +294,14 @@ export function DatePicker({
             </div>
         </div>
     );
+
+    const popup = insideDialog && popupContent ? (
+        <FocusScope onMountAutoFocus={(e) => e.preventDefault()} onUnmountAutoFocus={(e) => e.preventDefault()}>
+            <RemoveScroll forwardProps allowPinchZoom removeScrollBar={false}>
+                {popupContent}
+            </RemoveScroll>
+        </FocusScope>
+    ) : popupContent;
 
     return (
         <span className={cn(styles.wrap, className)}>

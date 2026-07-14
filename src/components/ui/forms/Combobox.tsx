@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { FocusScope } from '@radix-ui/react-focus-scope';
+import { RemoveScroll } from 'react-remove-scroll';
 import { cn } from '../../../lib/cn';
 import styles from './Combobox.module.css';
 
@@ -90,6 +92,7 @@ export function Combobox({
     const [query, setQuery] = useState('');
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const [dropPos, setDropPos] = useState<{ top: number; left: number; width: number; maxWidth: number } | null>(null);
+    const [insideDialog, setInsideDialog] = useState(false);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
@@ -139,6 +142,13 @@ export function Combobox({
             setOpen(false);
             setQuery('');
         }
+
+        // A Radix Dialog/AlertDialog ancestor traps focus and locks background
+        // scroll for its own content subtree only. This dropdown is portaled
+        // to document.body (outside that subtree, see the `dropdown` JSX
+        // below), so inside a dialog it needs FocusScope/RemoveScroll of its
+        // own to be recognized rather than fought by the ancestor's trap/lock.
+        setInsideDialog(!!triggerRef.current?.closest('[role="dialog"], [role="alertdialog"]'));
 
         reposition();
         document.addEventListener('mousedown', handleOutside);
@@ -202,7 +212,7 @@ export function Combobox({
     const dropdownId = `${id ?? 'imui-combobox'}-dropdown`;
     const listboxId = `${id ?? 'imui-combobox'}-listbox`;
 
-    const dropdown = dropPos && (
+    const dropdownContent = dropPos && (
         <div
             id={dropdownId}
             className={styles.dropdown}
@@ -265,6 +275,27 @@ export function Combobox({
             </div>
         </div>
     );
+
+    // Inside a Radix Dialog/AlertDialog, its FocusScope traps focus and its
+    // RemoveScroll instance locks background scroll — both only recognize
+    // content inside the dialog's own DOM subtree or content that registers
+    // itself the same way (this is how Popover/DropdownMenu, built on Radix
+    // primitives, already cooperate correctly). Since this dropdown is
+    // portaled to document.body as a sibling of the dialog, without its own
+    // FocusScope/RemoveScroll it's invisible to both: the dialog's trap
+    // yanks focus back out of the search input, and the dialog's scroll lock
+    // unconditionally blocks wheel/touch scrolling over the option list
+    // (dragging the native scrollbar thumb still works, since that isn't a
+    // wheel/touch event). Only applied inside a dialog — outside one, no
+    // ancestor is locking anything, so this would just add an unnecessary
+    // background-scroll lock to an otherwise plain dropdown.
+    const dropdown = insideDialog && dropdownContent ? (
+        <FocusScope onMountAutoFocus={(e) => e.preventDefault()} onUnmountAutoFocus={(e) => e.preventDefault()}>
+            <RemoveScroll forwardProps allowPinchZoom removeScrollBar={false}>
+                {dropdownContent}
+            </RemoveScroll>
+        </FocusScope>
+    ) : dropdownContent;
 
     return (
         <div className={cn(styles.root, className)}>
