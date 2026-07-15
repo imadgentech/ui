@@ -2,7 +2,19 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
-## [Unreleased]
+## [2.0.5] — 2026-07-15
+
+### Added
+
+- `Button`: new `variant="og"` — restores the original pre-Next.js CTA look (translucent diagonal gradient + colored glow shadow, hand-tuned per theme: dark uses `.22`/`.12` alpha, light uses `.16`/`.10` — these were never the same value re-themed). None of the existing variants reproduced it: `primary` has no fill at all, `brand` is a flat single-alpha tint, `brand-solid` overshoots to a 100%-fill solid button. Sizing is unaffected — `size="sm" | "md" | "lg"` still drives padding/font-size/min-height exactly like every other variant.
+- `--color-brand-secondary-rgb` token (`255, 138, 31`), matching the existing RGB-triplet pattern, used by `og`'s gradient second stop.
+
+### Fixed
+
+- `Textarea`: `min-height` was hardcoded `80px` on the base class regardless of `textareaSize`, so `sm`/`md`/`lg` all rendered at the same height while every other sized control (`Input`, `Select`, `Combobox`, `DatePicker`) scales 32/40/48px. Moved onto the `size-*` classes to match; also added the `@media (pointer: coarse)` 44px touch-target bump the other controls already had.
+- `Form`: `submitVariant` was typed as its own hardcoded `'primary' | 'secondary' | 'ghost' | 'danger'` union, independent of `Button`'s actual variant list and already missing `'brand'`/`'brand-solid'` before this pass added `'og'` too — a consumer couldn't set `submitVariant="brand"` (or now `"og"`) without a type error even though `Button` supported it. Now typed as `ButtonProps['variant']`, so it can't drift out of sync with `Button` again.
+
+## [2.0.4] — 2026-07-14
 
 ### Breaking
 

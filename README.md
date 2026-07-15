@@ -177,6 +177,7 @@ Light theme overrides are applied automatically under `[data-theme="light"]`.
 | Token | Value |
 |---|---|
 | `--color-brand-primary-rgb` | `255, 106, 0` |
+| `--color-brand-secondary-rgb` | `255, 138, 31` |
 | `--color-brand-accent-rgb` | `255, 174, 0` |
 | `--color-success-rgb` | `34, 197, 94` |
 | `--color-warning-rgb` | `245, 158, 11` |
@@ -306,7 +307,7 @@ Before reaching for a raw `<div>`/`<a>`/`<button>`, check whether a primitive al
 
 The kit's breakpoint scale is `sm` 640px / `md` 768px / `lg` 1024px, used consistently by `Grid`, `GridItem`, `Flex`, and `Navbar`. `tokens.css` also defines `--breakpoint-sm/md/lg/xl` for reference — these exist for readability in the source and in case a future build step can consume them, but CSS custom properties cannot be used inside `@media` conditions in any browser today, so overriding them in a consuming app's `:root` has no effect on any component's actual responsive behavior. Changing a breakpoint means forking the relevant `.module.css` file.
 
-- **Touch targets.** Interactive controls that render below the ~44px accessibility floor at their `sm` size (`Button`, `IconButton`, `Input`, `Select`, `Combobox`) automatically grow to 44px under `@media (pointer: coarse)` — i.e. on touch devices — while keeping the denser desktop sizing for mouse/trackpad. `Checkbox`, `RadioGroup`, and `Switch` expand their tappable hit area via an invisible `::before` overlay without growing the visible control.
+- **Touch targets.** Interactive controls that render below the ~44px accessibility floor at their `sm` size (`Button`, `IconButton`, `Input`, `Select`, `Combobox`, `Textarea`, `ToggleGroup`) automatically grow to 44px under `@media (pointer: coarse)` — i.e. on touch devices — while keeping the denser desktop sizing for mouse/trackpad. `Checkbox`, `RadioGroup`, and `Switch` expand their tappable hit area via an invisible `::before` overlay without growing the visible control.
 - **Responsive layout props.** `Grid.columns`, `GridItem.span`/`start`, and `Flex.direction` all accept either a single value or a breakpoint map (`{ base, sm, md, lg }`), e.g. `<Flex direction={{ base: 'column', md: 'row' }}>` to stack on phones and go side-by-side on tablet+.
 - **Overflow-prone components.** `Table` scrolls horizontally instead of breaking layout; `Tabs` scrolls its trigger row horizontally (scrollbar hidden) instead of wrapping or overflowing; `Combobox`'s portal-rendered dropdown clamps its position and width to the viewport so it can't render off-screen near a screen edge.
 - **Dialog/Drawer/AlertDialog** are viewport-relative (`min(…, 90vw)`-style widths), so they fit down to ~320px-wide phone screens without extra configuration.
@@ -330,7 +331,7 @@ import { Button } from '@imadgentech/ui';
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'brand' \| 'brand-solid' \| 'subtle'` | `'primary'` | `brand` is a ghost/tinted orange; `brand-solid` is solid-filled — use it for primary actions that need to read as filled |
+| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'brand' \| 'brand-solid' \| 'subtle' \| 'og'` | `'primary'` | `brand` is a ghost/tinted orange; `brand-solid` is solid-filled — use it for primary actions that need to read as filled; `og` is the original pre-Next.js CTA look (translucent diagonal gradient + colored glow shadow, hand-tuned per theme) |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Padding/font-size are on the same `rem` scale as `Input`/`Select`, so a `Button` height-matches a sibling field at the same size |
 | `loading` | `boolean` | `false` | Shows spinner, disables button |
 | `leftIcon` | `ReactNode` | — | Icon before label |
@@ -594,7 +595,7 @@ Higher-level form with declarative field definitions and mouse-tracking gradient
 | `fields` | `FormField[]` | **Required** |
 | `onSubmit` | `(e, data: Record<string, FormDataEntryValue>) => void` | **Required** |
 | `submitLabel` | `string` | `'Submit'` |
-| `submitVariant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger'` | `'primary'` |
+| `submitVariant` | Same as `Button`'s `variant` | `'primary'` |
 | `showSubmit` | `boolean` | `true` |
 | `children` | `ReactNode` | — |
 

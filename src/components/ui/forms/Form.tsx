@@ -5,7 +5,7 @@ import { cn } from '../../../lib/cn'
 import styles from './Form.module.css'
 import { Input } from './Input'
 import { Textarea } from './Textarea'
-import { Button } from './Button'
+import { Button, ButtonProps } from './Button'
 import { Stack } from '../layout/Stack'
 import { Grid } from '../layout/Grid'
 
@@ -59,7 +59,7 @@ export interface FormProps extends Omit<React.FormHTMLAttributes<HTMLFormElement
      * Submit button variant
      * @default 'primary'
      */
-    submitVariant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+    submitVariant?: ButtonProps['variant']
 
     /**
      * Show submit button
