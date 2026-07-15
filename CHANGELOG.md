@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.7] — 2026-07-15
+
+### Fixed
+
+- **`@imadgentech/ui/server` shipped with no type declarations** — `dist/server.d.ts`/`dist/server.d.mts` were missing from the published 2.0.6 tarball (confirmed via `npm pack --dry-run`), even though the exports map's `"./server"` entry still pointed at `./dist/server.d.ts`, breaking every server-safe import (`Container`, `Stack`, `Hero`, etc.) for any consumer using that entry point. Root cause: `tsup.config.ts` builds `index`/`chat` and `server` as two separate, concurrently-spawned child processes sharing one `outDir`, and the `index`/`chat` config's `clean: true` raced `server`'s much-slower DTS generation phase (5.5s vs. 14s) — `server.js`/`.mjs`/`.css` (written in the fast JS/CSS phase) survived, but `server.d.ts`/`.d.mts` (written later) were reliably wiped, 100% reproducible locally across repeated clean builds. Fixed by removing `clean: true` from both tsup configs and cleaning `dist/` once, synchronously, in the `build` npm script before either tsup process starts, instead of leaving it to one of the two racing processes.
+
 ## [2.0.6] — 2026-07-15
 
 ### Fixed

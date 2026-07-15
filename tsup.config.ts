@@ -151,12 +151,20 @@ const shared = {
   esbuildPlugins: [cssModulesPlugin],
 }
 
+// tsup spawns one child process per config entry below, and both write into
+// the same outDir concurrently. `clean: true` here would race the server
+// build's slower DTS phase — index/chat's clean step and server's DTS
+// output aren't ordered relative to each other, and server.d.ts/server.d.mts
+// reliably got wiped after being written (server.js/.mjs/.css survived,
+// since JS/CSS build much faster than DTS does). Cleaning is done once,
+// synchronously, in the `build` npm script before either process starts —
+// see package.json.
 export default defineConfig([
   {
     ...shared,
     entry: ['src/index.ts', 'src/chat.ts'],
     banner: { js: "'use client';" },
-    clean: true,
+    clean: false,
   },
   {
     ...shared,
