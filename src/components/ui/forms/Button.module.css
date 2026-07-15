@@ -188,6 +188,36 @@
     color: var(--color-text-default);
 }
 
+/* Original pre-Next.js CTA look (imadgen-intro): translucent diagonal
+   gradient + colored glow shadow, restored here as its own variant instead
+   of overloading 'brand'/'brand-solid' so existing consumers of those keep
+   their current look. Dark and light values are hand-tuned independently
+   (not the same alpha re-themed) — see button-regression-report.md. Sizing
+   (padding/font-size/min-height) comes entirely from the .size-* classes,
+   same as every other variant, so this doesn't change Button's box model. */
+.variant-og {
+    background: linear-gradient(135deg, rgba(var(--color-brand-primary-rgb), .22), rgba(var(--color-brand-secondary-rgb), .12));
+    border-color: rgba(var(--color-brand-primary-rgb), .35);
+    color: var(--color-text-default);
+    box-shadow: 0 14px 40px rgba(var(--color-brand-primary-rgb), .12), 0 18px 55px rgba(0, 0, 0, .25);
+}
+
+.variant-og:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(var(--color-brand-primary-rgb), .22), rgba(var(--color-brand-secondary-rgb), .12));
+    border-color: rgba(var(--color-brand-primary-rgb), .35);
+    box-shadow: 0 14px 40px rgba(var(--color-brand-primary-rgb), .12), 0 18px 55px rgba(0, 0, 0, .25);
+}
+
+:global([data-theme="light"]) .variant-og {
+    background: linear-gradient(135deg, rgba(var(--color-brand-primary-rgb), .16), rgba(var(--color-brand-secondary-rgb), .10));
+    box-shadow: 0 12px 30px rgba(var(--color-brand-primary-rgb), .10), 0 18px 45px rgba(0, 0, 0, .10);
+}
+
+:global([data-theme="light"]) .variant-og:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(var(--color-brand-primary-rgb), .16), rgba(var(--color-brand-secondary-rgb), .10));
+    box-shadow: 0 12px 30px rgba(var(--color-brand-primary-rgb), .10), 0 18px 45px rgba(0, 0, 0, .10);
+}
+
 /* Content & Icons */
 .content {
     display: inline-flex;
