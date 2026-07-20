@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.9] — 2026-07-15
+
+### Breaking
+
+- **`Button`'s default (`variant="primary"`) is now the gradient/glow CTA look, and `variant="og"` (added in 2.0.5) is removed** — the gradient/glow treatment turned out to be the company's actual core button theme rather than a one-off opt-in, so it now lives on `primary` directly instead of a separate variant name. The former flat `primary` look (transparent bg, brand-tinted border, no gradient/glow) is preserved under a new `variant="plain"`. **Any `Button` using the implicit or explicit `primary` default will change appearance app-wide** — pass `variant="plain"` to keep the old look. **Any `Button`/`Form.submitVariant` explicitly using `variant="og"` (2.0.5–2.0.8) must switch to `variant="primary"` (now the default) or drop the prop entirely.**
+
 ## [2.0.8] — 2026-07-15
 
 ### Fixed

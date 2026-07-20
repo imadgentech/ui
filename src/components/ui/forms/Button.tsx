@@ -6,10 +6,12 @@ import styles from './Button.module.css';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
-     * Button variant
+     * Button variant. 'primary' is the translucent diagonal gradient +
+     * colored glow CTA look (the company's core theme); use 'plain' for the
+     * former flat/bordered 'primary' look with no gradient or glow.
      * @default 'primary'
      */
-    variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'brand' | 'brand-solid' | 'subtle' | 'og';
+    variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'brand' | 'brand-solid' | 'subtle' | 'plain';
 
     /**
      * Button size

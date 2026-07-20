@@ -331,7 +331,7 @@ import { Button } from '@imadgentech/ui';
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'brand' \| 'brand-solid' \| 'subtle' \| 'og'` | `'primary'` | `brand` is a ghost/tinted orange; `brand-solid` is solid-filled — use it for primary actions that need to read as filled; `og` is the original pre-Next.js CTA look (translucent diagonal gradient + colored glow shadow, hand-tuned per theme) |
+| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'brand' \| 'brand-solid' \| 'subtle' \| 'plain'` | `'primary'` | `primary` is the company's core CTA look — translucent diagonal gradient + colored glow shadow, hand-tuned per theme; `plain` is the former flat `primary` look (transparent bg, brand-tinted border, no gradient/glow); `brand` is a ghost/tinted orange; `brand-solid` is solid-filled — use it for primary actions that need to read as filled |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Padding/font-size are on the same `rem` scale as `Input`/`Select`, so a `Button` height-matches a sibling field at the same size |
 | `loading` | `boolean` | `false` | Shows spinner, disables button |
 | `leftIcon` | `ReactNode` | — | Icon before label |
