@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.8] — 2026-07-15
+
+### Fixed
+
+- `ToggleGroup`: `.item`'s font-size stayed at `var(--text-sm)` (14px) for both `sm` and `md` sizes, and `size-lg` was pinned to `var(--text-md)` (16px) instead of `var(--text-lg)` (18px) — every other sized control (`Input`, `Select`, `Combobox`, `Textarea`) scales font-size 14/16/18px per tier, so a `ToggleGroup` at the shared `md` default read visibly smaller/lighter than a sibling `Input` despite matching the same 40px `min-height`. Now scales 14/16/18px per tier like the rest of the kit. Also gave `.item` its own small vertical padding per tier instead of depending solely on `.group`'s `align-items: stretch` to fill the height — stretch still applies as the final authority, this just stops the active pill from centering with zero padding baked into the item itself, matching how `Input`/`Select`/`Combobox` size their own element directly.
+
 ## [2.0.7] — 2026-07-15
 
 ### Fixed

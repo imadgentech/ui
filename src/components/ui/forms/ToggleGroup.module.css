@@ -32,29 +32,41 @@
 /* Sizes — min-height matches Input/Select/Combobox's sm/md/lg exactly, so a
    ToggleGroup renders at the same real height as a sibling Input/Select at
    the same size. .group's own 2px padding + 1px border (4px total) and each
-   .item's 1px border are already accounted for below; items stretch to fill
-   the remaining height (see align-items on .group), so only .group needs an
-   explicit min-height. */
+   .item's 1px border are already accounted for below; items still stretch
+   to fill the remaining height (see align-items on .group) as the ultimate
+   authority, but each .item also gets its own small vertical padding now
+   instead of relying on that alone — matches how Input/Select/Combobox size
+   their own element directly rather than depending on a wrapper.
+   Font-size now scales 14/16/18px per tier, the same as every other sized
+   control — it previously stayed at 14px for both sm and md, and lg was
+   pinned to 16px instead of 18px, so ToggleGroup text read smaller than a
+   same-size sibling Input despite matching min-height. */
 .size-sm {
     min-height: 32px;
 }
 
 .size-sm .item {
-    padding: 0 var(--space-12);
+    padding: var(--space-2) var(--space-12);
+    font-size: var(--text-sm);
 }
 
 .size-md {
     min-height: 40px;
 }
 
-.size-lg {
-    min-height: 48px;
+.size-md .item {
+    padding: var(--space-4) var(--space-16);
     font-size: var(--text-md);
 }
 
+.size-lg {
+    min-height: 48px;
+    font-size: var(--text-lg);
+}
+
 .size-lg .item {
-    padding: 0 var(--space-24);
-    font-size: var(--text-md);
+    padding: var(--space-8) var(--space-24);
+    font-size: var(--text-lg);
 }
 
 /* Touch devices: bump the sm size up to a 44px tap target, matching
