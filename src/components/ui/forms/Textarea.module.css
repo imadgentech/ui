@@ -42,21 +42,24 @@
 
 /* Sizes — min-height matches Input/Select/Combobox's sm/md/lg exactly, so a
    Textarea renders at the same real height as a sibling form control at the
-   same size (rows can still grow it taller when needed). */
+   same size (rows can still grow it taller when needed). Vertical padding
+   is smaller than horizontal — padding + border + line-height must come in
+   under min-height, or min-height is a no-op and the box overshoots its
+   declared 32/40/48px floor (see Input.module.css). */
 .size-sm {
-    padding: var(--space-8) var(--space-12);
+    padding: var(--space-2) var(--space-12);
     font-size: var(--text-sm);
     min-height: 32px;
 }
 
 .size-md {
-    padding: var(--space-12) var(--space-16);
+    padding: var(--space-4) var(--space-16);
     font-size: var(--text-md);
     min-height: 40px;
 }
 
 .size-lg {
-    padding: var(--space-16) var(--space-24);
+    padding: var(--space-8) var(--space-24);
     font-size: var(--text-lg);
     min-height: 48px;
 }

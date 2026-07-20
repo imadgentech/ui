@@ -54,10 +54,14 @@
    the same real height as a sibling Input/Select/Select regardless of the
    consuming app's root font-size. Horizontal padding is Button-specific
    (buttons want more breathing room around a label) and doesn't affect
-   height. min-height mirrors Input's declared floor, converted to rem. */
+   height. min-height mirrors Input's declared floor, converted to rem.
+   Vertical padding is deliberately smaller than horizontal — padding +
+   border + line-height must come in under min-height, or min-height is a
+   no-op and the box overshoots its declared 32/40/48px (see
+   Input.module.css). */
 .size-sm {
     min-height: 2rem;
-    padding: var(--space-8) var(--space-16);
+    padding: var(--space-2) var(--space-16);
     font-size: var(--text-sm);
     font-weight: 600;
     gap: 8px;
@@ -65,14 +69,14 @@
 
 .size-md {
     min-height: 2.5rem;
-    padding: var(--space-12) var(--space-24);
+    padding: var(--space-4) var(--space-24);
     font-size: var(--text-md);
     gap: 10px;
 }
 
 .size-lg {
     min-height: 3rem;
-    padding: var(--space-16) var(--space-32);
+    padding: var(--space-8) var(--space-32);
     font-size: var(--text-lg);
     gap: 12px;
 }

@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.10] — 2026-07-15
+
+### Breaking
+
+- **`Input`, `Select`, `Combobox`, `DatePicker`, `Textarea`, `Button` all overshot their own declared 32/40/48px `min-height` scale** — vertical padding (8/12/16px) plus 1px border plus text line-height summed to *more* than the declared min-height at every tier (measured: `md` rendered ~47.5px against a declared 40px, `sm` ~35px against 32px, `lg` ~56px against 48px), so `min-height` was silently a no-op everywhere except `ToggleGroup` (2.0.8's smaller item padding happened to fit under the target, which is what first surfaced this — `ToggleGroup` was the one control actually hitting 32/40/48px while everything else quietly ran taller). Vertical padding is now 2/4/8px per tier (horizontal padding unchanged) on all six components, so `min-height` is the real, enforced height everywhere for the first time. **Every sized form control in every consuming app renders visibly shorter/more compact** — re-check form-heavy screens after upgrading. This also means these controls are now genuinely height-matched to `ToggleGroup` and each other, rather than only nominally sharing a "scale" that most of them never actually reached.
+
 ## [2.0.9] — 2026-07-15
 
 ### Breaking
