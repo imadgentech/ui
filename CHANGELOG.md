@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.14] — 2026-07-24
+
+### Fixed
+
+- `Footer`: side padding was `--space-32` (32px), wider than `Container`'s `--space-24` (24px) — same class of mismatch as `Navbar` in 2.0.13. Now matches `Container` exactly (16px `<=640px`, 24px above).
+
 ## [2.0.13] — 2026-07-24
 
 ### Fixed
