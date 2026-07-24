@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.12] — 2026-07-24
+
+### Changed
+
+- `Hero`, `CTA`: `.description`'s `max-width` widened further, from 800px (2.0.11) to 1000px on both.
+
 ## [2.0.11] — 2026-07-24
 
 ### Changed
