@@ -2,6 +2,12 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.0.13] — 2026-07-24
+
+### Fixed
+
+- `Navbar`: desktop (`>=1024px`) side padding was `--space-80` (80px), and `--space-32` (32px) below that — both wider than `Container`'s own `--space-24` (24px), despite the `maxWidth` prop's own doc comment stating the navbar is meant to "line up with page content automatically." In practice the logo/actions sat visibly further inset than the Hero/CTA/etc. content edges below them, reading as everything bunched toward the middle instead of pinned to the actual left/right content edges. Now matches `Container` exactly (16px `<=640px`, 24px above).
+
 ## [2.0.12] — 2026-07-24
 
 ### Changed
