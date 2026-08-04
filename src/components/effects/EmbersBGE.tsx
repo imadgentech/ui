@@ -22,11 +22,18 @@ export default function EmbersBGE() {
         const rnd = (a: number, b: number) => a + Math.random() * (b - a)
 
         const resize = () => {
+            // Measures the wrapper div's actual rendered box, not
+            // window.innerWidth/innerHeight — see SwarmsBGE's resize() for
+            // why: this canvas fills whatever containing block its
+            // `position: fixed` wrapper resolves against (the full viewport
+            // normally, but a much smaller box when an ancestor establishes
+            // containment, e.g. a preview tile). Hardcoding to the window
+            // size drew particles across a full-page coordinate space that
+            // then got squished into the small box by CSS's width/height:100%.
+            const rect = (c.parentElement ?? c).getBoundingClientRect()
             dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
-            w = c.width = Math.floor(window.innerWidth * dpr)
-            h = c.height = Math.floor(window.innerHeight * dpr)
-            // c.style.width = window.innerWidth + 'px' // Handled by CSS usually, but good for safety
-            // c.style.height = window.innerHeight + 'px'
+            w = c.width = Math.floor(rect.width * dpr)
+            h = c.height = Math.floor(rect.height * dpr)
         }
 
         const seed = () => {

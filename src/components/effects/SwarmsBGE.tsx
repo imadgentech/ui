@@ -22,11 +22,23 @@ export default function SwarmsBGE() {
         const rnd = (a: number, b: number) => a + Math.random() * (b - a)
 
         const resize = () => {
+            // Measures the wrapper div's actual rendered box, not
+            // window.innerWidth/innerHeight — this canvas is meant to fill
+            // whatever containing block its `position: fixed` wrapper
+            // resolves against, which is the full viewport when mounted at
+            // the page root, but can be a much smaller box (e.g. a preview
+            // tile) when an ancestor establishes containment via `contain`/
+            // `transform`/`filter`. Hardcoding to the window size broke that
+            // second case — the canvas kept trying to render at full-page
+            // resolution and then got squished into the small box.
+            const rect = (c.parentElement ?? c).getBoundingClientRect()
             dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
-            w = c.width = Math.floor(window.innerWidth * dpr)
-            h = c.height = Math.floor(window.innerHeight * dpr)
-            c.style.width = window.innerWidth + 'px'
-            c.style.height = window.innerHeight + 'px'
+            const cssW = Math.floor(rect.width)
+            const cssH = Math.floor(rect.height)
+            w = c.width = Math.floor(cssW * dpr)
+            h = c.height = Math.floor(cssH * dpr)
+            c.style.width = cssW + 'px'
+            c.style.height = cssH + 'px'
         }
 
         const seed = () => {

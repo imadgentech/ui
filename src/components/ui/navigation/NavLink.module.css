@@ -27,6 +27,12 @@
 
 .navLink:hover {
     color: var(--color-text-default);
+    /* Explicit even though the base .navLink rule already sets this — a
+       consuming app's own global `a:hover { text-decoration: underline }`
+       (a common base-CSS pattern) has equal-or-higher specificity than a
+       single class selector and would otherwise win on hover, bleeding a
+       plain native underline in on top of the ::after gradient bar below. */
+    text-decoration: none;
 }
 
 .navLink:hover::after {

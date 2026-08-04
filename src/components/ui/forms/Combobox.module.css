@@ -136,8 +136,13 @@
    options render but are unclickable whenever the trigger sits inside a
    Radix-based modal. */
 .dropdown {
-    width: max-content;
-    max-width: 320px;
+    /* Width and max-height are set inline per-instance (matched to the
+       trigger's own width, and to whatever viewport space is actually
+       available above/below it — see Combobox.tsx's reposition()); no
+       CSS-level caps here. flex column so .list's flex:1 below fills
+       whatever height that leaves after .searchInput's own natural height. */
+    display: flex;
+    flex-direction: column;
     background: var(--color-bg-surface);
     backdrop-filter: blur(12px);
     border: 1px solid var(--color-border-default);
@@ -167,9 +172,16 @@
 }
 
 .list {
-    max-height: 220px;
+    /* No vertical padding — options fill the list edge-to-edge; .dropdown's
+       own overflow:hidden clips the first/last row's square corners to its
+       rounded shape, so there's no need for inset breathing room here (that
+       inset was showing up as dead space above/below the option rows).
+       flex:1 + min-height:0 fills whatever height .dropdown's inline
+       max-height leaves after .searchInput, scrolling internally via
+       overflow-y when the option list doesn't fit. */
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
-    padding: var(--space-4) 0;
 }
 
 .option {
@@ -183,15 +195,22 @@
     color: var(--color-text-default);
 }
 
-.option:hover {
+/* :not(.optionActive) on both hover states below — otherwise a selected
+   option loses its orange the moment the mouse or keyboard highlight lands
+   on it (gray wins on specificity ties by declaration order) and only
+   regains it once the highlight moves elsewhere, which reads as the
+   highlight "jumping" to a different row than the one you're on. Selected
+   stays visually selected regardless of where the cursor/highlight is. */
+.option:hover:not(.optionActive) {
     background: var(--color-bg-surface-hover);
 }
 
 .optionActive {
-    background: var(--color-focus-ring);
+    background: rgba(var(--color-brand-primary-rgb), 0.14);
+    color: var(--color-brand-primary);
 }
 
-.optionHighlighted {
+.optionHighlighted:not(.optionActive) {
     background: var(--color-bg-surface-hover);
 }
 

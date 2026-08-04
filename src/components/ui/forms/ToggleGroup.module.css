@@ -1,12 +1,36 @@
 .group {
     display: inline-flex;
     align-items: stretch;
-    padding: var(--space-2);
-    background: var(--color-bg-surface);
-    border: 1px solid var(--color-border-default);
+    position: relative;
+    /* No padding — items stretch flush to the track's own border (see
+       .item's border-radius below), so the active item's box coincides
+       with the track's edge instead of floating inset inside it as a
+       visibly smaller, separately-rounded "box in a box". */
+    background: rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(0, 0, 0, 0.16);
     border-radius: var(--radius-md);
     gap: 2px;
     box-sizing: border-box;
+}
+
+/* Single-select only (see ToggleGroup.tsx) — the actual active-state
+   background/border, positioned by JS and eased into place on change so
+   selecting a new item slides the highlight over instead of it just
+   appearing in two places at once. */
+.thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: var(--radius-md);
+    background: rgba(var(--color-brand-primary-rgb), 0.14);
+    border: 1px solid rgba(var(--color-brand-primary-rgb), 0.3);
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.15s ease;
 }
 
 .item {
@@ -15,28 +39,43 @@
     justify-content: center;
     padding: 0 var(--space-16);
     border: 1px solid transparent;
-    /* Nested inside .group's 2px inset — radius must be outer_radius - inset
-       to stay concentric with the group's rounded corners. */
-    border-radius: calc(var(--radius-md) - var(--space-2));
+    /* Matches .group's radius exactly (no inset to subtract now that
+       .group has no padding) so an active item's corners land flush on
+       the track's own corners instead of nesting a smaller pill inside it. */
+    border-radius: var(--radius-md);
     background: transparent;
     color: var(--color-text-muted);
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     font-family: var(--font-sans);
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    position: relative;
+    z-index: 1;
+    transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     box-sizing: border-box;
 }
 
+.item:active:not([data-disabled]) {
+    transform: scale(0.98);
+}
+
+.itemMultiple {
+    transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Sizes — min-height matches Input/Select/Combobox's sm/md/lg exactly, so a
    ToggleGroup renders at the same real height as a sibling Input/Select at
-   the same size. .group's own 2px padding + 1px border (4px total) and each
-   .item's 1px border are already accounted for below; items still stretch
-   to fill the remaining height (see align-items on .group) as the ultimate
-   authority, but each .item also gets its own small vertical padding now
-   instead of relying on that alone — matches how Input/Select/Combobox size
-   their own element directly rather than depending on a wrapper.
+   the same size. .group's own 1px border (2px total) and each .item's 1px
+   border are already accounted for below; items still stretch to fill the
+   remaining height (see align-items on .group) as the ultimate authority,
+   but each .item also gets its own small vertical padding now instead of
+   relying on that alone — matches how Input/Select/Combobox size their own
+   element directly rather than depending on a wrapper.
    Font-size now scales 14/16/18px per tier, the same as every other sized
    control — it previously stayed at 14px for both sm and md, and lg was
    pinned to 16px instead of 18px, so ToggleGroup text read smaller than a
@@ -82,10 +121,20 @@
     color: var(--color-text-default);
 }
 
+/* Single-select: only the text color changes here — the highlight itself
+   is the sliding .thumb, not the item's own background/border. Painting
+   both would show the destination lit up instantly while the thumb is
+   still mid-slide. */
 .item[data-state='on'] {
+    color: var(--color-brand-primary);
+}
+
+/* Multiple-select only (see ToggleGroup.tsx) — no shared thumb since more
+   than one item can be active at once, so each item still carries its own
+   background/border, same as before sliding was introduced. */
+.itemMultiple[data-state='on'] {
     background: rgba(var(--color-brand-primary-rgb), 0.14);
     border-color: rgba(var(--color-brand-primary-rgb), 0.3);
-    color: var(--color-brand-primary);
 }
 
 .item[data-disabled] {

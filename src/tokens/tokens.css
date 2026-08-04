@@ -169,7 +169,17 @@
      ============================================ */
 
   /* Font families */
-  --font-sans: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* --font-montserrat is injected by the consuming app's own next/font/google
+     setup (Montserrat) — it doesn't exist in this repo. The fallback has to
+     live on THIS inner var(), not wrapped around the whole --font-sans
+     reference at its use sites: a var() with an unset custom property and no
+     fallback makes the ENTIRE property using it invalid at computed-value
+     time — for an inherited property like font-family that means it falls
+     through to whatever the parent's font-family happens to be, not to any
+     of the other names still sitting in this list. Any consumer of
+     --font-sans that lacks Montserrat (this demo app included) silently lost
+     its whole font stack rather than degrading to -apple-system/Segoe UI/etc. */
+  --font-sans: var(--font-montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
   --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
 
   /* Font sizes */

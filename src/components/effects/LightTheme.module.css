@@ -1,7 +1,6 @@
 .togglePlaceholder {
-    width: 80px;
-    height: 32px;
-    border-radius: var(--radius-full);
+    box-sizing: border-box;
+    border-radius: var(--radius-md);
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border-default);
 }
@@ -12,15 +11,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-8);
-    width: 80px;
-    height: 32px;
-    padding: 0 var(--space-12);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-md);
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border-default);
     color: var(--color-text-default);
     cursor: pointer;
+    flex-shrink: 0;
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -40,8 +36,40 @@
     flex-shrink: 0;
 }
 
-.toggle span:last-child {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: 1;
+/* compact (default) — square icon button, matches IconButton's `sm` size
+   exactly so it height-matches a sibling IconButton/Button in the same row. */
+.variant-compact {
+    width: 32px;
+    height: 32px;
+}
+
+/* wide — same height as Button's `sm` size, but with Button's horizontal
+   padding instead of being square, so it holds visual weight next to a
+   text-labeled Button in the same row (e.g. navbar actions) instead of
+   reading as a smaller, secondary control. */
+.variant-wide {
+    min-height: 2rem;
+    padding: 0 var(--space-16);
+}
+
+/* mobile — bigger touch target for MobileMenu/MobileMenuContent, where the
+   context is inherently touch-driven even without a pointer:coarse match
+   (e.g. device-emulation viewing on a desktop browser). */
+.variant-mobile {
+    width: 44px;
+    height: 44px;
+}
+
+/* Touch devices: bump compact/wide up to the same 44px floor IconButton and
+   Button use, matching how every other sized control in the kit behaves.
+   Desktop (mouse/trackpad) keeps the denser sizing above. */
+@media (pointer: coarse) {
+    .variant-compact {
+        width: 44px;
+        height: 44px;
+    }
+
+    .variant-wide {
+        min-height: 2.75rem;
+    }
 }

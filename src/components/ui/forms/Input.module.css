@@ -27,6 +27,26 @@
     cursor: not-allowed;
 }
 
+/* Browser autofill (saved credentials, address/payment data) forces its own
+   yellow background via UA styles that `background`/`background-color`
+   can't override even with !important — only this inset box-shadow trick
+   can paint over it, so a filled email/password field doesn't clash with
+   the rest of the dark theme. */
+.inputStandalone:-webkit-autofill,
+.input:-webkit-autofill,
+.inputStandalone:-webkit-autofill:hover,
+.input:-webkit-autofill:hover,
+.inputStandalone:-webkit-autofill:focus,
+.input:-webkit-autofill:focus,
+.inputStandalone:-webkit-autofill:active,
+.input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-text-default);
+    -webkit-box-shadow: 0 0 0 1000px var(--color-bg-surface) inset;
+    box-shadow: 0 0 0 1000px var(--color-bg-surface) inset;
+    caret-color: var(--color-text-default);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .inputStandalone.invalid,
 .wrapper.invalid {
     border-color: var(--color-error);

@@ -62,7 +62,7 @@ Peer dependencies required:
 | Import path | Contents | `'use client'`? |
 |---|---|---|
 | `@imadgentech/ui` | All interactive UI components | Yes (bundle-level) |
-| `@imadgentech/ui/chat` | ChatPage, ChatProvider, useChatContext | Yes (bundle-level) |
+| `@imadgentech/ui/chat` | ChatBox, ChatPill, ChatProvider, useChatContext | Yes (bundle-level) |
 | `@imadgentech/ui/server` | Layout, typography, marketing — server-safe | No |
 
 > The main and chat bundles both carry a top-level `'use client'` directive, so importing them directly inside a React Server Component is safe — Next.js will treat them as a client boundary automatically.
@@ -429,6 +429,8 @@ A calendar date picker — not a styled wrapper around the browser's native `<in
 | `options` | `Array<{ label: string; value: string \| number }>` | — |
 
 If `options` is omitted, render `<option>` elements as `children`.
+
+`Select` renders a real native `<select>` — only the closed trigger is styled; the open options list is the browser/OS's own native listbox and cannot be styled (no custom background, no `backdrop-filter`, nothing — this is a platform limitation, not a gap in this library's CSS). Use `Select` when that's fine or preferable (mobile gets the native wheel/sheet picker for free, zero extra JS, real form semantics). When you need the dropdown itself to carry the design system's look — e.g. the same glassy `backdrop-filter` popover as `DatePicker`/`Combobox` — use **`Combobox` with `searchable={false}`** instead: same trigger sizing as `Select`, but a portal-rendered, fully-styleable dropdown with plain arrow-key/Enter navigation instead of a search input.
 
 #### Combobox
 
@@ -876,7 +878,7 @@ Use these if building a custom mobile nav outside of `Navbar`.
 <MobileMenu trigger={<BurgerButton />} title="Menu">
   <MobileMenuContent
     links={[{ label: 'Home', href: '/' }]}
-    actions={<LightTheme />}
+    actions={<LightTheme variant="mobile" />}
   />
 </MobileMenu>
 ```
@@ -1448,7 +1450,12 @@ Renders two images — one for light, one for dark — with no flash or layout s
 
 ### AI Chat
 
-`ChatPage` is a full AI chat widget powered by `@ai-sdk/react`. It must be wrapped in `ChatProvider`.
+Two components, both powered by `@ai-sdk/react` and both requiring a `ChatProvider` ancestor:
+
+- **`ChatBox`** — the full chat panel: header, message history, input. Embed it directly wherever a chat panel belongs on the page.
+- **`ChatPill`** — a standalone floating pill input for a hero section or command-bar entry point. Submitting it sends the message and pops a `ChatBox` out as a full-viewport overlay — the same interaction as imadgen.ai's homepage. `ChatPill` and the `ChatBox` it pops out share the same `ChatProvider`, so typing in the pill is the same `input` state the expanded panel picks up.
+
+Use `ChatBox` alone for an always-visible panel; use `ChatPill` when the chat should start as a lightweight, out-of-the-way entry point.
 
 #### Setup
 
@@ -1458,7 +1465,7 @@ Install optional peer deps first:
 npm install @ai-sdk/react ai
 ```
 
-Import the chat stylesheet alongside the component (it is not included in `styles.css`):
+Import the chat stylesheet alongside the components (it is not included in `styles.css`):
 
 ```tsx
 import '@imadgentech/ui/chat.css';
@@ -1466,12 +1473,12 @@ import '@imadgentech/ui/chat.css';
 
 ```tsx
 // In your page or layout — import from the /chat entry, not the main entry
-import { ChatProvider, ChatPage } from '@imadgentech/ui/chat';
+import { ChatProvider, ChatBox } from '@imadgentech/ui/chat';
 
 function AIChatSection() {
   return (
     <ChatProvider>
-      <ChatPage
+      <ChatBox
         variant="full"
         placeholder="Ask me anything..."
         onSessionCreate={async (sessionId, meta) => {
@@ -1490,7 +1497,7 @@ function AIChatSection() {
 
 ```tsx
 <ChatProvider api="/api/ai/assistant" maxFailures={5}>
-  <ChatPage />
+  <ChatBox />
 </ChatProvider>
 ```
 
@@ -1502,7 +1509,7 @@ function AIChatSection() {
 Auto-disables after `maxFailures` consecutive failures to prevent abuse.
 
 
-#### ChatPage Props
+#### ChatBox Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
@@ -1511,7 +1518,7 @@ Auto-disables after `maxFailures` consecutive failures to prevent abuse.
 | `subtitle` | `string` | `'Quantum-V2 Core'` | Header subtitle |
 | `placeholder` | `string` | `'Ask anything...'` | |
 | `initialMessages` | `Message[]` | — | |
-| `onClose` | `() => void` | — | |
+| `onClose` | `() => void` | — | Renders a close button in the header when provided |
 | `isFullPage` | `boolean` | — | |
 | `onSessionCreate` | `(sessionId: string, meta: { started_at: string }) => Promise<void>` | — | |
 | `onSaveConversation` | `(data: { session_id: string; messages: ConversationMessage[] }) => Promise<void>` | — | |
@@ -1520,13 +1527,31 @@ Auto-disables after `maxFailures` consecutive failures to prevent abuse.
 
 - `full` — 650px tall, max 800px wide. Shows header, messages, input.
 - `compact` — 500px tall, max 600px wide.
-- `minimal` — No chrome (no header, no message area). Just the input strip.
+- `minimal` — No chrome (no header, no message area). Just the input strip, still tied to `ChatProvider` — for embedding a lightweight chat input inline within a page section. For a hero/command-bar entry point that pops the full panel out on submit, use `ChatPill` instead.
 
 #### Exported Types
 
 ```ts
-import type { ChatPageProps, ConversationMessage, ChatMessage } from '@imadgentech/ui/chat';
+import type { ChatBoxProps, ConversationMessage, ChatMessage } from '@imadgentech/ui/chat';
 ```
+
+#### ChatPill
+
+```tsx
+import { ChatProvider, ChatPill } from '@imadgentech/ui/chat';
+
+<ChatProvider>
+  <ChatPill placeholder="What would you like to build today?" />
+</ChatProvider>
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `placeholder` | `string` | `'Ask anything…'` | |
+| `className` | `string` | — | Applied to the pill itself, not the popped-out panel |
+| `chatBoxProps` | `Omit<ChatBoxProps, 'onClose' \| 'variant'>` | — | Passed through to the `ChatBox` panel once it pops out (header title/subtitle, session/save callbacks, etc.) — `onClose` and `variant` aren't accepted since `ChatPill` supplies both itself |
+
+Reads `input`/`handleInputChange`/`handleSubmit`/`isDisabled` from `useChatContext()` — must render inside a `ChatProvider`. Submitting (Enter without Shift, or the send button) sends the message and portals a `ChatBox` over the page as an overlay (`Escape` or a backdrop click closes it, body scroll is locked while open). The send button only appears once there's text to send (stays in the DOM and animates in/out rather than popping).
 
 #### useChatContext
 
@@ -1568,12 +1593,17 @@ import { EmbersBGE } from '@imadgentech/ui';
 
 #### LightTheme
 
-A ready-made theme toggle button. Renders sun (dark mode) / moon (light mode) icons.
+A ready-made theme toggle button. Icon-only (sun for dark mode, moon for light mode) — same corner radius and box model as `Button`/`IconButton`, not a separate pill-shaped one-off.
 
 ```tsx
 import { LightTheme } from '@imadgentech/ui';
 <LightTheme />
 ```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `'compact' \| 'wide' \| 'mobile'` | `'compact'` | `compact` is a square icon button matching `IconButton`'s `sm` size — the preferred default. `wide` is the same height but with `Button`-style horizontal padding instead of being square, for holding visual weight next to a text-labeled `Button` in the same row. `mobile` is a bigger touch-target box for `MobileMenu`/`MobileMenuContent`, where the context is inherently touch-driven even without a `pointer: coarse` match |
+| `className` | `string` | — | |
 
 Uses `next-themes`. Includes SSR hydration guard (renders placeholder until mounted).
 
@@ -1589,7 +1619,7 @@ import { Container, Stack, Heading, Text, Surface } from '@imadgentech/ui/server
 
 Available server exports: `cn`, all **Layout** components, all **Typography** components, all **Marketing** components, and `Breadcrumbs` (the only navigation component with no client-side dependencies).
 
-**Not available** from `/server`: forms, overlays (Dialog, Tooltip, Popover, Toast), navigation (Navbar, MobileMenu, NavLink, Tabs, Pagination, Breadcrumbs is the exception), data display with interactive state (Accordion, Checkbox, etc.), ChatPage, effects, Providers.
+**Not available** from `/server`: forms, overlays (Dialog, Tooltip, Popover, Toast), navigation (Navbar, MobileMenu, NavLink, Tabs, Pagination, Breadcrumbs is the exception), data display with interactive state (Accordion, Checkbox, etc.), ChatBox/ChatPill, effects, Providers.
 
 **If your app also imports `@imadgentech/ui/styles.css` anywhere** (the common case — most apps mix RSC pages with client-interactive ones), don't additionally import `@imadgentech/ui/server.css`. `server.css` is a strict subset of `styles.css` — every class it defines is already present, byte-for-byte, in the main stylesheet — so loading both means downloading the same ~39KB of CSS twice for no visual difference. Only reach for `server.css` on its own in an app (or a standalone RSC-only module) that never loads `styles.css` at all.
 

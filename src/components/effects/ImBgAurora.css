@@ -1,7 +1,17 @@
 .im-bg {
     position: fixed;
     inset: 0;
-    z-index: 0;
+    /* Every other background effect (EmbersBGE/NetBGE/SwarmsBGE/
+       WaveformBackground) uses -1 here. z-index: 0 is still a "positioned"
+       stacking level, which per the CSS painting order sits ABOVE ordinary
+       static in-flow content (e.g. plain Heading/Text elements downstream in
+       the DOM) rather than behind it — so this fixed, full-viewport,
+       opaque-background layer was painting over any later page content that
+       didn't happen to have its own `position` set. Elements that did
+       (Button, ToggleGroup, etc.) escaped into their own positioned paint
+       step and stayed visible, making the bug look like it only affected
+       "some" text. -1 puts it behind static content like its siblings. */
+    z-index: -1;
     background-color: var(--color-bg-base, #050505);
     overflow: hidden;
     pointer-events: none;

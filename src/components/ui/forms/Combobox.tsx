@@ -91,7 +91,7 @@ export function Combobox({
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
-    const [dropPos, setDropPos] = useState<{ top: number; left: number; width: number; maxWidth: number } | null>(null);
+    const [dropPos, setDropPos] = useState<{ top?: number; bottom?: number; left: number; width: number; maxHeight: number } | null>(null);
     const [insideDialog, setInsideDialog] = useState(false);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -126,12 +126,33 @@ export function Combobox({
             if (!rect) return;
 
             const viewportMargin = 8;
-            const maxWidth = Math.min(320, window.innerWidth - viewportMargin * 2);
+            const gap = 4;
+            // Matches the trigger's own width exactly — only clamped down
+            // when the trigger itself is wider than the viewport.
+            const width = Math.min(rect.width, window.innerWidth - viewportMargin * 2);
             const left = Math.min(
                 Math.max(viewportMargin, rect.left),
-                window.innerWidth - maxWidth - viewportMargin
+                window.innerWidth - width - viewportMargin
             );
-            setDropPos({ top: rect.bottom + 4, left, width: rect.width, maxWidth });
+
+            // This is `position: fixed`, so page scroll can't reveal content
+            // that's clipped by the viewport edge — unlike an in-flow
+            // element, there's nothing to scroll TO. Below is the default,
+            // but when there isn't enough room there and there's more room
+            // above the trigger, flip upward instead of just getting cut
+            // off. Either way, height is clamped to whatever room actually
+            // exists (floor of 120px) so the list's own overflow-y:auto
+            // scrolls the remainder into view instead of it being clipped.
+            const spaceBelow = window.innerHeight - rect.bottom - gap - viewportMargin;
+            const spaceAbove = rect.top - gap - viewportMargin;
+            const openUpward = spaceBelow < 160 && spaceAbove > spaceBelow;
+            const maxHeight = Math.max(120, Math.min(220, openUpward ? spaceAbove : spaceBelow));
+
+            setDropPos(
+                openUpward
+                    ? { bottom: window.innerHeight - rect.top + gap, left, width, maxHeight }
+                    : { top: rect.bottom + gap, left, width, maxHeight }
+            );
         }
 
         function handleOutside(e: MouseEvent) {
@@ -162,19 +183,28 @@ export function Combobox({
     }, [open, id]);
 
     useEffect(() => {
-        if (!open) return;
-        const frame = requestAnimationFrame(() => {
-            if (searchable) {
-                inputRef.current?.focus();
-            } else {
-                const initialIndex = filtered.findIndex((o) => o.value === value);
-                setHighlightedIndex(initialIndex >= 0 ? initialIndex : 0);
-                listRef.current?.focus();
-            }
-        });
-        return () => cancelAnimationFrame(frame);
+        // Depends on dropPos (not just `open`) because the listbox/search
+        // input don't exist in the DOM until dropPos is set — it's computed
+        // by reposition() in the effect above, which lands one render after
+        // `open` flips true. Keying this on `open` alone (with a
+        // requestAnimationFrame guess at the timing) meant listRef/inputRef
+        // were still null when the callback ran, so .focus() silently did
+        // nothing and arrow keys/Enter never worked in the non-searchable
+        // (plain listbox) mode.
+        if (!open || !dropPos) return;
+        if (searchable) {
+            inputRef.current?.focus();
+        } else {
+            const initialIndex = filtered.findIndex((o) => o.value === value);
+            // Bundled with the imperative .focus() call below — both need to
+            // fire at the same DOM-ready moment this effect exists to catch,
+            // not computed during render.
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setHighlightedIndex(initialIndex >= 0 ? initialIndex : 0);
+            listRef.current?.focus();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, searchable]);
+    }, [open, searchable, dropPos]);
 
     function select(opt: ComboboxOption) {
         onChange(opt.value);
@@ -219,9 +249,10 @@ export function Combobox({
             style={{
                 position: 'fixed',
                 top: dropPos.top,
+                bottom: dropPos.bottom,
                 left: dropPos.left,
-                minWidth: Math.min(dropPos.width, dropPos.maxWidth),
-                maxWidth: dropPos.maxWidth,
+                width: dropPos.width,
+                maxHeight: dropPos.maxHeight,
             }}
         >
             {searchable && (

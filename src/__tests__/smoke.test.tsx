@@ -94,7 +94,8 @@ import { Testimonial } from '../components/ui/marketing/Testimonial';
 import { ThemeImage } from '../components/ui/marketing/ThemeImage';
 
 // ─── Chatbox ──────────────────────────────────────────────────────────────────
-import { ChatPage } from '../components/ui/chatbox/ChatPage';
+import { ChatBox } from '../components/ui/chatbox/ChatBox';
+import { ChatPill } from '../components/ui/chatbox/ChatPill';
 import { ChatProvider } from '../components/ui/chatbox/ChatContext';
 
 // ─── Effects ──────────────────────────────────────────────────────────────────
@@ -490,21 +491,29 @@ describe('Chatbox', () => {
     render(<ChatProvider><p>app</p></ChatProvider>);
   });
 
-  it('ChatPage renders inside ChatProvider', () => {
+  it('ChatBox renders inside ChatProvider', () => {
     render(
       <ChatProvider>
-        <ChatPage />
+        <ChatBox />
       </ChatProvider>
     );
   });
 
-  it('ChatPage renders with session/save callbacks', () => {
+  it('ChatBox renders with session/save callbacks', () => {
     render(
       <ChatProvider>
-        <ChatPage
+        <ChatBox
           onSessionCreate={vi.fn().mockResolvedValue(undefined)}
           onSaveConversation={vi.fn().mockResolvedValue(undefined)}
         />
+      </ChatProvider>
+    );
+  });
+
+  it('ChatPill renders inside ChatProvider', () => {
+    render(
+      <ChatProvider>
+        <ChatPill />
       </ChatProvider>
     );
   });

@@ -1,0 +1,172 @@
+.wrapper {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    position: relative;
+    padding: 3px;
+    border-radius: 999px;
+    /* Opaque, not a translucent bg + backdrop-filter combo — over an
+       animated background effect, translucency blurs and blends in
+       whatever's behind it, reading as a muddy tint rather than a clean
+       surface (see ChatBox's own .premiumWrapper for the same lesson). */
+    background: var(--color-bg-surface-solid);
+    border: 1px solid var(--color-border-default);
+    box-shadow: var(--shadow-xl);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* A physical "lift" instead of a color ring — border goes a shade lighter,
+   the whole pill rises slightly, and the shadow deepens to sell the lift.
+   No brand color here; the send button already carries that. */
+.wrapper:focus-within {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl), 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    padding: 8px 8px 8px 22px;
+    height: 64px;
+}
+
+.input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text-default);
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: var(--font-medium);
+    outline: none;
+    letter-spacing: var(--tracking-tight);
+    min-width: 0;
+}
+
+.input::placeholder {
+    color: var(--color-text-subtle);
+    font-weight: var(--font-light);
+}
+
+.send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary));
+    color: var(--color-text-inverted);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, opacity 0.2s ease,
+        width 0.2s ease, margin-left 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(var(--color-brand-primary-rgb), 0.35);
+}
+
+.send:hover:not(:disabled) {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgba(var(--color-brand-primary-rgb), 0.45);
+}
+
+.send:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.send:disabled {
+    background: var(--color-bg-surface-subtle);
+    color: var(--color-text-subtle);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Only appears once there's something to send — kept in the DOM (not
+   conditionally rendered) so it animates in/out instead of popping. Width +
+   negative margin collapse together so it doesn't leave a dead gap-sized
+   space where the button used to be. */
+.sendHidden {
+    width: 0;
+    min-width: 0;
+    margin-left: calc(-1 * var(--space-12));
+    opacity: 0;
+    transform: scale(0.5);
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+}
+
+/* Popout overlay — portals the full ChatBox panel over the page once the
+   pill has been submitted. Same z-index tokens Dialog uses (--z-overlay for
+   the backdrop, --z-modal for the content) so it layers consistently with
+   every other overlay in the kit. */
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-32);
+    animation: overlayFadeIn 0.3s ease both;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.overlayBackdrop {
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-overlay);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(14px);
+}
+
+.overlayPanel {
+    position: relative;
+    z-index: 1;
+    width: 100% !important;
+    max-width: 1100px !important;
+    height: calc(100vh - 80px) !important;
+    max-height: 900px !important;
+    margin: 0 !important;
+    animation: panelIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panelIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 640px) {
+    .overlay {
+        padding: 0;
+    }
+
+    .overlayPanel {
+        height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+    }
+}

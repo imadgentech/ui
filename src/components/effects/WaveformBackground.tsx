@@ -17,10 +17,15 @@ export default function WaveformBackground() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Set canvas size
+        // Set canvas size — measures its own rendered box, not
+        // window.innerWidth/innerHeight (see SwarmsBGE/EmbersBGE's resize()
+        // for why: this canvas fills whatever containing block it resolves
+        // against, which can be a much smaller box than the viewport, e.g. a
+        // preview tile, once an ancestor establishes CSS containment).
         const resize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = Math.floor(rect.width);
+            canvas.height = Math.floor(rect.height);
         };
         resize();
         window.addEventListener('resize', resize);

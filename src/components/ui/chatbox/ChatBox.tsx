@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useChatContext } from './ChatContext';
@@ -9,7 +9,7 @@ import { Stack } from '../layout/Stack';
 import { Flex } from '../layout/Flex';
 import { Text } from '../typography/Text';
 import { IconButton } from '../forms/IconButton';
-import styles from './ChatPage.module.css';
+import styles from './ChatBox.module.css';
 
 export interface Message extends UIMessage {
   timestamp?: string;
@@ -72,7 +72,7 @@ const ChatMessageBubble = React.memo(
     getMessageContent(prev.message) === getMessageContent(next.message)
 );
 
-export interface ChatPageProps {
+export interface ChatBoxProps {
   initialMessages?: Message[];
   className?: string;
   onSendMessage?: (content: string) => void;
@@ -106,7 +106,7 @@ export interface ChatPageProps {
   onSaveConversation?: (data: { session_id: string; messages: ConversationMessage[] }) => Promise<void>;
 }
 
-export function ChatPage({
+export function ChatBox({
   className,
   onSendMessage,
   onClose,
@@ -117,7 +117,7 @@ export function ChatPage({
   subtitle = 'Quantum-V2 Core',
   onSessionCreate,
   onSaveConversation,
-}: ChatPageProps) {
+}: ChatBoxProps) {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -155,7 +155,7 @@ export function ChatPage({
     hasCreatedSession.current = true;
 
     onSessionCreate(sessionId, { started_at: new Date().toISOString() }).catch((err: unknown) => {
-      console.error('[ChatPage] Session creation error:', err);
+      console.error('[ChatBox] Session creation error:', err);
       setError(`Session creation failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
       reportFailure();
     });
@@ -179,7 +179,7 @@ export function ChatPage({
     try {
       await onSaveConversation(buildConversationPayload());
     } catch (err: unknown) {
-      console.error('[ChatPage] Failed to save conversation:', err);
+      console.error('[ChatBox] Failed to save conversation:', err);
       setError(`Failed to save: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setIsSaving(false);
@@ -305,7 +305,6 @@ export function ChatPage({
       {/* Input Area */}
       <div className={styles.inputArea}>
         <div className={styles.premiumWrapper}>
-          <div className={styles.premiumGlow} />
           <div className={styles.premiumContainer}>
             <input
               type="text"
@@ -317,9 +316,10 @@ export function ChatPage({
               disabled={isDisabled || (!canSend && variant !== 'minimal')}
             />
             <button
-              className={styles.premiumSendButton}
+              className={cn(styles.premiumSendButton, !input.trim() && variant !== 'minimal' && styles.sendButtonHidden)}
               onClick={() => handleChatSubmit()}
               disabled={isDisabled || ((!input.trim() || !canSend) && variant !== 'minimal')}
+              tabIndex={!input.trim() && variant !== 'minimal' ? -1 : undefined}
               aria-label="Send message"
             >
               <svg
@@ -330,8 +330,8 @@ export function ChatPage({
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M22 2L11 13" />
-                <path d="M22 2L15 22L11 13L2 9L22 2Z" />
+                <path d="M12 19V5" />
+                <path d="M5 12l7-7 7 7" />
               </svg>
             </button>
           </div>
@@ -340,4 +340,3 @@ export function ChatPage({
     </Surface>
   );
 }
-

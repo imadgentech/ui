@@ -2,6 +2,34 @@
 
 All notable changes to `@imadgentech/ui` are documented here, newest first. Entries are grouped **Breaking** / **Added** / **Changed** / **Fixed**. If you're upgrading, read the **Breaking** subsection of every version between your current one and the target before bumping.
 
+## [2.1.0] — 2026-08-04
+
+### Breaking
+
+- **`ChatPage` renamed to `ChatBox`** (`ChatPageProps` → `ChatBoxProps`). `ChatPage`'s own input row is unchanged behaviorally, just relocated conceptually now that `ChatPill` exists as the standalone entry-point variant — see Added below. Update `import { ChatPage } from '@imadgentech/ui/chat'` to `import { ChatBox } from '@imadgentech/ui/chat'` and any `ChatPageProps` type references.
+- **`LightTheme` is icon-only now** — previously rendered a fixed 80px-wide pill with an icon *and* a "Light"/"Dark" text label; that text is gone, and the shape changed from `border-radius: full` to `var(--radius-md)` (matching `Button`/`IconButton`'s corner radius instead of being a one-off pill). Every existing `<LightTheme />` usage will change appearance. New `variant` prop (`'compact' | 'wide' | 'mobile'`, default `'compact'`) controls sizing — see Added below.
+
+### Added
+
+- **`ChatPill`** — standalone floating pill input for a hero section or command-bar entry point (`@imadgentech/ui/chat`). Reads `input`/`handleInputChange`/`handleSubmit` from `useChatContext()`, so it must render inside the same `ChatProvider` a `ChatBox` would. Submitting it (Enter or the send button) sends the message and portals a `ChatBox` over the page as a backdrop+panel overlay (Escape or a backdrop click closes it, body scroll locks while open) — the same interaction imadgen.ai's homepage hand-rolls per-project; now built into the package.
+- `LightTheme`'s `variant` prop: `'compact'` (default) — square, matches `IconButton`'s `sm` size. `'wide'` — same height, `Button`-style horizontal padding, for sitting next to a text-labeled `Button` in the same row. `'mobile'` — 44px touch target, for `MobileMenuContent`'s `actions` slot.
+
+### Changed
+
+- **`ToggleGroup` (single-select)**: the active-state highlight is now a JS-positioned sliding thumb that eases between segments on selection, instead of each item statically getting/losing its own background. Also: items now sit flush with the track (`.group`'s 2px padding removed, `.item`'s border-radius no longer inset from the track's) — previously the active pill floated visibly smaller than the outer track, reading as a nested "box in a box." Track background changed from a translucent white/black tint (which could wash out to invisible against a similarly-tinted host surface) to a fixed darkening overlay that contrasts reliably against any background. Multi-select is unaffected (no single "active" segment to slide toward).
+- **`Combobox`**: dropdown width now always matches the trigger's own width exactly (previously hard-capped at 320px regardless of a wider trigger, and separately could render *narrower* than the trigger on top of that). Dropdown now flips above the trigger and clamps its height (with the option list scrolling internally) when there isn't enough room below — it's `position: fixed`, so unlike in-flow content, page scroll can't reveal something clipped by the viewport edge. Selected-option highlight color rebased from the borrowed `--color-focus-ring` token to the same `rgba(brand, 0.14)` + brand-text treatment `ToggleGroup` uses, for visual consistency between the two.
+- **`DatePicker`**: same upward-flip-when-out-of-room fix as `Combobox` (the calendar grid isn't internally scrollable, so it flips rather than clamping height).
+- **`CTA`**'s `brand` variant: was a full-opacity solid `--color-brand-primary` fill — read as an oversaturated, "eye-shattering" block of color at that size, unlike every other large brand surface in the kit (`Button`'s `.variant-primary`), which uses a translucent tint over the normal dark surface. Now a `blur(22px)` frosted-glass surface (translucent `--color-bg-surface` + backdrop-filter, no gradient, no noise texture) with the same orange-tinted border/glow-shadow language as before.
+
+### Fixed
+
+- `ImBgAurora`: `z-index: 0` instead of `-1` like its sibling background effects (`EmbersBGE`/`NetBGE`/`SwarmsBGE`/`WaveformBackground`). `0` is still a "positioned" stacking level, which paints *above* ordinary static (non-positioned) page content per the CSS painting order — so this fixed, full-viewport, opaque-background effect was silently covering any later content that didn't happen to have its own `position` set, while elements that did (e.g. `Button`, `ToggleGroup`) stayed visible, making the bug look inconsistent rather than a flat "nothing renders."
+- `SwarmsBGE`, `EmbersBGE`, `WaveformBackground`: canvas sizing was hardcoded to `window.innerWidth`/`innerHeight` instead of measuring the canvas's own actual rendered box (only `NetBGE` did this correctly already). Fine when mounted full-page, but broke any contained use (e.g. a small preview tile) — content drew across a full-page coordinate space and then got squished/clipped into whatever smaller box the canvas actually rendered at.
+- `WaveformBackground`: CSS additionally hardcoded `width: 100vw; height: 100vh` — viewport units ignore CSS containment entirely (an ancestor's `contain: layout paint` confining a `position: fixed` descendant to a smaller box has no effect on `vw`/`vh`). Changed to `inset: 0; width: 100%; height: 100%`, matching the other three effects.
+- `--font-sans` token: the inner `var(--font-montserrat)` reference had no fallback of its own. A `var()` with an unset custom property and no fallback makes the *entire* property using it invalid at computed-value time — not just that one name dropped from the stack — so any consuming app lacking `--font-montserrat` (injected by a real app's own `next/font/google` setup; this repo's demo app included) silently lost its whole `font-family` declaration wherever `--font-sans` was used directly, falling back to whatever was inherited instead of degrading to `-apple-system`/`Segoe UI`/etc. Fallback moved to the correct (inner) `var()`.
+- `NavLink`: `:hover` didn't explicitly set `text-decoration: none` — a consuming app's own global `a:hover { text-decoration: underline }` (a common base-CSS reset pattern) has higher specificity than `NavLink`'s single-class rule and would win on hover, bleeding a plain native underline in on top of the intentional animated gradient bar.
+- `Input`: browser autofill (saved credentials) forces its own background color via UA styles that normal `background`/`background-color` can't override even with `!important`, clashing with the dark theme. Added the standard inset `box-shadow` override.
+
 ## [2.0.14] — 2026-07-24
 
 ### Fixed

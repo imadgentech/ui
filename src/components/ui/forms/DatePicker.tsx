@@ -154,7 +154,7 @@ export function DatePicker({
 }: DatePickerProps) {
     const [open, setOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
-    const [dropPos, setDropPos] = useState<{ top: number; left: number } | null>(null);
+    const [dropPos, setDropPos] = useState<{ top?: number; bottom?: number; left: number } | null>(null);
     const [insideDialog, setInsideDialog] = useState(false);
     const selectedDate = value ? parseISODate(value) : null;
     const [viewDate, setViewDate] = useState(() => selectedDate ?? new Date());
@@ -182,7 +182,32 @@ export function DatePicker({
 
         function reposition() {
             const rect = triggerRef.current?.getBoundingClientRect();
-            if (rect) setDropPos({ top: rect.bottom + 4, left: rect.left });
+            if (!rect) return;
+
+            const viewportMargin = 8;
+            const gap = 4;
+            const popupWidth = 280;
+            const left = Math.min(
+                Math.max(viewportMargin, rect.left),
+                window.innerWidth - popupWidth - viewportMargin
+            );
+
+            // Same reasoning as Combobox: this is `position: fixed`, so a
+            // trigger near the bottom of a short viewport would otherwise
+            // get its calendar clipped by the viewport edge with no way to
+            // scroll it into view. The grid's height is ~fixed (~340px, not
+            // internally scrollable like Combobox's option list), so flip
+            // above the trigger instead whenever there isn't enough room below.
+            const estimatedPopupHeight = 340;
+            const spaceBelow = window.innerHeight - rect.bottom - gap - viewportMargin;
+            const spaceAbove = rect.top - gap - viewportMargin;
+            const openUpward = spaceBelow < estimatedPopupHeight && spaceAbove > spaceBelow;
+
+            setDropPos(
+                openUpward
+                    ? { bottom: window.innerHeight - rect.top + gap, left }
+                    : { top: rect.bottom + gap, left }
+            );
         }
 
         function handleOutside(e: MouseEvent) {
@@ -237,7 +262,7 @@ export function DatePicker({
     const popupId = `${id ?? 'imui-datepicker'}-popup`;
 
     const popupContent = dropPos && (
-        <div id={popupId} className={styles.popup} style={{ position: 'fixed', top: dropPos.top, left: dropPos.left }}>
+        <div id={popupId} className={styles.popup} style={{ position: 'fixed', top: dropPos.top, bottom: dropPos.bottom, left: dropPos.left }}>
             <div className={styles.header}>
                 <button
                     type="button"

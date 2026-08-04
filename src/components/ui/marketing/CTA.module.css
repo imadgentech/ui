@@ -3,24 +3,28 @@
     position: relative;
 }
 
+/* A full-opacity raw --color-brand-primary fill (#ff6a00) read as a harsh,
+   oversaturated "eye-shattering" block of orange at this size — every other
+   large brand-colored surface in the kit (Button's .variant-primary, its
+   glow shadow) uses a translucent gradient tint over the normal dark
+   surface instead of a solid fill, so this now matches that same restrained
+   language rather than being a one-off loud outlier. */
 .brand {
-    background-color: var(--color-brand-primary);
-    background-image:
-        var(--noise-texture),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 40%, rgba(0, 0, 0, 0.25) 100%),
-        linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%, rgba(0, 0, 0, 0.1) 100%);
-    background-blend-mode: normal, normal, normal;
-    color: var(--color-text-inverted);
-    box-shadow:
-        inset 0 1px 2px rgba(255, 255, 255, 0.4),
-        inset 0 -2px 5px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Translucent, not the opaque --color-bg-surface-solid — backdrop-filter
+       has nothing to blur through an opaque fill, so this needs to be the
+       see-through surface token for the frosted-glass effect to read at all.
+       Surface's own .surface:hover already swaps this + the border to its
+       hover tokens with no override needed here, which is what visually
+       reads as the blur backing off on hover. */
+    background-color: var(--color-bg-surface);
+    backdrop-filter: blur(22px);
+    color: var(--color-text-default);
+    box-shadow: 0 14px 40px rgba(var(--color-brand-primary-rgb), 0.12), 0 18px 55px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(var(--color-brand-primary-rgb), 0.35);
 }
 
-.brand :global(.text),
-.brand :global(.heading) {
-    color: var(--color-text-inverted);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+:global([data-theme="light"]) .brand {
+    box-shadow: 0 12px 30px rgba(var(--color-brand-primary-rgb), 0.10), 0 18px 45px rgba(0, 0, 0, 0.10);
 }
 
 .description {
